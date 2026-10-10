@@ -1,0 +1,37 @@
+{
+  "slug": "solidworks-engineering-drawing",
+  "title": "Engineering Drawing & SolidWorks Practice",
+  "shortTitle": "SolidWorks Drawing Practice",
+  "category": "Engineering practice",
+  "group": "academic",
+  "summary": "Academic engineering-drawing work modelling mechanical components and assemblies in SolidWorks.",
+  "status": "Academic coursework",
+  "flagship": false,
+  "technologies": [
+    "SolidWorks",
+    "Engineering drawing",
+    "3D modelling"
+  ],
+  "overview": "Academic engineering-drawing work using SolidWorks to model mechanical components and assemblies.",
+  "approach": [
+    "Created 3D component and assembly models in SolidWorks.",
+    "Applied engineering-drawing and technical-detailing principles."
+  ],
+  "components": [
+    "SolidWorks models",
+    "Component and assembly drawings"
+  ],
+  "outcomes": [
+    "Developed academic practice in 3D modelling and technical drawings."
+  ],
+  "metrics": [],
+  "credits": [],
+  "images": [],
+  "provenance": [
+    "Everything/CV/SHARJEEL CV.pdf"
+  ],
+  "evidenceNotes": [
+    "Concise CV-supported entry; no report, code repository or public photograph supplied."
+  ],
+  "links": []
+}

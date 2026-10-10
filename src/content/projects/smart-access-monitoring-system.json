@@ -1,0 +1,57 @@
+{
+  "slug": "smart-access-monitoring-system",
+  "title": "Smart Access & Monitoring System — SAMS",
+  "shortTitle": "Smart Access & Monitoring",
+  "category": "Embedded systems",
+  "group": "showcase",
+  "summary": "An 8051 access-control and environmental-monitoring design combining PIN authentication, sensor inputs, event logging and emergency override.",
+  "status": "Schematic-based academic design",
+  "flagship": false,
+  "technologies": [
+    "8051",
+    "Proteus",
+    "LM35",
+    "4×3 keypad",
+    "Interrupts and timers",
+    "FIFO event logging"
+  ],
+  "overview": "SAMS brings access control and environmental monitoring into one 8051 academic design. Its scope includes multi-level PIN authentication, temperature and light sensing, an interrupt-driven emergency override and event logging. The supplied image is a Proteus schematic; it supports the circuit design but does not establish a physical hardware prototype.",
+  "approach": [
+    "Organised multi-level PIN entry through a 4×3 keypad and LCD feedback.",
+    "Included LM35 temperature and LDR light sensing in the monitoring design.",
+    "Specified interrupt-driven emergency override, hardware timers and FIFO/circular-buffer event logging.",
+    "Combined LCD/LED feedback and relay door control in the supplied Proteus schematic."
+  ],
+  "components": [
+    "8051-family microcontroller",
+    "4×3 keypad",
+    "LM35 temperature sensor and LDR",
+    "LCD and LED feedback",
+    "Relay door-control interface",
+    "Interrupts, hardware timers and circular-buffer logging"
+  ],
+  "outcomes": [
+    "The supplied Proteus schematic documents the proposed circuit integration.",
+    "The project develops academic practice in authentication logic, sensing, interrupt handling and event logging.",
+    "Physical implementation and measured performance remain unverified from the supplied material."
+  ],
+  "metrics": [],
+  "credits": [],
+  "images": [
+    {
+      "src": "../../assets/projects/smart-access-monitoring-system/sams-proteus-schematic.jpg",
+      "kind": "schematic",
+      "alt": "Proteus access-control schematic with AT89C51, keypad, LCD, LM35 sensor, ADC, LDR and relay.",
+      "caption": "Proteus schematic for SAMS. The supplied evidence establishes the circuit design; physical implementation is unverified.",
+      "focalPoint": "50% 50%"
+    }
+  ],
+  "provenance": [
+    "Owner-supplied current SAMS description",
+    "LinkedIn projects/Smart Access & Monitoring System (SAMS)/1769501887093.jpg"
+  ],
+  "evidenceNotes": [
+    "Only a Proteus schematic was found; no physical photograph or additional implementation evidence."
+  ],
+  "links": []
+}

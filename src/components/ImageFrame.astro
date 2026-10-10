@@ -1,0 +1,13 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+interface Props { image: CollectionEntry<'projects'>['data']['images'][number]; priority?: boolean; detail?: boolean; }
+const { image, priority = false, detail = false } = Astro.props;
+const contain = detail || image.kind !== 'photo';
+const widths = [400, 720, 1100, 1500, 2200].filter(w => w <= image.src.width);
+if (image.src.width < 2200 && !widths.includes(image.src.width)) widths.push(image.src.width);
+---
+<figure class:list={['image-frame', { 'image-contain': contain, 'image-detail': detail }]} style={`--image-position: ${image.focalPoint}`}>
+  <Image src={image.src} alt={image.alt} widths={widths} sizes={detail ? '(max-width: 800px) 92vw, 1248px' : '(max-width: 640px) 92vw, (max-width: 1000px) 46vw, 600px'} format="webp" loading={priority ? 'eager' : 'lazy'} decoding="async" fetchpriority={priority ? 'high' : 'auto'} />
+  {detail && <figcaption>{image.caption} <a href={image.src.src} target="_blank" rel="noopener">View full resolution <span aria-hidden="true">↗</span><span class="sr-only">: {image.alt}</span></a></figcaption>}
+</figure>

@@ -1,0 +1,37 @@
+{
+  "slug": "temperature-monitoring-system",
+  "title": "Temperature Monitoring System",
+  "shortTitle": "Temperature Monitoring",
+  "category": "Electronics",
+  "group": "academic",
+  "summary": "Academic circuit work for real-time temperature sensing and display.",
+  "status": "Academic coursework",
+  "flagship": false,
+  "technologies": [
+    "Circuit design",
+    "Temperature sensing",
+    "Display interfacing"
+  ],
+  "overview": "An academic temperature-monitoring circuit focused on real-time sensing and display.",
+  "approach": [
+    "Applied circuit-design principles to temperature sensing.",
+    "Included a display-oriented monitoring scope."
+  ],
+  "components": [
+    "Temperature-sensing circuit",
+    "Display interface"
+  ],
+  "outcomes": [
+    "Connected circuit-design principles with sensing and display functions."
+  ],
+  "metrics": [],
+  "credits": [],
+  "images": [],
+  "provenance": [
+    "Everything/CV/Sharjeel CV (1).pdf"
+  ],
+  "evidenceNotes": [
+    "Concise CV-supported entry; no report, code repository or public photograph supplied."
+  ],
+  "links": []
+}

@@ -1,0 +1,5 @@
+---
+import { site } from '../data/site';
+import { withBase } from '../lib/urls';
+---
+<footer class="site-footer"><div class="container"><div class="footer-top"><a href={withBase('/')} class="footer-name">Muhammad Sharjeel<span>Power. Control. Mobility.</span></a><nav aria-label="Footer navigation"><a href={withBase('/projects/')}>Projects</a><a href={withBase('/achievements/')}>Achievements</a><a href={withBase('/contact/')}>Contact</a><a href={site.linkedin}>LinkedIn ↗</a></nav></div><div class="footer-bottom"><span>© {new Date().getFullYear()} {site.name}</span><span>Islamabad, Pakistan</span><span>Built with care & curiosity.</span></div></div></footer>

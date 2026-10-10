@@ -1,0 +1,85 @@
+{
+  "slug": "center-tapped-transformer",
+  "title": "Single-Phase Center-Tapped Transformer",
+  "shortTitle": "Center-Tapped Transformer",
+  "category": "Power systems",
+  "group": "showcase",
+  "summary": "An Electric Machines design-and-fabrication project linking winding calculations and material selection with physical construction, tests and practical redesign.",
+  "status": "Fabricated academic prototype",
+  "flagship": false,
+  "technologies": [
+    "Transformer design",
+    "E-I laminated core",
+    "Winding calculations",
+    "Wire-gauge selection",
+    "Open/short-circuit tests"
+  ],
+  "overview": "This Electric Machines project covered the design and fabrication of a single-phase center-tapped transformer with a 220 V primary supply and an E-I laminated core. The report connects voltage and load requirements with core and winding calculations, turns per volt, current ratings and wire-gauge selection. The supplied photograph shows the fabricated hardware.",
+  "approach": [
+    "Started from the load and voltage requirements of the academic design brief.",
+    "Calculated core size, turns per volt, winding turns, current ratings and wire-gauge requirements.",
+    "Fabricated and insulated the windings, then assembled the laminated core and mounting hardware.",
+    "Included open-circuit and short-circuit tests in the project scope and redesigned the bobbin/core arrangement when the first winding fit proved impractical."
+  ],
+  "components": [
+    "220 V primary winding",
+    "Center-tapped secondary arrangement",
+    "E-I laminated core",
+    "Insulated winding wire",
+    "Bobbin and mounting hardware",
+    "Open-circuit and short-circuit test setup"
+  ],
+  "outcomes": [
+    "Produced the fabricated transformer shown in the project photograph.",
+    "Connected analytical sizing decisions to practical winding, insulation and core-assembly constraints.",
+    "The report records a practical redesign after winding/core fit difficulties; exact measured test results are not established in the supplied report."
+  ],
+  "metrics": [],
+  "credits": [],
+  "images": [
+    {
+      "src": "../../assets/projects/center-tapped-transformer/fabricated-transformer.jpg",
+      "kind": "photo",
+      "alt": "Fabricated E-I laminated-core transformer with yellow-insulated winding and metal mounting brackets.",
+      "caption": "The fabricated E-I laminated-core transformer from the Electric Machines project.",
+      "focalPoint": "48% 50%"
+    },
+    {
+      "src": "../../assets/projects/center-tapped-transformer/transformer-grid-context.jpg",
+      "kind": "diagram",
+      "alt": "Educational diagram of voltage transformation from power generation through transmission and distribution to a home.",
+      "caption": "General educational context for transformers in a power network; displayed voltages are not the fabricated transformer specifications.",
+      "focalPoint": "50% 50%"
+    },
+    {
+      "src": "../../assets/projects/center-tapped-transformer/transformer-principle.jpg",
+      "kind": "diagram",
+      "alt": "Transformer principle diagram labelling primary winding, iron core, secondary winding, magnetic flux and load.",
+      "caption": "Supporting diagram of transformer operation.",
+      "focalPoint": "50% 50%"
+    },
+    {
+      "src": "../../assets/projects/center-tapped-transformer/transformer-design-flowchart.jpg",
+      "kind": "flowchart",
+      "alt": "Design sequence covering core size, turns per volt, primary and secondary turns, current and wire-gauge selection.",
+      "caption": "The design calculation sequence used to organise the transformer work.",
+      "focalPoint": "50% 50%"
+    }
+  ],
+  "provenance": [
+    "Owner-supplied current transformer description",
+    "Everything/EM Project/EM Project Report.pdf",
+    "Everything/CV/New CV.pdf",
+    "Everything/CV/Sharjeel CV (1).pdf",
+    "LinkedIn projects/Single-Phase Center-Tapped Transformer/1769332272585.jpg",
+    "LinkedIn projects/Single-Phase Center-Tapped Transformer/1769332272479.jpg"
+  ],
+  "evidenceNotes": [
+    "CVs and report calculations give 380 V secondary with a 220 V tap, while current owner wording is center-tapped. Exact secondary-output/topology specifications are excluded pending owner reconciliation. Initial calculation and redesigned calculation also use different apparent-power ratings.",
+    "Report page 14 has an open/short-circuit test heading but no visible recorded measurements. User-supplied project description supports test scope; no measured results are claimed.",
+    "General supporting power-grid diagram voltages are not fabricated-device ratings.",
+    "Photograph winding-label names and identifiers were sanitized in the public copy."
+  ],
+  "links": [],
+  "featuredOrder": 4
+}

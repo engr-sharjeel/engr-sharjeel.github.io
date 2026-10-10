@@ -1,0 +1,37 @@
+{
+  "slug": "matlab-signal-calculator",
+  "title": "Signal Calculator Using GUI — MATLAB",
+  "shortTitle": "MATLAB Signal Calculator",
+  "category": "Software",
+  "group": "academic",
+  "summary": "A MATLAB GUI exercise for analysing and visualising continuous and discrete signals.",
+  "status": "Academic coursework",
+  "flagship": false,
+  "technologies": [
+    "MATLAB",
+    "GUI development",
+    "Signals"
+  ],
+  "overview": "A MATLAB graphical-interface project for the analysis and visualisation of continuous and discrete signals.",
+  "approach": [
+    "Built a GUI-based signal-calculator interface in MATLAB.",
+    "Worked with continuous and discrete signal analysis and visualisation."
+  ],
+  "components": [
+    "MATLAB graphical interface",
+    "Signal-analysis and visualisation functions"
+  ],
+  "outcomes": [
+    "Connected MATLAB GUI programming with signal analysis and visualisation."
+  ],
+  "metrics": [],
+  "credits": [],
+  "images": [],
+  "provenance": [
+    "Everything/CV/Sharjeel CV (1).pdf"
+  ],
+  "evidenceNotes": [
+    "Concise CV-supported entry; no report, code repository or public photograph supplied."
+  ],
+  "links": []
+}

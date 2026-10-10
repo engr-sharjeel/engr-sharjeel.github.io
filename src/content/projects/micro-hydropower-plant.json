@@ -1,0 +1,83 @@
+{
+  "slug": "micro-hydropower-plant",
+  "title": "34 kW Micro Hydropower Plant Design",
+  "shortTitle": "Micro Hydropower Plant",
+  "category": "Power systems",
+  "group": "showcase",
+  "summary": "A completed rural-electrification design study for Kewai Village, Naran, covering the water-to-wire system and its environmental and economic feasibility.",
+  "status": "Completed design study",
+  "flagship": false,
+  "technologies": [
+    "Hydropower design",
+    "Cross-flow turbine",
+    "Induction generator",
+    "Distribution design",
+    "Engineering economics"
+  ],
+  "overview": "This Complex Engineering Project studied a 34 kW micro hydropower scheme for rural electrification in Kewai Village, Naran, Khyber Pakhtunkhwa. The work connects resource and load assessment with turbine-generator selection, civil arrangements, electrical distribution and implementation planning. It is a design study; the illustrations do not establish a constructed or commissioned plant.",
+  "approach": [
+    "Assessed available head and flow alongside the village load requirements.",
+    "Selected a cross-flow turbine and a 35 kW induction generator for the proposed scheme.",
+    "Developed the intake, penstock, powerhouse, control, transformer and distribution-network scope.",
+    "Considered costing, implementation planning, environmental impact and economic feasibility."
+  ],
+  "components": [
+    "Intake and water conveyance",
+    "Penstock and powerhouse",
+    "Cross-flow turbine",
+    "35 kW induction generator",
+    "Control and protection arrangements",
+    "Transformer and distribution network"
+  ],
+  "outcomes": [
+    "Completed the academic plant-design study at a 34 kW design capacity.",
+    "Estimated annual generation of approximately 146,000 kWh and payback below two years. These are design estimates, not measured operating results.",
+    "Construction, commissioning and field performance are outside the established project evidence."
+  ],
+  "metrics": [
+    {
+      "value": "34 kW",
+      "label": "Plant design capacity",
+      "basis": "Design estimate"
+    },
+    {
+      "value": "≈146,000 kWh",
+      "label": "Estimated annual generation",
+      "basis": "Design estimate"
+    },
+    {
+      "value": "<2 years",
+      "label": "Estimated payback",
+      "basis": "Design estimate"
+    }
+  ],
+  "credits": [],
+  "images": [
+    {
+      "src": "../../assets/projects/micro-hydropower-plant/hydropower-system-illustration.jpg",
+      "kind": "diagram",
+      "alt": "Micro hydropower design illustration showing intake, desilting tank, penstock, turbine, generator, controls and distribution.",
+      "caption": "Conceptual system illustration. Capacity and energy figures are design estimates, not measured plant performance.",
+      "focalPoint": "50% 50%"
+    },
+    {
+      "src": "../../assets/projects/micro-hydropower-plant/site-design-illustration.jpg",
+      "kind": "diagram",
+      "alt": "Annotated mountain-river illustration showing proposed intake, powerhouse and village-load locations.",
+      "caption": "Illustrative site arrangement for the design study; not evidence of a constructed plant.",
+      "focalPoint": "50% 50%"
+    }
+  ],
+  "provenance": [
+    "Owner-supplied current hydropower description",
+    "LinkedIn projects/Hydro Power plant/1784472238828.jpg",
+    "LinkedIn projects/Hydro Power plant/1784472239089.jpg",
+    "LinkedIn projects/Hydro Power plant/1784472239613.jpg"
+  ],
+  "evidenceNotes": [
+    "Poster omitted from public assets because of student registration fields and ambiguous actual-output wording.",
+    "No construction or commissioning evidence; plant design and generator nameplate selection are different ratings."
+  ],
+  "links": [],
+  "featuredOrder": 2
+}

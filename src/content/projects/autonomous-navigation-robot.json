@@ -1,0 +1,90 @@
+{
+  "slug": "autonomous-navigation-robot",
+  "title": "Autonomous Multi-Sensor Navigation Robot",
+  "shortTitle": "Multi-Sensor Navigation Robot",
+  "category": "Embedded systems",
+  "group": "showcase",
+  "summary": "An implemented Arduino semester prototype combining line tracking, obstacle sensing and ambient-light response through embedded control.",
+  "status": "Implemented semester prototype",
+  "flagship": false,
+  "technologies": [
+    "Arduino UNO",
+    "ATmega328P",
+    "Embedded C/C++",
+    "PWM",
+    "HC-SR04",
+    "IR and LDR sensing"
+  ],
+  "overview": "Built for Electrical Measurements & Instrumentation, the prototype combines several sensor inputs in a compact autonomous robot. An Arduino UNO processes dual IR line-sensor signals, HC-SR04 obstacle-distance information and LDR ambient-light input, then drives the motors through an L298N interface. Its architecture separates sensing, processing, actuation and power management.",
+  "approach": [
+    "Interfaced dual IR sensors for line tracking and an HC-SR04 sensor for obstacle detection.",
+    "Included an LDR to support light-responsive behaviour.",
+    "Used Embedded C/C++ and PWM to connect sensing decisions with motor actuation.",
+    "Integrated the sensing, control, motor-driver and power subsystems in the photographed semester prototype."
+  ],
+  "components": [
+    "Arduino UNO / ATmega328P",
+    "Dual IR line sensors",
+    "HC-SR04 ultrasonic sensor",
+    "LDR ambient-light sensor",
+    "L298N motor driver",
+    "DC motors and prototype power supply"
+  ],
+  "outcomes": [
+    "The photographs show an implemented robot, supported by the CV descriptions and owner-supplied caption.",
+    "The caption reports 95–97% line-tracking precision, obstacle response below 250 ms, approximately 0.8 A average load and approximately 2.5 hours of operation.",
+    "These are reported prototype results. The supplied material does not establish a formal test procedure or detailed operating conditions."
+  ],
+  "metrics": [
+    {
+      "value": "95–97%",
+      "label": "Line-tracking precision",
+      "basis": "Reported prototype result"
+    },
+    {
+      "value": "<250 ms",
+      "label": "Obstacle response",
+      "basis": "Reported prototype result"
+    },
+    {
+      "value": "≈0.8 A",
+      "label": "Average load",
+      "basis": "Reported prototype result"
+    },
+    {
+      "value": "≈2.5 hours",
+      "label": "Operating time",
+      "basis": "Reported prototype result"
+    }
+  ],
+  "credits": [],
+  "images": [
+    {
+      "src": "../../assets/projects/autonomous-navigation-robot/robot-side-view.jpg",
+      "kind": "photo",
+      "alt": "Arduino-based four-wheel robot with breadboard wiring, battery cells and yellow wheels.",
+      "caption": "The implemented semester robot, shown from the side.",
+      "focalPoint": "58% 57%"
+    },
+    {
+      "src": "../../assets/projects/autonomous-navigation-robot/robot-top-view.jpg",
+      "kind": "photo",
+      "alt": "Top view of the robot showing its Arduino UNO, wiring, battery holder and ultrasonic sensor.",
+      "caption": "A top view of the prototype sensing and control hardware.",
+      "focalPoint": "50% 43%"
+    }
+  ],
+  "provenance": [
+    "Owner-supplied current robot description and caption",
+    "Everything/CV/New CV.pdf",
+    "Everything/CV/Muhammad_Sharjeel_CV_PPRA.pdf",
+    "LinkedIn projects/Autonomous Multi-Sensor Navigation Robot/1772576642824.jpg",
+    "LinkedIn projects/Autonomous Multi-Sensor Navigation Robot/1772576642957.jpg"
+  ],
+  "evidenceNotes": [
+    "Metrics come from the owner-supplied prototype caption; no invented test protocol, sample size or validation standard.",
+    "Complete teammate names and individual responsibilities are not established."
+  ],
+  "links": [],
+  "featuredOrder": 3
+}

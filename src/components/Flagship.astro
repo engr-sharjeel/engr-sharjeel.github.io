@@ -1,0 +1,13 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ImageFrame from './ImageFrame.astro';
+import Button from './Button.astro';
+import { projectUrl } from '../lib/urls';
+interface Props { project: CollectionEntry<'projects'>; catalogue?: boolean; }
+const { project, catalogue = false } = Astro.props;
+const p = project.data;
+---
+<article class="flagship" data-project={catalogue ? true : undefined} data-category={catalogue ? p.category : undefined} data-search={catalogue ? `${p.title} ${p.summary} ${p.technologies.join(' ')}`.toLowerCase() : undefined}>
+  <div class="flagship-copy"><p class="eyebrow"><span class="status-dot" aria-hidden="true"></span>Flagship / Final year project</p><h3>{p.shortTitle}</h3><p>{p.summary}</p><div class="flagship-specs"><span>{p.technologies[0]}</span><span>{p.status}</span></div><Button href={projectUrl(p.slug)}>Explore the project</Button></div>
+  <div class="flagship-visual">{p.images[0] && <ImageFrame image={p.images[0]} />}<div class="image-note"><span>REEV / 01</span><span>Concept illustration</span></div></div>
+</article>

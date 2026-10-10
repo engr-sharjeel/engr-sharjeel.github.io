@@ -1,0 +1,37 @@
+{
+  "slug": "audio-amplifier",
+  "title": "Audio Amplifier",
+  "shortTitle": "Audio Amplifier",
+  "category": "Electronics",
+  "group": "academic",
+  "summary": "A transistor-based academic audio-amplifier circuit project.",
+  "status": "Academic coursework",
+  "flagship": false,
+  "technologies": [
+    "Transistor circuits",
+    "Analog electronics",
+    "Audio amplification"
+  ],
+  "overview": "An academic design and implementation of a transistor-based audio-amplifier circuit.",
+  "approach": [
+    "Worked with transistor-based amplifier circuitry.",
+    "Designed and implemented an academic audio-amplification circuit."
+  ],
+  "components": [
+    "Transistor amplifier stages",
+    "Audio input/output circuit"
+  ],
+  "outcomes": [
+    "Implemented a transistor-based audio-amplifier circuit as academic electronics work."
+  ],
+  "metrics": [],
+  "credits": [],
+  "images": [],
+  "provenance": [
+    "Everything/CV/SHARJEEL CV.pdf"
+  ],
+  "evidenceNotes": [
+    "Concise CV-supported entry; no report, code repository or public photograph supplied."
+  ],
+  "links": []
+}

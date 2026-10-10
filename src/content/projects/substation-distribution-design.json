@@ -1,0 +1,38 @@
+{
+  "slug": "substation-distribution-design",
+  "title": "Substation Layout & Distribution System Design",
+  "shortTitle": "Substation & Distribution Design",
+  "category": "Power systems",
+  "group": "academic",
+  "summary": "An academic layout and distribution study for mixed residential, industrial and commercial loads, using load curves to guide equipment ratings.",
+  "status": "Academic coursework",
+  "flagship": false,
+  "technologies": [
+    "Load assessment",
+    "Substation layout",
+    "CT/PT instrumentation"
+  ],
+  "overview": "An academic substation-layout and distribution study for mixed residential, industrial and commercial loads. Load-curve analysis informed transformer, feeder and cable ratings, with CT/PT protective instrumentation included in the design scope.",
+  "approach": [
+    "Analysed mixed-load curves to support equipment-rating decisions.",
+    "Developed a substation layout and distribution-system design scope."
+  ],
+  "components": [
+    "Transformer, feeder and cable selection",
+    "CT/PT protective instrumentation"
+  ],
+  "outcomes": [
+    "Connected load analysis with substation layout and equipment-rating decisions."
+  ],
+  "metrics": [],
+  "credits": [],
+  "images": [],
+  "provenance": [
+    "Everything/CV/New CV.pdf",
+    "Everything/CV/Muhammad_Sharjeel_CV_PPRA.pdf"
+  ],
+  "evidenceNotes": [
+    "Concise CV-supported entry; no report, code repository or public photograph supplied."
+  ],
+  "links": []
+}

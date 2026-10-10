@@ -1,0 +1,74 @@
+{
+  "slug": "electronic-voting-machine",
+  "title": "Electronic Voting Machine",
+  "shortTitle": "Electronic Voting Machine",
+  "category": "Embedded systems",
+  "group": "showcase",
+  "summary": "An 8051 academic hardware prototype for candidate input, vote counting and LCD result display, including debouncing and winner/tie logic.",
+  "status": "Academic hardware prototype",
+  "flagship": false,
+  "technologies": [
+    "8051",
+    "Embedded C",
+    "16×2 LCD",
+    "Push-button interfacing",
+    "Proteus"
+  ],
+  "overview": "The Electronic Voting Machine is an academic embedded-system prototype using an 8051 microcontroller. Push buttons accept votes for multiple candidates, and a 16×2 LCD presents counts and calculated results. Embedded C logic handles switch debouncing, vote counting and winner or tie detection. Hardware photographs and a Proteus schematic document the implementation.",
+  "approach": [
+    "Connected multiple-candidate push-button inputs to the 8051 control system.",
+    "Used software debouncing to handle mechanical switch inputs.",
+    "Implemented vote counts, result calculation and winner/tie logic in Embedded C.",
+    "Presented results through the LCD and assembled the photographed breadboard prototype."
+  ],
+  "components": [
+    "8051-family microcontroller",
+    "Multiple-candidate push buttons",
+    "16×2 LCD",
+    "Breadboard wiring and prototype supply",
+    "Proteus circuit schematic"
+  ],
+  "outcomes": [
+    "Implemented the academic voting-machine prototype shown in the hardware photographs.",
+    "Practised input handling, state/count logic and display interfacing in an embedded system.",
+    "The work is an educational prototype, without certification for use in real elections."
+  ],
+  "metrics": [],
+  "credits": [],
+  "images": [
+    {
+      "src": "../../assets/projects/electronic-voting-machine/voting-machine-prototype.jpg",
+      "kind": "photo",
+      "alt": "Breadboard voting-machine prototype with a 16 by 2 LCD, push buttons and jumper wiring.",
+      "caption": "The academic voting-machine hardware prototype.",
+      "focalPoint": "50% 48%"
+    },
+    {
+      "src": "../../assets/projects/electronic-voting-machine/push-button-hardware.jpg",
+      "kind": "photo",
+      "alt": "Close view of push buttons and wiring on the voting-machine breadboard.",
+      "caption": "Candidate-input push buttons and prototype wiring.",
+      "focalPoint": "50% 43%"
+    },
+    {
+      "src": "../../assets/projects/electronic-voting-machine/voting-machine-schematic.jpg",
+      "kind": "schematic",
+      "alt": "Proteus schematic connecting an AT89C51 microcontroller to candidate buttons and an LCD.",
+      "caption": "The 8051 academic prototype schematic; this is not an election-certified system.",
+      "focalPoint": "50% 50%"
+    }
+  ],
+  "provenance": [
+    "Owner-supplied current voting-machine description",
+    "Everything/CV/New CV.pdf",
+    "Everything/CV/Muhammad_Sharjeel_CV_PPRA.pdf",
+    "LinkedIn projects/Electronic Voting Machine/1769793422440.jpg",
+    "LinkedIn projects/Electronic Voting Machine/1769793422406.jpg",
+    "LinkedIn projects/Electronic Voting Machine/1769793422313.jpg"
+  ],
+  "evidenceNotes": [
+    "Do not carry over CV secure-system wording as a certification/security assurance.",
+    "No completed independent security assessment or election deployment is established."
+  ],
+  "links": []
+}

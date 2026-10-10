@@ -1,0 +1,37 @@
+{
+  "slug": "oop-library-management",
+  "title": "Library Management System — OOP",
+  "shortTitle": "Library Management System",
+  "category": "Software",
+  "group": "academic",
+  "summary": "An object-oriented academic program for book inventory, borrowing and user management.",
+  "status": "Academic coursework",
+  "flagship": false,
+  "technologies": [
+    "Object-oriented programming",
+    "Inventory management"
+  ],
+  "overview": "An object-oriented library-management program covering book inventory, borrowing and user management.",
+  "approach": [
+    "Applied object-oriented organisation to library resources.",
+    "Included inventory, borrowing and user-management functions."
+  ],
+  "components": [
+    "Object-oriented program",
+    "Book inventory and borrowing functions",
+    "User-management scope"
+  ],
+  "outcomes": [
+    "Applied object-oriented programming to inventory, borrowing and user functions."
+  ],
+  "metrics": [],
+  "credits": [],
+  "images": [],
+  "provenance": [
+    "Everything/CV/SHARJEEL CV.pdf"
+  ],
+  "evidenceNotes": [
+    "Concise CV-supported entry; no report, code repository or public photograph supplied."
+  ],
+  "links": []
+}

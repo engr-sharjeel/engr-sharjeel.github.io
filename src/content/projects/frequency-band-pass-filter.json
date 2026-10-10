@@ -1,0 +1,36 @@
+{
+  "slug": "frequency-band-pass-filter",
+  "title": "Frequency Band Pass Filter",
+  "shortTitle": "Band Pass Filter",
+  "category": "Electronics",
+  "group": "academic",
+  "summary": "An academic filter circuit for passing a selected frequency band and attenuating frequencies outside it.",
+  "status": "Academic coursework",
+  "flagship": false,
+  "technologies": [
+    "Analog filtering",
+    "Frequency response",
+    "Circuit design"
+  ],
+  "overview": "An academic band-pass filter circuit intended to pass a selected frequency range while attenuating signals outside that band.",
+  "approach": [
+    "Applied band-pass filtering concepts to an academic circuit.",
+    "Considered the distinction between passband and out-of-band response."
+  ],
+  "components": [
+    "Band-pass filter circuit"
+  ],
+  "outcomes": [
+    "Applied frequency-selection principles in an academic filter circuit."
+  ],
+  "metrics": [],
+  "credits": [],
+  "images": [],
+  "provenance": [
+    "Everything/CV/SHARJEEL CV.pdf"
+  ],
+  "evidenceNotes": [
+    "Concise CV-supported entry; no report, code repository or public photograph supplied."
+  ],
+  "links": []
+}

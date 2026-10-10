@@ -1,0 +1,83 @@
+{
+  "slug": "range-extended-electric-vehicle",
+  "title": "Design and Integration of Chassis and Power-train for a Range Extended Electric Vehicle",
+  "shortTitle": "Range Extended Electric Vehicle",
+  "category": "Electric mobility",
+  "group": "showcase",
+  "summary": "A two-seater academic REEV study connecting electric propulsion with an engine-generator range extender. FYP-1 established the architecture and integration methodology.",
+  "status": "FYP-1 complete",
+  "flagship": true,
+  "technologies": [
+    "Series REEV architecture",
+    "Electric motor drives",
+    "Battery systems",
+    "DC/DC conversion",
+    "System integration"
+  ],
+  "overview": "Range anxiety and limited charging access motivate this two-seater academic project at Air University. The selected series architecture keeps the wheels electrically driven: the battery supplies a controller and traction motor, while a petrol engine runs a generator to support or recharge the electrical system when required. The engine has no direct mechanical connection to the wheels.",
+  "approach": [
+    "Reviewed electric, hybrid and range-extended vehicle literature to establish the problem and compare architectures.",
+    "Selected a series REEV architecture and identified the battery, motor, controller, generator, fuel tank and DC/DC converter.",
+    "Developed the sizing and integration methodology, including a power-flow block diagram and a conceptual battery-state-of-charge operating sequence.",
+    "Defined a development path from design calculations and component sizing to chassis integration and vehicle demonstration."
+  ],
+  "components": [
+    "Battery pack and battery management",
+    "Traction motor and motor controller",
+    "Petrol engine and generator range extender",
+    "Fuel tank and DC bus",
+    "DC/DC converter for auxiliary electrical loads",
+    "Proposed chassis and control integration"
+  ],
+  "outcomes": [
+    "FYP-1 is complete: literature review, architecture selection, component identification and methodology form the present deliverable.",
+    "FYP-2 is the next phase for design calculations and component sizing.",
+    "The final vehicle is planned for FYP-3. The supplied vehicle rendering is a concept illustration, and no completed-vehicle range is claimed."
+  ],
+  "metrics": [],
+  "credits": [
+    "Muhammad Sharjeel · team member",
+    "Muhammad Zikyas Babar · team member",
+    "Mashhood Un Nabi Butt · team member",
+    "Engr. Hussain Asif · supervisor"
+  ],
+  "images": [
+    {
+      "src": "../../assets/projects/range-extended-electric-vehicle/reev-concept-illustration.jpg",
+      "kind": "concept",
+      "alt": "Cutaway vehicle illustration showing an electric axle drive, battery, generator and auxiliary engine.",
+      "caption": "Concept illustration of a range-extended electric architecture; not a photograph of the completed project vehicle.",
+      "focalPoint": "50% 50%"
+    },
+    {
+      "src": "../../assets/projects/range-extended-electric-vehicle/series-architecture.jpg",
+      "kind": "diagram",
+      "alt": "Series REEV block diagram: fuel tank, engine and generator feed a DC bus; the electric motor drives the wheels, with a battery and control unit connected.",
+      "caption": "Series architecture: the petrol engine drives a generator; only the electric motor drives the wheels.",
+      "focalPoint": "50% 50%"
+    },
+    {
+      "src": "../../assets/projects/range-extended-electric-vehicle/soc-control-flowchart.jpg",
+      "kind": "flowchart",
+      "alt": "Flowchart for battery-state-of-charge decisions, electric driving and generator-supported range-extended operation.",
+      "caption": "Conceptual operating sequence for battery-electric and generator-supported modes; not evidence of implemented vehicle control.",
+      "focalPoint": "50% 50%"
+    }
+  ],
+  "provenance": [
+    "Owner-supplied current REEV description",
+    "Everything/FYP/P 2348.docx",
+    "Everything/FYP/REEV Abstract.docx",
+    "Everything/FYP/FYP 1 Presentation (1).pptx",
+    "LinkedIn projects/FYP/1791017338280.jpg",
+    "LinkedIn projects/FYP/1791017338295.jpg",
+    "LinkedIn projects/FYP/1791017339497.jpg"
+  ],
+  "evidenceNotes": [
+    "Prefer team spelling in the matching P 2348.docx report over presentation variants.",
+    "Older single-seater, vehicle-conversion and component-sizing files represent conflicting proposal scenarios; exact mass, rating, cost and range figures are excluded.",
+    "Owner phase boundaries take precedence over inconsistent completed-tense methodology sentences in report."
+  ],
+  "links": [],
+  "featuredOrder": 1
+}

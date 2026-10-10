@@ -1,0 +1,16 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { projectUrl } from '../lib/urls';
+import ImageFrame from './ImageFrame.astro';
+import Tag from './Tag.astro';
+interface Props { project: CollectionEntry<'projects'>; compact?: boolean; }
+const { project, compact = false } = Astro.props;
+const p = project.data;
+const symbol: Record<string, string> = { 'Power systems': 'AC', 'Electric mobility': 'EV', 'Embedded systems': 'µC', 'Electronics': '±', 'Software': '</>', 'Engineering practice': '↗' };
+---
+<article class:list={['project-card', { 'academic-card': compact }]} data-project data-category={p.category} data-search={`${p.title} ${p.summary} ${p.technologies.join(' ')}`.toLowerCase()}>
+  <a class="project-media-link" href={projectUrl(p.slug)} tabindex="-1" aria-hidden="true">
+    {p.images[0] ? <ImageFrame image={p.images[0]} /> : <div class="type-cover"><span class="eyebrow">{p.category}</span><span class="cover-symbol">{symbol[p.category]}</span><span class="cover-label">Academic work / {p.technologies[0] || 'Engineering'}</span></div>}
+  </a>
+  <div class="project-card-body"><p class="eyebrow">{p.category}</p><h3><a href={projectUrl(p.slug)}>{p.shortTitle}<span aria-hidden="true">↗</span></a></h3><p>{p.summary}</p><div class="card-meta"><Tag>{p.status}</Tag></div></div>
+</article>

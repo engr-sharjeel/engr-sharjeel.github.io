@@ -1,0 +1,34 @@
+{
+  "slug": "pcb-layout-practice",
+  "title": "PCB Layout & Circuit Design Practice",
+  "shortTitle": "PCB Layout Practice",
+  "category": "Engineering practice",
+  "group": "academic",
+  "summary": "Academic PCB-layout practice for electrical circuits.",
+  "status": "Academic coursework",
+  "flagship": false,
+  "technologies": [
+    "PCB layout",
+    "Circuit design"
+  ],
+  "overview": "Academic PCB-design practice covering the layout of electrical circuits.",
+  "approach": [
+    "Worked on PCB layouts for electrical circuits."
+  ],
+  "components": [
+    "Circuit-layout practice"
+  ],
+  "outcomes": [
+    "Developed academic practice in circuit-board layout."
+  ],
+  "metrics": [],
+  "credits": [],
+  "images": [],
+  "provenance": [
+    "Everything/CV/SHARJEEL CV.pdf"
+  ],
+  "evidenceNotes": [
+    "Concise CV-supported entry; no report, code repository or public photograph supplied."
+  ],
+  "links": []
+}

@@ -1,0 +1,36 @@
+{
+  "slug": "rain-detection-circuit",
+  "title": "Rain Detector",
+  "shortTitle": "Rain Detector",
+  "category": "Electronics",
+  "group": "academic",
+  "summary": "A sensor-based academic rain-detection circuit with an alert-oriented scope.",
+  "status": "Academic coursework",
+  "flagship": false,
+  "technologies": [
+    "Sensor interfacing",
+    "Alert circuits"
+  ],
+  "overview": "A sensor-based academic rain-detection circuit with an alert function.",
+  "approach": [
+    "Used rain-sensing input in an academic circuit.",
+    "Included an alert/indication function."
+  ],
+  "components": [
+    "Rain-sensing circuit",
+    "Alert output"
+  ],
+  "outcomes": [
+    "Connected sensor input with an alert-oriented circuit."
+  ],
+  "metrics": [],
+  "credits": [],
+  "images": [],
+  "provenance": [
+    "Everything/CV/SHARJEEL CV.pdf"
+  ],
+  "evidenceNotes": [
+    "Concise CV-supported entry; no report, code repository or public photograph supplied."
+  ],
+  "links": []
+}
