@@ -1,0 +1,27 @@
+# Private original sources: anchored so curated src/assets remain tracked.
+/Everything/
+/LinkedIn projects/
+/Documents/
+/CV/
+/FYP/
+/Certifications/
+/Paper/
+/Internship Pictures/
+/EM Project/
+/*.zip
+/*.rar
+node_modules/
+dist/
+.astro/
+.env
+.env.*
+!.env.example
+.aws/
+.codex/
+.agents/
+.tmp/
+artifacts/
+*.log
+*.tsbuildinfo
+.DS_Store
+Thumbs.db
