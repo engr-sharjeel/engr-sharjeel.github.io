@@ -1,0 +1,32 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import { achievements, type AchievementRecord } from '../data/achievements';
+
+const groups: AchievementRecord['category'][] = ['Academic recognition', 'Professional community', 'Course completion'];
+---
+
+<Layout title="Achievements & courses" description="Academic commendations, IEEE recognition and completed courses supporting Muhammad Sharjeel’s engineering education." active="about">
+  <div class="container">
+    <section class="page-intro">
+      <p class="eyebrow">Recognition & learning</p>
+      <h1>A continuing<br />engineering education.</h1>
+      <p class="intro-copy">Academic recognition, professional-community involvement and courses that complement undergraduate study.</p>
+    </section>
+    {groups.map((group, index) => (
+      <section class="section" aria-labelledby={`achievement-group-${index}`}>
+        <SectionHeading eyebrow={index === 2 ? 'Additional learning' : 'Recognition'} title={group} id={`achievement-group-${index}`} />
+        <div class="records-grid">
+          {achievements.filter((item) => item.category === group).map((item) => (
+            <article class="record">
+              <p class="eyebrow">{item.period}</p>
+              <h3>{item.title}</h3>
+              <p class="record-issuer">{item.issuer}</p>
+              <p class="muted">{item.description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+    ))}
+  </div>
+</Layout>

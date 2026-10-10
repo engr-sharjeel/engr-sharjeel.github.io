@@ -1,0 +1,90 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import Tag from '../../components/Tag.astro';
+import ImageFrame from '../../components/ImageFrame.astro';
+import MetricLabel from '../../components/MetricLabel.astro';
+import { projectUrl, withBase } from '../../lib/urls';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({ params: { slug: project.data.slug }, props: { project } }));
+}
+
+interface Props { project: CollectionEntry<'projects'> }
+const { project } = Astro.props;
+const data = project.data;
+const projects = await getCollection('projects');
+const related = projects
+  .filter((entry) => entry.data.slug !== data.slug)
+  .sort((a, b) => Number(b.data.category === data.category) - Number(a.data.category === data.category) || Number(b.data.flagship) - Number(a.data.flagship) || a.data.title.localeCompare(b.data.title))
+  .slice(0, 3);
+---
+
+<Layout title={data.shortTitle} description={data.summary} active="projects">
+  <div class="container">
+    <section class="page-intro project-intro">
+      <a class="back-link" href={withBase('/projects/')}><span aria-hidden="true">←</span> All projects</a>
+      <div class="tags"><Tag>{data.category}</Tag><Tag>{data.status}</Tag>{data.flagship && <Tag>Flagship FYP</Tag>}</div>
+      <h1>{data.title}</h1>
+      <p class="intro-copy">{data.summary}</p>
+    </section>
+    {data.images[0] && <div class="detail-cover"><ImageFrame image={data.images[0]} priority detail /></div>}
+    <section class="section detail-grid" aria-labelledby="overview-heading">
+      <div class="detail-main">
+        <SectionHeading eyebrow={data.group === 'showcase' ? 'Project overview' : 'Academic work'} title="The work" id="overview-heading" />
+        <div class="prose"><p>{data.overview}</p></div>
+        {data.approach.length > 0 && (
+          <div class="detail-section prose">
+            <h2>Scope & approach</h2>
+            <ul>{data.approach.map((item) => <li>{item}</li>)}</ul>
+          </div>
+        )}
+        {data.outcomes.length > 0 && (
+          <div class="detail-section prose">
+            <h2>{data.flagship ? 'Completed work & next phases' : 'Outcomes & status'}</h2>
+            <ul>{data.outcomes.map((item) => <li>{item}</li>)}</ul>
+          </div>
+        )}
+        {data.metrics.length > 0 && (
+          <div class="detail-section">
+            <h2>Figures in context</h2>
+            <div class="metrics-grid">{data.metrics.map((metric) => <MetricLabel metric={metric} />)}</div>
+          </div>
+        )}
+      </div>
+      <aside class="detail-aside" aria-label="Project context">
+        <dl class="definition-list">
+          <dt>Category</dt><dd>{data.category}</dd>
+          <dt>Status</dt><dd>{data.status}</dd>
+          <dt>Context</dt><dd>{data.group === 'showcase' ? 'Academic engineering project' : 'Additional academic work'}</dd>
+        </dl>
+        {data.technologies.length > 0 && <div class="aside-section"><h2>Tools & technologies</h2><ul class="tags" role="list">{data.technologies.map((technology) => <li><Tag>{technology}</Tag></li>)}</ul></div>}
+        {data.components.length > 0 && <div class="aside-section"><h2>Components & methods</h2><ul class="aside-list">{data.components.map((component) => <li>{component}</li>)}</ul></div>}
+        {data.credits.length > 0 && <div class="aside-section"><h2>Team & credits</h2><ul class="aside-list">{data.credits.map((credit) => <li>{credit}</li>)}</ul></div>}
+        {data.links.length > 0 && <div class="aside-section"><h2>Further reading</h2>{data.links.map((link) => <a class="link-arrow" href={link.url}>{link.label} <span aria-hidden="true">↗</span></a>)}</div>}
+      </aside>
+    </section>
+    {data.images.length > 1 && (
+      <section class="section" aria-labelledby="images-heading">
+        <SectionHeading eyebrow="Visual record" title="Images & diagrams" id="images-heading" />
+        <div class="detail-gallery">{data.images.slice(1).map((image) => <ImageFrame image={image} detail />)}</div>
+      </section>
+    )}
+    <section class="section" aria-labelledby="related-heading">
+      <SectionHeading eyebrow="Continue exploring" title="More engineering work" id="related-heading" />
+      <div class="records-grid">
+        {related.map((entry) => (
+          <a class="record related-record" href={projectUrl(entry.data.slug)}>
+            <p class="eyebrow">{entry.data.category}</p>
+            <h3>{entry.data.shortTitle}</h3>
+            <p class="muted">{entry.data.summary}</p>
+            <span class="link-arrow">View project <span aria-hidden="true">↗</span></span>
+          </a>
+        ))}
+      </div>
+      <a class="link-arrow catalogue-return" href={withBase('/projects/')}>View all projects <span aria-hidden="true">↗</span></a>
+    </section>
+  </div>
+</Layout>

@@ -1,0 +1,36 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import Tag from '../components/Tag.astro';
+import { research } from '../data/research';
+import { projectUrl } from '../lib/urls';
+---
+
+<Layout title="Research" description="Research contributions by Muhammad Sharjeel: a published coauthored paper, EV-charging manuscript and accepted REEV abstract." active="research">
+  <div class="container">
+    <section class="page-intro">
+      <p class="eyebrow">Research</p>
+      <h1>Questions beyond<br />the classroom.</h1>
+      <p class="intro-copy">Work spanning engineering education, distribution networks and electric mobility: a published coauthored paper, an EV-charging manuscript and an abstract accepted for a forthcoming oral presentation.</p>
+    </section>
+    <section class="section" aria-labelledby="research-heading">
+      <SectionHeading eyebrow="Writing & inquiry" title="Published and developing work" id="research-heading" />
+      <div class="record-list">
+        {research.map((item) => (
+          <article class="record" id={item.id}>
+            <div class="record-header">
+              <div class="tags"><Tag>{item.status}</Tag>{item.year && <span class="technical-label">{item.year}</span>}</div>
+            </div>
+            <h3>{item.title}</h3>
+            {item.authors && <p class="research-authors">{item.authors.join(' · ')}</p>}
+            {item.publication && <p class="eyebrow">{item.publication}</p>}
+            <p>{item.summary}</p>
+            <p class="muted">{item.context}</p>
+            {item.link && <a class="link-arrow" href={item.link.url}>{item.link.label} <span aria-hidden="true">↗</span></a>}
+            {item.projectSlug && <a class="link-arrow" href={projectUrl(item.projectSlug)}>Explore the REEV project <span aria-hidden="true">↗</span></a>}
+          </article>
+        ))}
+      </div>
+    </section>
+  </div>
+</Layout>

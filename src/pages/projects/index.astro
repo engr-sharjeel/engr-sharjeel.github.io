@@ -1,0 +1,51 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import Flagship from '../../components/Flagship.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { projectUrl } from '../../lib/urls';
+const projects = (await getCollection('projects')).sort((a,b) => Number(b.data.flagship) - Number(a.data.flagship) || (a.data.featuredOrder ?? 99) - (b.data.featuredOrder ?? 99) || a.data.title.localeCompare(b.data.title));
+const flagship = projects.find(p => p.data.flagship)!;
+const showcases = projects.filter(p => p.data.group === 'showcase' && !p.data.flagship);
+const academic = projects.filter(p => p.data.group === 'academic');
+const categories = [...new Set(projects.map(p => p.data.category))].sort();
+---
+<Layout title="Projects" active="projects" description="Explore Muhammad Sharjeel’s power engineering, electric mobility, embedded systems and additional academic work.">
+  <section class="container page-intro"><p class="eyebrow">Project catalogue</p><h1>From concept<br />to practical work<span class="accent">.</span></h1><p>A collection of design studies, semester prototypes and academic exercises. Explore the scope, approach and current status behind each one.</p><div class="catalogue-counts"><span><b>{projects.filter(p => p.data.group === 'showcase').length.toString().padStart(2,'0')}</b> Detailed showcases</span><span><b>{academic.length.toString().padStart(2,'0')}</b> Additional academic works</span></div></section>
+  <section class="container catalogue" aria-label="Browse projects"><form id="project-controls" class="catalogue-controls" role="search" hidden><div class="search-row"><label class="search-box"><span class="sr-only">Search projects</span><span aria-hidden="true">⌕</span><input id="project-search" type="search" placeholder="Search projects, tools or technologies" autocomplete="off" /></label><button class="button button-secondary" type="reset">Clear filters <span aria-hidden="true">×</span></button></div><fieldset class="filter-fieldset"><legend class="sr-only">Filter by category</legend><div class="filter-list"><button type="button" data-filter="all" aria-pressed="true">All work</button>{categories.map(category => <button type="button" data-filter={category} aria-pressed="false">{category}</button>)}</div></fieldset></form>
+  <div class="catalogue-status"><p id="result-count" role="status" aria-live="polite">{projects.length} projects</p><p>Flagship: <a href={projectUrl(flagship.data.slug)}>{flagship.data.shortTitle} ↗</a></p></div>
+  <div data-project-group><SectionHeading eyebrow="01 / In depth" title="Engineering showcases" /><Flagship project={flagship} catalogue /><div class="project-grid showcase-grid">{showcases.map(project => <ProjectCard project={project} />)}</div></div>
+  <div class="academic-group" data-project-group><SectionHeading eyebrow="02 / Coursework & practice" title="Additional academic work" description="Concise records of smaller projects and exercises, supported by the supplied academic portfolio." /><div class="project-grid academic-grid">{academic.map(project => <ProjectCard project={project} compact />)}</div></div>
+  <div id="empty-state" class="empty-state" hidden><span class="eyebrow">No matches</span><h2>No projects found.</h2><p>Try a broader term, choose another category or clear the filters to see all work.</p><button id="reset-projects" class="button" type="button">Show all projects <span aria-hidden="true">↗</span></button></div>
+  </section>
+</Layout>
+<script>
+  const controls = document.querySelector<HTMLFormElement>('#project-controls');
+  const search = document.querySelector<HTMLInputElement>('#project-search');
+  const cards = [...document.querySelectorAll<HTMLElement>('[data-project]')];
+  const filters = [...document.querySelectorAll<HTMLButtonElement>('[data-filter]')];
+  const count = document.querySelector<HTMLElement>('#result-count');
+  const empty = document.querySelector<HTMLElement>('#empty-state');
+  const groups = [...document.querySelectorAll<HTMLElement>('[data-project-group]')];
+  let category = 'all';
+  function update() {
+    const terms = (search?.value.toLowerCase().trim() || '').split(/\s+/).filter(Boolean);
+    let shown = 0;
+    cards.forEach(card => { const match = (category === 'all' || card.dataset.category === category) && terms.every(term => card.dataset.search?.includes(term)); card.hidden = !match; if (match) shown++; });
+    filters.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.filter === category)));
+    groups.forEach(group => { group.hidden = ![...group.querySelectorAll<HTMLElement>('[data-project]')].some(card => !card.hidden); });
+    if (count) count.textContent = `${shown} of ${cards.length} projects`;
+    if (empty) empty.hidden = shown > 0;
+  }
+  const reset = () => { category = 'all'; if (search) search.value = ''; update(); };
+  if (controls && search) {
+    controls.hidden = false;
+    controls.addEventListener('submit', event => event.preventDefault());
+    search.addEventListener('input', update);
+    controls.addEventListener('reset', () => { reset(); });
+    filters.forEach(button => button.addEventListener('click', () => { category = button.dataset.filter || 'all'; update(); }));
+    document.querySelector('#reset-projects')?.addEventListener('click', () => { reset(); search.focus(); });
+    update();
+  }
+</script>

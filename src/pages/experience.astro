@@ -1,0 +1,43 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import Tag from '../components/Tag.astro';
+import ImageFrame from '../components/ImageFrame.astro';
+import { experience } from '../data/experience';
+import { withBase } from '../lib/urls';
+---
+
+<Layout title="Experience" description="Engineering internship exposure at IESCO and POWERCHINA SEPCO1, with Muhammad Sharjeel." active="experience">
+  <div class="container">
+    <section class="page-intro">
+      <p class="eyebrow">Experience</p>
+      <h1>Learning where<br />engineering happens.</h1>
+      <p class="intro-copy">Two internships provided practical context for power-engineering coursework: utility operations and the coordination of engineering projects.</p>
+    </section>
+    <section class="section" aria-labelledby="internships-heading">
+      <SectionHeading eyebrow="Industry exposure" title="Internships" id="internships-heading" />
+      <div class="timeline">
+        {experience.map((item) => (
+          <article class="timeline-item" id={item.id}>
+            <p class="eyebrow">{item.period}</p>
+            <div class="record-header">
+              <h3>{item.organization}</h3>
+              <Tag>{item.role}</Tag>
+            </div>
+            <p class="record-lead">{item.summary}</p>
+            <ul class="prose">{item.activities.map((activity) => <li>{activity}</li>)}</ul>
+            <ul class="tags" role="list">{item.areas.map((area) => <li><Tag>{area}</Tag></li>)}</ul>
+            {item.images.length > 0 && <div class="detail-gallery experience-gallery">{item.images.map((image) => <ImageFrame image={image} detail />)}</div>}
+          </article>
+        ))}
+      </div>
+    </section>
+    <section class="section two-column" aria-labelledby="experience-contact-heading">
+      <SectionHeading eyebrow="Next steps" title="Open to learning and collaboration" id="experience-contact-heading" />
+      <div class="prose">
+        <p>I’m interested in opportunities that deepen my practical understanding of electrical power systems, embedded control and electric mobility.</p>
+        <a class="link-arrow" href={withBase('/contact/')}>Get in touch <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+  </div>
+</Layout>

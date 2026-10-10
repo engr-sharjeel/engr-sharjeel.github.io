@@ -1,0 +1,57 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import Tag from '../components/Tag.astro';
+import { site } from '../data/site';
+import { skillGroups } from '../data/skills';
+import { withBase } from '../lib/urls';
+---
+
+<Layout title="About" description="Meet Muhammad Sharjeel, an Electrical (Power) Engineering undergraduate at Air University, Islamabad." active="about">
+  <div class="container">
+    <section class="page-intro">
+      <p class="eyebrow">About</p>
+      <h1>Engineering through<br />study and practice.</h1>
+      <p class="intro-copy">I’m {site.name}, an {site.role} at {site.university}. My academic work connects power systems, electric mobility and embedded control.</p>
+    </section>
+    <section class="section two-column" aria-labelledby="background-heading">
+      <SectionHeading eyebrow="Background" title="A practical foundation" id="background-heading" />
+      <div class="prose">
+        <p>My projects range from a fabricated transformer and sensor-based robot to a rural micro hydropower design study. Each brings a different part of electrical engineering into focus: sizing, sensing, control, integration and testing.</p>
+        <p>My current final-year project explores the chassis and power-train integration of a two-seater range extended electric vehicle. FYP-1 is complete, establishing the literature review, series architecture and integration methodology for the next stages.</p>
+        <p>Internships at IESCO and POWERCHINA SEPCO1 have added exposure to utility systems and engineering project coordination.</p>
+        <a class="link-arrow" href={withBase('/projects/')}>Explore the project catalogue <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+    <section class="section" aria-labelledby="education-heading">
+      <SectionHeading eyebrow="Education" title="Electrical (Power) Engineering" id="education-heading" />
+      <article class="record">
+        <div class="record-header">
+          <h3>Air University</h3>
+          <Tag>Undergraduate</Tag>
+        </div>
+        <p>Islamabad, Pakistan</p>
+        <p class="muted">Academic interests include power systems, electric mobility, renewable energy and embedded systems.</p>
+      </article>
+    </section>
+    <section class="section" aria-labelledby="skills-heading">
+      <SectionHeading eyebrow="Tools & practice" title="Skills used in the work" description="Applied across academic projects and internship learning." id="skills-heading" />
+      <div class="records-grid">
+        {skillGroups.map((group) => (
+          <article class="record">
+            <h3>{group.title}</h3>
+            <p>{group.context}</p>
+            <ul class="tags" role="list">{group.items.map((item) => <li><Tag>{item}</Tag></li>)}</ul>
+          </article>
+        ))}
+      </div>
+    </section>
+    <section class="section two-column" aria-labelledby="recognition-heading">
+      <SectionHeading eyebrow="Beyond projects" title="Learning and recognition" id="recognition-heading" />
+      <div class="prose">
+        <p>Semester commendations, IEEE community engagement and additional courses support my continuing engineering education.</p>
+        <a class="link-arrow" href={withBase('/achievements/')}>View recognition & courses <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+  </div>
+</Layout>

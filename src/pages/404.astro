@@ -1,0 +1,18 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { withBase } from '../lib/urls';
+---
+
+<Layout title="Page not found" description="This page could not be found. Return to Muhammad Sharjeel’s portfolio or explore the project catalogue.">
+  <div class="container">
+    <section class="page-intro error-page">
+      <p class="eyebrow">404 / Page not found</p>
+      <h1>A different<br />route from here.</h1>
+      <p class="intro-copy">This address doesn’t lead to a page in the portfolio. You can return home or explore the engineering projects.</p>
+      <div class="button-row">
+        <a class="button" href={withBase('/')}>Return home <span aria-hidden="true">↗</span></a>
+        <a class="button button-secondary" href={withBase('/projects/')}>View all projects</a>
+      </div>
+    </section>
+  </div>
+</Layout>
