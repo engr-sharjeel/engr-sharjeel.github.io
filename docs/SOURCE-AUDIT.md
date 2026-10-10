@@ -74,7 +74,7 @@ Keep three distinct records:
 | Impact of Electric Vehicle Charging Infrastructure on Distribution Network Voltage Stability | `Everything/Paper/Conference_Paper.pdf`; `Conferece Paper Impact of Electric Vehicle Charging Infrastructure on Distribution Network Voltage Stability.pdf` | One manuscript record after version deduplication; no publication or acceptance claim. |
 | REEV chassis/power-train abstract | `Everything/Paper/acceptance-letter-CONF-MECHANICAL-023 (1).pdf` and corresponding JPEG | Abstract accepted for a future oral presentation per supplied October 2026 letter. Not the EV-charging manuscript; not published proceedings or a completed presentation. Omit raw payment-bearing letter and unverified conference details. |
 
-The journal PDF confirms the stated title, author order, DOI and a publication date of 12 August 2025. The EV manuscript PDFs are two eight-page versions of the same study, with corresponding analytical sections and rewritten prose/layout; they are not byte-identical duplicate files. Keep a single manuscript record, with no peer-review or acceptance claim. The letter is dated 3 October 2026 and schedules future oral presentation in November 2026. Its conference/location wording has not been independently verified, so the first public record uses accepted-abstract status without expanding those details.
+The journal PDF confirms the stated title, author order, DOI and a publication date of 12 August 2025. The EV manuscript PDFs are two eight-page versions of the same study, with corresponding analytical sections and rewritten prose/layout; they are not byte-identical duplicate files. First-page visual review confirms the same author order in both: Muhammad Sharjeel, Muhammad Zikyas Babar, Mashhood Un Nabi Butt. The alternate version's header is absent from its searchable text layer, so text-only comparison would miss this attribution. Keep a single manuscript record, with no peer-review or acceptance claim. The letter is dated 3 October 2026 and schedules future oral presentation in November 2026. Its conference/location wording has not been independently verified, so the first public record uses accepted-abstract status without expanding those details.
 
 ## Recognition and course titles verified visually
 
@@ -91,7 +91,7 @@ The journal PDF confirms the stated title, author order, DOI and a publication d
 
 ## Remaining evidence questions
 
-- Exact transformer secondary output must be reconciled before publication.
+- Exact transformer secondary output/topology must be reconciled before publication. Visually reviewed handwritten report calculations (pages 11 and 13) state a 380 V secondary with a 220 V tap, matching the CV voltage string but requiring reconciliation with the current “center-tapped” title. Initial and redesigned calculation pages use different apparent-power ratings; omit those ratings. Page 14 has an open/short-circuit-test heading without visible measurements, so publish the supported test scope without measured-result claims.
 - SAMS physical implementation has not been established from the schematic alone.
 - Robot metric test conditions are incomplete; retain “reported prototype results” if metrics are displayed.
 - Preserve proposed REEV calculations as separate scenarios; current phase status and compatible final sizing need owner confirmation in phase 2.

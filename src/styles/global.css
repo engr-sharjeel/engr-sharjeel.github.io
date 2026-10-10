@@ -162,7 +162,7 @@
   .empty-state { text-align: center; padding: 80px 24px; border: 1px solid var(--line); border-radius: 8px; }
   .empty-state h2 { margin-block: 15px; }
   .empty-state p { margin-bottom: 24px; }
-  .two-column { display: grid; grid-template-columns: 1.15fr 1fr; gap: 70px; }
+  .two-column { display: grid; grid-template-columns: 1.15fr 1fr; gap: 70px; align-items: start; }
   .prose { max-width: 68ch; }
   .prose > * + * { margin-top: 20px; }
   .prose h2, .prose h3 { margin-top: 32px; }
@@ -172,7 +172,8 @@
   .record p { font-size: .9rem; }
   .record > * + * { margin-top: 18px; }
   .record .eyebrow { margin-top: 0; }
-  .record-header { display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; }
+  .record-header { display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: center; }
+  .record-header h3 { margin: 0; }
   .record-issuer, .record-lead { color: var(--text); }
   .record-list, .timeline { display: grid; gap: 24px; }
   .records-grid { display: grid; gap: 24px; grid-template-columns: repeat(2,minmax(0,1fr)); }
@@ -214,7 +215,7 @@
   .metric-value { display: block; font-size: 1.9rem; color: var(--text); font-weight: 600; letter-spacing: -.04em; }
   .metric-label { display: block; font-size: .8rem; color: var(--muted); margin-top: 6px; }
   .metric-basis { display: block; font: .6rem/1.6 var(--mono); color: var(--accent); margin-top: 14px; }
-  .related-record { display: block; font-size: .85rem; padding-block: 12px; color: var(--accent); }
+  .related-record { display: block; font-size: .85rem; padding-block: 12px; color: var(--accent); text-decoration: none; }
   .catalogue-return { padding-top: 28px; }
   .research-authors { color: var(--text); font-size: .85rem; }
 }

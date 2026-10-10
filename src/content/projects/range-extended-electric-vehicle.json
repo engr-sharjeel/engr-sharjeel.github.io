@@ -32,7 +32,7 @@
   "outcomes": [
     "FYP-1 is complete: literature review, architecture selection, component identification and methodology form the present deliverable.",
     "FYP-2 is the next phase for design calculations and component sizing.",
-    "The final vehicle is planned for FYP-3. The supplied vehicle rendering is a concept illustration, and no completed-vehicle range is claimed."
+    "The final vehicle is planned for FYP-3."
   ],
   "metrics": [],
   "credits": [
@@ -60,7 +60,7 @@
       "src": "../../assets/projects/range-extended-electric-vehicle/soc-control-flowchart.jpg",
       "kind": "flowchart",
       "alt": "Flowchart for battery-state-of-charge decisions, electric driving and generator-supported range-extended operation.",
-      "caption": "Conceptual operating sequence for battery-electric and generator-supported modes; not evidence of implemented vehicle control.",
+      "caption": "Conceptual operating sequence for battery-electric and generator-supported modes, defined in FYP-1.",
       "focalPoint": "50% 50%"
     }
   ],

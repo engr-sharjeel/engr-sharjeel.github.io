@@ -31,9 +31,9 @@
     "DC motors and prototype power supply"
   ],
   "outcomes": [
-    "The photographs show an implemented robot, supported by the CV descriptions and owner-supplied caption.",
-    "The caption reports 95–97% line-tracking precision, obstacle response below 250 ms, approximately 0.8 A average load and approximately 2.5 hours of operation.",
-    "These are reported prototype results. The supplied material does not establish a formal test procedure or detailed operating conditions."
+    "Implemented a semester robot integrating the sensing, control, actuation and power subsystems.",
+    "Reported prototype results include 95–97% line-tracking precision, obstacle response below 250 ms, approximately 0.8 A average load and approximately 2.5 hours of operation.",
+    "Operating conditions and a formal test procedure were not documented with these reported results."
   ],
   "metrics": [
     {
