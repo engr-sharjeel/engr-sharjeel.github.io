@@ -24,3 +24,17 @@ The selected-work section has one dominant REEV feature and three supporting car
 Photos can use careful cover framing. Technical diagrams, flowcharts, schematics and posters use contain framing and a warm light matte; captions explain concept/design status. Detail-page technical images are uncropped, sized responsively and link to full-resolution assets. No gradients obscure labels. Asset metadata includes semantic kind, alt text, caption and optional focal point. Image processing does not overwrite source images.
 
 Semantic landmarks, one page h1, ordered headings, skip link, visible focus, real buttons, touch targets of at least 44px and readable contrast are defaults. Mobile menu exposes its expanded state and supports Escape. Catalogue controls appear only when JavaScript is available; content remains complete without it. Results announce count changes; clear/reset restores the full catalogue. Flagship context remains visible during filtering. Reduced-motion preferences disable nonessential transitions. Initial motion is limited to small color/transform transitions.
+
+## Phase 3 audit and direction
+
+The clean, synchronized baseline is `2601253`. An ignored isolated copy of that commit was checked and built for production-preview comparison; it passed with zero diagnostics and 29 HTML routes. Phone/desktop screenshots cover the homepage, catalogue, all six showcases, a concise entry, Education, Certificates/viewer, Experience, Research, Achievements, About, Contact and 404. Core pages also have 320/768/1024px samples. Temporary screenshots remain in `.tmp/`, outside commits and deployment.
+
+The coherent navy/teal composition is retained. The review confirmed small metadata, captions and controls; accumulated introduction/section gaps; and different card/cover slots using one image-size assumption. Long engineering titles need measured widths, and the viewer needs persistent controls in short viewports. Cold mobile measurement also attributed layout shift to the deferred navigation collapse, rather than project imagery.
+
+The chosen refinement uses fluid spacing, deliberate variable weights, comfortable 15–16px reading copy and 12–14px functional context. Shared panels keep an 8px radius, precise borders and light contained-document mattes. Strong functional borders have at least 3:1 contrast against their navy surfaces. Technical imagery remains steady; photos retain their supplied focal points.
+
+Effects are finite and restrained: a decorative orbit entrance, consistent arrow feedback, and 2px card emphasis for fine-pointer hover and keyboard focus. Meaningful hero text, photographs and page content are immediately visible. Reduced-motion preferences remove the effects through CSS, including changes during the session. No animation framework, observer reveal, page-transition system or new dependency is needed.
+
+Navigation initializes immediately after its markup while retaining complete no-JavaScript navigation. The viewer keeps native-dialog semantics and safe original links, with separate scrollable reading content and reachable header/toolbar controls. Context-specific image sizes follow the existing container/grid breakpoints. Reviewed full-resolution certificates, CV, manifest, content records and unresolved factual qualifiers are frozen.
+
+Fresh final verification and matched before/after delivery measurements will be recorded in PROGRESS.md and PERFORMANCE.md.
