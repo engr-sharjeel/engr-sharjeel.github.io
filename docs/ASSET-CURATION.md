@@ -1,4 +1,4 @@
-# Approved public assets ? Prompt 4
+# Approved public assets: Prompt 4
 
 The owner explicitly authorises publication of the supplied certificate originals, replacement CV, portrait and internship photographs, including printed signatures, seals, identifiers and other document content. This replaces the earlier certificate-redaction/generated-CV scope; the historical notes below remain evidence of prior decisions. Raw trees, archives, transcript and unrelated originals stay ignored and intact.
 
@@ -33,15 +33,15 @@ Source conflict: the supplied final CV retains historical two-seater wording on 
 
 | Source | Application copy | Pixels / use |
 | --- | --- | --- |
-| `Profile Picture/Realistic studio portrait in blazer and tie.png` | `src/assets/profile/muhammad-sharjeel-portrait.png` | 1024 ? 1536; hero and small header derivatives |
-| `IESCO/WhatsApp Image 2026-10-11 at 2.59.36 PM.jpeg` | `src/assets/experience/iesco-grid-station-portrait.jpeg` | 900 ? 1600; first IESCO gallery image, contained full portrait |
-| `Power china internship/1967127-image-1557165140.jpg.jpeg` | `src/assets/experience/powerchina-project-dam-context.jpeg` | 800 ? 600; project context |
-| `Power china internship/6175ce88e6f10.jpg.jpeg` | `src/assets/experience/powerchina-project-construction-context.jpeg` | 1024 ? 768; construction context |
-| `Power china internship/images.jpg.jpeg` | `src/assets/experience/powerchina-project-night-context.jpeg` | 516 ? 387; further context |
+| `Profile Picture/Realistic studio portrait in blazer and tie.png` | `src/assets/profile/muhammad-sharjeel-portrait.png` | 1024 × 1536; hero and small header derivatives |
+| `IESCO/WhatsApp Image 2026-10-11 at 2.59.36 PM.jpeg` | `src/assets/experience/iesco-grid-station-portrait.jpeg` | 900 × 1600; first IESCO gallery image, contained full portrait |
+| `Power china internship/1967127-image-1557165140.jpg.jpeg` | `src/assets/experience/powerchina-project-dam-context.jpeg` | 800 × 600; project context |
+| `Power china internship/6175ce88e6f10.jpg.jpeg` | `src/assets/experience/powerchina-project-construction-context.jpeg` | 1024 × 768; construction context |
+| `Power china internship/images.jpg.jpeg` | `src/assets/experience/powerchina-project-night-context.jpeg` | 516 × 387; further context |
 
 These five application copies retain original bytes and dimensions; responsive derivatives never upscale them. The face is preserved in the portrait crop, with full internship-image framing available through the viewer. Existing battery-bank/transformer-yard photographs follow the new IESCO photo. POWERCHINA images establish context only, not a specific assignment, photographer, commissioning or personal construction contribution.
 
-IELTS Academic: test 3 August 2026, issued 4 August 2026, overall 7.5 and printed CEFR C1. Campus Ambassador: Scholars Avenue participation at Air University, Islamabad, 27 July?8 October 2026. Neither adds an engineering internship or professional licence. The Fall 2025 award/report discrepancy and all other deferred engineering facts remain unresolved. Verification URLs are source links, not newly claimed independent verification.
+IELTS Academic: test 3 August 2026, issued 4 August 2026, overall 7.5 and printed CEFR C1. Campus Ambassador: Scholars Avenue participation at Air University, Islamabad, 27 July–8 October 2026. Neither adds an engineering internship or professional licence. The Fall 2025 award/report discrepancy and all other deferred engineering facts remain unresolved. Verification URLs are source links, not newly claimed independent verification.
 
 ## Historical asset decisions
 

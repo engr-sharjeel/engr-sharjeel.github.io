@@ -39,7 +39,7 @@ import '../styles/phase2-pages.css';
                 <a class="link-arrow" href={withBase(`/certificates/#${credential.slug}`)}>View internship credential <span aria-hidden="true">↗</span></a>
               ))}
             </div>
-            {item.images.length > 0 && <div class="detail-gallery experience-gallery">{item.images.map((image) => <ImageFrame image={image} detail context="experience" gallery={`experience-${item.id}`} viewerTitle={`${item.organization} · Internship context`} />)}</div>}
+            {item.images.length > 0 && <div class:list={['detail-gallery', 'experience-gallery', {'gallery-portrait-lead': item.images.length > 2 && item.images[0].src.width / item.images[0].src.height < .8}]}>{item.images.map((image) => <ImageFrame image={image} detail context="experience" gallery={`experience-${item.id}`} viewerTitle={`${item.organization} · Internship context`} />)}</div>}
           </article>
         ))}
       </div>

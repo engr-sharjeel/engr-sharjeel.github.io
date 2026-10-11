@@ -52,7 +52,7 @@ export const experience: ExperienceRecord[] = [
         src: iescoPortrait,
         kind: 'photo',
         alt: 'Muhammad Sharjeel at a grid-station site, with electrical yard equipment visible behind him.',
-        caption: 'Owner-supplied photograph from the IESCO internship. The full portrait framing retains both the person and site context.',
+        caption: 'At a grid-station site during the IESCO internship, alongside the electrical yard equipment.',
         focalPoint: '50% 50%',
       },
       {

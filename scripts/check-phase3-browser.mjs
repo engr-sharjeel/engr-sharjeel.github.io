@@ -9,6 +9,8 @@ const base = new URL(process.env.PORTFOLIO_TEST_URL || 'http://127.0.0.1:4321/')
 if (!base.pathname.endsWith('/')) base.pathname += '/';
 const route = path => new URL(path.replace(/^\/+/, ''), base).href;
 const report = { base: base.href, started: new Date().toISOString(), checks: [], axe: [], errors: [] };
+const publication=JSON.parse(await readFile('src/data/public-assets.json','utf8'));
+const credentialTotal=publication.certificates.length;
 const dir = '.tmp/phase3-browser';
 await mkdir(dir, { recursive: true });
 const browser = await chromium.launch({ executablePath: process.env.PORTFOLIO_CHROME || 'C:/Program Files/Google/Chrome/Application/chrome.exe', headless: true });
@@ -49,7 +51,7 @@ async function assertTargets(selectors) {
 }
 async function assertAxe(label) {
   await page.addScriptTag({ content: axe.source });
-  const result = await page.evaluate(() => window.axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa', 'best-practice'] } }));
+  const result = await page.evaluate(() => window.axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa', 'best-practice'] } }));
   report.axe.push({ label, violations: result.violations.map(violation => ({ id: violation.id, impact: violation.impact, targets: violation.nodes.flatMap(node => node.target) })) });
   assert.deepEqual(result.violations.map(violation => violation.id), []);
 }
@@ -60,13 +62,16 @@ async function readViewer() {
 try {
   await check('Reviewed certificate originals retain hashes and intrinsic dimensions', async () => {
     const manifest = JSON.parse(await readFile('src/data/public-assets.json', 'utf8'));
-    assert.equal(manifest.certificates.length, 10);
+    assert.equal(manifest.certificates.length, 12);
     for (const certificate of manifest.certificates) {
       const bytes = await readFile(`src/assets/certificates/${certificate.filename}`);
       assert.equal(createHash('sha256').update(bytes).digest('hex'), certificate.sha256);
       const metadata = await sharp(bytes).metadata();
       assert.equal(metadata.width, certificate.width);
       assert.equal(metadata.height, certificate.height);
+      const original=await readFile(`public/${certificate.original.path}`);
+      assert.equal(createHash('sha256').update(original).digest('hex'),certificate.original.sha256);
+      assert.equal(original.length,certificate.original.byteLength);
     }
     const resume = await readFile(`public/${manifest.resume.path}`);
     assert.equal(createHash('sha256').update(resume).digest('hex'), manifest.resume.sha256);
@@ -151,7 +156,8 @@ try {
   await check('Credential originals load on demand while previews remain responsive', async () => {
     await open('certificates/');
     assert.equal(await page.locator('.viewer-image').count(), 0);
-    assert.deepEqual(await page.evaluate(() => performance.getEntriesByType('resource').filter(entry => /\.png$/.test(new URL(entry.name).pathname)).map(entry => entry.name)), [], 'Full-resolution reviewed PNGs must not load before the viewer opens');
+    const originalPaths=publication.certificates.map(record=>new URL(record.original.path,base).href);
+    assert.deepEqual(await page.evaluate(paths => performance.getEntriesByType('resource').filter(entry => paths.includes(entry.name)).map(entry => entry.name),originalPaths), [], 'Full-resolution owner originals must load only on request');
     const opener = page.locator('[data-image-viewer]').first(); const href = new URL(await opener.getAttribute('href'), base).href;
     await opener.click(); await readViewer();
     assert.equal(await page.locator('.viewer-image').getAttribute('src'), href);
@@ -176,8 +182,8 @@ try {
     const noJs = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 320, height: 844 } }); const fallback = await noJs.newPage();
     try {
       await fallback.goto(route('projects/'), { waitUntil: 'networkidle' }); assert.equal(await fallback.locator('[data-project]:visible').count(), 19);
-      await fallback.goto(route('certificates/'), { waitUntil: 'networkidle' }); assert.equal(await fallback.locator('[data-credential]:visible').count(), 10); assert.equal(await fallback.locator('[data-image-viewer]').count(), 10);
-      await fallback.locator('.background-menu summary').click(); await fallback.locator('.background-links').getByRole('link', { name: 'Education', exact: true }).click(); await fallback.waitForURL(route('education/'));
+      await fallback.goto(route('certificates/'), { waitUntil: 'networkidle' }); assert.equal(await fallback.locator('[data-credential]:visible').count(), credentialTotal); assert.equal(await fallback.locator('[data-image-viewer]').count(), credentialTotal);assert.equal(await fallback.locator('[data-credential-original]').count(),credentialTotal);
+      await fallback.locator('#primary-nav').getByRole('link', { name: 'Education', exact: true }).click(); await fallback.waitForURL(route('education/'));
       assert.match(await fallback.locator('main').innerText(), /3\.10\s*\/\s*4\.00/);
     } finally { await noJs.close(); }
   });

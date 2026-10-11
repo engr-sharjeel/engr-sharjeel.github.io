@@ -1,3 +1,9 @@
+# Owner scope correction: Prompt 4
+
+Current public REEV wording supersedes the historical seating description in older private captions/reports. The prototype is being developed for limited-charging areas, with a future ambition to convert existing vehicles through a startup. FYP-1 remains complete, later phases and commercial availability remain future/unestablished, and the motor drives the wheels while the petrol engine drives a generator. All other deferred metrics/status/team-responsibility questions retain their qualifiers. The unchanged owner CV still carries historical wording; this document-only source conflict is recorded in ASSET-CURATION.md.
+
+## Historical case-study evidence
+
 # Phase 2 case-study evidence
 
 This is an internal evidence note; it is not copied into the generated website. Original reports, extracts and acceptance letters remain ignored. Public project prose describes team outcomes, not unestablished individual responsibilities.

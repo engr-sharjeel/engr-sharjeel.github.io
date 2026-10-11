@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { access, mkdir, writeFile } from 'node:fs/promises';
+import { access, mkdir, writeFile, readFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import path from 'node:path';
 import { chromium } from 'playwright-core';
 import axe from 'axe-core';
@@ -8,6 +9,13 @@ const base = new URL(process.env.PORTFOLIO_TEST_URL || 'http://127.0.0.1:4321/')
 if (!base.pathname.endsWith('/')) base.pathname += '/';
 const chromePath = process.env.PORTFOLIO_CHROME || 'C:/Program Files/Google/Chrome/Application/chrome.exe';
 const expectedProjects = Number(process.env.PORTFOLIO_EXPECTED_PROJECTS || 19);
+const manifest = JSON.parse(await readFile('src/data/public-assets.json', 'utf8'));
+const navigationDestinations = ['Projects', 'Experience', 'Education', 'Certificates', 'Research', 'Achievements', 'About'];
+const projectOrder = [
+  'range-extended-electric-vehicle', 'center-tapped-transformer', 'micro-hydropower-plant', 'autonomous-navigation-robot', 'smart-access-monitoring-system', 'electronic-voting-machine',
+  'substation-distribution-design', 'pcb-layout-practice', 'temperature-monitoring-system', 'water-level-indication', 'matlab-signal-calculator', 'solidworks-engineering-drawing',
+  'frequency-band-pass-filter', 'audio-amplifier', 'digital-logic-clock', 'rain-detection-circuit', 'university-management-system', 'oop-library-management', 'traffic-monitoring-ethics',
+];
 const artifacts = path.resolve('.tmp/screenshots');
 const report = { base: base.href, expectedProjects, started: new Date().toISOString(), checks: [], pageErrors: [], consoleErrors: [], axe: [] };
 const route = (relative = '') => new URL(relative.replace(/^\/+/, ''), base).href;
@@ -69,10 +77,20 @@ async function assertPage(page, width) {
   assert.deepEqual(state.dimensionless, [], 'Every image needs intrinsic width and height');
 }
 
+async function projectSlugs(page, selector = '[data-project]:visible') {
+  return page.locator(selector).evaluateAll(cards => cards.map(card => [...card.querySelectorAll('a[href]')]
+    .map(link => new URL(link.href).pathname.match(/\/projects\/([^/]+)\/$/)?.[1]).find(Boolean)));
+}
+
+async function assertFilteredPriority(page) {
+  const visible = await projectSlugs(page);
+  assert.deepEqual(visible, projectOrder.filter(slug => visible.includes(slug)), 'Filtered results retain the approved project order');
+}
+
 async function checkAxe(page, label) {
   await page.addScriptTag({ content: axe.source });
   const results = await page.evaluate(async () => window.axe.run(document, {
-    runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa', 'best-practice'] },
+    runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa', 'best-practice'] },
   }));
   const serious = results.violations.filter(item => ['serious', 'critical'].includes(item.impact));
   report.axe.push({ label, violations: results.violations.map(item => ({ id: item.id, impact: item.impact, description: item.description, targets: item.nodes.flatMap(node => node.target) })) });
@@ -94,6 +112,7 @@ try {
     assert.equal(await page.locator('[data-project]:visible').count(), expectedProjects);
     const first = await page.locator('[data-project]').first().getAttribute('class');
     assert.ok(first?.includes('flagship'), 'The default catalogue should present the flagship first');
+    assert.deepEqual(await projectSlugs(page), projectOrder, 'Catalogue follows the explicit power-engineering priority');
   });
 
   const routes = ['', 'projects/', 'experience/', 'research/', 'achievements/', 'education/', 'certificates/', 'about/', 'contact/', '404.html'].map(relative => route(relative));
@@ -137,12 +156,13 @@ try {
     });
   }
 
-  await check('Desktop navigation opens About', async () => {
+  await check('Desktop navigation directly exposes all seven destinations and opens About', async () => {
     await page.setViewportSize({ width: 1440, height: 1000 });
     await open(page, route());
     assert.equal(await page.locator('.menu-toggle').isVisible(), false);
     assert.ok(await page.locator('#primary-nav').isVisible());
-    await page.locator('#primary-nav summary').click();
+    assert.equal(await page.locator('.background-menu, #primary-nav summary').count(), 0, 'Obsolete Background disclosure is removed');
+    for (const destination of navigationDestinations) assert.ok(await page.locator('#primary-nav').getByRole('link', { name: destination, exact: true }).isVisible());
     await page.locator('#primary-nav').getByRole('link', { name: 'About', exact: true }).click();
     await page.waitForURL(route('about/'));
   });
@@ -152,6 +172,7 @@ try {
     await open(page, route());
     const selected = await page.locator('main a[href]').evaluateAll(links => [...new Set(links.map(link => link.href).filter(href => /\/projects\/[^/]+\/$/.test(new URL(href).pathname)))]);
     assert.equal(selected.length, 4);
+    assert.deepEqual(selected.map(href => new URL(href).pathname.match(/\/projects\/([^/]+)\/$/)[1]), projectOrder.slice(0, 4));
     assert.equal(selected.filter(url => url.includes('/range-extended-electric-vehicle/')).length, 1);
     for (const destination of selected) {
       await open(page, route());
@@ -160,6 +181,81 @@ try {
       await page.waitForURL(destination);
       assert.equal(await page.locator('h1').count(), 1);
     }
+  });
+
+  await check('Homepage shows the owner brief, portrait, academic identity and discovery links', async () => {
+    await open(page, route());
+    assert.equal(await page.locator('.hero-brief').innerText(), 'Building a range-extended EV for areas with limited charging , Power Systems, Embedded control, Renewable Energy');
+    assert.match(await page.locator('.hero').innerText(), /BS Electrical \(Power\) Engineering/i);
+    assert.match(await page.locator('.hero').innerText(), /Air University, Islamabad/);
+    assert.match(await page.locator('.hero').innerText(), /In progress/i);
+    assert.ok(await page.locator('.brand-portrait').isVisible());
+    assert.ok(await page.locator('.identity-art img').isVisible());
+    assert.equal(await page.locator('.mark, .monogram').count(), 0, 'Public identity uses the supplied portrait instead of MS branding');
+    for (const destination of ['education', 'certificates', 'achievements', 'about']) assert.ok(await page.locator(`.discovery-grid a[href="${new URL(route(`${destination}/`)).pathname}"]`).isVisible());
+    const faviconHref = await page.locator('link[rel="icon"]').getAttribute('href');
+    const favicon = await context.request.get(new URL(faviconHref, base).href);
+    assert.equal(favicon.status(), 200);
+    if ((favicon.headers()['content-type'] || '').includes('svg')) assert.doesNotMatch(await favicon.text(), /\bMS\b/, 'Favicon must not restore the old monogram');
+  });
+
+  await check('The six tools and six engineering skills immediately precede the contact invitation', async () => {
+    await open(page, route());
+    const items = selector => page.locator(`${selector} li`).evaluateAll(elements => elements.map(element => element.textContent.replace(/^\s*\d{2}\s*/, '').trim()));
+    assert.deepEqual(await items('[data-home-tools]'), ['MATLAB', 'SCADA systems', 'Proteus', 'PCB design', 'SolidWorks', 'ModelSim']);
+    assert.deepEqual(await items('[data-home-skills]'), ['Power-system design', 'Single-line diagrams', 'Grid testing and calculations', 'Renewable energy fundamentals', 'Electrical safety', 'Sensor integration']);
+    assert.ok(await page.locator('.home-skills').evaluate(element => element.nextElementSibling?.classList.contains('contact-banner')), 'Skills sit directly above Let’s connect');
+  });
+
+  await check('IESCO leads internship previews and galleries, and all supplied POWERCHINA views load', async () => {
+    await open(page, route());
+    const preview = await page.locator('.experience-preview .experience-row').evaluateAll(links => links.map(link => new URL(link.href).hash));
+    assert.deepEqual(preview, ['#iesco', '#powerchina-sepco1']);
+    await open(page, route('experience/'));
+    assert.deepEqual(await page.locator('.timeline-item').evaluateAll(items => items.map(item => item.id)), ['iesco', 'powerchina-sepco1']);
+    for (const [id, filenames] of [
+      ['iesco', ['iesco-grid-station-portrait', 'iesco-battery-bank', 'iesco-transformer-yard']],
+      ['powerchina-sepco1', ['powerchina-project-dam-context', 'powerchina-project-construction-context', 'powerchina-project-night-context']],
+    ]) {
+      const links = page.locator(`#${id} [data-image-viewer]`);
+      assert.equal(await links.count(), filenames.length);
+      for (let index = 0; index < filenames.length; index++) {
+        const href = await links.nth(index).getAttribute('href');
+        assert.ok(href.includes(filenames[index]), 'Gallery sequence uses the intended source view');
+        const response = await context.request.get(new URL(href, base).href);
+        assert.equal(response.status(), 200);
+        const approved = manifest.approvedImages.find(image => image.path.includes(filenames[index]));
+        if (approved) assert.equal(createHash('sha256').update(await response.body()).digest('hex'), approved.sha256);
+      }
+    }
+    await page.locator('.experience-gallery img').evaluateAll(async images => {
+      images.forEach(image => image.loading = 'eager');
+      await Promise.all(images.map(image => image.decode()));
+    });
+    const emptyFigureSpace = await page.locator('.experience-gallery figure').evaluateAll(figures => figures.map(figure => figure.getBoundingClientRect().bottom - figure.querySelector('figcaption').getBoundingClientRect().bottom));
+    assert.ok(emptyFigureSpace.every(space => space < 21), 'Internship figures keep natural heights beside the portrait rather than stretching into empty cards');
+  });
+
+  await check('REEV detail preserves FYP-1, series energy flow and future conversion ambition', async () => {
+    await open(page, route('projects/range-extended-electric-vehicle/'));
+    const content = await page.locator('main').innerText();
+    assert.doesNotMatch(content, /two[\s-]seater/i);
+    assert.match(content, /limited charging infrastructure/i);
+    assert.match(content, /FYP-1 complete|FYP-1 is complete/i);
+    assert.match(content, /startup/i);
+    assert.match(content, /longer-term|future/i);
+    assert.match(content, /electric motor drives the wheels|wheels electrically driven/i);
+    assert.match(content, /no direct mechanical connection|no mechanical engine.to.wheel path/i);
+    assert.doesNotMatch(await page.locator('meta[name="description"]').getAttribute('content'), /two[\s-]seater/i);
+  });
+
+  await check('Contact exposes the readable phone and canonical click-to-call link', async () => {
+    await open(page, route('contact/'));
+    const phone = page.locator('main a[href="tel:+923494247649"]');
+    assert.ok(await phone.isVisible());
+    assert.match(await phone.innerText(), /\+92 349 4247649/);
+    const schemas = await page.locator('script[type="application/ld+json"]').allTextContents();
+    assert.ok(schemas.some(text => text.includes('+923494247649')), 'Person data includes the canonical phone');
   });
 
   await check('View all projects opens the catalogue', async () => {
@@ -177,6 +273,7 @@ try {
     const visible = await page.locator('[data-project]:visible').count();
     assert.ok(visible > 0 && visible < expectedProjects);
     assert.ok(await page.locator('[data-project][data-search*="autonomous"]').isVisible());
+    await assertFilteredPriority(page);
     assert.ok(await page.locator('.catalogue-status').getByRole('link', { name: /Range Extended Electric Vehicle/ }).isVisible());
     await page.getByRole('button', { name: /^Clear filters/ }).click();
     assert.equal(await search.inputValue(), '');
@@ -193,6 +290,7 @@ try {
       await filter.click();
       assert.equal(await filter.getAttribute('aria-pressed'), 'true');
       assert.equal(await page.locator('[data-project]:visible').count(), expected);
+      await assertFilteredPriority(page);
       assert.ok(await page.locator('.catalogue-status').getByRole('link', { name: /Range Extended Electric Vehicle/ }).isVisible());
     }
     await page.getByRole('button', { name: /^Clear filters/ }).click();
@@ -238,7 +336,7 @@ try {
   observe(noJsPage);
   await check('JavaScript-disabled mobile navigation and all catalogue content remain accessible', async () => {
     await open(noJsPage, route());
-    assert.ok(await noJsPage.locator('#primary-nav').getByRole('link', { name: 'Projects', exact: true }).isVisible());
+    for (const destination of navigationDestinations) assert.ok(await noJsPage.locator('#primary-nav').getByRole('link', { name: destination, exact: true }).isVisible());
     assert.equal(await noJsPage.locator('.menu-toggle').isVisible(), false);
     await noJsPage.locator('#primary-nav').getByRole('link', { name: 'Projects', exact: true }).click();
     await noJsPage.waitForURL(route('projects/'));

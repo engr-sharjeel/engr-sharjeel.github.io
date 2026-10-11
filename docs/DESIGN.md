@@ -1,4 +1,21 @@
-# Design system
+# Design: cream engineering portfolio
+
+Prompt 4 establishes a white/light-cream editorial system across every route and interaction. Canvas #F8F5EE, white surface #FFFEFB, soft surface #F0EDE4, primary #1E2B27, secondary #53605A, emerald #17634F and control boundary #77857B are owned by existing CSS layers. Local variable Manrope, measured long-title widths, 15–16px reading copy, readable functional labels, fluid spacing, modest radii and soft shadows preserve the useful Phase 3 foundation.
+
+The two-row masthead pairs a recognisable portrait/name/BS Electrical (Power) Engineering/Air University, Islamabad identity with CV/Contact, then direct navigation to all seven principal destinations. Phone navigation is touch/keyboard/no-JavaScript usable and initializes before paint. The hero uses the exact owner brief, prominent university/in-progress identity and carefully framed original portrait. No MS monogram remains in current public branding; favicon/social graphics use an electrical icon/name on cream.
+
+Home follows identity, four selected projects (REEV, transformer, hydro, robot), IESCO-first internship preview, four Education/Certificates/Achievements/About discovery cards, concise engineering research, two tools/skills groups and the contact invitation. REEV stays the dominant Final Year Project, with correct series architecture, FYP-1-complete boundary and future conversion-startup ambition separated from current work.
+
+Photos are thoughtfully cropped only for portrait branding/cards; internship/gallery photos, engineering diagrams and complete documents remain contained. Certificate originals are owner-approved and unmodified; their printed contrast is never digitally altered. Faithful previews, stable original actions and verifier links have clear hierarchy. The portrait-format IESCO image comes first, followed by station photographs; three POWERCHINA views convey context rather than unestablished responsibilities.
+
+Calculated token contrast on canvas/white/soft/state surfaces: primary 12.46–14.56:1, secondary 5.59–6.53:1, emerald 6.07–7.10:1 and control boundaries 3.28–3.84:1. White-on-emerald buttons meet normal-text contrast. Runtime axe, keyboard focus, hover/selected/disabled/error states and representative visual review supplement these calculations; decorative dividers are distinguished from required boundaries. Viewer controls stay at least 44px with persistent close/read/original actions in short landscape/enlarged text. A tall first internship image spans two desktop rows beside two compact equipment views; figures align at their natural height rather than stretching to fill a neighbour's portrait.
+
+Short viewer entrances, arrow feedback and small pointer/focus card emphasis remain restrained. The portrait has a finished static treatment. No scroll reveals hide content, animation framework or continuous motion is added. Changing reduced-motion preferences disables optional motion through CSS. Preview/filter geometry stays stable before enhancement.
+
+The historical notes below are retained for context; their navy/teal and monogram conventions are superseded by this current cream system.
+
+## Historical design notes
+
 
 Editorial engineering portfolio: legible technical work, clear hierarchy and restrained effects.
 

@@ -1,71 +1,50 @@
-# Muhammad Sharjeel — engineering portfolio
+# Muhammad Sharjeel: engineering portfolio
 
-Astro 7, strict TypeScript and custom CSS generate this static GitHub Pages portfolio. The site has 29 HTML pages, nineteen supported projects (six showcases and thirteen shorter academic entries), dedicated Education and Certificates pages, ten distinct credentials, accessible galleries and a reviewed public CV. The navy/teal design, four selected projects and MS monogram established in phase 1 remain intact.
+Astro 7.3.8, strict TypeScript, custom cream/emerald CSS and local Manrope generate this static GitHub Pages site. There are 29 HTML pages, 19 projects (six showcases/thirteen concise academic records) and 12 distinct credentials. Owner-selected portrait, original certificates and supplied CV replace the earlier monogram, masked documents and generated CV.
 
 ## Run on Windows
 
-Use Node 24 and the committed npm lockfile. In PowerShell use `npm.cmd` to avoid script-execution-policy restrictions:
+Use the committed lockfile and Node 24. Install once when needed with `npm.cmd ci`; PowerShell uses `npm.cmd` to avoid script execution-policy restrictions.
 
 ```powershell
 Set-Location 'C:\Users\harri\OneDrive\Desktop\portfolio'
-npm.cmd ci
-npm.cmd run dev
-```
-
-Development: `http://localhost:4321/`. Production preview:
-
-```powershell
 npm.cmd run check
 npm.cmd run build
 npm.cmd run preview -- --ignore-lock --host 127.0.0.1 --port 4321
 ```
 
-Open `http://127.0.0.1:4321/`. These commands run in the foreground; stop with **Ctrl+C**. The preview flag keeps Astro 7 in the foreground. Type/content checks validate the project inventory and featured selection. Build checks validate all routes, internal assets/links, unique metadata, canonical URLs, sitemap/robots, JSON-LD and reviewed certificate/CV hashes.
+Open http://127.0.0.1:4321/ and stop the foreground preview with **Ctrl+C**. Development uses `npm.cmd run dev`. If a corporate CA is installed locally, use `$env:NODE_OPTIONS='--use-system-ca'`; TLS verification remains enabled.
 
-In a restricted shell set `$env:ASTRO_TELEMETRY_DISABLED='1'` if necessary. For npm behind a corporate certificate store, Node 24 supports `$env:NODE_OPTIONS='--use-system-ca'`; preserve certificate validation.
+## Edit content and owner settings
 
-## Owner-editable content
+- `src/data/site.ts`: identity, exact owner hero brief, program/university, contact phone/email/profiles, supplied portrait/focal point, CV path and four selected projects.
+- `src/lib/project-priority.ts`: one explicit nineteen-project editorial order. The catalogue, filtered results and related subsets reuse it. Homepage selections in site.ts are REEV, transformer, micro hydropower and navigation robot; keep four distinct supported slugs including the flagship.
+- `src/content/projects/*.json`: schema-validated facts, status, teams, metrics and project images. Keep six substantial showcases and thirteen modest academic records; do not invent measured results or personal responsibilities.
+- `src/data/education.ts`: current reported CGPA 3.10/4.00, Fall 2026 snapshot, degree-in-progress status and coursework. Do not average term SGPAs.
+- `src/data/certificates.ts`: twelve canonical records, explicit credential order, groups, original links, faithful previews and verification URLs. Achievements reuses recognition records.
+- `src/data/experience.ts`: IESCO first, with its new portrait-format photograph first; POWERCHINA follows with three supplied project-context photographs. Image order also controls gallery order.
+- `src/data/skills.ts`: six central tools and six central engineering skills, reused on Home/About. PCB design is supported by the supplied CV; SCADA systems is owner-supplied.
+- `src/styles/`: cream tokens, shared layout, responsive direct navigation, supporting pages and viewer. `src/lib/image-sizes.ts` must follow actual CSS slots/gutters when layout changes.
 
-- Identity, email, professional links, CV path, optional hero photo and four featured slugs: `src/data/site.ts`. Keep exactly four valid distinct slugs including `range-extended-electric-vehicle`; layout components need no edits.
-- Current CGPA, GPA scale, report snapshot, degree status, coursework and earlier study: `src/data/education.ts`. Update the explicitly reported CGPA, not an average of term SGPAs. Fall 2026 is the snapshot label, not a completed term.
-- Canonical credentials: `src/data/certificates.ts`. Achievements and internship links reuse these records.
-- Project facts, galleries and evidence: `src/content/projects/<slug>.json`, validated by `src/content.config.ts`. Short work uses `group: "academic"`; detailed work uses `"showcase"`. Optional problem/context/constraints/lessons/nextSteps enrich supported case studies.
-- Experience, research and skills: typed files in `src/data/`. Keep published paper, unpublished manuscript and accepted future abstract distinct.
-- Design tokens/layout: `src/styles/global.css`; connected pages, navigation and viewer have small separate stylesheets.
+## Replace portrait or CV
 
-New project JSON filenames must match their slugs; detail routes generate automatically. Place privacy-reviewed assets in `src/assets/projects/<slug>/` and include kind, alt, caption and focal point. Put the cover first. Keep provenance/evidence notes free of private values; templates do not publish them. Preserve team attribution and distinguish design estimates from reported prototype results.
+The current original portrait is `src/assets/profile/muhammad-sharjeel-portrait.png`; site.ts controls the import, alt text and hero focal point. Astro generates small header and larger hero WebP derivatives with explicit dimensions. Keep the source bytes unchanged, inspect face framing at phone/tablet/desktop sizes and update the approved-image hash/dimensions only after reviewing a replacement. Fallback branding uses the name/simple icon, never MS.
 
-## Add a certificate
+The public CV is an unchanged copy of `CV/Muhammad_Sharjeel_ATS_CV (2).pdf`, at `public/downloads/muhammad-sharjeel-cv.pdf`. It has two pages, but interface labels simply identify PDF rather than assuming future page counts. **`generate:resume` is retired and exits without overwriting the supplied PDF.** To replace it, inspect all pages, copy the chosen original bytes, record its actual SHA-256/byte length/page count in `src/data/public-assets.json`, and run checks/build. Do not regenerate its layout or edit owner document text.
 
-Review the original locally, then create a flattened public copy under `src/assets/certificates/`. Remove personal identifiers, family details, private contacts/signatures and embedded metadata from every linked resolution. Never mask only a thumbnail while linking an original. Keep legitimate award text and printed names intact.
+The current supplied CV retains historical two-seater wording; current website copy uses the corrected REEV scope. A revised owner PDF can resolve this document-only conflict. See the asset curation note.
 
-Import the safe asset into `src/data/certificates.ts` and add one typed record with a unique slug, title, issuer/platform, category, date/term precision, context, preview metadata and genuine optional verification URL. Deduplicate by content, title/issuer/term and hashes. Add source decisions to the audit without private values.
+## Add an approved certificate
 
-After visually reviewing the full-size public image, add its filename, dimensions and SHA256 to `src/data/public-assets.json`. PowerShell: `(Get-FileHash -Algorithm SHA256 -LiteralPath 'src/assets/certificates/example-public.png').Hash.ToLower()`. The build rejects a changed preview until its review manifest is updated. Run checks/build and the focused browser suite; verify both the preview and viewer/fallback.
+The owner explicitly approved publication of this collection's original documents, including complete signatures, seals, identifiers and printed content. This permission supersedes the earlier masked-preview policy for these selected assets; it does not approve unrelated identity documents, the transcript, payment letters, archives or raw source trees.
 
-## Public CV and share images
+Copy an explicitly approved original unchanged to `public/credentials/<slug>/original.<ext>`. Preserve original PDF bytes/all pages. Put a faithful full-content image preview in `src/assets/certificates/`; PDFs use reviewed raster page previews without cropping, masking, colour changes or orientation alteration. Multi-page documents require all preview pages and a complete original PDF action. Responsive delivery preserves aspect ratio and caps candidates at source size.
 
-`public/downloads/muhammad-sharjeel-cv.pdf` is a two-page selectable-text CV generated from the same public site/education/experience/project/research/credential records, not a copied private CV.
+Add one typed canonical record with original path/format/page count, preview metadata, factual issuer/date/context and any source-supported verification URL. Add each original/preview to the explicit version-2 manifest with hash, dimensions or page count and byte length. Originals and previews are independently validated; originals load only on request. `.gitattributes` prevents PDF/image line-ending conversion. Deduplicate alternate scans, then update `docs/ASSET-CURATION.md` with filenames/decisions rather than extracted private text. Run the build and focused browser suite before publishing.
 
-```powershell
-npm.cmd run generate:resume
-npm.cmd run generate:social
-```
+## Verify and publish
 
-CV generation uses installed Chrome through Playwright; set `$env:PORTFOLIO_CHROME` if needed. After any GPA/contact/content change, regenerate the PDF, inspect its page count, layout and selectable text for privacy, then update the resume SHA256 in `src/data/public-assets.json`. Do not approve a hash before review. The download controls exist on About and Contact. Social graphics are local PNGs generated from public project titles/status and `src/data/page-meta.json`; review long headings after regeneration. Generation is local; CI builds reviewed committed assets.
-
-## Add the profile photo
-
-1. Place a reviewed, metadata-cleaned image at `src/assets/profile/muhammad-sharjeel.jpg`.
-2. Add `import profilePhoto from '../assets/profile/muhammad-sharjeel.jpg';` to `src/data/site.ts`.
-3. Replace `profileImage: undefined as ImageMetadata | undefined` with `profileImage: profilePhoto`; keep `profileAlt` accurate.
-4. Run check/build and inspect the hero at phone/tablet/desktop widths. The same frame replaces the monogram with an optimized image; adjust `.identity-art img` object-position if necessary.
-
-Remove the import and restore the undefined setting to return to the monogram.
-
-## Browser verification and base paths
-
-With preview running in another terminal:
+With a stable production preview running in another terminal:
 
 ```powershell
 $env:PORTFOLIO_TEST_URL='http://127.0.0.1:4321/'
@@ -74,36 +53,26 @@ npm.cmd run test:phase2
 npm.cmd run test:phase3
 ```
 
-After a successful Pages run, `npm.cmd run test:live` checks all built page routes, live canonical/share metadata, sitemap/robots and custom 404 against the root build. Set `$env:PORTFOLIO_TEST_URL='https://engr-sharjeel.github.io/'` for the focused live interaction suite. If the local network uses a corporate CA, set `$env:NODE_OPTIONS='--use-system-ca'` for these Node requests.
-
-The scripts use existing local Chrome (`C:/Program Files/Google/Chrome/Application/chrome.exe`), Playwright and axe. They exercise routes at 390/768/1440px, navigation/keyboard/no-JavaScript fallbacks, catalogue search/reset/empty states, credential filters/anchors, viewer focus/close/full-resolution reading and reviewed downloads. Reports/screenshots stay ignored in `.tmp/`.
-
-Phase 3 adds all-route 320px/desktop reflow, actual grid/navigation breakpoints, 200% enlarged text, short-landscape viewer controls, failure/recovery, changing reduced-motion preferences and certificate dimension/hash checks. New effects use CSS; content is never hidden behind a reveal script. The navigation script runs directly after its markup to avoid an initial mobile collapse shift.
-
-For a repeatable cold mobile delivery sample on the production preview:
+Do not rebuild `dist` while these production browser checks are running. Tests cover direct navigation, phone/tablet/desktop routes, project order/search/reset, credential categories/search/empty states, portrait/hero/tools/phone, keyboard/no-JavaScript access, viewer focus/Escape/error handling, contrast via axe and original document hashes. Reports/screenshots stay ignored in `.tmp/`.
 
 ```powershell
-npm.cmd run measure:performance -- --phase=after --screenshots --slots
+npm.cmd run measure:performance -- --phase=prompt4-after --screenshots --slots
 ```
 
-The script records three samples for Home, Projects, REEV and Certificates using local Chrome, a 390px/DPR2 viewport and explicit CPU/network throttling. `--slots` adds untimed image-slot/candidate checks at DPR1/2/3. See [measurement method and comparison](docs/PERFORMANCE.md); this is lab evidence, not field Core Web Vitals. Image sizes live in `src/lib/image-sizes.ts` and must follow the CSS container/grid rules when those change. Certificate originals and the reviewed CV remain byte-identical through display changes.
+The measurement script records three cold mobile samples for Home, Projects, REEV and Certificates under explicit CPU/network throttling. Keep other browser/build work idle during timing. This is local lab evidence, not field Core Web Vitals, field INP or a Lighthouse score. See `docs/PERFORMANCE.md`.
 
-To check project-repository subpath compatibility:
+For the subpath fixture:
 
 ```powershell
 $env:PORTFOLIO_BASE='/portfolio-check'
 npm.cmd run build
-# Preview this build and check /portfolio-check/ URLs if needed.
+# Run preview with the same override; test http://127.0.0.1:4321/portfolio-check/
 Remove-Item Env:PORTFOLIO_BASE
 npm.cmd run build
 ```
 
-Restore the root build before publishing. Production is the username repository `engr-sharjeel/engr-sharjeel.github.io`: site `https://engr-sharjeel.github.io/`, root base. Internal/public URLs use the shared base helper; imported assets use Astro.
+Restore the root build before publishing. Production stays https://engr-sharjeel.github.io/ at root base. The existing workflow builds/deploys pushes to main or manual dispatch with locked dependencies, checks and one static build. Stage explicit intended application/documentation paths, inspect staged filenames/diffs and original hashes, commit, verify GitHub login engr-sharjeel and push normally. Never force push or stage source trees, archives, dependencies, build output or secrets. `npm.cmd run test:live` checks all deployed routes/metadata/sitemap/robots/custom404. Set `PORTFOLIO_TEST_URL` to the live URL for browser checks of deployed galleries/originals/CV.
 
-## Publish subsequent changes
+Navigation directly exposes Projects, Experience, Education, Certificates, Research, Achievements and About, plus CV/Contact actions; mobile uses a labelled progressive menu with complete no-JavaScript access. All enhancements remain small and reduced-motion-aware. `generate:social` produces cream share graphics with the name, correct program/university and simple electrical icon; it cannot restore MS branding.
 
-The workflow `.github/workflows/deploy.yml` runs on pushes to `main` and manual dispatch. Node 24 + `npm ci` + type/content checks + one production build produce `dist`; official Pages actions upload and deploy that static output. Repository Pages must use **GitHub Actions**. Check the Actions run for the pushed commit and verify the live page before calling a release deployed.
-
-Run local checks, review public assets, explicitly stage changed application/documentation paths, inspect the staged diff and commit. Confirm authenticated GitHub login is `engr-sharjeel`, then push normally. Never force push or stage original archives/trees, extracted text, dependencies, builds or secrets.
-
-Read [source audit](docs/SOURCE-AUDIT.md), [phase-2 evidence](docs/PHASE2-SOURCE-AUDIT.md), [case-study review](docs/CASE-STUDY-EVIDENCE.md), [architecture](docs/ARCHITECTURE.md), [design](docs/DESIGN.md) and [handoff](docs/PROGRESS.md). Original source trees and the portal report remain intact and ignored. Only reviewed public copies enter the build. Manrope is locally served under the retained SIL Open Font License.
+Read [asset curation](docs/ASSET-CURATION.md), [content priority](docs/CONTENT-PRIORITY.md), [architecture](docs/ARCHITECTURE.md), [design](docs/DESIGN.md), [performance](docs/PERFORMANCE.md) and [progress](docs/PROGRESS.md). Raw originals stay intact and ignored; only explicitly approved copies enter the build. Local Manrope retains its SIL Open Font License.

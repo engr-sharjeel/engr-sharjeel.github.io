@@ -1,3 +1,9 @@
+# Current owner-publication supplement
+
+Prompt 4 explicitly supersedes the earlier document freeze/redaction policy for selected owner originals. The root IESCO, Power china internship, Profile Picture, Certificates and CV trees were audited; twelve credentials, the supplied CV, portrait and four new internship/context photographs are approved public copies. Complete mappings, hash decisions, duplicate handling and the CV-only historical-scope conflict are recorded in [ASSET-CURATION.md](ASSET-CURATION.md). Raw trees, transcript, unrelated originals and archives remain intact/ignored; internal notes are not serialized into visitor pages. Existing unresolved engineering/award facts are unchanged. PCB wording is resolved by the new CV.
+
+## Historical source audit
+
 # Source audit — phase 1
 
 Phase 3 preserves the approved content and reviewed public documents. Newly present root folders `IESCO/`, `Power china internship/` and `Profile Picture/` are retained, unopened and covered by anchored source-ignore rules. They are not new public evidence or a configured portrait; any later curation remains separate from this visual-refinement phase. Original reviewed certificates, the public CV and their review manifest remain byte-for-byte unchanged.

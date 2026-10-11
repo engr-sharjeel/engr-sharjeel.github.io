@@ -1,4 +1,21 @@
-# Architecture
+# Architecture: current owner redesign
+
+Astro 7.3.8 / strict TypeScript / static multipage output / local Manrope / custom CSS are retained, with unchanged locked dependencies and existing Pages workflow. Production remains the username-repository root; base-aware helpers and the PORTFOLIO_BASE fixture remain supported.
+
+The cream masthead has a portrait/name/academic-identity row with CV/Contact, then seven direct page links. Mobile uses early inline initialization with a labelled menu; native full navigation is present without JavaScript. The obsolete Background disclosure and handlers are removed. All 29 routes remain, including nineteen generated details.
+
+Project relevance is centralised in src/lib/project-priority.ts; catalogue/search/filter output retains that order, while related subsets are selected by topic and then sorted by the same helper. Homepage configuration still controls exactly four choices. Credential priority comes from one explicit canonical order, with five discoverable groups and progressive search/category/reset/empty-state handling. Tools/skills are central typed data shared by Home/About. REEV scope is owner-corrected while academic status and engineering qualifiers remain intact.
+
+Version-2 public-assets.json explicitly allowlists twelve original certificate paths/hashes/formats/byte lengths/page counts, twelve faithful previews, the supplied CV and five newly approved owner images. Original documents under public/credentials and downloads are copied byte-for-byte; PDF/image binary attributes preserve them across Windows/CI. Existing output checks reject unlisted documents, archives, raw source trees, transcript/evidence serialization and obsolete masked previews. Portrait/gallery image dimensions/hashes are checked; originals remain locally intact. This explicit publication scope supersedes earlier redaction rules for approved documents only.
+
+Certificate cards link faithful responsive previews, stable original images/PDFs and verification services. The shared native-dialog viewer uses preview/image URLs separately from original-document URLs, retaining focus/Escape/restoration, loading/error feedback, grouped arrows, natural-size reading and safe no-JavaScript links. Optional verifier actions follow the current credential; original PDFs remain complete and accessible. The supplied CV is never regenerated; generate:resume exits without mutation. Social generation uses cream/name/program/university/simple-icon branding.
+
+Existing layered CSS, accurate context-specific sizes, no-upscaling candidates, local fonts and small progressive scripts are preserved. Hero portrait loads eagerly; header derivatives are small; galleries/previews are lazy and large originals load on demand. Person JSON-LD includes the configured phone/email without an awarded-degree claim. Canonical/social/sitemap/robots/404 behavior remains validated.
+
+The sections below describe historical phase boundaries; current navigation and original-publication rules above supersede their prior Background/monogram/redacted/generated-resume references.
+
+## Historical foundation
+
 
 ## Static foundation
 

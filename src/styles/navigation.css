@@ -40,6 +40,7 @@
     .wordmark { gap: 9px; }
     .wordmark-name { font-size: .875rem; }
     .menu-toggle { padding-inline: 10px; }
+    .header-actions .button { gap: 10px; font-size: .8125rem; white-space: nowrap; }
     .primary-nav { grid-template-columns: 1fr; }
   }
   @media (prefers-reduced-motion: reduce) {

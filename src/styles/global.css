@@ -214,7 +214,8 @@
   .image-detail figcaption { font-size: .875rem; line-height: 1.7; color: var(--muted); margin-top: 18px; padding-top: 15px; border-top: 1px solid var(--line); }
   .image-detail figcaption a { display: inline-flex; align-items: center; min-height: 44px; color: var(--accent); margin-left: 8px; }
   .detail-gallery { display: grid; gap: 24px; }
-  .experience-gallery { grid-template-columns: repeat(2,minmax(0,1fr)); margin-top: 32px; }
+  .experience-gallery { grid-template-columns: repeat(2,minmax(0,1fr)); align-items: start; margin-top: 32px; }
+  .gallery-portrait-lead > :first-child { grid-row: span 2; }
   .detail-aside { min-width: 0; border: 1px solid var(--line); padding: 24px; border-radius: var(--radius); background: var(--surface-soft); }
   .detail-aside .definition-list { grid-template-columns: 1fr; gap: 8px; margin: 0; }
   .detail-aside .definition-list dt { font: var(--font-label)/1.5 var(--mono); }
@@ -335,6 +336,7 @@
     .academic-group { margin-top: 54px; }
     .two-column, .records-grid { grid-template-columns: 1fr; gap: 24px; }
     .experience-gallery { grid-template-columns: 1fr; }
+    .gallery-portrait-lead > :first-child { grid-row: auto; }
     .record { padding: 26px; }
     .detail-aside { grid-template-columns: 1fr; }
     .aside-section + .aside-section, .detail-aside > .definition-list + .aside-section { padding-top: 20px; border-top: 1px solid var(--line); }
