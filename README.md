@@ -32,7 +32,7 @@ The current original portrait is `src/assets/profile/muhammad-sharjeel-portrait.
 
 The public CV is an unchanged copy of `CV/Muhammad_Sharjeel_ATS_CV (2).pdf`, at `public/downloads/muhammad-sharjeel-cv.pdf`. It has two pages, but interface labels simply identify PDF rather than assuming future page counts. **`generate:resume` is retired and exits without overwriting the supplied PDF.** To replace it, inspect all pages, copy the chosen original bytes, record its actual SHA-256/byte length/page count in `src/data/public-assets.json`, and run checks/build. Do not regenerate its layout or edit owner document text.
 
-The current supplied CV retains historical two-seater wording; current website copy uses the corrected REEV scope. A revised owner PDF can resolve this document-only conflict. See the asset curation note.
+The supplied CV retains historical two-seater wording and a different printed phone; the website uses the corrected REEV scope and current owner-supplied number. A revised owner PDF can resolve these document-only conflicts. See the asset curation note.
 
 ## Add an approved certificate
 

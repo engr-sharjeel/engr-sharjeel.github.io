@@ -27,7 +27,7 @@ All original copies match source SHA-256 hashes. The eight JPEG/image previews u
 
 Only one owner CV exists in the root CV tree: `CV/Muhammad_Sharjeel_ATS_CV (2).pdf`. Both pages were visually reviewed. The unchanged two-page, 90,991-byte PDF is published at `public/downloads/muhammad-sharjeel-cv.pdf`; SHA-256 `36817b31517fdc188c7d8a6df4453803ea685c6d52112b1d8311542f7c777a44`. The old generated CV is replaced and `generate:resume` is guarded/retired so it cannot overwrite the supplied PDF.
 
-Source conflict: the supplied final CV retains historical two-seater wording on both pages, while Prompt 4 corrects the current prototype scope. The PDF is deliberately unchanged under the owner's explicit instruction. Current website HTML, research summaries, metadata and social graphics use the corrected limited-charging/REEV-conversion direction. A revised owner PDF would resolve this document-only conflict. PCB design is explicitly named in this CV, resolving the owner's ECB wording to PCB design; SCADA systems is separately owner-supplied.
+Source conflicts: the supplied final CV retains historical two-seater wording on both pages and a printed phone that differs from the current number explicitly supplied in Prompt 4. Its email matches the configured email. The PDF is deliberately unchanged under the owner's explicit instruction. Current website HTML, research summaries, metadata and social graphics use the corrected limited-charging/REEV-conversion direction; Contact/footer/Person data use the requested current phone. A revised owner PDF would resolve these document-only conflicts. PCB design is explicitly named in this CV, resolving the owner's ECB wording to PCB design; SCADA systems is separately owner-supplied.
 
 ## Portrait and internship images
 
