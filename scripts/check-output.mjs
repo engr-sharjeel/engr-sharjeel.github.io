@@ -5,7 +5,8 @@ import { createHash } from 'node:crypto';
 import { inflateSync } from 'node:zlib';
 import sharp from 'sharp';
 
-const root = path.resolve('dist');
+// The same boundary checks can inspect a downloaded Pages artifact read-only.
+const root = path.resolve(process.env.PORTFOLIO_OUTPUT_DIR || 'dist');
 const base = (process.env.PORTFOLIO_BASE || '/').replace(/\/+$/, '');
 async function walk(dir) {
   const entries = await readdir(dir, { withFileTypes: true });

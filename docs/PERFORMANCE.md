@@ -1,4 +1,37 @@
-# Phase 3 delivery measurements
+# Prompt 4 delivery measurements
+
+This fresh comparison uses the Phase 3 baseline `84ecb18d74ca2a4b89708a8014dc86eae968d35f`, built in `.tmp/prompt4-baseline`, and the final visitor code `6a57ca652bd78d6543f3ee17c4f74a5370e17f7c`. Both are actual production previews on the same Windows machine. Existing dependencies and the measurement script are unchanged. The new portrait, originals and credential inventory are intentional changes in content, so this is a delivery-budget comparison rather than an identical-content benchmark.
+
+Measured on 11 October 2026 with Chrome **154.0.8037.98**, Playwright/Performance APIs, three cold samples per page, cache disabled, **390 × 844**, **DPR 2**, **4× CPU slowdown**, **150ms latency**, **200,000 bytes/s download**, **93,750 bytes/s upload** and 1.2 seconds observation after network idle/font readiness. Timed runs were sequential, with other browser/build checks idle. Resource latency is asserted. This is local lab evidence, not field Core Web Vitals, field INP or a Lighthouse score.
+
+| Page | Requests before → final | Transfer before → final | Median LCP before → final | Median CLS before → final |
+| --- | ---: | ---: | ---: | ---: |
+| Home | 6 → 7 | 59.5 → 82.9 KiB | 2.604 → 3.388s | 0.00010 → 0.00148 |
+| Catalogue | 5 → 7 | 91.6 → 78.4 KiB | 3.020 → 3.700s | 0.00010 → 0.00000 |
+| REEV | 5 → 6 | 59.9 → 62.5 KiB | 1.760 → 2.632s | 0.00010 → 0.00000 |
+| Certificates | 7 → 7 | 91.8 → 73.2 KiB | 2.372 → 3.332s | 0.00010 → 0.00000 |
+
+The supplied portrait adds approximately **23.4 KiB** to the homepage's initial transfer. The small header derivative transfers about **2 KiB** rather than the 2 MiB source PNG. Catalogue image transfer falls as the approved order brings the transformer into the first lazy-loading window; this is not a claim that all nineteen images have become smaller. Certificate preview transfer is lower and original PDFs/images remain on demand. No full-resolution certificate, source portrait PNG or CV is requested in these initial timed views.
+
+All four final pages transfer **zero external JavaScript** and one **24.5 KiB** local Latin Manrope font. CSS transfer remains **10.4–12.8 KiB**, compared with **10.5–12.7 KiB** before. Inline enhancement source is 4,099 / 5,229 / 4,099 / 5,621 bytes for Home/Catalogue/REEV/Certificates; only certificate search/original/verifier handling grows materially, by 541 source bytes. No animation framework, new runtime dependency, preload or caching layer was introduced.
+
+The LCP medians are slower in this final run, so no overall speed improvement is claimed. Attribution identifies headings/introductory text rather than the large originals as LCP. Extra portrait/identity/document markup is a deliberate presentation cost; request inspection found no duplicate fonts, eager original-document loads or newly introduced reveal delay to remove. Timing varies substantially: final home samples span **2.752–3.720s**, catalogue **2.192–4.408s**, REEV **2.308–2.848s**, and Certificates **3.228–3.808s**. A preceding diagnostic after-run varied up to 5.35s and is not substituted for the final measurements. These short local samples cannot isolate every CPU/paint variance or establish a field regression. Initial layout is stable: final median CLS is at most 0.00148; one home sample has a 0.01133 shift and one REEV sample has a 0.01310 text/font shift, recorded rather than hidden. There is no return of the deferred header/filter collapse.
+
+The separate untimed image-slot audit visits four pages at **390/768/1024/1440px** and **DPR 1/2/3** (48 page/width/DPR combinations). It checks selected candidates against true delivered pixel dimensions. At DPR 2, the 390px header uses 96px for a 48px slot; the hero uses 720px for a 348px slot. At 1440px the hero uses the 1024px source cap for a 533px slot, and the header uses 128px for a 60px slot. Course documents use 720px for 322px mobile slots and up to 1248px for 505px desktop slots. Portrait/document aspect ratios are preserved, candidate widths never exceed their source, and technical diagrams remain contained. Existing context-specific sizing is retained.
+
+Reproduce with production previews running separately:
+
+```powershell
+$env:PORTFOLIO_TEST_URL='http://127.0.0.1:4323/'
+npm.cmd run measure:performance -- --phase=prompt4-before
+$env:PORTFOLIO_TEST_URL='http://127.0.0.1:4324/'
+npm.cmd run measure:performance -- --phase=prompt4-final
+npm.cmd run measure:performance -- --phase=prompt4-slots --slots-only
+```
+
+Actual reports remain ignored in `.tmp/phase3-prompt4-before/`, `.tmp/phase3-prompt4-final/` and `.tmp/phase3-prompt4-slots/`. Visual capture is outside timing. The earlier Phase 3 evidence below is historical and is not presented as fresh Prompt 4 testing.
+
+## Historical Phase 3 delivery measurements
 
 The comparison uses the production output, with the approved Phase 2 commit `260125378313d4c39555218db24c62bda9c0a347` built in an ignored, isolated snapshot. Its preview runs at `http://127.0.0.1:4323/`; the working site's production preview runs separately at port 4324. The original certificate PNGs, review manifest and public CV are unchanged. This is local lab evidence, not field Core Web Vitals, field INP or a Lighthouse score.
 

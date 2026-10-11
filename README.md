@@ -75,4 +75,6 @@ Restore the root build before publishing. Production stays https://engr-sharjeel
 
 Navigation directly exposes Projects, Experience, Education, Certificates, Research, Achievements and About, plus CV/Contact actions; mobile uses a labelled progressive menu with complete no-JavaScript access. All enhancements remain small and reduced-motion-aware. `generate:social` produces cream share graphics with the name, correct program/university and simple electrical icon; it cannot restore MS branding.
 
+For a downloaded Pages artifact, set `PORTFOLIO_OUTPUT_DIR` to its extracted site folder and run `node scripts/check-output.mjs`. This runs the same route, metadata and approved-asset boundary checks read-only; normal builds use `dist`. Clear the temporary variable afterwards.
+
 Read [asset curation](docs/ASSET-CURATION.md), [content priority](docs/CONTENT-PRIORITY.md), [architecture](docs/ARCHITECTURE.md), [design](docs/DESIGN.md), [performance](docs/PERFORMANCE.md) and [progress](docs/PROGRESS.md). Raw originals stay intact and ignored; only explicitly approved copies enter the build. Local Manrope retains its SIL Open Font License.

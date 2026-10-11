@@ -1,4 +1,55 @@
-# Phase 3 handoff
+# Prompt 4 handoff
+
+The completed redesign retains Astro 7.3.8, strict TypeScript, local Manrope, the static routes, URL/image helpers and existing Pages workflow. Dependencies/lockfile and unrelated source files are unchanged. White/light cream, emerald controls, portrait branding, direct two-row navigation and consistent cards/viewer/404 replace the navy/MS presentation.
+
+## Implemented owner updates
+
+- Exactly four homepage projects: **REEV, transformer, micro hydropower, robot**. All nineteen catalogue/detail records remain: six showcases and thirteen concise academic entries. One shared explicit priority helper controls catalogue/filter/related ordering; the homepage selection remains editable in `src/data/site.ts`.
+- Exact owner hero brief, **BS Electrical (Power) Engineering**, **Air University, Islamabad** and degree-in-progress identity. The original portrait is centrally configured and displayed through source-capped derivatives in hero/header. Favicon and all 28 share images/generator use cream/name/electrical-icon branding.
+- Corrected REEV limited-charging prototype direction and separate future conversion-startup ambition. FYP-1 remains complete; engine-to-generator electrical support and motor-to-wheels propulsion are explicit. No finished vehicle, launched business or achieved range claim.
+- IESCO leads all internship previews and the full timeline. Its new portrait photograph leads a three-view gallery beside battery/transformer context; three new POWERCHINA context views follow. Full framing and accessible enlargement preserve both people and useful equipment context.
+- Prominent Education/Certificates/Achievements/About discovery and direct desktop/mobile/footer links. Education retains **3.10/4.00**, the **Fall 2026 report snapshot** and in-progress degree. Six central tool areas and six engineering skills sit immediately above the contact invitation and are reused by About.
+- **12 distinct credentials**: **4 courses, 2 internships, 1 IELTS Academic, 2 academic commendations, 3 leadership/community recognitions**. IELTS Academic overall 7.5 and Scholars Avenue Campus Ambassador participation are source-supported additions. Existing records/verification URLs are retained, grouped by relevance, with search/filter/reset/empty states.
+- Complete original certificate images/PDFs are owner-approved and copied unchanged. Twelve faithful previews, twelve stable original actions, four complete one-page credential PDFs, all signatures/seals/printed content and five genuine verification links are accessible. Obsolete masked copies/notices are removed. Original documents remain on demand, with accessible viewer and no-JavaScript links.
+- Supplied **`CV/Muhammad_Sharjeel_ATS_CV (2).pdf`** replaces the generated resume unchanged: two pages, 90,991 bytes, exact source hash. Every CV action works; the retired generator cannot overwrite it. Configured phone **+92 349 4247649** / `tel:+923494247649` appears on Contact/footer and Person metadata.
+
+## Fresh verification
+
+- Content/type check: **0 errors, warnings or hints** across 46 checked files; nineteen projects, six showcases, thirteen concise entries and four valid selections.
+- Production build/output guard: **29 HTML pages, 932 local page/asset references**; route inventory, title/description/canonical/social/JSON-LD/sitemap/robots, 404 policy, image dimensions/alt and version-2 public boundary pass.
+- Main production browser suite: **136 passed, 0 failed**, with **31 axe contexts and zero violations**. Covers all routes, catalogue order and every category/search/reset/empty state, exact hero, portrait/discovery/tools/phone, six internship images, keyboard and JavaScript-disabled behavior.
+- Responsive/interaction suite: **106 passed, 0 failed**, with **10 axe contexts and zero violations**. All 29 pages at 320/1440px, core pages at 768/1024 and changed breakpoints, enlarged text, short landscape, touch targets, viewer focus/Escape/restoration/failure/original loading, preference changes and no-JavaScript access.
+- Credential/education/viewer suite: **16 passed, 0 failed**, with **6 axe contexts and zero violations**, including exact source/delivered hashes of all twelve original certificates/previews and the CV. All suites include WCAG 2.2 AA tags.
+- Final gallery/header/state review at **320/390/768/941/1440px**: five gallery reflow checks, no stretched/empty adjacent cards, readable one-line narrow CV action, zero axe violations on Experience. **17 actual normal/hover/focus/selected/disabled/error contrast states** meet 4.5:1 text and 3:1 relevant boundary/focus thresholds. Original scans are unchanged rather than digitally contrast-adjusted.
+- Visual inspection includes all page types, six showcases, concise entries, portrait/site framing, discovery, certificates/open viewer, both CV pages, new source previews, small favicon and cream social graphics. Temporary screenshots/reports/parsing artifacts remain ignored.
+- All **30 staged original/preview/photo records** matched manifest hashes, with binary Git attributes protecting original document bytes. Build checks retain the explicit PDF/image allowlist and reject archives, transcript, raw trees, unrelated/private documents, evidence serialization and obsolete masked outputs. See [ASSET-CURATION.md](ASSET-CURATION.md).
+- Matched production lab delivery and 48 responsive slot combinations are recorded in [PERFORMANCE.md](PERFORMANCE.md). Initial transfer is below 100 KiB on the four measured pages, with zero external JavaScript and one local font. The portrait adds about 23 KiB to Home; median local paint timings are slower and variable, so no universal speed/field metric claim is made.
+
+## Release tracking
+
+- `fea7fa0ee368ac4eaa4842dc5e82bfa1b75dad9a` — cream portfolio, approved originals/portrait/CV, corrected owner content, priority and publication safeguards. Pushed; [Actions run 38151977020](https://github.com/engr-sharjeel/engr-sharjeel.github.io/actions/runs/38151977020) successfully built/deployed.
+- `6a57ca652bd78d6543f3ee17c4f74a5370e17f7c` — balanced internship galleries, narrow header action, expanded owner/document/AA verification and current editing/design documentation. Pushed; [Actions run 38152359944](https://github.com/engr-sharjeel/engr-sharjeel.github.io/actions/runs/38152359944) successfully built/deployed. This is the final visitor-code revision used for final delivery measurements.
+
+Verified at [https://engr-sharjeel.github.io/](https://engr-sharjeel.github.io/):
+
+- **29 live routes**, 29 social references, canonical URLs, sitemap/robots and actual missing-route custom 404 pass `test:live`.
+- Live main browser suite: **136 passed, 0 failed**, with **31 axe contexts and zero violations**. Live credential/viewer suite: **16 passed, 0 failed**, with **6 axe contexts and zero violations**. The new portrait/navigation/order/phone/tools, galleries, full originals/CV and keyboard/no-JavaScript behavior were exercised against the deployed site.
+- Isolated `/portfolio-check/` production build: **29 pages / 932 references**; main **136 passed, 0 failed** and focused **16 passed, 0 failed**, zero axe violations. Direct loads/refresh, navigation, original/preview/download paths and public asset URLs work with the base override. The root production build remains `/`; the temporary fixture never changes root configuration.
+- Downloaded run-38152359944 artifact: **347 public files, 29 HTML pages, 5 explicitly approved PDFs** (four credential originals and the CV). The same complete output-boundary validator passes the extracted artifact. No raw trees, archives, transcript, unrelated documents or internal evidence enter deployment.
+- Seven deployed HTML pages are byte-identical to final local output and the artifact: Home, Projects, REEV, Education, Certificates, Experience and Contact. Twenty-one live public assets match artifact hashes, including **all twelve original credentials**, the replacement CV, favicon and seven representative cream share graphics. Separate live hash checks confirm all five new portrait/internship source copies; live browser tests also verify faithful certificate previews and gallery images.
+- Live screenshots at phone/tablet/desktop and the open viewer were inspected; temporary files remain ignored. TLS verification stayed enabled using the Windows system certificate store where needed.
+
+Performance/verification handoff commits follow this deployed visitor-code revision without changing page output. Their deployment SHA/run is tracked separately below after each final push.
+
+## Settings and remaining source conflicts
+
+`src/data/site.ts` owns the portrait/focal point, exact brief, name/program/university, contact/profile links, phone/CV and four featured slugs. `src/data/skills.ts` owns both ordered lists; `src/data/education.ts` owns current academic data; `src/data/certificates.ts` and `public-assets.json` own canonical credential facts and explicitly approved public originals. [README.md](../README.md) contains Windows run, replacement and publishing instructions.
+
+**ECB/PCB is resolved:** the supplied final CV explicitly names printed circuit board (PCB) design and layouts; the display label is PCB design. No separate ECB software is invented. Only one final CV candidate exists. **The unchanged supplied CV retains historical two-seater wording on both pages**, while current site HTML/metadata/social/research use the corrected scope. A revised owner PDF can resolve this document-only conflict; its layout/text were not edited.
+
+Deferred facts remain: Fall 2025 award SGPA 3.67 versus portal 3.73; transformer measured ratings/tests; SAMS physical implementation; robot test conditions; future conference program/presentation/proceedings; individual team responsibilities. Existing careful qualifiers remain. Raw owner trees/archives/transcript and unrelated originals are intact, ignored and unpublished; approval applies only to the selected copies documented in the manifest.
+
+## Historical Phase 3 handoff
 
 Completed on 11 October 2026 using the existing Astro 7.3.8 / strict TypeScript / custom CSS implementation. Phase 2's approved engineering accounts and unresolved facts are preserved. Its historical handoff follows below.
 
