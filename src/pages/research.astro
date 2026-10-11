@@ -23,14 +23,25 @@ import { projectUrl } from '../lib/urls';
             </div>
             <h3>{item.title}</h3>
             {item.authors && <p class="research-authors">{item.authors.join(' · ')}</p>}
+            {item.collaborators && <p class="research-authors">Project team: {item.collaborators.join(' · ')}</p>}
             {item.publication && <p class="eyebrow">{item.publication}</p>}
-            <p>{item.summary}</p>
-            <p class="muted">{item.context}</p>
-            {item.link && <a class="link-arrow" href={item.link.url}>{item.link.label} <span aria-hidden="true">↗</span></a>}
-            {item.projectSlug && <a class="link-arrow" href={projectUrl(item.projectSlug)}>Explore the REEV project <span aria-hidden="true">↗</span></a>}
+            <div class="prose">
+              <p class="record-lead">{item.summary}</p>
+              <p>{item.abstract}</p>
+              <p class="muted">{item.context}</p>
+            </div>
+            <ul class="tags research-focus" role="list" aria-label="Research focus areas">{item.focus.map((topic) => <li><Tag>{topic}</Tag></li>)}</ul>
+            <div class="button-row">
+              {item.link && <a class="link-arrow" href={item.link.url}>{item.link.label} <span aria-hidden="true">↗</span></a>}
+              {item.projectSlug && <a class="link-arrow" href={projectUrl(item.projectSlug)}>Explore the REEV project <span aria-hidden="true">↗</span></a>}
+            </div>
           </article>
         ))}
       </div>
     </section>
   </div>
 </Layout>
+
+<style>
+  .research-focus { margin-top: 28px; }
+</style>

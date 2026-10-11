@@ -17,6 +17,7 @@ export interface ExperienceRecord {
   period: string;
   summary: string;
   activities: string[];
+  learning: string[];
   areas: string[];
   images: ExperienceImage[];
   provenance: string[];
@@ -28,11 +29,18 @@ export const experience: ExperienceRecord[] = [
     organization: 'Islamabad Electric Supply Company (IESCO)',
     role: 'Engineering intern',
     period: 'July–September 2025',
-    summary: 'Grid-station and substation exposure connected power-engineering coursework with utility maintenance, protection and safe working practices.',
+    summary: 'A utility internship connecting power-engineering coursework with grid-station equipment, maintenance, protection and safe working practices.',
     activities: [
       'Observed and assisted work associated with Substation and Transmission Lines (SS&TL) and Protection and Instrumentation (P&I).',
-      'Gained exposure to substation maintenance, protection equipment and testing practices under the guidance of utility personnel.',
-      'Learned about station battery systems and the safety procedures used around electrical equipment.',
+      'Studied the roles of power transformers, circuit breakers, isolators, current transformers and potential transformers in station operation and protection.',
+      'Gained guided exposure to transformer testing, including turns/voltage ratio, insulation and winding-resistance test practices; this was internship learning rather than independent commissioning responsibility.',
+      'Observed maintenance documentation, shift handover and permit-to-work procedures, connecting equipment work with operational coordination.',
+      'Learned about battery banks, battery chargers and auxiliary supplies used for substation control and protection.',
+    ],
+    learning: [
+      'Protection and measurement equipment link the high-voltage plant to the control and monitoring functions studied in class.',
+      'Safe isolation, permits, grounding and protective equipment are integral to maintenance work in a high-voltage environment.',
+      'Station DC supplies and battery systems support control and protection functions alongside the main power circuit.',
     ],
     areas: ['Substations', 'Maintenance', 'Protection and testing', 'Battery systems', 'Electrical safety'],
     images: [
@@ -63,8 +71,12 @@ export const experience: ExperienceRecord[] = [
       'Observed project-management and planning processes in an engineering organization.',
       'Gained exposure to procurement workflows and their relationship to project execution.',
     ],
+    learning: [
+      'Engineering delivery depends on coordinating project planning and procurement as well as technical design.',
+      'The placement provided an early introduction to how organizational processes support engineering projects.',
+    ],
     areas: ['Project management', 'Procurement', 'Planning'],
     images: [],
-    provenance: ['Owner-supplied internship description', 'Supplied CV records'],
+    provenance: ['Owner-supplied internship description', 'Supplied CV records', 'Everything/Documents/Scanned PDF/Internship Certificate (Power China).pdf'],
   },
 ];

@@ -17,10 +17,10 @@
   ],
   "overview": "SAMS brings access control and environmental monitoring into one 8051 academic design. Its scope includes multi-level PIN authentication, temperature and light sensing, an interrupt-driven emergency override and event logging. The project is documented through a Proteus circuit schematic; physical implementation remains unverified.",
   "approach": [
-    "Organised multi-level PIN entry through a 4×3 keypad and LCD feedback.",
-    "Included LM35 temperature and LDR light sensing in the monitoring design.",
-    "Specified interrupt-driven emergency override, hardware timers and FIFO/circular-buffer event logging.",
-    "Combined LCD/LED feedback and relay door control in the Proteus circuit design."
+    "Defined multi-level PIN authentication through a 4×3 keypad, with LCD/LED feedback and a relay interface for door control.",
+    "Included LM35 temperature and LDR light inputs in the monitoring architecture.",
+    "Specified an interrupt-driven emergency override and hardware-timer use alongside the normal access and monitoring functions.",
+    "Included FIFO/circular-buffer event logging in the software scope and brought the controller, keypad, sensing, feedback and relay connections together in Proteus."
   ],
   "components": [
     "8051-family microcontroller",
@@ -31,8 +31,8 @@
     "Interrupts, hardware timers and circular-buffer logging"
   ],
   "outcomes": [
-    "Documented the proposed circuit integration in Proteus.",
-    "Developed academic practice in authentication logic, sensing, interrupt handling and event logging."
+    "Documented the proposed circuit integration in Proteus, including keypad, LCD, sensor and relay interfaces.",
+    "Established the academic scope for authentication, interrupts, timers and buffered event logging. Hardware implementation is not confirmed in the available record."
   ],
   "metrics": [],
   "credits": [],
@@ -52,5 +52,17 @@
   "evidenceNotes": [
     "Only a Proteus schematic was found; no physical photograph or additional implementation evidence."
   ],
-  "links": []
+  "links": [],
+  "problem": "Bring access decisions and environmental monitoring into one controller design while retaining an emergency override and a record of events.",
+  "context": "An 8051 academic access-control and monitoring design. The supplied evidence is a Proteus schematic; a physical hardware build remains unverified.",
+  "constraints": [
+    "Authentication, sensing and feedback share the controller, while the emergency input requires a distinct interrupt-driven response.",
+    "The schematic establishes circuit-design evidence; it does not establish physical installation, measured sensor performance or deployed access security."
+  ],
+  "lessons": [
+    "Access control and monitoring involve more than a PIN check: emergency response, user feedback and event handling also shape the controller design."
+  ],
+  "nextSteps": [
+    "Further development would require a documented physical implementation and validation of access, sensor, logging and emergency-override behaviour."
+  ]
 }

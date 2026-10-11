@@ -16,10 +16,10 @@
   ],
   "overview": "This Complex Engineering Project studied a 34 kW micro hydropower scheme for rural electrification in Kewai Village, Naran, Khyber Pakhtunkhwa. The work connects resource and load assessment with turbine-generator selection, civil arrangements, electrical distribution and implementation planning. It is a design study; the illustrations do not establish a constructed or commissioned plant.",
   "approach": [
-    "Assessed available head and flow alongside the village load requirements.",
-    "Selected a cross-flow turbine and a 35 kW induction generator for the proposed scheme.",
-    "Developed the intake, penstock, powerhouse, control, transformer and distribution-network scope.",
-    "Considered costing, implementation planning, environmental impact and economic feasibility."
+    "Started with head/flow assessment and village load assessment so the generation concept addressed both the water resource and electricity demand.",
+    "Selected a cross-flow turbine and a 35 kW induction generator for a scheme with a 34 kW design capacity. The generator selection and plant design capacity describe different parts of the design.",
+    "Developed the water-to-wire chain: intake and conveyance, penstock, powerhouse, turbine-generator set, controls, transformer and distribution network.",
+    "Brought technical choices into a feasibility assessment covering costs, implementation planning and environmental/economic considerations."
   ],
   "components": [
     "Intake and water conveyance",
@@ -30,9 +30,9 @@
     "Transformer and distribution network"
   ],
   "outcomes": [
-    "Completed the academic plant-design study at a 34 kW design capacity.",
-    "Estimated annual generation of approximately 146,000 kWh and payback below two years. These are design estimates, not measured operating results.",
-    "The completed deliverable is an academic design study; construction and commissioning are not part of this record."
+    "Completed the academic design study for a 34 kW micro hydropower scheme.",
+    "Projected approximately 146,000 kWh annual generation and a payback below two years under the study assumptions.",
+    "The illustrations describe the proposed system and site arrangement. Construction and commissioning are not established by this design record."
   ],
   "metrics": [
     {
@@ -51,7 +51,13 @@
       "basis": "Design estimate"
     }
   ],
-  "credits": [],
+  "credits": [
+    "Muhammad Zikyas Babar · team member",
+    "Muhammad Sharjeel · team member",
+    "Bushra Eman · team member",
+    "Aman Masood · team member",
+    "Engr. Faizan Munir · course instructor"
+  ],
   "images": [
     {
       "src": "../../assets/projects/micro-hydropower-plant/hydropower-system-illustration.jpg",
@@ -79,5 +85,15 @@
     "No construction or commissioning evidence; plant design and generator nameplate selection are different ratings."
   ],
   "links": [],
-  "featuredOrder": 2
+  "featuredOrder": 2,
+  "problem": "Develop a feasible local-generation design for rural electrification in Kewai Village, Naran, connecting the available water resource with community electricity demand.",
+  "context": "A completed Complex Engineering Project for Power Generation Systems at Air University. The deliverable is a plant-design and feasibility study.",
+  "constraints": [
+    "Resource assessment, civil layout and electrical distribution must be considered as one system rather than treating generator selection as the whole plant.",
+    "Annual generation and payback depend on the study assumptions; they are projections rather than operational records."
+  ],
+  "lessons": [
+    "Rural electrification design connects generation equipment with the civil works, controls and distribution needed to serve a community.",
+    "Technical capacity, expected energy delivery and economic feasibility are different design questions and need to be reported separately."
+  ]
 }

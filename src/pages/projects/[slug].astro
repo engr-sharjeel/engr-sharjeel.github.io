@@ -15,6 +15,14 @@ export async function getStaticPaths() {
 interface Props { project: CollectionEntry<'projects'> }
 const { project } = Astro.props;
 const data = project.data;
+const approachHeadings: Record<string, string> = {
+  'range-extended-electric-vehicle': 'Series architecture & integration',
+  'micro-hydropower-plant': 'From water resource to electricity',
+  'autonomous-navigation-robot': 'From sensing to motor control',
+  'electronic-voting-machine': 'Input, counting & display',
+  'smart-access-monitoring-system': 'Access, monitoring & event handling',
+  'center-tapped-transformer': 'Calculation, fabrication & redesign',
+};
 const projects = await getCollection('projects');
 const related = projects
   .filter((entry) => entry.data.slug !== data.slug)
@@ -33,18 +41,39 @@ const related = projects
     {data.images[0] && <div class="detail-cover"><ImageFrame image={data.images[0]} priority detail /></div>}
     <section class="section detail-grid" aria-labelledby="overview-heading">
       <div class="detail-main">
-        <SectionHeading eyebrow={data.group === 'showcase' ? 'Project overview' : 'Academic work'} title="The work" id="overview-heading" />
-        <div class="prose"><p>{data.overview}</p></div>
+        <SectionHeading eyebrow={data.group === 'showcase' ? 'Engineering case study' : 'Academic work'} title={data.problem ? 'The engineering brief' : 'The work'} id="overview-heading" />
+        <div class="prose">
+          {data.problem && <p class="record-lead">{data.problem}</p>}
+          <p>{data.overview}</p>
+        </div>
         {data.approach.length > 0 && (
           <div class="detail-section prose">
-            <h2>Scope & approach</h2>
+            <h2>{approachHeadings[data.slug] ?? 'Scope & approach'}</h2>
             <ul>{data.approach.map((item) => <li>{item}</li>)}</ul>
+          </div>
+        )}
+        {data.constraints.length > 0 && (
+          <div class="detail-section prose">
+            <h2>Design constraints</h2>
+            <ul>{data.constraints.map((item) => <li>{item}</li>)}</ul>
           </div>
         )}
         {data.outcomes.length > 0 && (
           <div class="detail-section prose">
-            <h2>{data.flagship ? 'Completed work & next phases' : 'Outcomes & status'}</h2>
+            <h2>{data.flagship ? 'What FYP-1 established' : 'Work & results in context'}</h2>
             <ul>{data.outcomes.map((item) => <li>{item}</li>)}</ul>
+          </div>
+        )}
+        {data.lessons.length > 0 && (
+          <div class="detail-section prose">
+            <h2>{data.slug === 'center-tapped-transformer' ? 'What the redesign illustrates' : 'Engineering takeaways'}</h2>
+            <ul>{data.lessons.map((item) => <li>{item}</li>)}</ul>
+          </div>
+        )}
+        {data.nextSteps.length > 0 && (
+          <div class="detail-section prose">
+            <h2>{data.flagship ? 'The remaining academic phases' : 'Further work'}</h2>
+            <ul>{data.nextSteps.map((item) => <li>{item}</li>)}</ul>
           </div>
         )}
         {data.metrics.length > 0 && (
@@ -58,7 +87,7 @@ const related = projects
         <dl class="definition-list">
           <dt>Category</dt><dd>{data.category}</dd>
           <dt>Status</dt><dd>{data.status}</dd>
-          <dt>Context</dt><dd>{data.group === 'showcase' ? 'Academic engineering project' : 'Additional academic work'}</dd>
+          <dt>Context</dt><dd>{data.context ?? (data.group === 'showcase' ? 'Academic engineering project' : 'Additional academic work')}</dd>
         </dl>
         {data.technologies.length > 0 && <div class="aside-section"><h2>Tools & technologies</h2><ul class="tags" role="list">{data.technologies.map((technology) => <li><Tag>{technology}</Tag></li>)}</ul></div>}
         {data.components.length > 0 && <div class="aside-section"><h2>Components & methods</h2><ul class="aside-list">{data.components.map((component) => <li>{component}</li>)}</ul></div>}

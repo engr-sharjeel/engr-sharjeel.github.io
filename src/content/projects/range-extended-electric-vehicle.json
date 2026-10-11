@@ -16,10 +16,11 @@
   ],
   "overview": "Range anxiety and limited charging access motivate this two-seater academic project at Air University. The selected series architecture keeps the wheels electrically driven: the battery supplies a controller and traction motor, while a petrol engine runs a generator to support or recharge the electrical system when required. The engine has no direct mechanical connection to the wheels.",
   "approach": [
-    "Reviewed electric, hybrid and range-extended vehicle literature to establish the problem and compare architectures.",
-    "Selected a series REEV architecture and identified the battery, motor, controller, generator, fuel tank and DC/DC converter.",
-    "Developed the sizing and integration methodology, including a power-flow block diagram and a conceptual battery-state-of-charge operating sequence.",
-    "Defined a development path from design calculations and component sizing to chassis integration and vehicle demonstration."
+    "Compared battery-electric, hybrid and range-extended concepts through a literature review, then selected a series architecture for the proposed two-seater.",
+    "Defined the traction path as battery/DC bus → motor controller → electric motor → final drive and wheels. The engine-generator branch supplies electrical energy to the DC bus or battery; there is no mechanical engine-to-wheel path.",
+    "Identified the battery, traction motor, controller, petrol engine, generator, fuel tank and DC/DC converter, relating selection to voltage, current, torque and auxiliary-load requirements.",
+    "Set out a sizing method using vehicle mass, speed, acceleration and wheel radius for traction requirements, followed by battery voltage, current and energy-capacity considerations. Final compatible values remain later-phase work.",
+    "Defined integration and evaluation methodology around motor operation, battery support and generator charging response, with a conceptual state-of-charge flowchart for electric and generator-supported modes."
   ],
   "components": [
     "Battery pack and battery management",
@@ -30,9 +31,9 @@
     "Proposed chassis and control integration"
   ],
   "outcomes": [
-    "FYP-1 is complete: literature review, architecture selection, component identification and methodology form the present deliverable.",
-    "FYP-2 is the next phase for design calculations and component sizing.",
-    "The final vehicle is planned for FYP-3."
+    "FYP-1 completed the literature review, architecture selection, component identification and sizing/integration methodology.",
+    "The block diagram and state-of-charge flowchart explain the proposed energy and control paths. The vehicle rendering communicates the concept, not completed construction.",
+    "No achieved driving range, finalized component ratings or completed vehicle demonstration is claimed."
   ],
   "metrics": [],
   "credits": [
@@ -79,5 +80,20 @@
     "Owner phase boundaries take precedence over inconsistent completed-tense methodology sentences in report."
   ],
   "links": [],
-  "featuredOrder": 1
+  "featuredOrder": 1,
+  "problem": "How can a small two-seater vehicle retain electric propulsion while reducing dependence on charging access and a very large battery pack?",
+  "context": "Air University final-year team project. FYP-1 is complete; chassis and power-train development continues in later academic phases.",
+  "constraints": [
+    "Battery, motor, controller and generator choices must form a compatible electrical system; the current deliverable establishes the selection method rather than a final hardware specification.",
+    "The project concerns component selection and integration. Manufacturing an engine, generator or traction motor is outside its stated scope.",
+    "The engine-generator range extender uses petrol, so the architecture is not a zero-emission vehicle claim."
+  ],
+  "lessons": [
+    "A series architecture separates mechanical propulsion from the range extender: both energy sources support one electric traction path.",
+    "Component sizing and integration must be considered together, rather than selecting a motor, battery and generator independently."
+  ],
+  "nextSteps": [
+    "FYP-2: carry out the design calculations and component sizing for the selected two-seater scenario.",
+    "FYP-3: develop the planned final vehicle, integrating the chassis and power-train and documenting its operation."
+  ]
 }

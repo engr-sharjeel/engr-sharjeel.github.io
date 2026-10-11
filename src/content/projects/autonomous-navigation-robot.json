@@ -17,10 +17,10 @@
   ],
   "overview": "Built for Electrical Measurements & Instrumentation, the prototype combines several sensor inputs in a compact autonomous robot. An Arduino UNO processes dual IR line-sensor signals, HC-SR04 obstacle-distance information and LDR ambient-light input, then drives the motors through an L298N interface. Its architecture separates sensing, processing, actuation and power management.",
   "approach": [
-    "Interfaced dual IR sensors for line tracking and an HC-SR04 sensor for obstacle detection.",
-    "Included an LDR to support light-responsive behaviour.",
-    "Used Embedded C/C++ and PWM to connect sensing decisions with motor actuation.",
-    "Integrated the sensing, control, motor-driver and power subsystems in the photographed semester prototype."
+    "Organised the system into sensing, processing, actuation and power management, with Arduino UNO/ATmega328P as the processing unit.",
+    "Used dual IR sensors to follow a line, an HC-SR04 ultrasonic sensor to detect obstacles and an LDR to provide ambient-light input.",
+    "Connected Embedded C/C++ control decisions to the L298N motor driver, using PWM for motor actuation.",
+    "Integrated the controller, sensor wiring, driver, motors and prototype supply into the four-wheel hardware shown in the gallery."
   ],
   "components": [
     "Arduino UNO / ATmega328P",
@@ -31,9 +31,9 @@
     "DC motors and prototype power supply"
   ],
   "outcomes": [
-    "Implemented a semester robot integrating the sensing, control, actuation and power subsystems.",
-    "Reported prototype results include 95–97% line-tracking precision, obstacle response below 250 ms, approximately 0.8 A average load and approximately 2.5 hours of operation.",
-    "Operating conditions and a formal test procedure were not documented with these reported results."
+    "Implemented a semester robot integrating sensing, embedded processing, motor actuation and power management.",
+    "The caption reports 95–97% line-tracking precision, obstacle response below 250 ms, approximately 0.8 A average load and approximately 2.5 hours operation.",
+    "These figures describe reported prototype behaviour, not performance guaranteed across different surfaces, lighting or operating conditions."
   ],
   "metrics": [
     {
@@ -86,5 +86,18 @@
     "Complete teammate names and individual responsibilities are not established."
   ],
   "links": [],
-  "featuredOrder": 3
+  "featuredOrder": 3,
+  "problem": "Combine line tracking, obstacle sensing and ambient-light input in one mobile prototype, then translate sensor information into motor decisions.",
+  "context": "An implemented semester prototype for Electrical Measurements & Instrumentation. The hardware photographs document the assembled robot.",
+  "constraints": [
+    "Navigation depends on several sensor inputs sharing one control and power arrangement.",
+    "The reported performance figures are prototype-caption results. A formal procedure, track layout, lighting conditions and independent validation dataset are not supplied."
+  ],
+  "lessons": [
+    "Sensor interfacing becomes useful navigation only when readings, embedded decisions and motor actuation work together.",
+    "Power demand and operating time belong alongside motion behaviour when describing a mobile prototype."
+  ],
+  "nextSteps": [
+    "Further evaluation would need repeatable conditions and a documented procedure for line tracking, obstacle response and operating time."
+  ]
 }

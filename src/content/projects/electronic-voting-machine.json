@@ -16,10 +16,10 @@
   ],
   "overview": "The Electronic Voting Machine is an academic embedded-system prototype using an 8051 microcontroller. Push buttons accept votes for multiple candidates, and a 16×2 LCD presents counts and calculated results. Embedded C logic handles switch debouncing, vote counting and winner or tie detection. Hardware photographs and a Proteus schematic document the implementation.",
   "approach": [
-    "Connected multiple-candidate push-button inputs to the 8051 control system.",
-    "Used software debouncing to handle mechanical switch inputs.",
-    "Implemented vote counts, result calculation and winner/tie logic in Embedded C.",
-    "Presented results through the LCD and assembled the photographed breadboard prototype."
+    "Interfaced multiple candidate push buttons with an 8051-family microcontroller and a 16×2 LCD.",
+    "Used software debouncing to account for the mechanical behaviour of the button inputs.",
+    "Implemented vote counting and result calculation in Embedded C, with logic to identify a winner or a tie.",
+    "Linked the circuit design to the breadboard implementation, using the LCD as the result-display interface."
   ],
   "components": [
     "8051-family microcontroller",
@@ -29,9 +29,8 @@
     "Proteus circuit schematic"
   ],
   "outcomes": [
-    "Implemented the academic voting-machine prototype shown in the hardware photographs.",
-    "Practised input handling, state/count logic and display interfacing in an embedded system.",
-    "The work is an educational prototype, without certification for use in real elections."
+    "Assembled the academic voting-machine prototype shown in the hardware views.",
+    "Connected input handling, counting, winner/tie logic and LCD interfacing in one Embedded C implementation."
   ],
   "metrics": [],
   "credits": [],
@@ -70,5 +69,15 @@
     "Do not carry over CV secure-system wording as a certification/security assurance.",
     "No completed independent security assessment or election deployment is established."
   ],
-  "links": []
+  "links": [],
+  "problem": "Turn multiple-candidate button inputs into counted votes and clear LCD results, including the cases where a winner or a tie must be displayed.",
+  "context": "An 8051 academic embedded-system prototype, documented by a Proteus schematic and assembled breadboard photographs.",
+  "constraints": [
+    "Button input handling and result logic both affect the displayed counts; switch debouncing is part of the prototype implementation.",
+    "The educational scope does not establish an independently assessed security model or certification for real elections."
+  ],
+  "lessons": [
+    "A small embedded system can bring together physical input, maintained state and meaningful output.",
+    "Handling a tie explicitly makes result logic part of the design rather than an afterthought."
+  ]
 }

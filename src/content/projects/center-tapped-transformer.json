@@ -4,7 +4,7 @@
   "shortTitle": "Center-Tapped Transformer",
   "category": "Power systems",
   "group": "showcase",
-  "summary": "An Electric Machines design-and-fabrication project linking winding calculations and material selection with physical construction, tests and practical redesign.",
+  "summary": "An Electric Machines design-and-fabrication project connecting winding calculations with bobbin availability, core fit and practical redesign.",
   "status": "Fabricated academic prototype",
   "flagship": false,
   "technologies": [
@@ -14,28 +14,37 @@
     "Wire-gauge selection",
     "Open/short-circuit tests"
   ],
-  "overview": "This Electric Machines project covered the design and fabrication of a single-phase center-tapped transformer with a 220 V primary supply and an E-I laminated core. The report connects voltage and load requirements with core and winding calculations, turns per volt, current ratings and wire-gauge selection. The supplied photograph shows the fabricated hardware.",
+  "overview": "The report documents a 220 V primary and a 380 V secondary design with a 220 V tap, using an E-I laminated core. It connects core area, turns per volt, winding turns, current ratings and wire-gauge selection with fabrication. The project retains its original center-tapped title; the documented tap voltages do not establish equal secondary halves or measured output ratings.",
   "approach": [
-    "Started from the load and voltage requirements of the academic design brief.",
-    "Calculated core size, turns per volt, winding turns, current ratings and wire-gauge requirements.",
-    "Fabricated and insulated the windings, then assembled the laminated core and mounting hardware.",
-    "Included open-circuit and short-circuit tests in the project scope and redesigned the bobbin/core arrangement when the first winding fit proved impractical."
+    "Translated the academic load/voltage brief into core and winding calculations, including turns per volt, primary/secondary turns, currents and wire-gauge requirements.",
+    "The initial handwritten calculation used 57 VA with a 220 V primary and a 380 V secondary with a 220 V tap. This is an initial design calculation, not a verified hardware nameplate.",
+    "The report describes difficulty sourcing the first bobbin and fitting the core after winding. The team moved to a larger bobbin and recalculated the arrangement.",
+    "A later handwritten page records an apparent-power calculation of about 210 VA for the larger bobbin, retaining the documented primary, secondary and tap voltages. This is a separate design iteration.",
+    "Wound and insulated the coils, assembled the E-I core and mounting hardware, and included open-/short-circuit test work in the project scope."
   ],
   "components": [
-    "220 V primary winding",
-    "Center-tapped secondary arrangement",
+    "220 V primary design",
+    "Tapped secondary winding",
     "E-I laminated core",
-    "Insulated winding wire",
-    "Bobbin and mounting hardware",
-    "Open-circuit and short-circuit test setup"
+    "Enamelled copper winding wire",
+    "Insulation, bobbin and mounting hardware",
+    "Open-circuit and short-circuit test scope"
   ],
   "outcomes": [
-    "Produced the fabricated transformer shown in the project photograph.",
-    "Connected analytical sizing decisions to practical winding, insulation and core-assembly constraints.",
-    "The report records a practical redesign after winding/core fit difficulties; exact measured test results are not established in the supplied report."
+    "Fabricated the transformer shown in the hardware photograph and documented a redesign around winding/core fit.",
+    "The owner caption reports test work, but measured voltages, efficiency, regulation and test values are not established by the supplied report.",
+    "The documented 380 V secondary with a 220 V tap describes the design arrangement, not a verified output specification or equal secondary halves."
   ],
   "metrics": [],
-  "credits": [],
+  "credits": [
+    "Muhammad Sharjeel · team member",
+    "Ureeda Farrukh · team member",
+    "Maiz Akbar · team member",
+    "M. Zikyas Babar · team member",
+    "Umer Mehsud · team member",
+    "Hamza Abid · team member",
+    "Submitted to Hiba Hareem"
+  ],
   "images": [
     {
       "src": "../../assets/projects/center-tapped-transformer/fabricated-transformer.jpg",
@@ -75,11 +84,28 @@
     "LinkedIn projects/Single-Phase Center-Tapped Transformer/1769332272479.jpg"
   ],
   "evidenceNotes": [
-    "CVs and report calculations give 380 V secondary with a 220 V tap, while current owner wording is center-tapped. Exact secondary-output/topology specifications are excluded pending owner reconciliation. Initial calculation and redesigned calculation also use different apparent-power ratings.",
-    "Report page 14 has an open/short-circuit test heading but no visible recorded measurements. User-supplied project description supports test scope; no measured results are claimed.",
+    "Phase-2 visual review of handwritten report pages 11 and 13 confirms 220 V primary, 380 V secondary and a 220 V tap. The original center-tapped project title is retained; mathematically equal secondary halves are not claimed.",
+    "The initial calculation uses 57 VA; the larger-bobbin calculation is approximately 210 VA. Neither establishes a measured rating of the fabricated hardware.",
+    "Report page 12 describes bobbin sourcing and winding/core-fit difficulties. Avoid repeating its weak wire-gauge/turn-count causality as a general engineering rule.",
+    "Report page 14 has an open/short-circuit test heading but no recorded measurements. The owner-supplied caption supports test work, not numerical efficiency/regulation/test results.",
+    "Report cover establishes team names and course context, without individual contributions. Student identifiers are excluded.",
     "General supporting power-grid diagram voltages are not fabricated-device ratings.",
     "Photograph winding-label names and identifiers were sanitized in the public copy."
   ],
   "links": [],
-  "featuredOrder": 4
+  "featuredOrder": 4,
+  "problem": "Design and fabricate a single-phase transformer for an academic power-plant control-room brief, working from a 220 V primary and required secondary/tap voltages.",
+  "context": "An Electric Machines Lab Complex Engineering Activity at Air University, Spring 2025. Team calculations and the fabricated hardware document the work.",
+  "constraints": [
+    "Bobbin availability and the space required by the windings affected whether the laminated core could be fitted.",
+    "The 57 VA and approximately 210 VA calculations belong to different design iterations; neither is presented as a measured rating of the photographed transformer.",
+    "The supplied report has an open-/short-circuit-test page without recorded measurements."
+  ],
+  "lessons": [
+    "A winding calculation must fit a real bobbin and core assembly; material availability and fabrication geometry can force a new calculation.",
+    "Design iterations and measured results need separate records so a calculated apparent-power value is not mistaken for verified hardware performance."
+  ],
+  "nextSteps": [
+    "A fuller technical record would require measured secondary/tap voltages and the original open-/short-circuit readings before assigning performance or a tested rating."
+  ]
 }
