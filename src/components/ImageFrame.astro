@@ -1,13 +1,13 @@
 ---
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
-interface Props { image: {src: ImageMetadata; kind: string; alt: string; caption: string; focalPoint?: string}; priority?: boolean; detail?: boolean; actionLabel?: string; gallery?: string; sizes?: string; viewerTitle?: string; }
-const { image, priority = false, detail = false, actionLabel = 'View full resolution', gallery = 'page', sizes, viewerTitle } = Astro.props;
+import { imageSizes, imageWidths, type ImageContext } from '../lib/image-sizes';
+interface Props { image: {src: ImageMetadata; kind: string; alt: string; caption: string; focalPoint?: string}; priority?: boolean; detail?: boolean; actionLabel?: string; gallery?: string; sizes?: string; context?: ImageContext; viewerTitle?: string; }
+const { image, priority = false, detail = false, actionLabel = 'View full resolution', gallery = 'page', sizes, context = detail ? 'gallery' : 'card', viewerTitle } = Astro.props;
 const contain = detail || image.kind !== 'photo';
-const widths = [400, 720, 1100, 1500, 2200].filter(w => w <= image.src.width);
-if (image.src.width < 2200 && !widths.includes(image.src.width)) widths.push(image.src.width);
+const widths = imageWidths(image.src.width);
 ---
 <figure class:list={['image-frame', { 'image-contain': contain, 'image-detail': detail }]} style={`--image-position: ${image.focalPoint}`}>
-  <Image src={image.src} alt={image.alt} widths={widths} sizes={sizes || (detail ? '(max-width: 800px) 92vw, 1248px' : '(max-width: 640px) 92vw, (max-width: 1000px) 46vw, 600px')} format="webp" loading={priority ? 'eager' : 'lazy'} decoding="async" fetchpriority={priority ? 'high' : 'auto'} />
+  <Image src={image.src} alt={image.alt} widths={widths} sizes={sizes || imageSizes(context, image.kind, image.src.width / image.src.height)} format="webp" loading={priority ? 'eager' : 'lazy'} decoding="async" fetchpriority={priority ? 'high' : 'auto'} />
   {detail && <figcaption>{image.caption} <a class="image-view-link" href={image.src.src} data-image-viewer data-gallery={gallery} data-image-alt={image.alt} data-image-caption={image.caption} data-image-title={viewerTitle || (image.kind === 'certificate' ? 'Certificate' : 'Project image')} target="_blank" rel="noopener">{actionLabel} <span aria-hidden="true">↗</span><span class="sr-only">: {image.alt}</span></a></figcaption>}
 </figure>

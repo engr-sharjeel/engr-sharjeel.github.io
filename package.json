@@ -13,6 +13,8 @@
     "preview": "astro preview",
     "test:browser": "node scripts/check-browser.mjs",
     "test:phase2": "node scripts/check-phase2-browser.mjs",
+    "test:phase3": "node scripts/check-phase3-browser.mjs",
+    "measure:performance": "node scripts/measure-performance.mjs",
     "test:live": "node scripts/check-live.mjs",
     "generate:social": "node scripts/generate-social.mjs",
     "generate:resume": "node scripts/generate-resume.mjs"

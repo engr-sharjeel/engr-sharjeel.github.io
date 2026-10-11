@@ -38,7 +38,7 @@ const related = projects
       <h1>{data.title}</h1>
       <p class="intro-copy">{data.summary}</p>
     </section>
-    {data.images[0] && <div class="detail-cover"><ImageFrame image={data.images[0]} priority detail /></div>}
+    {data.images[0] && <div class="detail-cover"><ImageFrame image={data.images[0]} priority detail context="cover" /></div>}
     <section class="section detail-grid" aria-labelledby="overview-heading">
       <div class="detail-main">
         <SectionHeading eyebrow={data.group === 'showcase' ? 'Engineering case study' : 'Academic work'} title={data.problem ? 'The engineering brief' : 'The work'} id="overview-heading" />

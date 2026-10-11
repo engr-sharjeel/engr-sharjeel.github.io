@@ -10,7 +10,7 @@ const { credential } = Astro.props;
 <article class="credential-card" id={credential.slug} data-credential data-category={credential.category}>
   {credential.image && (
     <div class="credential-preview">
-      <ImageFrame image={credential.image} detail actionLabel="View certificate" gallery={`certificates-${credential.category}`} viewerTitle={credential.title} sizes="(max-width: 640px) 92vw, (max-width: 1000px) 46vw, 600px" />
+      <ImageFrame image={credential.image} detail context="certificate" actionLabel="View certificate" gallery={`certificates-${credential.category}`} viewerTitle={credential.title} />
       {credential.publicPreviewLabel && <p class="credential-preview-label">{credential.publicPreviewLabel}</p>}
     </div>
   )}
