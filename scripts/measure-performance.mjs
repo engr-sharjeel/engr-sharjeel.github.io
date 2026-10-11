@@ -38,7 +38,7 @@ try {
           if (entry) { window.portfolioLab.lcp = entry.startTime; window.portfolioLab.lcpElement = entry.element?.tagName + '.' + entry.element?.className; }
         }).observe({ type: 'largest-contentful-paint', buffered: true });
         new PerformanceObserver(list => {
-          for (const entry of list.getEntries()) if (!entry.hadRecentInput) window.portfolioLab.shifts.push({ time: entry.startTime, value: entry.value });
+          for (const entry of list.getEntries()) if (!entry.hadRecentInput) window.portfolioLab.shifts.push({ time: entry.startTime, value: entry.value, sources: entry.sources.map(source => ({ element: source.node?.tagName + '.' + source.node?.className, previous: source.previousRect.toJSON(), current: source.currentRect.toJSON() })) });
         }).observe({ type: 'layout-shift', buffered: true });
       });
       const response = await page.goto(route(path), { waitUntil: 'networkidle' });
@@ -60,7 +60,7 @@ try {
         }
         const inlineJavaScriptBytes = [...document.scripts].filter(script => !script.src && script.type !== 'application/ld+json').reduce((sum, script) => sum + new TextEncoder().encode(script.textContent).length, 0);
         const navigation = performance.getEntriesByType('navigation')[0];
-        return { lcpMs: window.portfolioLab.lcp, lcpElement: window.portfolioLab.lcpElement, cls, responseWaitMs: navigation.responseStart - navigation.requestStart, requestCount: entries.length, transferBytes: entries.reduce((sum, entry) => sum + entry.transferSize, 0), transferByType: groups, inlineJavaScriptBytes, resources: entries, images: [...document.images].map(image => ({ alt: image.alt, slotWidth: Math.round(image.getBoundingClientRect().width), slotHeight: Math.round(image.getBoundingClientRect().height), naturalWidth: image.naturalWidth, declaredWidth: Number(image.getAttribute('width')), currentSrc: image.currentSrc, sizes: image.sizes, srcset: image.srcset, loading: image.loading, fetchPriority: image.fetchPriority, visible: image.getBoundingClientRect().top < innerHeight && image.getBoundingClientRect().bottom > 0 })) };
+        return { lcpMs: window.portfolioLab.lcp, lcpElement: window.portfolioLab.lcpElement, cls, shifts: window.portfolioLab.shifts, responseWaitMs: navigation.responseStart - navigation.requestStart, requestCount: entries.length, transferBytes: entries.reduce((sum, entry) => sum + entry.transferSize, 0), transferByType: groups, inlineJavaScriptBytes, resources: entries, images: [...document.images].map(image => ({ alt: image.alt, slotWidth: Math.round(image.getBoundingClientRect().width), slotHeight: Math.round(image.getBoundingClientRect().height), naturalWidth: image.naturalWidth, declaredWidth: Number(image.getAttribute('width')), currentSrc: image.currentSrc, sizes: image.sizes, srcset: image.srcset, loading: image.loading, fetchPriority: image.fetchPriority, visible: image.getBoundingClientRect().top < innerHeight && image.getBoundingClientRect().bottom > 0 })) };
       });
       const result = { page: path || '/', sample, ...state };
       report.samples.push(result);
@@ -73,6 +73,8 @@ try {
     const samples = report.samples.filter(sample => sample.page === (path || '/'));
     report.summary.push({ page: path || '/', requestCount: median(samples.map(s => s.requestCount)), transferBytes: median(samples.map(s => s.transferBytes)), lcpMs: median(samples.map(s => s.lcpMs)), cls: median(samples.map(s => s.cls)), inlineJavaScriptBytes: median(samples.map(s => s.inlineJavaScriptBytes)), transferByType: Object.fromEntries(Object.keys(samples[0].transferByType).map(type => [type, median(samples.map(s => s.transferByType[type]))])) });
   }
+  await writeFile(`${artifactDir}/performance-timing.json`, JSON.stringify(report, null, 2) + '\n');
+  if (report.samples.length) console.log('Timed samples complete; optional image-slot and screenshot inspection follows.');
 
   if (process.argv.includes('--slots') || process.argv.includes('--slots-only')) {
     for (const dpr of [1, 2, 3]) {

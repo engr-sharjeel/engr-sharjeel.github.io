@@ -71,11 +71,22 @@ With preview running in another terminal:
 $env:PORTFOLIO_TEST_URL='http://127.0.0.1:4321/'
 npm.cmd run test:browser
 npm.cmd run test:phase2
+npm.cmd run test:phase3
 ```
 
 After a successful Pages run, `npm.cmd run test:live` checks all built page routes, live canonical/share metadata, sitemap/robots and custom 404 against the root build. Set `$env:PORTFOLIO_TEST_URL='https://engr-sharjeel.github.io/'` for the focused live interaction suite. If the local network uses a corporate CA, set `$env:NODE_OPTIONS='--use-system-ca'` for these Node requests.
 
 The scripts use existing local Chrome (`C:/Program Files/Google/Chrome/Application/chrome.exe`), Playwright and axe. They exercise routes at 390/768/1440px, navigation/keyboard/no-JavaScript fallbacks, catalogue search/reset/empty states, credential filters/anchors, viewer focus/close/full-resolution reading and reviewed downloads. Reports/screenshots stay ignored in `.tmp/`.
+
+Phase 3 adds all-route 320px/desktop reflow, actual grid/navigation breakpoints, 200% enlarged text, short-landscape viewer controls, failure/recovery, changing reduced-motion preferences and certificate dimension/hash checks. New effects use CSS; content is never hidden behind a reveal script. The navigation script runs directly after its markup to avoid an initial mobile collapse shift.
+
+For a repeatable cold mobile delivery sample on the production preview:
+
+```powershell
+npm.cmd run measure:performance -- --phase=after --screenshots --slots
+```
+
+The script records three samples for Home, Projects, REEV and Certificates using local Chrome, a 390px/DPR2 viewport and explicit CPU/network throttling. `--slots` adds untimed image-slot/candidate checks at DPR1/2/3. See [measurement method and comparison](docs/PERFORMANCE.md); this is lab evidence, not field Core Web Vitals. Image sizes live in `src/lib/image-sizes.ts` and must follow the CSS container/grid rules when those change. Certificate originals and the reviewed CV remain byte-identical through display changes.
 
 To check project-repository subpath compatibility:
 

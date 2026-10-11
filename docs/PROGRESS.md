@@ -1,4 +1,49 @@
-# Phase 2 handoff
+# Phase 3 handoff
+
+Completed on 11 October 2026 using the existing Astro 7.3.8 / strict TypeScript / custom CSS implementation. Phase 2's approved engineering accounts and unresolved facts are preserved. Its historical handoff follows below.
+
+## Visible refinement
+
+- Refined fluid typography, reading widths, long titles, functional labels, captions and introductory/section spacing. Shared panels, cards, borders, actions and keyboard states now follow one token system across every page type.
+- Kept the navy/teal identity, local Manrope, MS monogram and optional portrait configuration. The hero/flagship, academic covers, education/credential records, internships, research, About, Contact, footer and 404 received responsive polish.
+- Added finite decorative orbit/viewer entrances, arrow feedback and gentle 2px card emphasis for fine-pointer hover and focus. Meaningful content is immediately visible; reduced-motion preference changes remove nonessential motion. No animation framework or motion JavaScript was introduced.
+- Kept the native dialog/focus loop/Escape/restoration and safe image links. Persistent header/toolbar controls, scrolling reading content and load/error feedback improve short-landscape and enlarged-text use. Full-resolution documents load on demand.
+- Context-specific image sizes follow the actual card, flagship, cover, gallery, credential and portrait slots. Original photos/diagrams are preserved, with no upscaling. Early navigation initialization and stable filter-control geometry remove initial mobile shifts while retaining complete no-JavaScript access.
+
+## Fresh verification
+
+- Final content/type checks: zero errors, warnings or hints. Inventory remains **19 projects: 6 showcases + 13 concise entries**, exactly four configured selections, **10 credentials** and **29 HTML pages**.
+- Final root production build: 29 routes / 744 local references, with existing metadata, sitemap/robots, public-output and reviewed-document checks passing. No dependency or lockfile change.
+- General browser suite: **131 passed / 0 failed**, with **31 axe runs / 0 violations**. Catalogue categories/search/reset/empty state, flagship reminder, project links, keyboard/skip link, navigation and no-JavaScript access pass.
+- Phase 3 browser suite: **106 passed / 0 failed**, with **10 axe runs / 0 violations**. All routes at 320/1440px, core pages around grid/navigation breakpoints, enlarged text, 44px key controls, short-landscape viewer, loading failure/recovery, focus restoration, reduced-motion preference changes, history navigation and asset hashes/dimensions pass.
+- Isolated `/portfolio-check/` production build and focused suite: **16 passed / 0 failed**, **6 axe runs / 0 violations**, including direct navigation/refresh, galleries, safe originals and CV links. Root production output remains unchanged; the temporary override was confined to the ignored snapshot.
+- Deployed focused suite: **16 passed / 0 failed**, **6 axe runs / 0 violations**, including all ten certificate original hashes and CV downloads. An initial Node HTTPS request failed on the local corporate CA; rerunning with `NODE_OPTIONS=--use-system-ca` passed with TLS verification enabled.
+- All **29 live page URLs**, their canonical/social metadata, sitemap/robots and actual missing-route custom 404 pass. Five live page types are byte-identical to the final local production output and downloaded deployment artifact: home, catalogue, REEV, Education and Certificates.
+- Downloaded final-code Pages artifact: **281 public files**, 29 HTML pages, ten exact reviewed certificate PNGs with matching dimensions, one exact reviewed CV, font license and robots. No source archives/private document formats are included. Source content/data/assets/downloads/manifest are unchanged relative to the approved Phase 2 commit.
+- Final production screenshots were visually reviewed at phone/tablet/desktop sizes, including the viewer and all page types; live homepage/catalogue/REEV/Education/Certificates/About/Contact were inspected at 390/1440px. Temporary reports/screenshots stay ignored under `.tmp/`.
+
+## Measured delivery
+
+Paired cold mobile lab measurements use the same Chrome, viewport/DPR, network and CPU conditions, with three samples per page. Catalogue transfer falls from **148.7 to 92.3 KiB**; median initial CLS across the four measured pages falls from **0.116–0.252 to approximately 0.0001**. Median LCP improves in these samples, with local variance explicitly recorded. REEV/Certificates transfer increases by 1.7/2.7 KiB for refined HTML/CSS. See [PERFORMANCE.md](PERFORMANCE.md) for actual medians, method, candidate selection and limitations; no field Core Web Vitals, field INP or Lighthouse score is claimed.
+
+## Commits and verified release
+
+- `c203692` — production audit and design direction.
+- `c5bedb2` — typography, page rhythm, navigation and image reading.
+- `a855f9c` — responsive image delivery and Phase 3 verification.
+- `d7b83c5` — stable filter geometry and mobile candidate correction.
+
+These milestones are pushed to `origin/main`. Final visitor code **d7b83c563005f35845edd72f3ff49dccc786005a** successfully deployed in [Actions run 38130886166](https://github.com/engr-sharjeel/engr-sharjeel.github.io/actions/runs/38130886166), then passed the live checks above at [https://engr-sharjeel.github.io/](https://engr-sharjeel.github.io/). The final source-protection/measurement/handoff commit follows this verified code commit without changing visitor output; its own deployment is watched and reported separately at completion. Normal history, owner authentication and the existing workflow are preserved.
+
+## Owner settings and factual follow-up
+
+`src/data/site.ts` retains contact/profile/portrait/CV settings and the four featured slugs: REEV, micro hydropower, navigation robot and center-tapped transformer. `src/data/education.ts` retains CGPA **3.10/4.00**, the Fall 2026 report snapshot and degree-in-progress status. `src/data/certificates.ts` retains four courses, two academic commendations, two organisational recognitions and two internships. README documents Windows commands, content/settings updates and publishing.
+
+The new root `IESCO/`, `Power china internship/` and `Profile Picture/` source folders are preserved, unopened, ignored and unpublished. This phase does not add a portrait or new factual evidence. Reviewed certificate PNGs, the two-page public CV and `src/data/public-assets.json` remain byte-for-byte unchanged.
+
+Prompt 4 may address the existing Fall 2025 award/report SGPA discrepancy, transformer measured ratings/tests, SAMS physical implementation, robot test conditions, future conference program/presentation/proceedings and unestablished individual project responsibilities. Their current qualifiers remain intact; no answers were requested or inferred during Phase 3. The completed design, routes, evidence boundary and deployment should be retained for any factual follow-up.
+
+## Historical Phase 2 handoff
 
 ## Implemented
 

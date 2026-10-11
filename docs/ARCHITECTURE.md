@@ -28,6 +28,12 @@ src/data/public-assets.json stores reviewed certificate dimensions/hashes and th
 
 Astro image() schema and astro:assets manage project dimensions, responsive widths/WebP and loading. Raw large safe images are only requested when a viewer or original link is opened. The dialog supports captions, previous/next, Escape/close, an explicit Tab loop, focus restoration and a scrollable natural-size reading mode. Native modal semantics make the background inert; original image anchors are no-JavaScript fallbacks.
 
+Phase 3 centralises media-slot sizes in `src/lib/image-sizes.ts`: cards, the wide tablet selection, flagship, full-width covers/galleries, experience pairs, height-capped document previews and optional portrait each follow actual CSS gutters/breakpoints. Original assets and review hashes are unchanged. More closely spaced WebP candidates improve selection without upscaling source files.
+
+CSS has explicit reset/base/components/responsive/navigation/viewer layers. Finite decorative motion and pointer/focus states need no animation library or additional motion JavaScript. The existing navigation script initializes inline after header markup to prevent deferred-collapse layout shifts; its no-JavaScript fallback stays complete. Viewer header/toolbar remain outside a scrollable reading body, with load/error status and a reviewed-original fallback.
+
+Catalogue and credential controls have stable initial HTML geometry. Adjacent native `noscript` styles hide inactive controls without JavaScript; all projects, credentials and reviewed-original links remain available. The TypeScript filtering logic and result announcements are preserved.
+
 ## SEO and deployment
 
 Production site is https://engr-sharjeel.github.io/ with root base because this is the confirmed username repository. PORTFOLIO_BASE remains available for subpath verification. src/lib/urls.ts prefixes internal/public paths; Astro manages imported assets. Directory routes support direct navigation and refresh.

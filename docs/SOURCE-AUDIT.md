@@ -1,5 +1,7 @@
 # Source audit — phase 1
 
+Phase 3 preserves the approved content and reviewed public documents. Newly present root folders `IESCO/`, `Power china internship/` and `Profile Picture/` are retained, unopened and covered by anchored source-ignore rules. They are not new public evidence or a configured portrait; any later curation remains separate from this visual-refinement phase. Original reviewed certificates, the public CV and their review manifest remain byte-for-byte unchanged.
+
 Phase 2 supplement: [PHASE2-SOURCE-AUDIT.md](PHASE2-SOURCE-AUDIT.md) records the current academic report, ten deduplicated credentials and public-image redaction decisions. Current reported CGPA is resolved at **3.10/4.00** from the Fall 2026 portal snapshot; degree remains in progress. The Farewell 2026 printed-name variant is included under the owner's explicit phase-2 instruction. [CASE-STUDY-EVIDENCE.md](CASE-STUDY-EVIDENCE.md) records deeper project/report review and independently corroborated future conference details. Older decisions below describe the evidence available in phase 1.
 
 The extracted collections are `Everything/` and `LinkedIn projects/` in the repository root. The original collections remain intact and ignored. Only explicitly reviewed project images are eligible for curated copies under `src/assets/projects/`; none of the source PDFs, Word files, presentations, CVs, certificates or letters are intended as public downloads.
