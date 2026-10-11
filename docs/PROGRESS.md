@@ -42,6 +42,8 @@ Phase-2 milestones so far:
 
 All four milestones were pushed to the correct origin. Pages was changed from legacy builds to **GitHub Actions** using the authorised owner account. [Run 38114268068](https://github.com/engr-sharjeel/engr-sharjeel.github.io/actions/runs/38114268068) successfully built and deployed **d30d661dbf5ac4fd7d21632447efbfc32da2ca0f** on 11 October 2026. Its logs independently confirm zero type diagnostics and 29 routes/744 references. Pages reports built; [https://engr-sharjeel.github.io/](https://engr-sharjeel.github.io/) was directly verified with the intended portfolio, new routes, galleries, downloads and metadata. A final verification/handoff commit follows without changing visitor content; the latest run for that final commit is checked before phase completion.
 
+The verification/handoff milestone **18ac54a** was also pushed and successfully built/deployed in [run 38114526256](https://github.com/engr-sharjeel/engr-sharjeel.github.io/actions/runs/38114526256). A final data review corrects Farewell 2026 precision to **year**, rather than an academic term; its printed name, event text and preview are unchanged. This correction is followed by type/content checks and a checked deployment before completion.
+
 Historical phase-1 baseline: 6dff623, e44ea58, 658a281, b7bdf60; 27 routes/123 browser checks were phase-1 results, superseded by the fresh checks above.
 
 ## Owner settings and run commands

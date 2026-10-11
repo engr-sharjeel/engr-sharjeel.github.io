@@ -28,7 +28,7 @@ export interface CredentialRecord {
   platform?: string;
   category: CredentialCategory;
   dateLabel: string;
-  datePrecision: 'date' | 'term' | 'year-range' | 'month-range';
+  datePrecision: 'date' | 'term' | 'year' | 'year-range' | 'month-range';
   context: string;
   image?: CredentialImage;
   verificationUrl?: string;
@@ -155,7 +155,7 @@ export const certificates: CredentialRecord[] = [
     issuer: 'Air University ECE department / IEEE Air University',
     category: 'Organisational Recognition',
     dateLabel: 'Farewell 2026',
-    datePrecision: 'term',
+    datePrecision: 'year',
     context: 'Appreciation for contributing to the successful organisation of Farewell 2026 for the Electrical and Computer Engineering department.',
     image: preview(farewellAppreciation, 'Certificate of Appreciation for organising Farewell 2026 in the ECE department; the printed recipient name is Rao Sharjeel.', 'Appreciation for organising ECE Farewell 2026. The original printed recipient name is preserved; issuer signatures are redacted.'),
     printedName: 'Rao Sharjeel',
