@@ -10,18 +10,20 @@ const background = ['About', 'Education', 'Certificates', 'Achievements'];
   <button class="menu-toggle" type="button" aria-controls="primary-nav" aria-expanded="false" hidden>Menu <span aria-hidden="true">＋</span></button>
   <nav id="primary-nav" class="primary-nav" aria-label="Main navigation">{links.map(label => <a href={withBase(`/${label.toLowerCase()}/`)} aria-current={active === label.toLowerCase() ? 'page' : undefined}>{label}</a>)}<details class:list={['background-menu', { 'background-active': background.some(label => label.toLowerCase() === active) }]}><summary>Background <span aria-hidden="true">⌄</span></summary><div class="background-links">{background.map(label => <a href={withBase(`/${label.toLowerCase()}/`)} aria-current={active === label.toLowerCase() ? 'page' : undefined}>{label}</a>)}</div></details><a class="nav-contact" href={withBase('/contact/')} aria-current={active === 'contact' ? 'page' : undefined}>Let’s connect <span aria-hidden="true">↗</span></a></nav>
 </div></header>
-<script>
-  const button = document.querySelector<HTMLButtonElement>('.menu-toggle');
-  const nav = document.querySelector<HTMLElement>('#primary-nav');
+<!-- Initialize directly after the header, before first paint, to avoid a deferred
+     navigation-collapse layout shift. Without JavaScript the full nav stays visible. -->
+<script is:inline>
+  const button = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('#primary-nav');
   if (button && nav) {
     button.hidden = false;
     nav.classList.add('enhanced');
-    const background = nav.querySelector<HTMLDetailsElement>('.background-menu');
+    const background = nav.querySelector('.background-menu');
     const close = () => { button.setAttribute('aria-expanded', 'false'); nav.classList.remove('is-open'); if (background) background.open = false; };
     button.addEventListener('click', () => { const open = button.getAttribute('aria-expanded') !== 'true'; button.setAttribute('aria-expanded', String(open)); nav.classList.toggle('is-open', open); });
-    nav.addEventListener('click', (event) => { if ((event.target as HTMLElement).closest('a')) close(); });
+    nav.addEventListener('click', (event) => { if (event.target.closest('a')) close(); });
     document.addEventListener('keydown', event => { if (event.key !== 'Escape') return; if (background?.open) { background.open = false; background.querySelector('summary')?.focus(); } else if (nav.classList.contains('is-open')) { close(); button.focus(); } });
-    document.addEventListener('click', event => { if (background?.open && !background.contains(event.target as Node)) background.open = false; });
+    document.addEventListener('click', event => { if (background?.open && !background.contains(event.target)) background.open = false; });
     matchMedia('(min-width: 941px)').addEventListener('change', close);
   }
 </script>

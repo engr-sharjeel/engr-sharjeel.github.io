@@ -1,7 +1,7 @@
 <dialog class="image-viewer" aria-labelledby="viewer-title" aria-describedby="viewer-caption">
   <div class="viewer-header"><div><p class="eyebrow">Visual record</p><h2 id="viewer-title">Image</h2></div><button type="button" class="viewer-close" autofocus>Close <span aria-hidden="true">×</span></button></div>
-  <div class="viewer-stage" tabindex="0" aria-label="Image reading area"><p class="viewer-loading" role="status">Loading full-resolution image…</p></div>
-  <p id="viewer-caption"></p>
+  <div class="viewer-body"><div class="viewer-stage" tabindex="0" aria-label="Image reading area" aria-busy="false"><p class="viewer-loading" role="status">Loading full-resolution image…</p></div>
+  <p id="viewer-caption"></p></div>
   <div class="viewer-toolbar"><button type="button" class="viewer-previous" aria-label="Previous image">← Previous</button><span class="viewer-position" aria-live="polite"></span><button type="button" class="viewer-next" aria-label="Next image">Next →</button><button type="button" class="viewer-zoom" aria-pressed="false">Read full size</button><a class="viewer-original" target="_blank" rel="noopener">Open image ↗</a></div>
 </dialog>
 <script>
@@ -9,6 +9,7 @@
   if (dialog && typeof dialog.showModal === 'function') {
     const img = new Image(); img.className = 'viewer-image';
     const stage = dialog.querySelector<HTMLElement>('.viewer-stage')!;
+    const feedback = dialog.querySelector<HTMLElement>('.viewer-loading')!;
     const title = dialog.querySelector<HTMLElement>('#viewer-title')!;
     const caption = dialog.querySelector<HTMLElement>('#viewer-caption')!;
     const position = dialog.querySelector<HTMLElement>('.viewer-position')!;
@@ -20,7 +21,10 @@
     const resetZoom = () => { dialog.classList.remove('is-zoomed'); zoom.setAttribute('aria-pressed', 'false'); zoom.textContent = 'Read full size'; };
     const render = () => {
       const link = links[index];
-      resetZoom(); dialog.classList.add('is-loading');
+      resetZoom(); dialog.classList.remove('is-error'); dialog.classList.add('is-loading');
+      stage.setAttribute('aria-busy', 'true'); stage.scrollTo(0, 0);
+      dialog.querySelector('.viewer-body')?.scrollTo(0, 0);
+      feedback.textContent = 'Loading full-resolution image…'; zoom.disabled = true;
       stage.prepend(img);
       img.alt = link.dataset.imageAlt || ''; img.src = link.href;
       title.textContent = link.dataset.imageTitle || 'Image';
@@ -32,13 +36,13 @@
     const move = (direction: number) => { index = (index + direction + links.length) % links.length; render(); };
     document.addEventListener('click', event => {
       const target = (event.target as Element).closest<HTMLAnchorElement>('a[data-image-viewer]');
-      if (!target || event.defaultPrevented || (event as MouseEvent).button !== 0 || (event as MouseEvent).ctrlKey || (event as MouseEvent).metaKey || (event as MouseEvent).shiftKey) return;
+      if (!target || event.defaultPrevented || (event as MouseEvent).button !== 0 || (event as MouseEvent).ctrlKey || (event as MouseEvent).metaKey || (event as MouseEvent).shiftKey || (event as MouseEvent).altKey) return;
       event.preventDefault(); opener = target;
       links = [...document.querySelectorAll<HTMLAnchorElement>('a[data-image-viewer]')].filter(link => !link.closest('[hidden]') && link.dataset.gallery === target.dataset.gallery);
       index = links.indexOf(target); render(); dialog.showModal(); document.body.classList.add('viewer-open');
     });
-    img.addEventListener('load', () => { img.width = img.naturalWidth; img.height = img.naturalHeight; dialog.classList.remove('is-loading'); });
-    img.addEventListener('error', () => { dialog.classList.remove('is-loading'); caption.textContent = 'The image could not load. Use the original image link to try again.'; });
+    img.addEventListener('load', () => { img.width = img.naturalWidth; img.height = img.naturalHeight; dialog.classList.remove('is-loading'); stage.setAttribute('aria-busy', 'false'); zoom.disabled = false; });
+    img.addEventListener('error', () => { if (!dialog.open) return; dialog.classList.remove('is-loading'); dialog.classList.add('is-error'); stage.setAttribute('aria-busy', 'false'); feedback.textContent = 'This image could not load. Use “Open image” to try the safe original.'; });
     dialog.querySelector('.viewer-close')?.addEventListener('click', () => dialog.close());
     previous.addEventListener('click', () => move(-1)); next.addEventListener('click', () => move(1));
     zoom.addEventListener('click', () => { const enlarged = dialog.classList.toggle('is-zoomed'); zoom.setAttribute('aria-pressed', String(enlarged)); zoom.textContent = enlarged ? 'Fit image' : 'Read full size'; });
@@ -55,6 +59,6 @@
       if (event.key === 'ArrowRight') { event.preventDefault(); move(1); }
     });
     dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
-    dialog.addEventListener('close', () => { img.remove(); img.removeAttribute('src'); document.body.classList.remove('viewer-open'); resetZoom(); opener?.focus(); });
+    dialog.addEventListener('close', () => { img.remove(); img.removeAttribute('src'); document.body.classList.remove('viewer-open'); dialog.classList.remove('is-loading', 'is-error'); stage.setAttribute('aria-busy', 'false'); resetZoom(); opener?.focus(); });
   }
 </script>

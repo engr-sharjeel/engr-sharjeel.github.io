@@ -18,7 +18,7 @@ import { withBase } from '../lib/urls';
       <div class="contact-links">
         <a class="record contact-record" href={`mailto:${site.email}`}>
           <span class="eyebrow">Email</span>
-          <span class="contact-value">{site.email}</span>
+          <span class="contact-value">{site.email.split('@')[0]}<wbr /><span class="contact-domain">@{site.email.split('@')[1]}</span></span>
           <span class="muted">Opens your email application <span aria-hidden="true">↗</span></span>
         </a>
         <a class="record contact-record" href={site.linkedin}>
