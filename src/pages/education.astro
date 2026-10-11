@@ -1,0 +1,71 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import Tag from '../components/Tag.astro';
+import { education, earlierEducation, courseworkFocusAreas, courseHighlights } from '../data/education';
+import { projectUrl, withBase } from '../lib/urls';
+import '../styles/phase2-pages.css';
+---
+
+<Layout title="Education" description={`Muhammad Sharjeel’s in-progress Electrical (Power) Engineering studies at Air University Islamabad, selected coursework and current reported CGPA of ${education.cgpa}/${education.gpaScale}.`} active="education">
+  <div class="container">
+    <section class="page-intro">
+      <p class="eyebrow">Education</p>
+      <h1>A foundation in<br />electrical engineering.</h1>
+      <p class="intro-copy">{education.summary}</p>
+    </section>
+    <section class="education-overview" aria-labelledby="degree-heading">
+      <div class="degree-copy">
+        <p class="eyebrow">{education.institution}</p>
+        <div class="degree-heading"><h2 id="degree-heading">{education.program}</h2><Tag>{education.status}</Tag></div>
+        <p>Undergraduate study connecting power engineering with embedded systems, electronics and control. Academic projects bring these subjects into practical design and implementation.</p>
+        <div class="degree-meta"><span>{education.period}</span><span>{education.location}</span><span>{education.level}</span></div>
+      </div>
+      <div class="academic-snapshot">
+        <p class="eyebrow">Current reported CGPA</p>
+        <strong>{education.cgpa}<small>/ {education.gpaScale}</small></strong>
+        <p>{education.reportTerm} report snapshot. The reported course results extend through Spring 2026; the degree remains in progress.</p>
+      </div>
+    </section>
+    <section class="section" aria-labelledby="focus-areas-heading">
+      <SectionHeading eyebrow="01 / Academic focus" title="Connected areas of study." description="Coursework in power, electronics and computation supports a broad engineering foundation." id="focus-areas-heading" />
+      <div class="focus-area-grid">
+        {courseworkFocusAreas.map((area, index) => (
+          <article class="course-focus">
+            <p class="eyebrow">{String(index + 1).padStart(2, '0')} / Focus area</p>
+            <h3>{area.title}</h3>
+            <p>{area.description}</p>
+            <ul class="course-list" aria-label={`${area.title} coursework`}>{area.courses.map(course => <li>{course}</li>)}</ul>
+            {area.projects.length > 0 && <div class="course-project-links"><p class="technical-label">Related academic work</p>{area.projects.map(project => <a class="related-record" href={projectUrl(project.slug)}>{project.title} <span aria-hidden="true">↗</span></a>)}</div>}
+          </article>
+        ))}
+      </div>
+    </section>
+    <section class="section education-bridge" aria-labelledby="course-highlights-heading">
+      <SectionHeading eyebrow="02 / Selected coursework" title="Course highlights." description="Selected A-grade results in subjects closely connected to my engineering interests and academic work." id="course-highlights-heading" />
+      <div class="course-highlights">
+        {courseHighlights.map(highlight => (
+          <article class="course-highlight">
+            <div class="course-highlight-title"><h3>{highlight.course}</h3><span class="course-grade" aria-label={`Grade ${highlight.grade}`}>{highlight.grade}</span></div>
+            <p class="technical-label">{highlight.term}</p>
+            <p>{highlight.context}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+    <section class="section education-earlier" aria-labelledby="earlier-study-heading">
+      <SectionHeading eyebrow="03 / Earlier study" title="Before university." id="earlier-study-heading" />
+      <article>
+        <p class="eyebrow">{earlierEducation.period}</p>
+        <h3>{earlierEducation.institution}</h3>
+        <p>{earlierEducation.program} · {earlierEducation.location}</p>
+        <p>{earlierEducation.context}</p>
+      </article>
+    </section>
+    <section class="section education-bridge" aria-labelledby="education-next-heading">
+      <SectionHeading eyebrow="Beyond coursework" title="Learning through application." id="education-next-heading" />
+      <p>Academic prototypes and design studies put coursework into practice. Additional courses and industry placements bring further perspectives on energy systems and engineering work.</p>
+      <div class="button-row"><a class="link-arrow" href={withBase('/projects/')}>Explore the project catalogue <span aria-hidden="true">↗</span></a><a class="link-arrow" href={withBase('/certificates/')}>Browse certificates <span aria-hidden="true">↗</span></a></div>
+    </section>
+  </div>
+</Layout>

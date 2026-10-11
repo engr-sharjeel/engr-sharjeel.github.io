@@ -1,32 +1,47 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import SectionHeading from '../components/SectionHeading.astro';
-import { achievements, type AchievementRecord } from '../data/achievements';
+import { achievements } from '../data/achievements';
+import { withBase } from '../lib/urls';
+import '../styles/phase2-pages.css';
 
-const groups: AchievementRecord['category'][] = ['Academic recognition', 'Professional community', 'Course completion'];
+const groups = [
+  { category: 'Academic Commendations', title: 'Academic recognition', description: 'Departmental commendations for undergraduate study at Air University.' },
+  { category: 'Organisational Recognition', title: 'Contributing to the community', description: 'Recognition for engagement with the university engineering community and departmental events.' },
+];
 ---
 
-<Layout title="Achievements & courses" description="Academic commendations, IEEE recognition and completed courses supporting Muhammad Sharjeel’s engineering education." active="about">
+<Layout title="Achievements" description="Air University semester commendations and recognition for Muhammad Sharjeel’s contributions to the university engineering community." active="achievements">
   <div class="container">
     <section class="page-intro">
-      <p class="eyebrow">Recognition & learning</p>
-      <h1>A continuing<br />engineering education.</h1>
-      <p class="intro-copy">Academic recognition, professional-community involvement and courses that complement undergraduate study.</p>
+      <p class="eyebrow">Recognition & contribution</p>
+      <h1>Work recognised.<br />Community supported.</h1>
+      <p class="intro-copy">Selected academic commendations and organisational contributions alongside my engineering study. The certificate gallery holds the corresponding records and reviewed public previews.</p>
+      <a class="link-arrow" href={withBase('/certificates/')}>Explore the full certificate gallery <span aria-hidden="true">↗</span></a>
     </section>
     {groups.map((group, index) => (
       <section class="section" aria-labelledby={`achievement-group-${index}`}>
-        <SectionHeading eyebrow={index === 2 ? 'Additional learning' : 'Recognition'} title={group} id={`achievement-group-${index}`} />
+        <SectionHeading eyebrow={index === 0 ? 'Academic work' : 'University community'} title={group.title} description={group.description} id={`achievement-group-${index}`} />
         <div class="records-grid">
-          {achievements.filter((item) => item.category === group).map((item) => (
-            <article class="record">
-              <p class="eyebrow">{item.period}</p>
-              <h3>{item.title}</h3>
-              <p class="record-issuer">{item.issuer}</p>
-              <p class="muted">{item.description}</p>
+          {achievements.filter(credential => credential.category === group.category).map(credential => (
+            <article class="record recognition-record">
+              <p class="eyebrow">{credential.dateLabel}</p>
+              <h3>{credential.title}</h3>
+              <p class="record-issuer">{credential.issuer}</p>
+              <p>{credential.context}</p>
+              <a class="link-arrow" href={withBase(`/certificates/#${credential.slug}`)}>View the credential record <span aria-hidden="true">↗</span></a>
             </article>
           ))}
         </div>
       </section>
     ))}
+    <section class="section education-bridge" aria-labelledby="continuing-learning-heading">
+      <SectionHeading eyebrow="Continuing learning" title="A foundation that keeps growing." id="continuing-learning-heading" />
+      <p>Courses in renewable energy, electric-industry operations and electrical safety complement my degree. Coursework, project work and additional learning each contribute a different part of that foundation.</p>
+      <div class="button-row">
+        <a class="link-arrow" href={withBase('/education/')}>Education & coursework <span aria-hidden="true">↗</span></a>
+        <a class="link-arrow" href={withBase('/certificates/#courses')}>Course certificates <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
   </div>
 </Layout>

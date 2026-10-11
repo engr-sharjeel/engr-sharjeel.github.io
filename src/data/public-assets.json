@@ -1,0 +1,79 @@
+{
+  "reviewed": "2026-10-11",
+  "resume": {
+    "path": "downloads/muhammad-sharjeel-cv.pdf",
+    "sha256": "c644cac259befdb6a97a192e523466bd46722d292187bd308bf911c4fd6c2901"
+  },
+  "certificates": [
+    {
+      "slug": "renewable-energy-fundamentals",
+      "filename": "renewable-energy-fundamentals-public.png",
+      "sha256": "1745688d9aec11e909818771b8d5c308c21ae3287c6f6f49ce4386513a764545",
+      "width": 1650,
+      "height": 1275
+    },
+    {
+      "slug": "electric-industry-operations-markets",
+      "filename": "electric-industry-operations-markets-public.png",
+      "sha256": "ae2222404d4fd39db1cc6109a5070c903a1327f862d4324fb7d67bca0f761e07",
+      "width": 1650,
+      "height": 1275
+    },
+    {
+      "slug": "electrical-safety-essentials",
+      "filename": "electrical-safety-essentials-public.png",
+      "sha256": "504b65f2b4a08e3591bfdb2d901201eb5f7e59406fc4462a25b6b5db76c868da",
+      "width": 1123,
+      "height": 789
+    },
+    {
+      "slug": "nfpa70e-workplace-safety",
+      "filename": "nfpa70e-workplace-safety-public.png",
+      "sha256": "46a14624c930b21070f6865c85700df63704672f402540f0215dff32dba4b8f9",
+      "width": 1754,
+      "height": 1241
+    },
+    {
+      "slug": "air-university-commendation-spring2025",
+      "filename": "air-university-commendation-spring2025-public.png",
+      "sha256": "7c8dc90749fa5f3a1bf4f0847e7ea370fdc8fc924936708db74cbb710d6e951a",
+      "width": 1600,
+      "height": 1178
+    },
+    {
+      "slug": "air-university-commendation-fall2025",
+      "filename": "air-university-commendation-fall2025-public.png",
+      "sha256": "4a1d782dcc8b9bbcb67e3168c7bb668a372402b7d4a23070ca6bb7fa3fbcf6d8",
+      "width": 1280,
+      "height": 911
+    },
+    {
+      "slug": "ieee-recognition-2025-26",
+      "filename": "ieee-recognition-2025-26-public.png",
+      "sha256": "be788558bc7fdfa21f20cd56c328f605d3050f7118adf84d8ec597ab37681211",
+      "width": 2480,
+      "height": 3509
+    },
+    {
+      "slug": "ece-farewell-appreciation-2026",
+      "filename": "ece-farewell-appreciation-2026-public.png",
+      "sha256": "62e42552f54311d7edd2853e0d3df4081c10a96ca021eb37a6229f76e7fa19c0",
+      "width": 1280,
+      "height": 904
+    },
+    {
+      "slug": "iesco-internship-2025",
+      "filename": "iesco-internship-2025-public.png",
+      "sha256": "4b46b6c426243fee70bc5bf0d88fdf6bce0451dbc359627009fd752e097d9982",
+      "width": 1684,
+      "height": 1190
+    },
+    {
+      "slug": "powerchina-sepco1-internship-2024",
+      "filename": "powerchina-sepco1-internship-2024-public.png",
+      "sha256": "1e917ca36ccc870bf28d300e41faf19b9d8fa9bbec4fcf8bc25dd4335b024e65",
+      "width": 1190,
+      "height": 1684
+    }
+  ]
+}

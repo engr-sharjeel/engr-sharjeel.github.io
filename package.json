@@ -3,22 +3,29 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "engines": { "node": ">=22.12.0" },
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
     "dev": "astro dev",
     "check": "astro check && node scripts/check-content.mjs",
     "build": "astro build && node scripts/check-output.mjs",
     "preview": "astro preview",
-    "test:browser": "node scripts/check-browser.mjs"
+    "test:browser": "node scripts/check-browser.mjs",
+    "test:phase2": "node scripts/check-phase2-browser.mjs",
+    "generate:social": "node scripts/generate-social.mjs",
+    "generate:resume": "node scripts/generate-resume.mjs"
   },
   "dependencies": {
-    "astro": "7.3.8",
-    "@fontsource-variable/manrope": "5.3.0"
+    "@astrojs/sitemap": "^3.7.4",
+    "@fontsource-variable/manrope": "5.3.0",
+    "astro": "7.3.8"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",
-    "typescript": "^5.9.3",
+    "axe-core": "^4.11.0",
     "playwright-core": "^1.56.1",
-    "axe-core": "^4.11.0"
+    "sharp": "^0.35.5",
+    "typescript": "^5.9.3"
   }
 }

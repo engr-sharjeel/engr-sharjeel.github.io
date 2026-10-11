@@ -96,7 +96,7 @@ try {
     assert.ok(first?.includes('flagship'), 'The default catalogue should present the flagship first');
   });
 
-  const routes = ['', 'projects/', 'experience/', 'research/', 'achievements/', 'about/', 'contact/', '404.html'].map(relative => route(relative));
+  const routes = ['', 'projects/', 'experience/', 'research/', 'achievements/', 'education/', 'certificates/', 'about/', 'contact/', '404.html'].map(relative => route(relative));
   const allRoutes = [...routes, ...detailUrls];
   for (const width of [390, 768, 1440]) {
     await page.setViewportSize({ width, height: width === 1440 ? 1000 : 900 });
@@ -142,6 +142,7 @@ try {
     await open(page, route());
     assert.equal(await page.locator('.menu-toggle').isVisible(), false);
     assert.ok(await page.locator('#primary-nav').isVisible());
+    await page.locator('#primary-nav summary').click();
     await page.locator('#primary-nav').getByRole('link', { name: 'About', exact: true }).click();
     await page.waitForURL(route('about/'));
   });

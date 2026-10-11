@@ -4,7 +4,9 @@ import SectionHeading from '../components/SectionHeading.astro';
 import Tag from '../components/Tag.astro';
 import { site } from '../data/site';
 import { skillGroups } from '../data/skills';
+import { education } from '../data/education';
 import { withBase } from '../lib/urls';
+import '../styles/phase2-pages.css';
 ---
 
 <Layout title="About" description="Meet Muhammad Sharjeel, an Electrical (Power) Engineering undergraduate at Air University, Islamabad." active="about">
@@ -13,6 +15,7 @@ import { withBase } from '../lib/urls';
       <p class="eyebrow">About</p>
       <h1>Engineering through<br />study and practice.</h1>
       <p class="intro-copy">I’m {site.name}, an {site.role} at {site.university}. My academic work connects power systems, electric mobility and embedded control.</p>
+      <div class="button-row"><a class="button button-secondary" href={withBase(site.resumePath)} download>Download CV <span class="sr-only">(PDF, two pages)</span><span aria-hidden="true">↓</span></a></div>
     </section>
     <section class="section two-column" aria-labelledby="background-heading">
       <SectionHeading eyebrow="Background" title="A practical foundation" id="background-heading" />
@@ -24,14 +27,16 @@ import { withBase } from '../lib/urls';
       </div>
     </section>
     <section class="section" aria-labelledby="education-heading">
-      <SectionHeading eyebrow="Education" title="Electrical (Power) Engineering" id="education-heading" />
+      <SectionHeading eyebrow="Education" title={education.program} id="education-heading" />
       <article class="record">
         <div class="record-header">
-          <h3>Air University</h3>
-          <Tag>Undergraduate</Tag>
+          <h3>{education.institution}</h3>
+          <Tag>{education.status}</Tag>
         </div>
-        <p>Islamabad, Pakistan</p>
+        <p>{education.location} · {education.period}</p>
         <p class="muted">Academic interests include power systems, electric mobility, renewable energy and embedded systems.</p>
+        <div class="about-education-details"><span>Current reported CGPA <strong>{education.cgpa}/{education.gpaScale}</strong></span><span>{education.reportTerm} snapshot</span></div>
+        <a class="link-arrow" href={withBase('/education/')}>Explore education & coursework <span aria-hidden="true">↗</span></a>
       </article>
     </section>
     <section class="section" aria-labelledby="skills-heading">
@@ -50,7 +55,7 @@ import { withBase } from '../lib/urls';
       <SectionHeading eyebrow="Beyond projects" title="Learning and recognition" id="recognition-heading" />
       <div class="prose">
         <p>Semester commendations, IEEE community engagement and additional courses support my continuing engineering education.</p>
-        <a class="link-arrow" href={withBase('/achievements/')}>View recognition & courses <span aria-hidden="true">↗</span></a>
+        <div class="about-learning-links"><a class="link-arrow" href={withBase('/certificates/')}>Browse certificates <span aria-hidden="true">↗</span></a><a class="link-arrow" href={withBase('/achievements/')}>View achievements <span aria-hidden="true">↗</span></a></div>
       </div>
     </section>
   </div>

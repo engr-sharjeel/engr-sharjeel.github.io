@@ -1,0 +1,80 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import CertificateCard from '../components/CertificateCard.astro';
+import { certificates, type CredentialRecord } from '../data/certificates';
+import { withBase } from '../lib/urls';
+import '../styles/phase2-pages.css';
+
+const groups: { category: CredentialRecord['category']; id: string; label: string; description: string }[] = [
+  { category: 'Courses', id: 'courses', label: 'Course completion', description: 'Additional learning in energy, electricity markets and electrical safety.' },
+  { category: 'Academic Commendations', id: 'academic-commendations', label: 'Academic commendations', description: 'Departmental recognition for undergraduate academic work at Air University.' },
+  { category: 'Organisational Recognition', id: 'organisational-recognition', label: 'Organisational recognition', description: 'Contributions to the university engineering community and departmental activities.' },
+  { category: 'Internship', id: 'internship', label: 'Internship credentials', description: 'Documented learning through industry placements, with context on the experience page.' },
+];
+const availableGroups = groups.filter(group => certificates.some(credential => credential.category === group.category));
+---
+
+<Layout title="Certificates" description="Course-completion certificates, Air University academic commendations, organisational recognition and internship credentials for Muhammad Sharjeel." active="certificates">
+  <div class="container">
+    <section class="page-intro">
+      <p class="eyebrow">Certificates & credentials</p>
+      <h1>Learning, with<br />a record behind it.</h1>
+      <p class="intro-copy">Selected courses, academic commendations, organisational contributions and internship learning. Each record keeps its issuer, date or term and supporting context together.</p>
+      <div class="credential-summary" aria-label="Credential inventory">
+        <span><b>{certificates.length}</b> credentials</span>
+        {availableGroups.map(group => <a href={`#${group.id}`}><b>{certificates.filter(credential => credential.category === group.category).length}</b>{group.label}</a>)}
+      </div>
+    </section>
+    <div class="credential-controls" id="certificate-filters" hidden>
+      <div class="filter-list" role="group" aria-label="Filter certificates by category">
+        <button type="button" data-certificate-filter="all" aria-pressed="true">All credentials</button>
+        {availableGroups.map(group => <button type="button" data-certificate-filter={group.category} aria-pressed="false">{group.label}</button>)}
+      </div>
+      <p id="certificate-count" class="credential-count" role="status" aria-live="polite">Showing {certificates.length} credentials.</p>
+    </div>
+    <div class="credential-groups">
+      {availableGroups.map(group => (
+        <section class="section credential-group" id={group.id} data-certificate-group={group.category} aria-labelledby={`${group.id}-heading`}>
+          <SectionHeading eyebrow={`${String(availableGroups.indexOf(group) + 1).padStart(2, '0')} / ${certificates.filter(credential => credential.category === group.category).length} records`} title={group.label} description={group.description} id={`${group.id}-heading`} />
+          <div class="credential-grid">
+            {certificates.filter(credential => credential.category === group.category).map(credential => <CertificateCard credential={credential} />)}
+          </div>
+        </section>
+      ))}
+    </div>
+    <section class="section credential-note" aria-labelledby="learning-context-heading">
+      <h2 id="learning-context-heading">Part of a broader education.</h2>
+      <p>Course certificates complement my undergraduate study. They record course completion; academic coursework and project work are described on the education page.</p>
+      <a class="link-arrow" href={withBase('/education/')}>Explore education & coursework <span aria-hidden="true">↗</span></a>
+    </section>
+  </div>
+</Layout>
+
+<script>
+  const controls = document.querySelector<HTMLElement>('#certificate-filters');
+  const buttons = [...document.querySelectorAll<HTMLButtonElement>('[data-certificate-filter]')];
+  const groups = [...document.querySelectorAll<HTMLElement>('[data-certificate-group]')];
+  const count = document.querySelector<HTMLElement>('#certificate-count');
+  if (controls && count && groups.length) {
+    controls.hidden = false;
+    const applyFilter = (button: HTMLButtonElement) => {
+      const category = button.dataset.certificateFilter;
+      buttons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+      groups.forEach(group => { group.hidden = category !== 'all' && group.dataset.certificateGroup !== category; });
+      const visible = groups.filter(group => !group.hidden).reduce((total, group) => total + group.querySelectorAll('[data-credential]').length, 0);
+      count.textContent = `Showing ${visible} ${visible === 1 ? 'credential' : 'credentials'}${category === 'all' ? '' : ` in ${category}`}.`;
+    };
+    buttons.forEach(button => button.addEventListener('click', () => applyFilter(button)));
+    const revealAnchor = () => {
+      const target = document.getElementById(window.location.hash.slice(1));
+      const group = target?.closest<HTMLElement>('[data-certificate-group]');
+      if (target && group?.hidden) {
+        const button = buttons.find(item => item.dataset.certificateFilter === group.dataset.certificateGroup);
+        if (button) { applyFilter(button); target.scrollIntoView(); }
+      }
+    };
+    window.addEventListener('hashchange', revealAnchor);
+    revealAnchor();
+  }
+</script>

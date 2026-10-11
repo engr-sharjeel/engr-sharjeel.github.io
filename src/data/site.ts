@@ -8,6 +8,7 @@ export const site = {
   email: 'engr.muhammadsharjeel@gmail.com',
   linkedin: 'https://www.linkedin.com/in/engr-muhammad-sharjeel/',
   github: 'https://github.com/engr-sharjeel',
+  resumePath: '/downloads/muhammad-sharjeel-cv.pdf',
   description: 'Power engineering, electric mobility and embedded systems. Academic design studies and practical prototypes by Muhammad Sharjeel, an Electrical (Power) Engineering undergraduate at Air University, Islamabad.',
   // Import a reviewed photo from src/assets/profile/ and assign it here.
   profileImage: undefined as ImageMetadata | undefined,

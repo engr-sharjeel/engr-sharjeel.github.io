@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import { site } from '../data/site';
+import { withBase } from '../lib/urls';
 ---
 
 <Layout title="Contact" description="Contact Muhammad Sharjeel for engineering opportunities, academic collaboration and project conversations." active="contact">
@@ -10,6 +11,7 @@ import { site } from '../data/site';
       <p class="eyebrow">Contact</p>
       <h1>Let’s start<br />a conversation.</h1>
       <p class="intro-copy">For engineering opportunities, academic collaboration or a conversation about the work, reach me by email or LinkedIn.</p>
+      <div class="button-row"><a class="button button-secondary" href={withBase(site.resumePath)} download>Download CV <span class="sr-only">(PDF, two pages)</span><span aria-hidden="true">↓</span></a></div>
     </section>
     <section class="section two-column" aria-labelledby="contact-heading">
       <SectionHeading eyebrow={site.location} title="Get in touch" id="contact-heading" />

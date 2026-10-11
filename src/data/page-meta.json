@@ -1,0 +1,11 @@
+{
+  "home": {"title": "Power systems. Embedded control. Electric mobility.", "label": "Engineering portfolio"},
+  "projects": {"title": "Engineering projects", "label": "Design studies & academic prototypes"},
+  "experience": {"title": "Experience in industry", "label": "IESCO & POWERCHINA SEPCO1 internships"},
+  "research": {"title": "Research & technical inquiry", "label": "Publication, manuscript & accepted abstract"},
+  "education": {"title": "Education & academic focus", "label": "Electrical (Power) Engineering · In progress"},
+  "certificates": {"title": "Certificates & recognition", "label": "Courses, commendations & internships"},
+  "achievements": {"title": "Academic & organisational recognition", "label": "Selected achievements"},
+  "about": {"title": "An engineering foundation", "label": "Muhammad Sharjeel · Air University"},
+  "contact": {"title": "Start a conversation", "label": "Islamabad, Pakistan"}
+}

@@ -1,0 +1,29 @@
+---
+import ImageFrame from './ImageFrame.astro';
+import type { CredentialRecord } from '../data/certificates';
+import { withBase } from '../lib/urls';
+
+interface Props { credential: CredentialRecord; }
+const { credential } = Astro.props;
+---
+
+<article class="credential-card" id={credential.slug} data-credential data-category={credential.category}>
+  {credential.image && (
+    <div class="credential-preview">
+      <ImageFrame image={credential.image} detail actionLabel="View certificate" gallery={`certificates-${credential.category}`} viewerTitle={credential.title} sizes="(max-width: 640px) 92vw, (max-width: 1000px) 46vw, 600px" />
+      {credential.publicPreviewLabel && <p class="credential-preview-label">{credential.publicPreviewLabel}</p>}
+    </div>
+  )}
+  <div class="credential-copy">
+    <p class="eyebrow">{credential.dateLabel}</p>
+    <h3>{credential.title}</h3>
+    <p class="credential-issuer">{credential.issuer}{credential.platform && <span>Offered through {credential.platform}</span>}</p>
+    <p>{credential.context}</p>
+    {(credential.verificationUrl || credential.experienceId) && (
+      <div class="credential-actions">
+        {credential.verificationUrl && <a class="link-arrow" href={credential.verificationUrl} target="_blank" rel="noopener noreferrer">Verify credential <span aria-hidden="true">↗</span><span class="sr-only">: {credential.title} (opens a new tab)</span></a>}
+        {credential.experienceId && <a class="link-arrow" href={withBase(`/experience/#${credential.experienceId}`)}>Explore the internship <span aria-hidden="true">↗</span></a>}
+      </div>
+    )}
+  </div>
+</article>
