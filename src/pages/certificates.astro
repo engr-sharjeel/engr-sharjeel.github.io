@@ -26,7 +26,8 @@ const availableGroups = groups.filter(group => certificates.some(credential => c
         {availableGroups.map(group => <a href={`#${group.id}`}><b>{certificates.filter(credential => credential.category === group.category).length}</b>{group.label}</a>)}
       </div>
     </section>
-    <div class="credential-controls" id="certificate-filters" hidden>
+    <noscript><style is:inline>#certificate-filters { display: none; }</style></noscript>
+    <div class="credential-controls" id="certificate-filters">
       <div class="filter-list" role="group" aria-label="Filter certificates by category">
         <button type="button" data-certificate-filter="all" aria-pressed="true">All credentials</button>
         {availableGroups.map(group => <button type="button" data-certificate-filter={group.category} aria-pressed="false">{group.label}</button>)}

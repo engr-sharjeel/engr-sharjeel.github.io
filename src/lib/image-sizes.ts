@@ -3,7 +3,7 @@
 export type ImageContext = 'card' | 'selected-wide' | 'flagship' | 'cover' | 'gallery' | 'experience' | 'certificate' | 'portrait';
 
 export function imageWidths(sourceWidth: number): number[] {
-  return [...new Set([320, 480, 640, 800, 1000, 1248, 1600, 2200, Math.min(sourceWidth, 2200)].filter(width => width <= sourceWidth))].sort((a, b) => a - b);
+  return [...new Set([320, 480, 640, 720, 800, 1000, 1248, 1600, 2200, Math.min(sourceWidth, 2200)].filter(width => width <= sourceWidth))].sort((a, b) => a - b);
 }
 
 export function imageSizes(context: ImageContext, kind = 'photo', aspectRatio?: number): string {
