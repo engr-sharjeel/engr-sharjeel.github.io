@@ -1,5 +1,7 @@
 # Source audit — phase 1
 
+Phase 2 supplement: [PHASE2-SOURCE-AUDIT.md](PHASE2-SOURCE-AUDIT.md) records the current academic report, ten deduplicated credentials and public-image redaction decisions. Current reported CGPA is resolved at **3.10/4.00** from the Fall 2026 portal snapshot; degree remains in progress. The Farewell 2026 printed-name variant is included under the owner's explicit phase-2 instruction. [CASE-STUDY-EVIDENCE.md](CASE-STUDY-EVIDENCE.md) records deeper project/report review and independently corroborated future conference details. Older decisions below describe the evidence available in phase 1.
+
 The extracted collections are `Everything/` and `LinkedIn projects/` in the repository root. The original collections remain intact and ignored. Only explicitly reviewed project images are eligible for curated copies under `src/assets/projects/`; none of the source PDFs, Word files, presentations, CVs, certificates or letters are intended as public downloads.
 
 ## Method and privacy boundary
