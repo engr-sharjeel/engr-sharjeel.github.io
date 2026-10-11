@@ -21,6 +21,8 @@ Fresh phase-2 verification, not repeated phase-1 reporting:
 - Production build: **29 HTML routes**, **744 internal page/asset references**; unique title/description, canonical/social/JSON-LD, sitemap/robots, h1/image dimensions/alt and public document boundaries checked.
 - Main headless Chrome suite: **131 passed, 0 failed**, direct routes at 390/768/1440px, navigation, four project links, View all, search/categories/reset/empty state, flagship reminder, visible skip/keyboard focus and no-JavaScript access. **Zero axe violations** across tested routes.
 - Focused root suite: **16 passed, 0 failed**; education/credential navigation and facts, category filters/anchor recovery, viewer full-resolution loading, captions, arrows/Tab/Escape/close/focus restoration, open-dialog/new-page axe, safe image and CV hashes, no-JavaScript fallbacks. Zero axe violations.
+- Deployed-site focused suite: **16 passed, 0 failed**, including full-resolution hashes for all ten certificate originals and the CV, mobile/desktop viewer accessibility and no-JavaScript links. Node used the Windows system certificate store; TLS verification remained enabled.
+- All **29 live page URLs** returned the intended title/content/canonical. Social image references, sitemap/robots and the actual missing-route custom 404 were checked. The downloaded Actions artifact contained 201 public files, including 29 HTML pages, ten matching safe certificate originals and the exact reviewed CV; no source archive/private document types were present.
 - Subpath /portfolio-check build/output checks and the same focused suite: **16 passed, 0 failed**, including direct refresh of Education/Certificates and diagram/download paths. Final build restored to root configuration.
 - Desktop/tablet/phone screenshots and both CV page renders visually inspected. All ten safe certificate inputs inspected at full resolution. PyMuPDF confirmed two CV pages with selectable text and text bounds inside each page.
 - The first focus test exposed modal Tab traversal leaving the controls; an explicit wrap fixed it and the suite was rerun successfully. Test assumptions about text whitespace/rendered image width were corrected to inspect the real CGPA text/intrinsic attributes.
@@ -36,8 +38,9 @@ Phase-2 milestones so far:
 - de67df8 — protected new sources, verified education, canonical credentials and reviewed previews.
 - 718d27b — expanded supported case studies, experience and research context.
 - 89f2d83 — Education/Certificates, connected pages/navigation, accessible galleries, public CV, metadata and verification scripts.
+- d30d661 — official Pages Actions workflow and phase-2 architecture/editing/verification handoff.
 
-The first two commits have been pushed. The application/deployment-ready milestones and live run verification are being completed; deployment success is recorded here only after the real URL responds with the intended content.
+All four milestones were pushed to the correct origin. Pages was changed from legacy builds to **GitHub Actions** using the authorised owner account. [Run 38114268068](https://github.com/engr-sharjeel/engr-sharjeel.github.io/actions/runs/38114268068) successfully built and deployed **d30d661dbf5ac4fd7d21632447efbfc32da2ca0f** on 11 October 2026. Its logs independently confirm zero type diagnostics and 29 routes/744 references. Pages reports built; [https://engr-sharjeel.github.io/](https://engr-sharjeel.github.io/) was directly verified with the intended portfolio, new routes, galleries, downloads and metadata. A final verification/handoff commit follows without changing visitor content; the latest run for that final commit is checked before phase completion.
 
 Historical phase-1 baseline: 6dff623, e44ea58, 658a281, b7bdf60; 27 routes/123 browser checks were phase-1 results, superseded by the fresh checks above.
 

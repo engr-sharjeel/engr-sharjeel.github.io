@@ -73,6 +73,8 @@ npm.cmd run test:browser
 npm.cmd run test:phase2
 ```
 
+After a successful Pages run, `npm.cmd run test:live` checks all built page routes, live canonical/share metadata, sitemap/robots and custom 404 against the root build. Set `$env:PORTFOLIO_TEST_URL='https://engr-sharjeel.github.io/'` for the focused live interaction suite. If the local network uses a corporate CA, set `$env:NODE_OPTIONS='--use-system-ca'` for these Node requests.
+
 The scripts use existing local Chrome (`C:/Program Files/Google/Chrome/Application/chrome.exe`), Playwright and axe. They exercise routes at 390/768/1440px, navigation/keyboard/no-JavaScript fallbacks, catalogue search/reset/empty states, credential filters/anchors, viewer focus/close/full-resolution reading and reviewed downloads. Reports/screenshots stay ignored in `.tmp/`.
 
 To check project-repository subpath compatibility:

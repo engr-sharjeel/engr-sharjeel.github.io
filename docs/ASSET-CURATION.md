@@ -1,5 +1,7 @@
 # Public asset curation — phase 1
 
+Phase 2 adds ten **privacy-redacted public credential PNGs** and a newly generated, reviewed **two-page public CV**. The full mappings/redaction decisions are in [PHASE2-SOURCE-AUDIT.md](PHASE2-SOURCE-AUDIT.md), with public review hashes in `src/data/public-assets.json`. Original scans, portal report and source CVs remain private and ignored. The phase-1 decisions below are historical; only the reviewed public derivatives are new application inputs. Twenty-eight local social PNGs contain public names/titles/status rather than source documents.
+
 All 18 JPEGs in `LinkedIn projects`, all nine JPEGs in `Everything/Internship Pictures`, and the three supporting transformer images in `Everything/EM Project` were inspected visually. The application receives 15 selected project images and two internship context images. Originals remain intact in their ignored source trees. No document scan, certificate scan, identity image, CV or acceptance/payment letter is a public asset.
 
 Copies retain their original pixel dimensions. A fresh JPEG encoding at quality 97 removes source EXIF and other embedded metadata. This is a local sanitization step; it creates no new hardware or technical evidence. Astro should produce responsive delivery sizes from these curated sources. Small source diagrams cannot gain genuine detail by enlargement.
