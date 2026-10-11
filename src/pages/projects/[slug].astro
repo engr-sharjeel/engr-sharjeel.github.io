@@ -6,6 +6,7 @@ import Tag from '../../components/Tag.astro';
 import ImageFrame from '../../components/ImageFrame.astro';
 import MetricLabel from '../../components/MetricLabel.astro';
 import { projectUrl, withBase } from '../../lib/urls';
+import { sortProjectsByPriority } from '../../lib/project-priority';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
@@ -24,10 +25,9 @@ const approachHeadings: Record<string, string> = {
   'center-tapped-transformer': 'Calculation, fabrication & redesign',
 };
 const projects = await getCollection('projects');
-const related = projects
-  .filter((entry) => entry.data.slug !== data.slug)
-  .sort((a, b) => Number(b.data.category === data.category) - Number(a.data.category === data.category) || Number(b.data.flagship) - Number(a.data.flagship) || a.data.title.localeCompare(b.data.title))
-  .slice(0, 3);
+const candidates = sortProjectsByPriority(projects.filter(entry => entry.data.slug !== data.slug));
+const sameCategory = candidates.filter(entry => entry.data.category === data.category).slice(0, 3);
+const related = sortProjectsByPriority([...sameCategory, ...candidates.filter(entry => !sameCategory.includes(entry))].slice(0, 3));
 ---
 
 <Layout title={data.shortTitle} description={data.summary} active="projects">

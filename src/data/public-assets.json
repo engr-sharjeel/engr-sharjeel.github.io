@@ -1,79 +1,227 @@
 {
+  "version": 2,
   "reviewed": "2026-10-11",
+  "publicationScope": "Owner-approved original certificates, supplied CV, portrait and internship photographs (Prompt 4).",
   "resume": {
     "path": "downloads/muhammad-sharjeel-cv.pdf",
-    "sha256": "c644cac259befdb6a97a192e523466bd46722d292187bd308bf911c4fd6c2901"
+    "sha256": "36817b31517fdc188c7d8a6df4453803ea685c6d52112b1d8311542f7c777a44",
+    "format": "pdf",
+    "pageCount": 2,
+    "byteLength": 90991
   },
   "certificates": [
     {
-      "slug": "renewable-energy-fundamentals",
-      "filename": "renewable-energy-fundamentals-public.png",
-      "sha256": "1745688d9aec11e909818771b8d5c308c21ae3287c6f6f49ce4386513a764545",
-      "width": 1650,
-      "height": 1275
-    },
-    {
       "slug": "electric-industry-operations-markets",
-      "filename": "electric-industry-operations-markets-public.png",
-      "sha256": "ae2222404d4fd39db1cc6109a5070c903a1327f862d4324fb7d67bca0f761e07",
+      "filename": "electric-industry-operations-markets-original.jpg",
+      "sha256": "8bd848c1912902b095a39a394d7d8b6fc7035e7ecc1978a90ce0a3b73e9ed090",
       "width": 1650,
-      "height": 1275
+      "height": 1275,
+      "original": {
+        "path": "credentials/electric-industry-operations-markets/original.jpg",
+        "sha256": "8bd848c1912902b095a39a394d7d8b6fc7035e7ecc1978a90ce0a3b73e9ed090",
+        "format": "image",
+        "byteLength": 810853,
+        "width": 1650,
+        "height": 1275
+      }
     },
     {
-      "slug": "electrical-safety-essentials",
-      "filename": "electrical-safety-essentials-public.png",
-      "sha256": "504b65f2b4a08e3591bfdb2d901201eb5f7e59406fc4462a25b6b5db76c868da",
-      "width": 1123,
-      "height": 789
+      "slug": "renewable-energy-fundamentals",
+      "filename": "renewable-energy-fundamentals-original.jpg",
+      "sha256": "e58a0f43e0300914b717b8bd2880e1a0cfd370ec51b89cec8996fce45323b435",
+      "width": 1650,
+      "height": 1275,
+      "original": {
+        "path": "credentials/renewable-energy-fundamentals/original.jpg",
+        "sha256": "e58a0f43e0300914b717b8bd2880e1a0cfd370ec51b89cec8996fce45323b435",
+        "format": "image",
+        "byteLength": 835078,
+        "width": 1650,
+        "height": 1275
+      }
     },
     {
       "slug": "nfpa70e-workplace-safety",
-      "filename": "nfpa70e-workplace-safety-public.png",
-      "sha256": "46a14624c930b21070f6865c85700df63704672f402540f0215dff32dba4b8f9",
+      "filename": "nfpa70e-workplace-safety-original.jpg",
+      "sha256": "e475ada589c99480a2189d05c3bd13cd183e30c827ea7745a2ef99257b259d00",
       "width": 1754,
-      "height": 1241
+      "height": 1241,
+      "original": {
+        "path": "credentials/nfpa70e-workplace-safety/original.jpg",
+        "sha256": "e475ada589c99480a2189d05c3bd13cd183e30c827ea7745a2ef99257b259d00",
+        "format": "image",
+        "byteLength": 762280,
+        "width": 1754,
+        "height": 1241
+      }
     },
     {
-      "slug": "air-university-commendation-spring2025",
-      "filename": "air-university-commendation-spring2025-public.png",
-      "sha256": "7c8dc90749fa5f3a1bf4f0847e7ea370fdc8fc924936708db74cbb710d6e951a",
-      "width": 1600,
-      "height": 1178
-    },
-    {
-      "slug": "air-university-commendation-fall2025",
-      "filename": "air-university-commendation-fall2025-public.png",
-      "sha256": "4a1d782dcc8b9bbcb67e3168c7bb668a372402b7d4a23070ca6bb7fa3fbcf6d8",
-      "width": 1280,
-      "height": 911
-    },
-    {
-      "slug": "ieee-recognition-2025-26",
-      "filename": "ieee-recognition-2025-26-public.png",
-      "sha256": "be788558bc7fdfa21f20cd56c328f605d3050f7118adf84d8ec597ab37681211",
-      "width": 2480,
-      "height": 3509
-    },
-    {
-      "slug": "ece-farewell-appreciation-2026",
-      "filename": "ece-farewell-appreciation-2026-public.png",
-      "sha256": "62e42552f54311d7edd2853e0d3df4081c10a96ca021eb37a6229f76e7fa19c0",
-      "width": 1280,
-      "height": 904
+      "slug": "electrical-safety-essentials",
+      "filename": "electrical-safety-essentials-original.jpeg",
+      "sha256": "fdf29fd9414931f3552177b7c707d96bf49dc76e33bba9587fd6cd1c72112601",
+      "width": 1123,
+      "height": 789,
+      "original": {
+        "path": "credentials/electrical-safety-essentials/original.jpeg",
+        "sha256": "fdf29fd9414931f3552177b7c707d96bf49dc76e33bba9587fd6cd1c72112601",
+        "format": "image",
+        "byteLength": 155124,
+        "width": 1123,
+        "height": 789
+      }
     },
     {
       "slug": "iesco-internship-2025",
-      "filename": "iesco-internship-2025-public.png",
-      "sha256": "4b46b6c426243fee70bc5bf0d88fdf6bce0451dbc359627009fd752e097d9982",
-      "width": 1684,
-      "height": 1190
+      "filename": "iesco-internship-2025-preview-page-1.png",
+      "sha256": "1a5aa31a24b62db0c056c9d92fa39aed8dd781a1868b27ad9ecce13fde5c3477",
+      "width": 1190,
+      "height": 1684,
+      "original": {
+        "path": "credentials/iesco-internship-2025/original.pdf",
+        "sha256": "f4cad91578537542d9bc1e835a613b2847c56bf4acae232f92108e3509063b94",
+        "format": "pdf",
+        "byteLength": 68358,
+        "pageCount": 1
+      }
     },
     {
       "slug": "powerchina-sepco1-internship-2024",
-      "filename": "powerchina-sepco1-internship-2024-public.png",
-      "sha256": "1e917ca36ccc870bf28d300e41faf19b9d8fa9bbec4fcf8bc25dd4335b024e65",
+      "filename": "powerchina-sepco1-internship-2024-preview-page-1.png",
+      "sha256": "b4bb5355ccd02891ef52553fd5b2d72b0dd41a7c76364e97eabc1fc81f878ae7",
       "width": 1190,
-      "height": 1684
+      "height": 1684,
+      "original": {
+        "path": "credentials/powerchina-sepco1-internship-2024/original.pdf",
+        "sha256": "7307a01238c726560b8be5c30fed96b79ca881d6c4f42ff429b4a7e1e4c51e46",
+        "format": "pdf",
+        "byteLength": 69284,
+        "pageCount": 1
+      }
+    },
+    {
+      "slug": "ielts-academic-2026",
+      "filename": "ielts-academic-2026-preview-page-1.png",
+      "sha256": "1d4df7a491055a6b5762d3d2aeaaa3e8ef8b02499d4a19fe9dee197c067c03fe",
+      "width": 1190,
+      "height": 1684,
+      "original": {
+        "path": "credentials/ielts-academic-2026/original.pdf",
+        "sha256": "dac3883224253cb55aa8ba87864352ca7a314b93a1f951dbc06401e86af0e147",
+        "format": "pdf",
+        "byteLength": 679206,
+        "pageCount": 1
+      }
+    },
+    {
+      "slug": "air-university-commendation-fall2025",
+      "filename": "air-university-commendation-fall2025-original.jpeg",
+      "sha256": "8643c77cac8b660bf88d61e26448fb8c6cae5a2ddc2f148928353cb3cfcf8e4d",
+      "width": 1280,
+      "height": 911,
+      "original": {
+        "path": "credentials/air-university-commendation-fall2025/original.jpeg",
+        "sha256": "8643c77cac8b660bf88d61e26448fb8c6cae5a2ddc2f148928353cb3cfcf8e4d",
+        "format": "image",
+        "byteLength": 124935,
+        "width": 1280,
+        "height": 911
+      }
+    },
+    {
+      "slug": "air-university-commendation-spring2025",
+      "filename": "air-university-commendation-spring2025-original.jpeg",
+      "sha256": "928a5ee363221d44cb60345d417d22ce6fae947c18bcaaf4de8bb090c3e688f7",
+      "width": 1600,
+      "height": 1178,
+      "original": {
+        "path": "credentials/air-university-commendation-spring2025/original.jpeg",
+        "sha256": "928a5ee363221d44cb60345d417d22ce6fae947c18bcaaf4de8bb090c3e688f7",
+        "format": "image",
+        "byteLength": 191973,
+        "width": 1600,
+        "height": 1178
+      }
+    },
+    {
+      "slug": "scholars-avenue-campus-ambassador-2026",
+      "filename": "scholars-avenue-campus-ambassador-2026-preview-page-1.png",
+      "sha256": "4771bea6af7a0db032f071cf3ea437c5e7408d4b49ba3e77b178a6035b4c2c88",
+      "width": 1685,
+      "height": 1191,
+      "original": {
+        "path": "credentials/scholars-avenue-campus-ambassador-2026/original.pdf",
+        "sha256": "1c601de7b60a6f9bdc935076eabf9d825dd8f9979aacdd679ffddca955320885",
+        "format": "pdf",
+        "byteLength": 804590,
+        "pageCount": 1
+      }
+    },
+    {
+      "slug": "ieee-recognition-2025-26",
+      "filename": "ieee-recognition-2025-26-original.jpg",
+      "sha256": "ec132f30b99f516fb6ce5f6740b9b33a3fb4fb0f36c5d0b3d3664878f372ee10",
+      "width": 2480,
+      "height": 3509,
+      "original": {
+        "path": "credentials/ieee-recognition-2025-26/original.jpg",
+        "sha256": "ec132f30b99f516fb6ce5f6740b9b33a3fb4fb0f36c5d0b3d3664878f372ee10",
+        "format": "image",
+        "byteLength": 2466292,
+        "width": 2480,
+        "height": 3509
+      }
+    },
+    {
+      "slug": "ece-farewell-appreciation-2026",
+      "filename": "ece-farewell-appreciation-2026-original.jpeg",
+      "sha256": "19db5b4e4dd697c2583e567627365a9a1958aff725b8aea421602dd8ab25454c",
+      "width": 1280,
+      "height": 904,
+      "original": {
+        "path": "credentials/ece-farewell-appreciation-2026/original.jpeg",
+        "sha256": "19db5b4e4dd697c2583e567627365a9a1958aff725b8aea421602dd8ab25454c",
+        "format": "image",
+        "byteLength": 140315,
+        "width": 1280,
+        "height": 904
+      }
+    }
+  ],
+  "approvedImages": [
+    {
+      "path": "src/assets/profile/muhammad-sharjeel-portrait.png",
+      "sha256": "63cf1abbc96a0c0d9e813d549cc8d6e25ae9ca8fa24da39f21958ada9836a872",
+      "width": 1024,
+      "height": 1536,
+      "byteLength": 2044301
+    },
+    {
+      "path": "src/assets/experience/iesco-grid-station-portrait.jpeg",
+      "sha256": "4716605d12f045bf9a8311781f8f10bda93f3aa0d0dfc488f24ff1150e1d8c77",
+      "width": 900,
+      "height": 1600,
+      "byteLength": 313024
+    },
+    {
+      "path": "src/assets/experience/powerchina-project-dam-context.jpeg",
+      "sha256": "660b18dbc4e43cba7832a480bd34213c24013ce79da4e9afbb4d2a5c88db3f4f",
+      "width": 800,
+      "height": 600,
+      "byteLength": 86587
+    },
+    {
+      "path": "src/assets/experience/powerchina-project-construction-context.jpeg",
+      "sha256": "9d2c38357dd6943a896577327b80ef6f95c75829b0ae0c46dc4e251d64305bf8",
+      "width": 1024,
+      "height": 768,
+      "byteLength": 141404
+    },
+    {
+      "path": "src/assets/experience/powerchina-project-night-context.jpeg",
+      "sha256": "229ca35695bbdcf0c423ea1a9189ca60cff1cd42c7ea1fd18c37d7b35e326f06",
+      "width": 516,
+      "height": 387,
+      "byteLength": 43626
     }
   ]
 }

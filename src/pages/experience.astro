@@ -6,6 +6,7 @@ import ImageFrame from '../components/ImageFrame.astro';
 import { experience } from '../data/experience';
 import { certificates } from '../data/certificates';
 import { withBase } from '../lib/urls';
+import '../styles/phase2-pages.css';
 ---
 
 <Layout title="Experience" description="Engineering internship exposure at IESCO and POWERCHINA SEPCO1, with Muhammad Sharjeel." active="experience">
@@ -38,7 +39,7 @@ import { withBase } from '../lib/urls';
                 <a class="link-arrow" href={withBase(`/certificates/#${credential.slug}`)}>View internship credential <span aria-hidden="true">↗</span></a>
               ))}
             </div>
-            {item.images.length > 0 && <div class="detail-gallery experience-gallery">{item.images.map((image) => <ImageFrame image={image} detail context="experience" />)}</div>}
+            {item.images.length > 0 && <div class="detail-gallery experience-gallery">{item.images.map((image) => <ImageFrame image={image} detail context="experience" gallery={`experience-${item.id}`} viewerTitle={`${item.organization} · Internship context`} />)}</div>}
           </article>
         ))}
       </div>

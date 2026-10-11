@@ -93,7 +93,6 @@
     "Photograph winding-label names and identifiers were sanitized in the public copy."
   ],
   "links": [],
-  "featuredOrder": 4,
   "problem": "Design and fabricate a single-phase transformer for an academic power-plant control-room brief, working from a 220 V primary and required secondary/tap voltages.",
   "context": "An Electric Machines Lab Complex Engineering Activity at Air University, Spring 2025. Team calculations and the fabricated hardware document the work.",
   "constraints": [

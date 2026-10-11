@@ -2,7 +2,7 @@
   <div class="viewer-header"><div><p class="eyebrow">Visual record</p><h2 id="viewer-title">Image</h2></div><button type="button" class="viewer-close" autofocus>Close <span aria-hidden="true">×</span></button></div>
   <div class="viewer-body"><div class="viewer-stage" tabindex="0" aria-label="Image reading area" aria-busy="false"><p class="viewer-loading" role="status">Loading full-resolution image…</p></div>
   <p id="viewer-caption"></p></div>
-  <div class="viewer-toolbar"><button type="button" class="viewer-previous" aria-label="Previous image">← Previous</button><span class="viewer-position" aria-live="polite"></span><button type="button" class="viewer-next" aria-label="Next image">Next →</button><button type="button" class="viewer-zoom" aria-pressed="false">Read full size</button><a class="viewer-original" target="_blank" rel="noopener">Open image ↗</a></div>
+  <div class="viewer-toolbar"><button type="button" class="viewer-previous" aria-label="Previous image">← Previous</button><span class="viewer-position" aria-live="polite"></span><button type="button" class="viewer-next" aria-label="Next image">Next →</button><button type="button" class="viewer-zoom" aria-pressed="false">Read full size</button><a class="viewer-original" target="_blank" rel="noopener">Open image ↗</a><a class="viewer-verify" hidden target="_blank" rel="noopener noreferrer">Verify credential ↗</a></div>
 </dialog>
 <script>
   const dialog = document.querySelector<HTMLDialogElement>('.image-viewer');
@@ -14,6 +14,7 @@
     const caption = dialog.querySelector<HTMLElement>('#viewer-caption')!;
     const position = dialog.querySelector<HTMLElement>('.viewer-position')!;
     const original = dialog.querySelector<HTMLAnchorElement>('.viewer-original')!;
+    const verify = dialog.querySelector<HTMLAnchorElement>('.viewer-verify')!;
     const zoom = dialog.querySelector<HTMLButtonElement>('.viewer-zoom')!;
     const previous = dialog.querySelector<HTMLButtonElement>('.viewer-previous')!;
     const next = dialog.querySelector<HTMLButtonElement>('.viewer-next')!;
@@ -30,7 +31,11 @@
       title.textContent = link.dataset.imageTitle || 'Image';
       caption.textContent = link.dataset.imageCaption || '';
       position.textContent = `${index + 1} / ${links.length}`;
-      original.href = link.href;
+      original.href = new URL(link.dataset.originalHref || link.href, window.location.href).href;
+      original.textContent = link.dataset.originalFormat === 'pdf' ? 'Open original PDF ↗' : 'Open image ↗';
+      verify.hidden = !link.dataset.verificationUrl;
+      if (link.dataset.verificationUrl) verify.href = link.dataset.verificationUrl;
+      else verify.removeAttribute('href');
       previous.disabled = links.length < 2; next.disabled = links.length < 2;
     };
     const move = (direction: number) => { index = (index + direction + links.length) % links.length; render(); };
@@ -42,7 +47,7 @@
       index = links.indexOf(target); render(); dialog.showModal(); document.body.classList.add('viewer-open');
     });
     img.addEventListener('load', () => { img.width = img.naturalWidth; img.height = img.naturalHeight; dialog.classList.remove('is-loading'); stage.setAttribute('aria-busy', 'false'); zoom.disabled = false; });
-    img.addEventListener('error', () => { if (!dialog.open) return; dialog.classList.remove('is-loading'); dialog.classList.add('is-error'); stage.setAttribute('aria-busy', 'false'); feedback.textContent = 'This image could not load. Use “Open image” to try the safe original.'; });
+    img.addEventListener('error', () => { if (!dialog.open) return; dialog.classList.remove('is-loading'); dialog.classList.add('is-error'); stage.setAttribute('aria-busy', 'false'); feedback.textContent = 'This image could not load. Use the original-document link below to open it directly.'; });
     dialog.querySelector('.viewer-close')?.addEventListener('click', () => dialog.close());
     previous.addEventListener('click', () => move(-1)); next.addEventListener('click', () => move(1));
     zoom.addEventListener('click', () => { const enlarged = dialog.classList.toggle('is-zoomed'); zoom.setAttribute('aria-pressed', String(enlarged)); zoom.textContent = enlarged ? 'Fit image' : 'Read full size'; });

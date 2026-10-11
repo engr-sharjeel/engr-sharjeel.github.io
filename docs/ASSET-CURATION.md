@@ -1,4 +1,50 @@
-# Public asset curation — phase 1
+# Approved public assets ? Prompt 4
+
+The owner explicitly authorises publication of the supplied certificate originals, replacement CV, portrait and internship photographs, including printed signatures, seals, identifiers and other document content. This replaces the earlier certificate-redaction/generated-CV scope; the historical notes below remain evidence of prior decisions. Raw trees, archives, transcript and unrelated originals stay ignored and intact.
+
+## Current source-to-public mapping
+
+The actual root source folders are IESCO, Power china internship, Profile Picture, Certificates and CV. Every organised certificate subfolder was audited: Courses, Internship certificates, IELTS, Appreciation, Campus Ambassador and Organisational. Twelve distinct credentials remain after content/issuer/title/term deduplication: four courses, two internships, one IELTS Academic, two commendations and three community records. The earlier ten records are retained; alternate Everything scans and old masked copies do not create additional credentials.
+
+| Owner source | Stable public original | Format |
+| --- | --- | --- |
+| `Certificates/Courses/Coursera 2_page-0001.jpg` | `public/credentials/electric-industry-operations-markets/original.jpg` | Original image |
+| `Certificates/Courses/Coursera 1_page-0001.jpg` | `public/credentials/renewable-energy-fundamentals/original.jpg` | Original image |
+| `Certificates/Courses/Alison_Certificate-6483-50990454_page-0001.jpg` | `public/credentials/nfpa70e-workplace-safety/original.jpg` | Original image |
+| `Certificates/Courses/WhatsApp Image 2025-08-06 at 12.37.28 PM.jpeg` | `public/credentials/electrical-safety-essentials/original.jpeg` | Original image |
+| `Certificates/Internship certificates/Internship Certificate (IESCO).pdf` | `public/credentials/iesco-internship-2025/original.pdf` | PDF, 1 page |
+| `Certificates/Internship certificates/Internship Certificate (Power China).pdf` | `public/credentials/powerchina-sepco1-internship-2024/original.pdf` | PDF, 1 page |
+| `Certificates/IELTS/IELTS Result PK01526504295-03-08-2026-ETRF.pdf` | `public/credentials/ielts-academic-2026/original.pdf` | PDF, 1 page |
+| `Certificates/Appreciation/WhatsApp Image 2026-07-19 at 7.54.18 PM.jpeg` | `public/credentials/air-university-commendation-fall2025/original.jpeg` | Original image |
+| `Certificates/Appreciation/Certificate.jpeg` | `public/credentials/air-university-commendation-spring2025/original.jpeg` | Original image |
+| `Certificates/Campus Ambassador/Muhammad Sharjeel_Campus Ambassador_SA.pdf` | `public/credentials/scholars-avenue-campus-ambassador-2026/original.pdf` | PDF, 1 page |
+| `Certificates/Organisational/IEEE Certificate_page-0001.jpg` | `public/credentials/ieee-recognition-2025-26/original.jpg` | Original image |
+| `Certificates/Organisational/WhatsApp Image 2026-07-19 at 7.46.13 PM.jpeg` | `public/credentials/ece-farewell-appreciation-2026/original.jpeg` | Original image |
+
+All original copies match source SHA-256 hashes. The eight JPEG/image previews use identical source bytes before responsive delivery. Four original PDFs are each one page; faithful PNG previews retain complete content, colours, orientation and aspect ratio, with access to the complete PDF. The IESCO source is physically sideways; the preview preserves it and the original PDF reader allows rotation while reading. No signatures/identifiers are masked or edited. All ten obsolete masked source PNGs are removed from application assets. The explicit version-2 manifest validates original paths/hashes/formats/page counts, preview hashes/dimensions and approved portrait/photo copies; builds reject unlisted documents and obsolete masked outputs.
+
+## Supplied CV
+
+Only one owner CV exists in the root CV tree: `CV/Muhammad_Sharjeel_ATS_CV (2).pdf`. Both pages were visually reviewed. The unchanged two-page, 90,991-byte PDF is published at `public/downloads/muhammad-sharjeel-cv.pdf`; SHA-256 `36817b31517fdc188c7d8a6df4453803ea685c6d52112b1d8311542f7c777a44`. The old generated CV is replaced and `generate:resume` is guarded/retired so it cannot overwrite the supplied PDF.
+
+Source conflict: the supplied final CV retains historical two-seater wording on both pages, while Prompt 4 corrects the current prototype scope. The PDF is deliberately unchanged under the owner's explicit instruction. Current website HTML, research summaries, metadata and social graphics use the corrected limited-charging/REEV-conversion direction. A revised owner PDF would resolve this document-only conflict. PCB design is explicitly named in this CV, resolving the owner's ECB wording to PCB design; SCADA systems is separately owner-supplied.
+
+## Portrait and internship images
+
+| Source | Application copy | Pixels / use |
+| --- | --- | --- |
+| `Profile Picture/Realistic studio portrait in blazer and tie.png` | `src/assets/profile/muhammad-sharjeel-portrait.png` | 1024 ? 1536; hero and small header derivatives |
+| `IESCO/WhatsApp Image 2026-10-11 at 2.59.36 PM.jpeg` | `src/assets/experience/iesco-grid-station-portrait.jpeg` | 900 ? 1600; first IESCO gallery image, contained full portrait |
+| `Power china internship/1967127-image-1557165140.jpg.jpeg` | `src/assets/experience/powerchina-project-dam-context.jpeg` | 800 ? 600; project context |
+| `Power china internship/6175ce88e6f10.jpg.jpeg` | `src/assets/experience/powerchina-project-construction-context.jpeg` | 1024 ? 768; construction context |
+| `Power china internship/images.jpg.jpeg` | `src/assets/experience/powerchina-project-night-context.jpeg` | 516 ? 387; further context |
+
+These five application copies retain original bytes and dimensions; responsive derivatives never upscale them. The face is preserved in the portrait crop, with full internship-image framing available through the viewer. Existing battery-bank/transformer-yard photographs follow the new IESCO photo. POWERCHINA images establish context only, not a specific assignment, photographer, commissioning or personal construction contribution.
+
+IELTS Academic: test 3 August 2026, issued 4 August 2026, overall 7.5 and printed CEFR C1. Campus Ambassador: Scholars Avenue participation at Air University, Islamabad, 27 July?8 October 2026. Neither adds an engineering internship or professional licence. The Fall 2025 award/report discrepancy and all other deferred engineering facts remain unresolved. Verification URLs are source links, not newly claimed independent verification.
+
+## Historical asset decisions
+
 
 Phase 2 adds ten **privacy-redacted public credential PNGs** and a newly generated, reviewed **two-page public CV**. The full mappings/redaction decisions are in [PHASE2-SOURCE-AUDIT.md](PHASE2-SOURCE-AUDIT.md), with public review hashes in `src/data/public-assets.json`. Original scans, portal report and source CVs remain private and ignored. The phase-1 decisions below are historical; only the reviewed public derivatives are new application inputs. Twenty-eight local social PNGs contain public names/titles/status rather than source documents.
 

@@ -86,7 +86,6 @@
     "Complete teammate names and individual responsibilities are not established."
   ],
   "links": [],
-  "featuredOrder": 3,
   "problem": "Combine line tracking, obstacle sensing and ambient-light input in one mobile prototype, then translate sensor information into motor decisions.",
   "context": "An implemented semester prototype for Electrical Measurements & Instrumentation. The hardware photographs document the assembled robot.",
   "constraints": [

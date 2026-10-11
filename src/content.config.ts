@@ -13,7 +13,6 @@ const projects = defineCollection({
     summary: z.string(),
     status: z.string(),
     flagship: z.boolean().default(false),
-    featuredOrder: z.number().int().optional(),
     technologies: z.array(z.string()),
     overview: z.string(),
     problem: z.string().optional(),

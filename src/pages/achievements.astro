@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import { achievements } from '../data/achievements';
+import { sortCredentials } from '../data/certificates';
 import { withBase } from '../lib/urls';
 import '../styles/phase2-pages.css';
 
@@ -16,14 +17,14 @@ const groups = [
     <section class="page-intro">
       <p class="eyebrow">Recognition & contribution</p>
       <h1>Work recognised.<br />Community supported.</h1>
-      <p class="intro-copy">Selected academic commendations and organisational contributions alongside my engineering study. The certificate gallery holds the corresponding records and reviewed public previews.</p>
+      <p class="intro-copy">Selected academic commendations and organisational contributions alongside my engineering study. The certificate gallery holds the corresponding records and original documents.</p>
       <a class="link-arrow" href={withBase('/certificates/')}>Explore the full certificate gallery <span aria-hidden="true">↗</span></a>
     </section>
     {groups.map((group, index) => (
       <section class="section" aria-labelledby={`achievement-group-${index}`}>
         <SectionHeading eyebrow={index === 0 ? 'Academic work' : 'University community'} title={group.title} description={group.description} id={`achievement-group-${index}`} />
         <div class="records-grid">
-          {achievements.filter(credential => credential.category === group.category).map(credential => (
+          {sortCredentials(achievements.filter(credential => credential.category === group.category)).map(credential => (
             <article class="record recognition-record">
               <p class="eyebrow">{credential.dateLabel}</p>
               <h3>{credential.title}</h3>

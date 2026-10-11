@@ -1,14 +1,21 @@
 ---
+import { Image } from 'astro:assets';
+import { site } from '../data/site';
 import { withBase } from '../lib/urls';
 interface Props { active?: string; }
 const { active } = Astro.props;
-const links = ['Projects', 'Experience', 'Research'];
-const background = ['About', 'Education', 'Certificates', 'Achievements'];
+const links = ['Projects', 'Experience', 'Education', 'Certificates', 'Research', 'Achievements', 'About'];
 ---
-<header class="site-header"><div class="container header-inner">
-  <a class="wordmark" href={withBase('/')} aria-label="Muhammad Sharjeel — home"><span class="logo-mark" aria-hidden="true">MS<span>.</span></span><span class="wordmark-name">Muhammad Sharjeel<span>Electrical Engineering</span></span></a>
-  <button class="menu-toggle" type="button" aria-controls="primary-nav" aria-expanded="false" hidden>Menu <span aria-hidden="true">＋</span></button>
-  <nav id="primary-nav" class="primary-nav" aria-label="Main navigation">{links.map(label => <a href={withBase(`/${label.toLowerCase()}/`)} aria-current={active === label.toLowerCase() ? 'page' : undefined}>{label}</a>)}<details class:list={['background-menu', { 'background-active': background.some(label => label.toLowerCase() === active) }]}><summary>Background <span aria-hidden="true">⌄</span></summary><div class="background-links">{background.map(label => <a href={withBase(`/${label.toLowerCase()}/`)} aria-current={active === label.toLowerCase() ? 'page' : undefined}>{label}</a>)}</div></details><a class="nav-contact" href={withBase('/contact/')} aria-current={active === 'contact' ? 'page' : undefined}>Let’s connect <span aria-hidden="true">↗</span></a></nav>
+<header class="site-header"><div class="container">
+  <div class="header-inner">
+    <a class="wordmark" href={withBase('/')} aria-label={`${site.name} — home`}>
+      {site.profileImage ? <Image class="brand-portrait" src={site.profileImage} alt={site.profileAlt} widths={[48, 64, 96, 128, 192]} sizes="(max-width: 640px) 48px, 60px" format="webp" loading="eager" decoding="async" /> : <svg class="brand-icon" aria-hidden="true" viewBox="0 0 32 32" fill="none"><path d="M18 3 8 18h8l-2 11 10-15h-8l2-11Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" /></svg>}
+      <span class="wordmark-name">{site.name}<span class="wordmark-degree">{site.program}</span><span class="wordmark-university">{site.university}</span></span>
+    </a>
+    <div class="header-actions"><a class="button button-secondary header-cv" href={withBase(site.resumePath)} download>Download CV <span aria-hidden="true">↓</span></a><a class="button header-contact" href={withBase('/contact/')} aria-current={active === 'contact' ? 'page' : undefined}>Contact <span aria-hidden="true">↗</span></a></div>
+    <button class="menu-toggle" type="button" aria-controls="primary-nav" aria-expanded="false" hidden>Menu <span aria-hidden="true">＋</span></button>
+  </div>
+  <nav id="primary-nav" class="primary-nav" aria-label="Main navigation">{links.map(label => <a href={withBase(`/${label.toLowerCase()}/`)} aria-current={active === label.toLowerCase() ? 'page' : undefined}>{label}<span aria-hidden="true">↗</span></a>)}</nav>
 </div></header>
 <!-- Initialize directly after the header, before first paint, to avoid a deferred
      navigation-collapse layout shift. Without JavaScript the full nav stays visible. -->
@@ -18,12 +25,10 @@ const background = ['About', 'Education', 'Certificates', 'Achievements'];
   if (button && nav) {
     button.hidden = false;
     nav.classList.add('enhanced');
-    const background = nav.querySelector('.background-menu');
-    const close = () => { button.setAttribute('aria-expanded', 'false'); nav.classList.remove('is-open'); if (background) background.open = false; };
+    const close = () => { button.setAttribute('aria-expanded', 'false'); nav.classList.remove('is-open'); };
     button.addEventListener('click', () => { const open = button.getAttribute('aria-expanded') !== 'true'; button.setAttribute('aria-expanded', String(open)); nav.classList.toggle('is-open', open); });
     nav.addEventListener('click', (event) => { if (event.target.closest('a')) close(); });
-    document.addEventListener('keydown', event => { if (event.key !== 'Escape') return; if (background?.open) { background.open = false; background.querySelector('summary')?.focus(); } else if (nav.classList.contains('is-open')) { close(); button.focus(); } });
-    document.addEventListener('click', event => { if (background?.open && !background.contains(event.target)) background.open = false; });
+    document.addEventListener('keydown', event => { if (event.key === 'Escape' && nav.classList.contains('is-open')) { close(); button.focus(); } });
     matchMedia('(min-width: 941px)').addEventListener('change', close);
   }
 </script>

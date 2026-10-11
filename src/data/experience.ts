@@ -1,6 +1,10 @@
 import type { ImageMetadata } from 'astro';
 import batteryBank from '../assets/experience/iesco-battery-bank.jpg';
 import transformerYard from '../assets/experience/iesco-transformer-yard.jpg';
+import iescoPortrait from '../assets/experience/iesco-grid-station-portrait.jpeg';
+import damContext from '../assets/experience/powerchina-project-dam-context.jpeg';
+import constructionContext from '../assets/experience/powerchina-project-construction-context.jpeg';
+import nightContext from '../assets/experience/powerchina-project-night-context.jpeg';
 
 export interface ExperienceImage {
   src: ImageMetadata;
@@ -45,6 +49,13 @@ export const experience: ExperienceRecord[] = [
     areas: ['Substations', 'Maintenance', 'Protection and testing', 'Battery systems', 'Electrical safety'],
     images: [
       {
+        src: iescoPortrait,
+        kind: 'photo',
+        alt: 'Muhammad Sharjeel at a grid-station site, with electrical yard equipment visible behind him.',
+        caption: 'Owner-supplied photograph from the IESCO internship. The full portrait framing retains both the person and site context.',
+        focalPoint: '50% 50%',
+      },
+      {
         src: batteryBank,
         kind: 'photo',
         alt: 'Two-tier substation battery bank with connected lead-acid cells on a steel rack.',
@@ -76,7 +87,11 @@ export const experience: ExperienceRecord[] = [
       'The placement provided an early introduction to how organizational processes support engineering projects.',
     ],
     areas: ['Project management', 'Procurement', 'Planning'],
-    images: [],
+    images: [
+      { src: damContext, kind: 'photo', alt: 'Project-context view of a large dam and surrounding landscape.', caption: 'Owner-supplied POWERCHINA project-context photograph. This view does not establish a specific site assignment or personal construction contribution.', focalPoint: '50% 50%' },
+      { src: constructionContext, kind: 'photo', alt: 'Project-context view of large civil works and construction equipment.', caption: 'Construction context supplied for the POWERCHINA SEPCO1 internship; the exact project and individual construction responsibilities are not established by the photograph.', focalPoint: '50% 50%' },
+      { src: nightContext, kind: 'photo', alt: 'Illuminated engineering project seen at night.', caption: 'A further owner-supplied POWERCHINA project-context view. Internship learning concerned project management, procurement and planning.', focalPoint: '50% 50%' },
+    ],
     provenance: ['Owner-supplied internship description', 'Supplied CV records', 'Everything/Documents/Scanned PDF/Internship Certificate (Power China).pdf'],
   },
 ];

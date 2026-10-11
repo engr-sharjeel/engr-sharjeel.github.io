@@ -26,7 +26,7 @@ const structured = {
   '@context': 'https://schema.org',
   '@graph': [
     { '@type': 'WebSite', '@id': `${production.href}#website`, url: production.href, name: `${site.name} — Engineering portfolio`, inLanguage: 'en' },
-    { '@type': 'Person', '@id': `${production.href}#person`, name: site.name, url: new URL(withBase('/about/'), production).href, description: site.role, sameAs: [site.linkedin, site.github], homeLocation: { '@type': 'Place', name: site.location } },
+    { '@type': 'Person', '@id': `${production.href}#person`, name: site.name, url: new URL(withBase('/about/'), production).href, description: site.role, email: site.email, telephone: site.phoneCanonical, sameAs: [site.linkedin, site.github], homeLocation: { '@type': 'Place', name: site.location } },
     ...(!notFound ? [{ '@type': 'BreadcrumbList', itemListElement: crumbs }] : []),
   ],
 };
@@ -39,7 +39,8 @@ const jsonLd = JSON.stringify(structured).replace(/</g, '\\u003c').replace(/\u20
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#0B1220" />
+    <meta name="theme-color" content="#F8F5EE" />
+    <meta name="color-scheme" content="light" />
     {notFound && <meta name="robots" content="noindex, follow" />}
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />

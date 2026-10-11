@@ -20,9 +20,9 @@ export interface CourseHighlight {
 // The current portal report resolves the older CV CGPA conflict. Its session
 // header is a snapshot label; it does not establish Fall 2026 term results.
 export const education = {
-  institution: 'Air University Islamabad',
+  institution: 'Air University, Islamabad',
   location: 'Islamabad, Pakistan',
-  program: 'Electrical (Power) Engineering',
+  program: 'BS Electrical (Power) Engineering',
   level: 'Undergraduate',
   status: 'In progress',
   period: 'September 2023–present',

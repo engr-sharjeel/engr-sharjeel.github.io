@@ -5,25 +5,26 @@ import { withBase } from '../lib/urls';
 
 interface Props { credential: CredentialRecord; }
 const { credential } = Astro.props;
+const pages = credential.previewPages?.length ? credential.previewPages : credential.image ? [credential.image] : [];
+const originalHref = withBase(credential.original.path);
 ---
 
-<article class="credential-card" id={credential.slug} data-credential data-category={credential.category}>
-  {credential.image && (
+<article class="credential-card" id={credential.slug} data-credential data-category={credential.category} data-search={`${credential.title} ${credential.issuer} ${credential.platform || ''} ${credential.category} ${credential.context}`.toLowerCase()}>
+  {pages.length > 0 && (
     <div class="credential-preview">
-      <ImageFrame image={credential.image} detail context="certificate" actionLabel="View certificate" gallery={`certificates-${credential.category}`} viewerTitle={credential.title} />
-      {credential.publicPreviewLabel && <p class="credential-preview-label">{credential.publicPreviewLabel}</p>}
+      {pages.map((image, index) => <ImageFrame image={image} detail context="certificate" actionLabel={pages.length > 1 ? `View certificate · page ${index + 1}` : 'View certificate'} gallery={`certificates-${credential.category}`} viewerTitle={credential.title} imageHref={credential.original.format === 'image' ? originalHref : undefined} originalHref={originalHref} originalFormat={credential.original.format} verificationUrl={credential.verificationUrl} />)}
     </div>
   )}
   <div class="credential-copy">
     <p class="eyebrow">{credential.dateLabel}</p>
+    {credential.issuedLabel && <p class="credential-issue-date">Issued {credential.issuedLabel}</p>}
     <h3>{credential.title}</h3>
     <p class="credential-issuer">{credential.issuer}{credential.platform && <span>Offered through {credential.platform}</span>}</p>
     <p>{credential.context}</p>
-    {(credential.verificationUrl || credential.experienceId) && (
       <div class="credential-actions">
+        <a class="button button-secondary" href={originalHref} data-credential-original target="_blank" rel="noopener">Open original {credential.original.format === 'pdf' ? 'PDF' : 'image'} <span aria-hidden="true">↗</span><span class="sr-only">: {credential.title} (opens a new tab)</span></a>
         {credential.verificationUrl && <a class="link-arrow" href={credential.verificationUrl} target="_blank" rel="noopener noreferrer">Verify credential <span aria-hidden="true">↗</span><span class="sr-only">: {credential.title} (opens a new tab)</span></a>}
         {credential.experienceId && <a class="link-arrow" href={withBase(`/experience/#${credential.experienceId}`)}>Explore the internship <span aria-hidden="true">↗</span></a>}
       </div>
-    )}
   </div>
 </article>

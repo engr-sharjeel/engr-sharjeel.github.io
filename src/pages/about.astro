@@ -9,19 +9,19 @@ import { withBase } from '../lib/urls';
 import '../styles/phase2-pages.css';
 ---
 
-<Layout title="About" description="Meet Muhammad Sharjeel, an Electrical (Power) Engineering undergraduate at Air University, Islamabad." active="about">
+<Layout title="About" description="Meet Muhammad Sharjeel, a BS Electrical (Power) Engineering undergraduate at Air University, Islamabad." active="about">
   <div class="container">
     <section class="page-intro">
       <p class="eyebrow">About</p>
       <h1>Engineering through<br />study and practice.</h1>
-      <p class="intro-copy">I’m {site.name}, an {site.role} at {site.university}. My academic work connects power systems, electric mobility and embedded control.</p>
-      <div class="button-row"><a class="button button-secondary" href={withBase(site.resumePath)} download>Download CV <span class="sr-only">(PDF, two pages)</span><span aria-hidden="true">↓</span></a></div>
+      <p class="intro-copy">I’m {site.name}, a {site.role} at {site.university}. My degree is in progress, and my academic work connects power systems, electric mobility and embedded control.</p>
+      <div class="button-row"><a class="button button-secondary" href={withBase(site.resumePath)} download>Download CV <span class="sr-only">(PDF)</span><span aria-hidden="true">↓</span></a></div>
     </section>
     <section class="section two-column" aria-labelledby="background-heading">
       <SectionHeading eyebrow="Background" title="A practical foundation" id="background-heading" />
       <div class="prose">
         <p>My projects range from a fabricated transformer and sensor-based robot to a rural micro hydropower design study. Each brings a different part of electrical engineering into focus: sizing, sensing, control, integration and testing.</p>
-        <p>My current final-year project explores the chassis and power-train integration of a two-seater range extended electric vehicle. FYP-1 is complete, establishing the literature review, series architecture and integration methodology for the next stages.</p>
+        <p>My current final-year project develops a range-extended electric vehicle prototype for areas with limited charging infrastructure. FYP-1 is complete, establishing the literature review, series architecture and integration methodology for the next stages. A longer-term ambition is a startup that converts existing vehicles into REEVs; that is a future direction, rather than a launched service.</p>
         <p>Internships at IESCO and POWERCHINA SEPCO1 have added exposure to utility systems and engineering project coordination.</p>
         <a class="link-arrow" href={withBase('/projects/')}>Explore the project catalogue <span aria-hidden="true">↗</span></a>
       </div>

@@ -2,48 +2,51 @@
 import Layout from '../layouts/Layout.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import CertificateCard from '../components/CertificateCard.astro';
-import { certificates, type CredentialRecord } from '../data/certificates';
+import { certificates, sortCredentials, type CredentialRecord } from '../data/certificates';
 import { withBase } from '../lib/urls';
 import '../styles/phase2-pages.css';
 
 const groups: { category: CredentialRecord['category']; id: string; label: string; description: string }[] = [
-  { category: 'Courses', id: 'courses', label: 'Course completion', description: 'Additional learning in energy, electricity markets and electrical safety.' },
+  { category: 'Courses', id: 'courses', label: 'Engineering & safety learning', description: 'Additional learning in electricity operations, renewable energy and workplace electrical safety. These are course-completion records, rather than professional licences.' },
+  { category: 'Internship', id: 'internship', label: 'Internship credentials', description: 'IESCO and POWERCHINA industry learning, with supervised activities described on the experience page.' },
+  { category: 'Language Qualification', id: 'language-qualification', label: 'Language qualification', description: 'The supplied IELTS Academic record preserves the actual test type, result and date.' },
   { category: 'Academic Commendations', id: 'academic-commendations', label: 'Academic commendations', description: 'Departmental recognition for undergraduate academic work at Air University.' },
-  { category: 'Organisational Recognition', id: 'organisational-recognition', label: 'Organisational recognition', description: 'Contributions to the university engineering community and departmental activities.' },
-  { category: 'Internship', id: 'internship', label: 'Internship credentials', description: 'Documented learning through industry placements, with context on the experience page.' },
+  { category: 'Organisational Recognition', id: 'organisational-recognition', label: 'Leadership & community', description: 'Campus ambassador participation, IEEE recognition and departmental contributions. These are distinct from engineering internships.' },
 ];
 const availableGroups = groups.filter(group => certificates.some(credential => credential.category === group.category));
 ---
 
-<Layout title="Certificates" description="Course-completion certificates, Air University academic commendations, organisational recognition and internship credentials for Muhammad Sharjeel." active="certificates">
+<Layout title="Certificates" description="Original engineering and safety certificates, internship credentials, IELTS Academic result, commendations and community recognition for Muhammad Sharjeel." active="certificates">
   <div class="container">
     <section class="page-intro">
       <p class="eyebrow">Certificates & credentials</p>
       <h1>Learning, with<br />a record behind it.</h1>
-      <p class="intro-copy">Selected courses, academic commendations, organisational contributions and internship learning. Each record keeps its issuer, date or term and supporting context together.</p>
+      <p class="intro-copy">Engineering and safety learning, internships, language qualification and recognition. Each record keeps its issuer, date and context together, with the complete owner-supplied original available to view.</p>
       <div class="credential-summary" aria-label="Credential inventory">
         <span><b>{certificates.length}</b> credentials</span>
         {availableGroups.map(group => <a href={`#${group.id}`}><b>{certificates.filter(credential => credential.category === group.category).length}</b>{group.label}</a>)}
       </div>
     </section>
     <noscript><style is:inline>#certificate-filters { display: none; }</style></noscript>
-    <div class="credential-controls" id="certificate-filters">
+    <form class="credential-controls" id="certificate-filters" role="search">
+      <div class="search-row"><label class="search-box"><span class="sr-only">Search certificates</span><span aria-hidden="true">⌕</span><input id="certificate-search" type="search" placeholder="Search titles, issuers or learning areas" autocomplete="off" /></label><button class="button button-secondary" type="reset">Clear filters <span aria-hidden="true">×</span></button></div>
       <div class="filter-list" role="group" aria-label="Filter certificates by category">
         <button type="button" data-certificate-filter="all" aria-pressed="true">All credentials</button>
         {availableGroups.map(group => <button type="button" data-certificate-filter={group.category} aria-pressed="false">{group.label}</button>)}
       </div>
       <p id="certificate-count" class="credential-count" role="status" aria-live="polite">Showing {certificates.length} credentials.</p>
-    </div>
+    </form>
     <div class="credential-groups">
       {availableGroups.map(group => (
         <section class="section credential-group" id={group.id} data-certificate-group={group.category} aria-labelledby={`${group.id}-heading`}>
           <SectionHeading eyebrow={`${String(availableGroups.indexOf(group) + 1).padStart(2, '0')} / ${certificates.filter(credential => credential.category === group.category).length} records`} title={group.label} description={group.description} id={`${group.id}-heading`} />
           <div class="credential-grid">
-            {certificates.filter(credential => credential.category === group.category).map(credential => <CertificateCard credential={credential} />)}
+            {sortCredentials(certificates.filter(credential => credential.category === group.category)).map(credential => <CertificateCard credential={credential} />)}
           </div>
         </section>
       ))}
     </div>
+    <div class="empty-state" id="certificate-empty-state" hidden><p class="eyebrow">No matches</p><h2>No credentials found.</h2><p>Try a broader term or clear the filters to see all credentials.</p><button class="button" id="reset-certificates" type="button">Show all credentials <span aria-hidden="true">↗</span></button></div>
     <section class="section credential-note" aria-labelledby="learning-context-heading">
       <h2 id="learning-context-heading">Part of a broader education.</h2>
       <p>Course certificates complement my undergraduate study. They record course completion; academic coursework and project work are described on the education page.</p>
@@ -53,29 +56,42 @@ const availableGroups = groups.filter(group => certificates.some(credential => c
 </Layout>
 
 <script>
-  const controls = document.querySelector<HTMLElement>('#certificate-filters');
+  const controls = document.querySelector<HTMLFormElement>('#certificate-filters');
+  const search = document.querySelector<HTMLInputElement>('#certificate-search');
   const buttons = [...document.querySelectorAll<HTMLButtonElement>('[data-certificate-filter]')];
   const groups = [...document.querySelectorAll<HTMLElement>('[data-certificate-group]')];
   const count = document.querySelector<HTMLElement>('#certificate-count');
+  const cards = [...document.querySelectorAll<HTMLElement>('[data-credential]')];
+  const empty = document.querySelector<HTMLElement>('#certificate-empty-state');
+  let category = 'all';
   if (controls && count && groups.length) {
     controls.hidden = false;
-    const applyFilter = (button: HTMLButtonElement) => {
-      const category = button.dataset.certificateFilter;
-      buttons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
-      groups.forEach(group => { group.hidden = category !== 'all' && group.dataset.certificateGroup !== category; });
-      const visible = groups.filter(group => !group.hidden).reduce((total, group) => total + group.querySelectorAll('[data-credential]').length, 0);
+    const update = () => {
+      const terms = (search?.value.toLowerCase().trim() || '').split(/\s+/).filter(Boolean);
+      cards.forEach(card => { card.hidden = !(category === 'all' || card.dataset.category === category) || !terms.every(term => card.dataset.search?.includes(term)); });
+      buttons.forEach(item => item.setAttribute('aria-pressed', String(item.dataset.certificateFilter === category)));
+      groups.forEach(group => { group.hidden = ![...group.querySelectorAll<HTMLElement>('[data-credential]')].some(card => !card.hidden); });
+      const visible = cards.filter(card => !card.hidden).length;
       count.textContent = `Showing ${visible} ${visible === 1 ? 'credential' : 'credentials'}${category === 'all' ? '' : ` in ${category}`}.`;
+      if (empty) empty.hidden = visible > 0;
     };
-    buttons.forEach(button => button.addEventListener('click', () => applyFilter(button)));
+    const reset = () => { category = 'all'; if (search) search.value = ''; update(); };
+    controls.addEventListener('submit', event => event.preventDefault());
+    controls.addEventListener('reset', reset);
+    search?.addEventListener('input', update);
+    buttons.forEach(button => button.addEventListener('click', () => { category = button.dataset.certificateFilter || 'all'; update(); }));
+    document.querySelector('#reset-certificates')?.addEventListener('click', () => { reset(); search?.focus(); });
     const revealAnchor = () => {
       const target = document.getElementById(window.location.hash.slice(1));
       const group = target?.closest<HTMLElement>('[data-certificate-group]');
-      if (target && group?.hidden) {
-        const button = buttons.find(item => item.dataset.certificateFilter === group.dataset.certificateGroup);
-        if (button) { applyFilter(button); target.scrollIntoView(); }
+      if (target && group && (group.hidden || target.hidden)) {
+        category = group.dataset.certificateGroup || 'all';
+        if (search) search.value = '';
+        update(); target.scrollIntoView();
       }
     };
     window.addEventListener('hashchange', revealAnchor);
     revealAnchor();
+    update();
   }
 </script>

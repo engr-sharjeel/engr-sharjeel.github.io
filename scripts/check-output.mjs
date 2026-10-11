@@ -2,6 +2,8 @@ import { readFile, readdir, stat } from 'node:fs/promises';
 import path from 'node:path';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
+import { inflateSync } from 'node:zlib';
+import sharp from 'sharp';
 
 const root = path.resolve('dist');
 const base = (process.env.PORTFOLIO_BASE || '/').replace(/\/+$/, '');
@@ -11,14 +13,67 @@ async function walk(dir) {
 }
 const files = await walk(root);
 const reviewed = JSON.parse(await readFile('src/data/public-assets.json', 'utf8'));
+assert.equal(reviewed.version, 2, 'Explicit original-publication manifest version required');
+const hash = bytes => createHash('sha256').update(bytes).digest('hex');
+const allowedOriginals = new Map([reviewed.resume, ...reviewed.certificates.map(record => record.original)].map(record => [record.path, record]));
+assert.equal(allowedOriginals.size, reviewed.certificates.length + 1, 'Duplicate public original paths');
+
+// The reviewed PDFs use ordinary page dictionaries, with one supplied report
+// storing them inside a Flate-compressed object stream. Decode object streams
+// for page-count checks; images/content streams are never interpreted as pages.
+function pdfPageCount(bytes) {
+  const raw = bytes.toString('latin1');
+  assert.ok(raw.startsWith('%PDF-'), 'Published PDF must have a PDF header');
+  let pageObjects = raw;
+  for (const match of raw.matchAll(/\d+\s+\d+\s+obj\b((?:(?!\bendobj\b)[\s\S])*?)stream\r?\n/g)) {
+    const dictionary = match[1];
+    if (!/\/Type\s*\/ObjStm\b/.test(dictionary)) continue;
+    assert.match(dictionary, /\/FlateDecode\b/, 'Unsupported reviewed PDF object-stream encoding');
+    const length = Number(dictionary.match(/\/Length\s+(\d+)\s*(?:\/|>>)/)?.[1]);
+    assert.ok(Number.isInteger(length) && length > 0, 'Object stream requires an explicit length');
+    const start = match.index + match[0].length;
+    pageObjects += '\n' + inflateSync(bytes.subarray(start, start + length)).toString('latin1');
+  }
+  return (pageObjects.match(/\/Type\s*\/Page\b/g) || []).length;
+}
+
+for (const [relative, record] of allowedOriginals) {
+  assert.ok(!relative.startsWith('/') && !relative.split('/').includes('..'), 'Original path must stay within public output');
+  const source = await readFile(path.join('public', relative));
+  const delivered = await readFile(path.join(root, relative));
+  assert.equal(hash(source), record.sha256, `Approved original changed: ${relative}`);
+  assert.equal(hash(delivered), record.sha256, `Delivered original differs: ${relative}`);
+  assert.equal(source.length, record.byteLength, `Original byte length: ${relative}`);
+  if (record.format === 'pdf') {
+    assert.equal(pdfPageCount(source), record.pageCount, `Original PDF page count: ${relative}`);
+  } else {
+    const metadata = await sharp(source).metadata();
+    assert.equal(metadata.width, record.width, `Original width: ${relative}`);
+    assert.equal(metadata.height, record.height, `Original height: ${relative}`);
+  }
+}
+
+const previewNames = new Set(reviewed.certificates.map(record => record.filename));
+assert.deepEqual(new Set(await readdir('src/assets/certificates')), previewNames, 'Only approved faithful credential previews belong in the application');
 for (const record of reviewed.certificates) {
   const source = await readFile(`src/assets/certificates/${record.filename}`);
-  assert.equal(createHash('sha256').update(source).digest('hex'), record.sha256, `Certificate changed since privacy review: ${record.filename}`);
-  const delivered = files.find(file => path.basename(file).startsWith(record.filename.replace('.png', '.') ) && file.endsWith('.png'));
-  assert.ok(delivered, `Reviewed original missing: ${record.filename}`);
-  assert.equal(createHash('sha256').update(await readFile(delivered)).digest('hex'), record.sha256, 'Delivered certificate must match reviewed public original');
+  assert.equal(hash(source), record.sha256, `Faithful preview changed: ${record.filename}`);
+  const metadata = await sharp(source).metadata();
+  assert.equal(metadata.width, record.width, `Preview width: ${record.filename}`);
+  assert.equal(metadata.height, record.height, `Preview height: ${record.filename}`);
+  const extension = path.extname(record.filename);
+  const stem = path.basename(record.filename, extension);
+  const delivered = files.find(file => path.basename(file).startsWith(`${stem}.`) && file.endsWith(extension));
+  assert.ok(delivered, `Full-resolution faithful preview missing: ${record.filename}`);
+  assert.equal(hash(await readFile(delivered)), record.sha256, 'Delivered full-resolution preview must preserve its approved bytes');
 }
-assert.equal(createHash('sha256').update(await readFile(path.join(root, reviewed.resume.path))).digest('hex'), reviewed.resume.sha256, 'Resume changed since privacy/layout review');
+for (const record of reviewed.approvedImages) {
+  const source = await readFile(record.path);
+  assert.equal(hash(source), record.sha256, `Owner image original changed: ${record.path}`);
+  const metadata = await sharp(source).metadata();
+  assert.equal(metadata.width, record.width, `Owner image width: ${record.path}`);
+  assert.equal(metadata.height, record.height, `Owner image height: ${record.path}`);
+}
 const htmlFiles = files.filter(file => file.endsWith('.html'));
 const projects = await Promise.all((await readdir('src/content/projects')).filter(f => f.endsWith('.json')).map(async f => JSON.parse(await readFile(`src/content/projects/${f}`, 'utf8'))));
 const routes = ['index.html','projects/index.html','experience/index.html','research/index.html','achievements/index.html','education/index.html','certificates/index.html','about/index.html','contact/index.html','404.html',...projects.map(p => `projects/${p.slug}/index.html`)];
@@ -39,7 +94,9 @@ for (const file of htmlFiles) {
   assert.equal((html.match(/<h1(?:\s|>)/g) || []).length, 1, `Exactly one h1: ${file}`);
   assert.match(html, /<title>[^<]+<\/title>/, `Missing title: ${file}`);
   assert.match(html, /name="description"/, `Missing description: ${file}`);
-  assert.ok(!/Everything\/|LinkedIn projects\/|evidenceNotes|provenance|STUDENT_PORTAL|Certificates\.zip/.test(html), `Internal evidence leaked: ${file}`);
+  assert.doesNotMatch(html, /two[\s-]seater|class="monogram"|MS \/ Electrical/i, `Obsolete owner scope/branding: ${file}`);
+  assert.ok(html.includes('name="color-scheme" content="light"'), `Light color scheme required: ${file}`);
+  assert.ok(!/Everything\/|LinkedIn projects\/|Profile Picture\/|Power china internship\/|evidenceNotes|provenance|STUDENT_PORTAL|Certificates\.zip/.test(html), `Internal evidence leaked: ${file}`);
   const title = html.match(/<title>([^<]+)<\/title>/)?.[1];
   const description = html.match(/name="description" content="([^"]+)"/)?.[1];
   assert.ok(!titles.has(title), `Duplicate title: ${file}`); titles.add(title);
@@ -71,7 +128,10 @@ for (const file of htmlFiles) {
 for (const file of files) {
   const relative = path.relative(root, file).replaceAll(path.sep, '/');
   assert.ok(!/\.(docx|pptx|zip|rar)$/i.test(file), `Private document in output: ${file}`);
-  if (file.endsWith('.pdf')) assert.equal(relative, 'downloads/muhammad-sharjeel-cv.pdf', 'Only the reviewed public resume may be delivered');
+  if (file.toLowerCase().endsWith('.pdf')) assert.ok(allowedOriginals.get(relative)?.format === 'pdf', `PDF is not an approved owner original: ${relative}`);
+  if (relative.startsWith('credentials/') || relative.startsWith('downloads/')) assert.ok(allowedOriginals.has(relative), `Unapproved public document: ${relative}`);
+  if (/^(?:Everything|LinkedIn projects|Certificates|CV|IESCO|Power china internship|Profile Picture)\//i.test(relative)) assert.equal(relative, 'certificates/index.html', `Raw source tree in output: ${relative}`);
+  assert.ok(!/-public\.[^.]+\.(?:png|webp)$/i.test(relative), `Obsolete masked credential delivered: ${relative}`);
 }
 assert.deepEqual(failures, [], failures.join('\n'));
 console.log(`Output verified: ${htmlFiles.length} HTML routes, ${references} local page/asset references, image dimensions/alt, metadata, and public-asset boundary. Base: ${base || '/'}.`);
