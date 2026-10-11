@@ -39,7 +39,7 @@ Verified at [https://engr-sharjeel.github.io/](https://engr-sharjeel.github.io/)
 - Seven deployed HTML pages are byte-identical to final local output and the artifact: Home, Projects, REEV, Education, Certificates, Experience and Contact. Twenty-one live public assets match artifact hashes, including **all twelve original credentials**, the replacement CV, favicon and seven representative cream share graphics. Separate live hash checks confirm all five new portrait/internship source copies; live browser tests also verify faithful certificate previews and gallery images.
 - Live screenshots at phone/tablet/desktop and the open viewer were inspected; temporary files remain ignored. TLS verification stayed enabled using the Windows system certificate store where needed.
 
-Performance/verification handoff commits follow this deployed visitor-code revision without changing page output. Their deployment SHA/run is tracked separately below after each final push.
+The performance/verification release **`909f942c49bc970f0afb4526d6ccb69c87bfaeec`** is pushed and successfully deployed in [Actions run 38153095886](https://github.com/engr-sharjeel/engr-sharjeel.github.io/actions/runs/38153095886). Its downloaded artifact passes the same public-output guard; all **347 files are byte-identical** to the live-tested `6a57ca6` visitor-code artifact. All 29 live routes/metadata/sitemap/robots/custom404 were checked again after deployment. This final documentation-only follow-up records that evidence without changing visitor output; its own SHA/run is watched and reported at completion.
 
 ## Settings and remaining source conflicts
 
