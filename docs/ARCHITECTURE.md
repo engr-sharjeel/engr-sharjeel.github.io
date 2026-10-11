@@ -1,29 +1,47 @@
-# Phase 1 architecture
+# Architecture
 
-## Foundation
+## Static foundation
 
-Astro, strict TypeScript and custom CSS generate a static multipage site. No framework runtime, backend, database or contact-form service. HTML contains all content; small progressive scripts enhance mobile navigation and catalogue filtering. Original source trees remain private and ignored; only reviewed images enter `src/assets`.
+Astro 7.3.8, strict TypeScript and custom CSS generate a static multipage website. Small progressive scripts enhance navigation, catalogue/certificate filters and a native-dialog image viewer. HTML contains the complete content without JavaScript. No backend, database, admin interface or contact-submission service is required.
 
-## Routes
+## Routes and navigation
 
-`/`, `/projects/`, `/projects/<slug>/`, `/experience/`, `/research/`, `/achievements/`, `/about/`, `/contact/` and `/404.html`. Project detail routes use `getStaticPaths()` from one schema-validated collection. Short academic entries share the same route model without pretending to be full case studies. The homepage reads exactly four selected slugs from `src/data/site.ts`; the REEV remains the single flagship.
+29 HTML routes: home, Projects, nineteen generated project details, Experience, Research, Education, Certificates, Achievements, About, Contact and 404. Static robots.txt and sitemap files are additional non-page outputs.
 
-## Content contract
+The header has Projects, Experience, Research, an accessible Background disclosure (About, Education, Certificates, Achievements) and Contact. Education/Certificates also appear on About, homepage previews and footer. Background uses native details/summary for keyboard/touch/no-JavaScript support.
 
-`src/content.config.ts` uses the installed Astro content-layer `glob()` loader for JSON in `src/content/projects`. Fields include slug, title, shortTitle, category, group, summary, status, flagship, featuredOrder, technologies, overview, approach, components, outcomes, metrics with explicit basis, credits, images with kind/alt/caption/focal point, provenance and optional external links. Collection image paths resolve through Astro's `image()` schema and use `astro:assets` for dimensions, responsive WebP output and lazy loading. Internal provenance is never rendered or serialized into client scripts.
+Project detail routes use getStaticPaths() from the single validated collection. Six showcases receive supported deeper sections; thirteen additional academic entries remain concise. The homepage's exactly four selections come from src/data/site.ts; REEV is the single flagship.
 
-Typed site, experience, research and achievement data live in `src/data`. Site identity and email have one authoritative setting. Shared components own headings, links, cards, tags, image framing and metrics. Build checks verify selection integrity and generated local links/assets.
+## Authoritative records
 
-## Hosting decision
+src/content.config.ts uses Astro's content-layer glob() loader for project JSON. Fields cover identity/category/summary/status/flagship/featuredOrder, technologies, overview/approach/components/outcomes, metric bases, credits, image kind/alt/caption/focal point, provenance and optional links. Optional problem/context/constraints/lessons/nextSteps support differentiated case studies.
 
-Verified Git root: this portfolio directory. Verified origin: `https://github.com/engr-sharjeel/engr-sharjeel.github.io`. Therefore `site` is `https://engr-sharjeel.github.io` and `base` is `/`. `src/lib/urls.ts` prefixes internal routes and public assets with `import.meta.env.BASE_URL`; imported images are handled by Astro. `PORTFOLIO_BASE` supports a subpath verification build. Static directory routes support direct navigation and refresh on GitHub Pages. Basic metadata and a monogram favicon are included now.
+Typed src/data/education.ts centralises current CGPA/scale/report snapshot, in-progress status, course groupings/highlights and earlier study. src/data/certificates.ts supplies ten canonical records, including issuer/platform/category/date precision, safe image metadata, optional verification links, original printed-name metadata and internal provenance. Achievements derives selected recognition from that collection; experience links by experienceId. Public templates never serialize evidence notes or private source paths.
 
-Deployment is deferred to phase 2: add the official Astro GitHub Actions build/upload/deploy workflow and select GitHub Actions in repository Pages settings. No workflow or live hosting is claimed in phase 1. Authentication must belong to `engr-sharjeel` before pushing; never force push or use another account.
+Site settings centralise identity/contact/photo/CV path and featured selection. Other typed data owns experience, research and skills. Resume generation reads the same records, omitting asset imports and private evidence. Social graphics derive public project titles/status and page label data.
+
+## Public asset boundary
+
+Original archives, extracted trees, grade report and analysis tools/text remain ignored. Certificates are flattened privacy-redacted PNGs in src/assets/certificates; responsive WebP previews and full-size viewer/no-JavaScript links all derive from those safe copies. There is no unredacted original download. The public resume is the only allowed PDF in dist.
+
+src/data/public-assets.json stores reviewed certificate dimensions/hashes and the public CV hash. Build/output checks compare the source and delivered originals to that review manifest, check metadata/local URLs and reject private document types. A modified document requires renewed visual/privacy review before updating its manifest hash.
+
+Astro image() schema and astro:assets manage project dimensions, responsive widths/WebP and loading. Raw large safe images are only requested when a viewer or original link is opened. The dialog supports captions, previous/next, Escape/close, an explicit Tab loop, focus restoration and a scrollable natural-size reading mode. Native modal semantics make the background inert; original image anchors are no-JavaScript fallbacks.
+
+## SEO and deployment
+
+Production site is https://engr-sharjeel.github.io/ with root base because this is the confirmed username repository. PORTFOLIO_BASE remains available for subpath verification. src/lib/urls.ts prefixes internal/public paths; Astro manages imported assets. Directory routes support direct navigation and refresh.
+
+Layout generates unique supplied title/description, canonical URL, Open Graph/Twitter metadata, local 1200×630 share image, and accurate Person/WebSite/Breadcrumb JSON-LD with less-than and Unicode line separators escaped. No employer, awarded degree, rating or invented credential appears in structured data. 404 is noindex and excluded from sitemap. @astrojs/sitemap emits sitemap-index.xml/sitemap-0.xml; static robots.txt points to the configured production sitemap.
+
+.github/workflows/deploy.yml uses the committed npm lockfile and Node 24, official checkout/setup-node/configure-pages/upload-pages-artifact/deploy-pages actions, push-to-main/manual triggers and Pages concurrency. Build has read permissions; deployment alone has pages:write/id-token:write. Checks and one build precede upload/deployment. CI uses reviewed committed assets, never ignored sources or local parsers.
+
+Repository Pages is configured through GitHub Actions when authenticated owner permissions permit. Live status and deployed commit/run are recorded in PROGRESS.md after direct verification.
 
 ## Phase boundaries
 
-1. Evidence audit, source protection, design system, responsive route foundation, curated images, full catalogue, concise detail pages and verification.
-2. Expand supported case studies/galleries, experience/research/recognition, comprehensive SEO and social cards, Actions deployment.
-3. Refine typography, spacing, subtle effects/motion, performance and accessibility; finish live deployment checks. Preserve the established architecture and evidence distinctions.
+1. Completed evidence/source protection, responsive foundation, catalogue and initial pages.
+2. Dedicated education/credentials, deeper supported case studies/galleries, experience/research/recognition, reviewed CV, SEO and Pages deployment.
+3. Refine established typography/spacing, restrained effects/motion, image delivery/performance and final accessibility/live checks; preserve architecture and factual distinctions.
 
-Official references: [content collections](https://docs.astro.build/en/guides/content-collections/), [images](https://docs.astro.build/en/guides/images/), [GitHub Pages](https://docs.astro.build/en/guides/deploy/github/). Installed versions are pinned by `package-lock.json`.
+Official implementation references: [Astro content collections](https://docs.astro.build/en/guides/content-collections/), [Astro images](https://docs.astro.build/en/guides/images/), [Astro sitemap](https://docs.astro.build/en/guides/integrations-guide/sitemap/), [Astro GitHub deployment](https://docs.astro.build/en/guides/deploy/github/), [GitHub custom Pages workflows](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages), [GitHub Pages API](https://docs.github.com/en/rest/pages/pages). Versions are recorded in the lockfile.

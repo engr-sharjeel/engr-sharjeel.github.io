@@ -69,3 +69,11 @@ These are clearly labelled **Privacy-redacted public previews**, with masks flat
 The four public verification URLs were compared visually with the certificate text and retained exactly as supplied. On 11 October 2026 the available web tool could not fetch either Coursera page (cache miss) and rejected access to both Alison check pages. Therefore the site offers “Verify credential” links without claiming that the credentials were independently verified during implementation.
 
 The Fall 2025 certificate/report SGPA difference remains unresolved: the historical award image prints 3.67; the current portal reports 3.73. The current overall CGPA is resolved at 3.10/4.00, and the owner has resolved inclusion of the Rao Sharjeel Farewell name variant. There is no reason to ask those resolved questions again. Transformer measured ratings/tests, SAMS hardware status, robot test conditions, conference details and unestablished individual contributions remain separate project/research evidence questions.
+
+## Public resume and delivered asset review
+
+A new two-page public CV was generated from the site's canonical public records, not copied from an original CV. PyMuPDF confirmed selectable text on both pages and text bounds within the page; both rendered pages were inspected for layout and privacy. It contains the configured professional contacts, general city, in-progress education/current reported CGPA, supported internships/projects, research statuses, tools and credentials. It omits identity/student numbers, family details, home address, birth date, private signatures and unrelated contacts. `public/downloads/muhammad-sharjeel-cv.pdf` is the only public PDF allowed by output checks.
+
+The primary agent additionally inspected all ten safe certificate PNGs at their source resolution. `src/data/public-assets.json` records reviewed public hashes/dimensions; build checks ensure full-size delivered images match these exact public copies. Resizing/compression never uses unredacted input. Local share PNGs contain only public titles, status, name and engineering role.
+
+Conference name/date/venue were independently corroborated from official UET sources, as recorded in CASE-STUDY-EVIDENCE.md. A final program, completed presentation and eventual proceedings publication remain unestablished; these do not change the accepted future abstract status.

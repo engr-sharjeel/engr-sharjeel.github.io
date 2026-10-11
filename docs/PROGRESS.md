@@ -1,56 +1,67 @@
-# Phase 1 handoff
+# Phase 2 handoff
 
 ## Implemented
 
-- Astro 7.3.8 static application, strict TypeScript, custom responsive CSS and locally served licensed Manrope. Deep navy, warm off-white and restrained teal establish the editorial design; MS monogram and optional profile image share one hero frame.
-- All 27 routes: home, catalogue, 19 generated project details, experience, research, achievements, about, contact and 404. Six showcases have initial scope/components/status/results/images; thirteen additional works have concise CV-supported records and typographic covers. No alternative FYP proposal is represented as completed work.
-- Homepage has exactly four projects: REEV flagship, micro hydropower, navigation robot and center-tapped transformer. Catalogue defaults to flagship first and supports text/technology search, all six category filters, reset and empty state. A persistent flagship link remains available during filtering.
-- Semantic layouts/components, skip link, visible keyboard focus, accessible mobile menu/Escape, reduced-motion support and complete HTML content without JavaScript. Navigation and contact links work without a backend; email opens the visitor's email application.
-- Two careful internship summaries and two IESCO equipment photographs, three distinct research statuses, seven supported text-only recognition/course records, education and evidenced skills. No graduation/licensure, overall CGPA, invented role, achieved vehicle range or commissioned hydro claim.
-- One validated project collection and typed supporting data. Images retain kind/alt/caption/focal point and Astro supplies responsive WebP, dimensions and loading behavior. Technical images stay uncropped on a light matte; details link to full-resolution curated inputs.
-- Source/audit/design/architecture documentation, owner editing instructions and reproducible content/output/browser checks. Private source trees, archives, secrets, tools, extraction/OCR output, dependencies and builds remain ignored.
+- Preserved Astro 7.3.8, TypeScript, local Manrope, custom navy/teal design, MS monogram/optional photo and the owner's contact/featured settings.
+- 29 HTML routes: home, catalogue, nineteen project details, Experience, Research, Education, Certificates, Achievements, About, Contact and 404. Static robots/sitemap files are additional outputs.
+- Education centralises **CGPA 3.10/4.00**, Fall 2026 report snapshot and **degree in progress**, September 2023–present. Four course focus areas, selected supported A highlights, linked academic projects and earlier Nishat college study provide recruiter-facing context. No raw portal report, exhaustive grades or graduation claim.
+- Ten canonical credentials: **4 Courses, 2 Academic Commendations, 2 Organisational Recognition, 2 Internship**. Eight sorted files are exact duplicates of Everything; two distinct internship records add to the total. Full-resolution public previews have flattened privacy masks. Supplied verification URLs remain genuine links without a new independent-verification claim.
+- Background navigation connects About/Education/Certificates/Achievements by keyboard/touch/native disclosure; Education/Certificates are also linked from homepage/About/footer. Achievements reuses canonical recognition; experience links canonical internship records.
+- Six deeper engineering showcases with supported problems/context, approach/components, constraints, outcomes, lessons, next steps, team context and useful existing galleries. Thirteen shorter works remain modest. REEV remains FYP-1 complete, with no mechanical engine-to-wheel path or achieved range. Hydro is a design study. Transformer 57 VA/approximately 210 VA calculations are distinct iterations; no measured rating or numerical test results.
+- Shared accessible viewer: lazy full-resolution reading, captions, previous/next, Escape/close, explicit keyboard focus loop/restoration and natural-size scroll mode. No-JavaScript links use the same privacy-reviewed originals.
+- Expanded internship/research context. Published policy paper retains source author order/DOI; EV analysis is one unpublished manuscript; REEV remains a future accepted oral abstract. Official UET evidence corroborates IMC 2026, UET Lahore, 17–18 November; no completed presentation/proceedings claim.
+- Reviewed two-page selectable-text public CV on About/Contact, generated from canonical public records. Unique titles/descriptions/canonicals, 28 local share PNGs, Open Graph/Twitter, accurate Person/WebSite/Breadcrumb JSON-LD, sitemap and robots. 404 has noindex and is excluded from sitemap.
+- Official GitHub Pages Actions workflow for main/manual dispatch, Node 24/npm lockfile, checks + one static build, artifact upload and deployment with limited permissions.
 
-## Evidence and source safety
+## Verification and public boundary
 
-Originals are intact. The initial repository/history tracked only README; no private document needed removal from Git. All 18 LinkedIn images, nine internship photos and relevant report/presentation/certificate material were inspected. Fifteen project images plus two experience images were selected, with metadata stripped. Three derivatives remove registration identifiers or local-path/timestamp information. No raw CV, certificate scan, identity/academic record, internship/funding document or payment-bearing letter enters the app, build or commits. [Asset curation](ASSET-CURATION.md) records exact mapping/omissions; [source audit](SOURCE-AUDIT.md) records evidence and version conflicts.
+Fresh phase-2 verification, not repeated phase-1 reporting:
 
-## Verification
+- Type/content check: zero errors/warnings/hints; nineteen projects, six showcases, thirteen academic entries, exactly four valid distinct selections.
+- Production build: **29 HTML routes**, **744 internal page/asset references**; unique title/description, canonical/social/JSON-LD, sitemap/robots, h1/image dimensions/alt and public document boundaries checked.
+- Main headless Chrome suite: **131 passed, 0 failed**, direct routes at 390/768/1440px, navigation, four project links, View all, search/categories/reset/empty state, flagship reminder, visible skip/keyboard focus and no-JavaScript access. **Zero axe violations** across tested routes.
+- Focused root suite: **16 passed, 0 failed**; education/credential navigation and facts, category filters/anchor recovery, viewer full-resolution loading, captions, arrows/Tab/Escape/close/focus restoration, open-dialog/new-page axe, safe image and CV hashes, no-JavaScript fallbacks. Zero axe violations.
+- Subpath /portfolio-check build/output checks and the same focused suite: **16 passed, 0 failed**, including direct refresh of Education/Certificates and diagram/download paths. Final build restored to root configuration.
+- Desktop/tablet/phone screenshots and both CV page renders visually inspected. All ten safe certificate inputs inspected at full resolution. PyMuPDF confirmed two CV pages with selectable text and text bounds inside each page.
+- The first focus test exposed modal Tab traversal leaving the controls; an explicit wrap fixed it and the suite was rerun successfully. Test assumptions about text whitespace/rendered image width were corrected to inspect the real CGPA text/intrinsic attributes.
+- Reviewed public hashes/dimensions are recorded in src/data/public-assets.json; build checks enforce exact delivered large-copy identity. Only the reviewed CV is allowed as a PDF. Original archives/source trees/portal report, raw private documents, extracts and tooling remain ignored and intact. No sensitive originals were tracked in the initial history.
+- Local npm dependency installation reported zero vulnerabilities. No arbitrary performance score or external credential-validation success is claimed. Browser/PDF inspection artifacts stay in ignored .tmp. CI runs type/content/output checks; browser and visual checks are local.
 
-- `npm.cmd run check`: 0 errors, 0 warnings, 0 hints; 19 entries, 6 showcases, 13 academic works, 4 valid distinct homepage selections.
-- `npm.cmd run build`: 27 static HTML routes; output checks validate local route/asset references, one h1, title/description, image alt/dimensions and private-document boundaries. Root base and `/portfolio-check` both passed; final output restored to root base.
-- Complete headless Chrome runs before and after visual-review fixes: each 123 passed, 0 failed. Direct-route coverage at 390, 768 and 1440px; image loading, horizontal overflow, menu click/Escape, desktop/mobile navigation, four homepage project links, View all, text search, every category, reset/empty state, persistent flagship reminder, keyboard skip/focus and JavaScript-disabled mobile navigation/catalogue/detail access. Axe reported no violations across tested routes.
-- Separate `/portfolio-check/` browser smoke passed five direct/refresh routes, images, base-prefixed links, search/reset and flagship navigation. The real repository remains root-hosted; no deployment is implied by this smoke test.
-- Screenshots visually reviewed for desktop/mobile/tablet hero, cards, ancillary pages, REEV architecture/flowchart, technical framing and definitions. Fixed heading alignment, stretched education badge and blanket related-card underlining.
-- Dependency installation reported 0 npm vulnerabilities. No performance score or live GitHub Pages deployment is claimed. Browser reports/screenshots are local ignored `.tmp/` artifacts, not tracked assets.
+## Git and deployment
 
-## Repository and run state
+Working directory/Git root: C:\Users\harri\OneDrive\Desktop\portfolio. Branch main; origin https://github.com/engr-sharjeel/engr-sharjeel.github.io. Authenticated GitHub login engr-sharjeel was checked before pushing. No global author identity, visibility, custom domain or branch protection was changed; all pushes are normal.
 
-Verified working directory/Git root: `C:\Users\harri\OneDrive\Desktop\portfolio`. Branch: `main`. Origin: `https://github.com/engr-sharjeel/engr-sharjeel.github.io`. Local commit identity already matched the owner; global identity was not changed. Network-enabled GitHub checks confirmed authenticated account `engr-sharjeel`; the initial restricted check's invalid-token result was misleading. Fetch confirmed the remote is an ancestor of the local work, allowing a normal non-force push.
+Phase-2 milestones so far:
 
-Milestones: `6dff623` source protection/audit/design; `e44ea58` Astro/content/assets foundation; `658a281` responsive routes/catalogue/details; final verification/handoff commit follows these. Push verification is reported in the phase completion response; use `git status -sb` and `git rev-list --left-right --count origin/main...main` to confirm current synchronization. Deployment workflow and live publication belong to phase 2.
+- de67df8 — protected new sources, verified education, canonical credentials and reviewed previews.
+- 718d27b — expanded supported case studies, experience and research context.
+- 89f2d83 — Education/Certificates, connected pages/navigation, accessible galleries, public CV, metadata and verification scripts.
 
-PowerShell production preview:
+The first two commits have been pushed. The application/deployment-ready milestones and live run verification are being completed; deployment success is recorded here only after the real URL responds with the intended content.
+
+Historical phase-1 baseline: 6dff623, e44ea58, 658a281, b7bdf60; 27 routes/123 browser checks were phase-1 results, superseded by the fresh checks above.
+
+## Owner settings and run commands
+
+src/data/site.ts owns public contact/profile links, optional photo, CV path and exactly four featured slugs: **REEV, micro hydropower, navigation robot, center-tapped transformer**. src/data/education.ts owns current academic data; src/data/certificates.ts owns all credentials. README describes content/photo/certificate updates, public-asset re-review and subsequent Actions publishing.
 
 ```powershell
 Set-Location 'C:\Users\harri\OneDrive\Desktop\portfolio'
 npm.cmd ci
 npm.cmd run check
 npm.cmd run build
-npm.cmd run preview -- --host 127.0.0.1 --port 4321
+npm.cmd run preview -- --ignore-lock --host 127.0.0.1 --port 4321
 ```
 
-Open `http://127.0.0.1:4321/`. Stop Astro 7 preview with `npm.cmd exec -- astro preview stop`. Read README for development, browser-check and subpath commands. Phase QA servers are stopped at handoff.
+Open http://127.0.0.1:4321/; stop the foreground preview with **Ctrl+C**. Run test:browser/test:phase2 in a second terminal with PORTFOLIO_TEST_URL set to that origin. Phase-2 temporary preview processes are stopped after testing; unrelated pre-existing processes are preserved.
 
-## Owner settings and open facts
+## Remaining evidence and phase 3
 
-`src/data/site.ts` owns the four featured slugs, public email, LinkedIn/GitHub links and optional photo. README gives the exact photo import/setting instructions. `src/content/projects` owns project copy and image metadata; `src/data` owns supporting records; `src/styles/global.css` owns design tokens/layout.
+- Historical Fall 2025 commendation prints SGPA 3.67; current portal lists 3.73. Preserve both sources; current overall CGPA is resolved at 3.10/4.00.
+- Transformer measured output/tap values, tested apparent-power rating and numerical open-/short-circuit readings remain absent. Its documented design tap is not evidence of equal secondary halves.
+- SAMS physical-hardware implementation remains unestablished; public figure is a Proteus schematic.
+- Robot reported prototype metrics lack supplied formal conditions/sample sizes.
+- Future conference final program, presentation completion and eventual proceedings publication remain unestablished; event name/date/venue are now corroborated.
+- Project-team outcomes do not establish individual task ownership. Older incompatible FYP sizing/proposals stay outside the public specification.
 
-Confirm before expansion: transformer secondary output/tap topology and power rating; SAMS physical implementation; robot test conditions; public email preference and overall CGPA if desired; exact conference details and eventual presentation status; other project team credits/individual responsibilities and compatible FYP sizing; the omitted farewell-recognition recipient name variant. Current public records omit uncertain specifications and distinguish design estimates, reported results, manuscripts and future presentation status. A public CV remains absent until sanitized/reviewed.
-
-## Concrete phase 2 next steps
-
-1. Preserve the content collection, base helper, components and existing design. Deepen the six case studies with supported calculations, diagrams, learning and verified team contributions; keep alternative FYP scenarios separate. Add modest galleries without replacing technical contain framing.
-2. Resolve the grouped owner facts above. Expand internship/research/achievement context from reviewed evidence. Add a sanitized public CV only if a suitable version is explicitly prepared; use the optional photo setting when supplied.
-3. Add comprehensive metadata/canonical URLs, sitemap, social preview images and any verified publication links. Keep the three research statuses distinct and update the abstract only after the event/evidence changes.
-4. Add the official Astro GitHub Actions build/upload/deploy workflow, choose GitHub Actions in Pages settings, deploy the static output and verify the real root URL/direct routes/404/assets. Current site/base already match this repository.
-5. Run existing check/build/browser scripts after changes. Leave advanced typography/effects/motion, performance tuning and final accessibility/live-deployment review for phase 3; refine the foundation rather than redesigning it.
+Phase 3 should refine this completed site: typography/spacing and responsive rhythm, restrained effects/motion with reduced-motion support, image delivery/performance, final contrast/keyboard/accessibility and live checks. Preserve the design system, architecture, nineteen-project/ten-credential inventory, editable selections and evidence boundaries; no redesign or invented metrics.

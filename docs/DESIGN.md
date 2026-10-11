@@ -2,6 +2,10 @@
 
 Editorial engineering portfolio: legible technical work, clear hierarchy and restrained effects.
 
+Phase 2 preserves this visual direction. Education uses a degree/CGPA overview, four focus-area panels, selected course rows and a restrained earlier-study entry. Certificates groups ten canonical records in a responsive two-column gallery, with full-image light-matte previews, date/issuer context and genuine actions. Achievements selects academic/organisational records from the same data. The homepage keeps exactly four project selections and adds a small background preview.
+
+The Background navigation disclosure works by keyboard, touch and without JavaScript. Gallery links progressively open a native modal viewer with captions, 44px controls, previous/next, Escape/close, an explicit focus loop/restoration and scrollable natural-size reading. Original links remain usable without JavaScript and point only to reviewed public copies. Larger images load on demand. Public CV/share graphics use the established restrained color hierarchy; no stock project evidence or invented charts are added.
+
 | Token | Value / use |
 | --- | --- |
 | Ink | `#0B1220`, page background |
