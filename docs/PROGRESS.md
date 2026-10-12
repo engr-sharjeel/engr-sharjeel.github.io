@@ -1,4 +1,48 @@
-# Prompt 4 handoff
+# Prompt 5 handoff
+
+Prompt 5 restores the actual navy/teal Phase 3 visual system from **`84ecb18d74ca2a4b89708a8014dc86eae968d35f`** while retaining Prompt 4's approved content, direct navigation, original documents, experience galleries and functional improvements. No repository reset/revert, dependency upgrade, framework change or CV rewrite occurred. The working root was verified as `C:\Users\harri\OneDrive\Desktop\portfolio`; owner authentication/upstream remain unchanged.
+
+## Completed refinements
+
+- Exact reference ink/surface/soft/state/text/muted/teal/divider/strong-boundary tokens, Manrope typography, spacing, buttons, borders, radii, panels, document mattes and restrained effects. Browser color scheme, favicon, all 28 share images and their generator are dark. Portrait/name branding and seven prominent direct navigation destinations remain; MS/Background do not return.
+- New root source **`Profile Picture/Polished studio portrait with side-swept hair.png`**, **1024 × 1536**, source SHA-256 **`b144d7394e8c96e7cd56545c023522d9d8f025c5cbc27012c4510877e9bde259`**, copied unchanged. Full `contain` composition shows head, collar, tie and clothing in hero/header. Vertical header frames are 48×72 / 60×90; the hero inner slot caps at 418px. Source-capped responsive derivatives replace stale imports/output.
+- Reusable local Phone/WhatsApp/Gmail/LinkedIn/GitHub SVGs and clear independent icon/label/value/link groups. Phone `tel:+923494247649`, WhatsApp `https://wa.me/923494247649`, Email `mailto:engr.muhammadsharjeel@gmail.com` are centrally configured. Home, Contact and footer grouping remain unambiguous; email can break before `@` while retaining the complete domain. No automatic launch/message or added icon dependency.
+- Upright IESCO card/viewer/PDF: page rotation metadata **90° → 0°**, a **90° counterclockwise** correction. Full landscape page 842×595 points / preview 1684×1190px, with margins, text, signatures, seals and colours preserved. The untouched supplied PDF remains ignored locally. Separate source/public hashes and the unchanged page-content stream plus all 22 image streams are documented and guarded. “Open upright PDF” accurately labels this authorised derivative.
+- Education's supporting **IELTS Academic / 7.5 overall / 3 August 2026 / printed C1** panel immediately follows the degree/current academic overview and precedes coursework. It reuses structured fields in the canonical certificate record and links through the base helper to its certificate anchor. Current source hash/result/date were checked visually. Twelve credentials, their five groups/order/filter/verification/original actions remain intact.
+- Exact shared first-four order: **FYP REEV, micro hydropower, navigation robot, Single-Phase Center-Tapped Transformer**. Home derives the priority's first four; catalogue/filter/search/related subsets use the same helper. Remaining fifteen relative positions and all nineteen details/statuses are preserved. Transformer display title is consistent. REEV remains FYP-1 complete, with corrected prototype/future-startup boundaries.
+
+## Fresh verification
+
+- Final type/content check: **48 files, 0 errors/warnings/hints**, nineteen projects (six showcases/thirteen concise records), four valid selections.
+- Final production build/output validator: **29 HTML pages, 933 local references**; route inventory, dimensions/alt, metadata/social/canonical/JSON-LD, sitemap/robots/404, explicit publication allowlist, current delivered portrait hashes and lossless IESCO stream/rotation proof pass.
+- Production main suite: **138 passed / 0 failed**, **31 axe contexts / zero violations**. Focused education/credential/viewer suite: **18 passed / 0 failed**, **6 axe contexts / zero violations**. Responsive suite: **107 passed / 0 failed**, **10 axe contexts / zero violations**. Coverage includes theme tokens, portrait framing/source caps/enlarged text, grouped contacts/icons/hrefs, exact order/related subsets, IELTS location/anchor, upright IESCO/full PDF hashes, every route, keyboard/touch/no-JavaScript and live reduced-motion preference changes.
+- Read-only visual/reference comparison: six page types × phone/desktop = **12 comparison pairs**; shared rule-owner computed typography/layout/buttons/radii/mattes match the reference. **24 current page/width captures** at 320/390/768/1440px show no horizontal overflow, broken images or browser errors. Sampled runtime text contrast ≥6.91:1, relevant outside boundaries ≥3.25:1 and focus 9.62:1. Original document print contrast is unmodified.
+- Final targeted visual review verifies clean email wrapping and complete initial IESCO fit at **667×375**, uncapped natural-size reading and Escape/focus restoration. Both portrait placements preserve the complete source composition. Temporary reports/screenshots remain ignored.
+- Paired mobile delivery and **48** responsive slot combinations are recorded in [PERFORMANCE.md](PERFORMANCE.md): zero external JavaScript, one local font, initial transfer 64–96 KiB across measured pages, median initial CLS zero. Catalogue transfer is larger because of the owner-selected image/order, not an added runtime or eager originals.
+
+## Commit and release tracking
+
+- `cb012e8a26ad6a1d2ba471aee3e1adc317f3bc70` — reference theme, new portrait, clear contacts, canonical IELTS, upright IESCO, owner order and publication safeguards. Pushed; [Actions run 38304950885](https://github.com/engr-sharjeel/engr-sharjeel.github.io/actions/runs/38304950885) succeeded.
+- `6189df2158d2864e1e7f41fe7ddcc3cd8d960a76` — focused owner checks, email-domain wrapping and complete short-landscape reading. Pushed; [Actions run 38305416558](https://github.com/engr-sharjeel/engr-sharjeel.github.io/actions/runs/38305416558) succeeded. This is the final visitor-code revision measured locally.
+
+Verified at [https://engr-sharjeel.github.io/](https://engr-sharjeel.github.io/) against that deployed visitor-code revision:
+
+- All **29 live routes**, 29 share-image references, canonical URLs, sitemap/robots and the actual missing-route custom 404 pass `test:live`.
+- Live main suite: **138 passed / 0 failed**, **31 axe contexts / zero violations**. Live focused suite: **18 passed / 0 failed**, **6 axe contexts / zero violations**. The portrait, contacts, owner order, original downloads, upright IESCO and canonical IELTS panel were exercised on the deployed site.
+- Isolated `/portfolio-check/` build: **29 pages / 933 local references**; main **138 passed / 0 failed**, focused **18 passed / 0 failed**, with zero axe violations in 31/6 contexts and no browser errors. Direct navigation/refresh, original downloads, IELTS anchor, contact paths and no-JavaScript access work under the base override. The root release remains `/`.
+- Downloaded run-38305416558 artifact: **349 public files, 29 HTML pages, 5 explicitly approved PDFs**. The complete output-boundary validator passes the extracted artifact. Every file is byte-identical to final local production output; no raw sources, archives, transcript or internal evidence enter deployment.
+- Seven deployed HTML pages and **44 live assets** match the artifact byte-for-byte: all twelve credential originals, the unchanged supplied CV, new full-resolution portrait, upright IESCO preview, favicon and all 28 navy share graphics. This checks the actual live document/image bytes in addition to responsive browser rendering.
+- Eight final live visual samples cover Home, Contact, Education and Certificates at 390/1440px, including the open IESCO viewer. Navy surfaces, local fonts, full head/collar/tie composition, unambiguous contact groups/email wrapping, IELTS placement and complete upright paper are confirmed; no horizontal overflow, stale monogram/dropdown or browser errors occur. TLS verification remains enabled using the Windows system certificate store.
+
+The final handoff-only commit records these results without changing visitor output. Its own SHA/Actions run is reported at completion after watching deployment and comparing the new artifact with this verified code artifact.
+
+## Owner settings and preserved uncertainties
+
+`src/data/site.ts` owns portrait/contact/WhatsApp/program/university/CV; `src/lib/project-priority.ts` owns the exact order and therefore the four home choices. `src/data/certificates.ts` owns canonical IELTS structured results and IESCO presentation; `src/data/public-assets.json` explicitly guards approved originals and the single orientation derivative. See README and [ASSET-CURATION.md](ASSET-CURATION.md) for safe replacement/publication details.
+
+The supplied CV is unchanged, including its historical phone/seating discrepancy; PCB design remains source-confirmed. Existing Fall 2025 award/report SGPA difference, transformer measured ratings/tests, SAMS hardware status, robot testing conditions, conference completion/proceedings and individual responsibilities remain unresolved with their careful qualifiers. Original archives/source folders/transcript and unrelated records remain intact, ignored and unpublished.
+
+## Historical Prompt 4 handoff
 
 The completed redesign retains Astro 7.3.8, strict TypeScript, local Manrope, the static routes, URL/image helpers and existing Pages workflow. Dependencies/lockfile and unrelated source files are unchanged. White/light cream, emerald controls, portrait branding, direct two-row navigation and consistent cards/viewer/404 replace the navy/MS presentation.
 

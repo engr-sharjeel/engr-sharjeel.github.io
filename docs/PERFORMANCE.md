@@ -1,4 +1,23 @@
-# Prompt 4 delivery measurements
+# Prompt 5 delivery and portrait measurements
+
+Fresh paired production-preview measurements compare `b2514ef` (cream baseline at port 4332) with visitor code `6189df2` (restored reference theme and final refinements at port 4334). The existing measurement script and locked dependencies are unchanged. Chrome **154.0.8037.98**, three cold samples per page, cache disabled, **390 × 844 / DPR 2**, **4× CPU slowdown**, **150ms latency**, **200,000 bytes/s download** and **93,750 bytes/s upload** are identical before/after. Timing runs were sequential with browser QA/build work idle. Observation ends after network idle, font readiness and another 1.2 seconds. This is local lab evidence, not Lighthouse or field Core Web Vitals/INP.
+
+| Page | Initial transfer before → after | Median LCP before → after | Median CLS before → after |
+| --- | ---: | ---: | ---: |
+| Home | 82.9 → 86.3 KiB | 1.664 → 1.536s | 0.00000 → 0.00000 |
+| Catalogue | 78.4 → 96.5 KiB | 1.408 → 1.484s | 0.00027 → 0.00000 |
+| REEV | 62.5 → 64.2 KiB | 1.436 → 1.716s | 0.00000 → 0.00000 |
+| Certificates | 73.3 → 74.9 KiB | 1.824 → 1.600s | 0.00000 → 0.00000 |
+
+All four pages still request **zero external JavaScript** and one **24.5 KiB** local Latin Manrope font. Inline enhancement source grows only 28 bytes per page for the accurately labelled public-document viewer action. CSS transfer is 10.8–13.1 KiB. Grouped SVG contacts increase compressed HTML by approximately 1.1–1.4 KiB. Homepage image transfer grows by approximately 1.5 KiB for the replacement portrait. The catalogue's approximately 18 KiB increase chiefly reflects the owner's hydro-second order: the hydropower illustration replaces the smaller transformer photo in the initial lazy-loading window. It does not reflect eager loading of all nineteen projects or document originals. REEV's modest LCP increase is reported, not hidden; these small samples are variable. One final REEV sample has CLS 0.01241, while its median remains zero.
+
+The source PNG is 2,044,380 bytes and remains unchanged. Initial pages use WebP derivatives rather than that full PNG; icons are local inline SVGs with no font/package/hotlink request. No certificate original or CV loads until requested. Explicit portrait dimensions and 2:3 frames reserve layout: header **48 × 72px** on phones / **60 × 90px** on larger screens, hero capped at **418 × 627px** inside its panel. `contain` preserves head, collar, tie and all visible clothing rather than filling a cropped circle/square.
+
+The untimed slot audit covers four pages × four widths (390/768/1024/1440px) × DPR 1/2/3: **48 combinations**, zero errors. At DPR 2, the 390px header chooses 96px for a 48px slot, and the hero chooses 720px for a 348px slot. At 768px these are 128px/60px and 720px/344px; at 1440px, 128px/60px and 1000px/418px. Candidates never exceed the 1024px source width. Header and hero both use natural 2:3 composition. The new asset hash replaces the old import output; delivered original bytes also match the new source manifest.
+
+Actual timing/slot reports remain ignored in `.tmp/phase3-prompt5-before/`, `.tmp/phase3-prompt5-after/` and `.tmp/phase3-prompt5-slots/`. Screenshot/reference/manual-state evidence is separate in `.tmp/prompt5/visual/`. Existing script commands apply with `--phase=prompt5-before`, `--phase=prompt5-after` and `--phase=prompt5-slots --slots-only`, setting `PORTFOLIO_TEST_URL` to the relevant production preview. Earlier comparisons below are historical.
+
+## Historical Prompt 4 delivery measurements
 
 This fresh comparison uses the Phase 3 baseline `84ecb18d74ca2a4b89708a8014dc86eae968d35f`, built in `.tmp/prompt4-baseline`, and the final visitor code `6a57ca652bd78d6543f3ee17c4f74a5370e17f7c`. Both are actual production previews on the same Windows machine. Existing dependencies and the measurement script are unchanged. The new portrait, originals and credential inventory are intentional changes in content, so this is a delivery-budget comparison rather than an identical-content benchmark.
 
