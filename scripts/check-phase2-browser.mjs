@@ -47,9 +47,38 @@ try {
   await check('Education and About use current CGPA and in-progress status',async()=>{
     for(const path of ['education/','about/']) {await open(path);assert.match(await page.locator('main').innerText(),/3\.10\s*\/\s*4\.00/);assert.match(await page.locator('main').innerText(),/In progress/);assert.match(await page.locator('main').innerText(),/Fall 2026/);}
   });
+  await check('Education places the canonical IELTS result directly after the degree overview',async()=>{
+    for(const width of [320,390,768,1440]) {
+      await page.setViewportSize({width,height:1000});await open('education/');
+      const panel=page.locator('.education-language');
+      assert.equal(await panel.count(),1);
+      assert.ok(await panel.isVisible());
+      assert.ok(await panel.evaluate(element=>element.previousElementSibling?.classList.contains('education-overview')), 'Language evidence immediately follows the degree/current academic overview');
+      assert.match(await panel.innerText(),/Language qualification/i);
+      assert.equal((await panel.getByRole('heading',{name:'IELTS Academic',exact:true}).innerText()).trim(),'IELTS Academic');
+      assert.match(await panel.locator('.language-band').innerText(),/7\.5\s*\/\s*9/);
+      assert.match(await panel.innerText(),/3 August 2026/);
+      assert.doesNotMatch(await panel.innerText(),/expires|independently verified/i);
+      const prominence=await page.locator('#degree-heading').evaluate((degree)=>({degree:Number.parseFloat(getComputedStyle(degree).fontSize),language:Number.parseFloat(getComputedStyle(document.querySelector('.education-language h2')).fontSize)}));
+      assert.ok(prominence.language<=prominence.degree,'The language panel remains subordinate to the engineering degree');
+      const target=new URL(url('certificates/#ielts-academic-2026')).pathname+'#ielts-academic-2026';
+      const link=panel.locator(`a[href="${target}"]`);assert.equal(await link.count(),1);
+      await link.click();await page.waitForURL(url('certificates/#ielts-academic-2026'));
+      assert.ok(await page.locator('#ielts-academic-2026').isVisible());
+      assert.match(await page.locator('#ielts-academic-2026').innerText(),/overall band 7\.5/);
+      assert.match(await page.locator('#ielts-academic-2026').innerText(),/CEFR level C1/);
+      assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+    }
+  });
   await check('Certificate categories, reset and deep-link recovery show the canonical inventory',async()=>{
     await open('certificates/');
     assert.equal(await page.locator('[data-credential]:visible').count(),credentialTotal);
+    assert.deepEqual(await page.locator('[data-certificate-group]').evaluateAll(groups=>groups.map(group=>group.dataset.certificateGroup)),['Courses','Internship','Language Qualification','Academic Commendations','Organisational Recognition']);
+    assert.deepEqual(await page.locator('[data-credential]').evaluateAll(cards=>cards.map(card=>card.id)),[
+      'electric-industry-operations-markets','renewable-energy-fundamentals','nfpa70e-workplace-safety','electrical-safety-essentials',
+      'iesco-internship-2025','powerchina-sepco1-internship-2024','ielts-academic-2026',
+      'air-university-commendation-fall2025','air-university-commendation-spring2025','scholars-avenue-campus-ambassador-2026','ieee-recognition-2025-26','ece-farewell-appreciation-2026',
+    ],'The existing credential structure and order remain unchanged');
     for(const [category,count] of [['Courses',4],['Internship',2],['Language Qualification',1],['Academic Commendations',2],['Organisational Recognition',3]]) {
       const button=page.locator(`button[data-certificate-filter="${category}"]`);
       await button.click(); assert.equal(await button.getAttribute('aria-pressed'),'true'); assert.equal(await page.locator('[data-credential]:visible').count(),count);
@@ -93,12 +122,41 @@ try {
       await opener.click();await readViewer();await page.locator('.viewer-close').click();assert.ok(await opener.evaluate(el=>el===document.activeElement));
     });
   }
-  await check('Every faithful preview and owner original delivers the approved bytes',async()=>{
+  await check('Every faithful preview and approved public document delivers the allowed bytes',async()=>{
     await open('certificates/');
     const manifest=JSON.parse(await readFile('src/data/public-assets.json','utf8'));
     const links=await page.locator('[data-credential]').evaluateAll(cards=>cards.map(card=>({slug:card.id,href:card.querySelector('[data-image-viewer]').href,original:card.querySelector('[data-credential-original]').href})));
     assert.equal(links.length,credentialTotal);
     for(const item of links){const record=manifest.certificates.find(record=>record.slug===item.slug);for(const [href,expected] of [[item.href,record.sha256],[item.original,record.original.sha256]]){const response=await context.request.get(href);assert.equal(response.status(),200);const bytes=await response.body();assert.equal(createHash('sha256').update(bytes).digest('hex'),expected);if(href===item.original){assert.equal(bytes.length,record.original.byteLength);if(record.original.format==='pdf')assert.equal(bytes.subarray(0,5).toString(),'%PDF-');}}}
+  });
+  await check('IESCO has an upright complete preview, reading view and accurately labelled PDF',async()=>{
+    const record=manifest.certificates.find(item=>item.slug==='iesco-internship-2025');
+    assert.ok(record.width>record.height,'The upright certificate is a landscape page');
+    assert.equal(record.original.pageCount,1);
+    for(const width of [390,1440]) {
+      await page.setViewportSize({width,height:1000});await open('');await open('certificates/#iesco-internship-2025');
+      const card=page.locator('#iesco-internship-2025');
+      assert.ok(await card.isVisible());
+      assert.doesNotMatch(await card.innerText(),/supplied scan orientation is retained|unchanged original PDF/i);
+      const preview=card.locator('img');await preview.evaluate(image=>image.decode());
+      const framing=await preview.evaluate(image=>({width:Number(image.getAttribute('width')),height:Number(image.getAttribute('height')),fit:getComputedStyle(image).objectFit,transform:getComputedStyle(image).transform}));
+      assert.ok(framing.width>framing.height);
+      assert.equal(framing.fit,'contain','Full certificate margins/content remain visible');
+      assert.equal(framing.transform,'none','Orientation is corrected in the asset rather than CSS');
+      const document=card.locator('[data-credential-original]');
+      assert.match(await document.innerText(),/upright.*PDF/i,'The rotation-only derivative is labelled accurately');
+      const pdfUrl=new URL(await document.getAttribute('href'),base).href;
+      const response=await context.request.get(pdfUrl);assert.equal(response.status(),200);
+      assert.equal(createHash('sha256').update(await response.body()).digest('hex'),record.original.sha256);
+      const opener=card.locator('[data-image-viewer]');await opener.click();await readViewer();
+      assert.ok(await page.locator('.viewer-image').evaluate(image=>image.naturalWidth>image.naturalHeight));
+      assert.equal(await page.locator('.viewer-image').evaluate(image=>getComputedStyle(image).objectFit),'contain');
+      assert.equal(await page.locator('.viewer-image').evaluate(image=>getComputedStyle(image).transform),'none');
+      assert.equal(await page.locator('.viewer-original').getAttribute('href'),pdfUrl);
+      assert.match(await page.locator('.viewer-original').innerText(),/upright.*PDF/i);
+      await page.screenshot({path:`.tmp/screenshots/${width}-iesco-upright-viewer.png`});
+      await page.keyboard.press('Escape');assert.ok(await opener.evaluate(element=>element===document.activeElement));
+    }
   });
   await check('Project diagram viewer has captions, full-size reading and focus restoration',async()=>{
     await open('projects/range-extended-electric-vehicle/');
@@ -116,6 +174,8 @@ try {
   await check('No-JavaScript direct navigation and certificate originals remain usable',async()=>{
     await fallback.goto(url('certificates/'),{waitUntil:'networkidle'});assert.equal(await fallback.locator('[data-credential]:visible').count(),credentialTotal);assert.equal(await fallback.locator('#certificate-filters').isVisible(),false);assert.equal(await fallback.locator('[data-image-viewer]').count(),credentialTotal);assert.equal(await fallback.locator('[data-credential-original]').count(),credentialTotal);
     await fallback.locator('#primary-nav').getByRole('link',{name:'Education',exact:true}).click();await fallback.waitForURL(url('education/'));assert.equal(await fallback.locator('h1').count(),1);
+    assert.ok(await fallback.locator('.education-language').isVisible());
+    await fallback.locator('.education-language a').click();await fallback.waitForURL(url('certificates/#ielts-academic-2026'));assert.ok(await fallback.locator('#ielts-academic-2026').isVisible());
     await fallback.goto(url('projects/range-extended-electric-vehicle/'));assert.equal(await fallback.locator('[data-image-viewer]').count(),3);const href=await fallback.locator('[data-image-viewer]').nth(1).getAttribute('href');assert.equal((await noJs.request.get(new URL(href,base).href)).status(),200);
   });await noJs.close();
   await check('No interaction script errors occurred',async()=>assert.deepEqual(results.errors,[]));

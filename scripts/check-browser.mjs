@@ -12,7 +12,7 @@ const expectedProjects = Number(process.env.PORTFOLIO_EXPECTED_PROJECTS || 19);
 const manifest = JSON.parse(await readFile('src/data/public-assets.json', 'utf8'));
 const navigationDestinations = ['Projects', 'Experience', 'Education', 'Certificates', 'Research', 'Achievements', 'About'];
 const projectOrder = [
-  'range-extended-electric-vehicle', 'center-tapped-transformer', 'micro-hydropower-plant', 'autonomous-navigation-robot', 'smart-access-monitoring-system', 'electronic-voting-machine',
+  'range-extended-electric-vehicle', 'micro-hydropower-plant', 'autonomous-navigation-robot', 'center-tapped-transformer', 'smart-access-monitoring-system', 'electronic-voting-machine',
   'substation-distribution-design', 'pcb-layout-practice', 'temperature-monitoring-system', 'water-level-indication', 'matlab-signal-calculator', 'solidworks-engineering-drawing',
   'frequency-band-pass-filter', 'audio-amplifier', 'digital-logic-clock', 'rain-detection-circuit', 'university-management-system', 'oop-library-management', 'traffic-monitoring-ethics',
 ];
@@ -112,7 +112,7 @@ try {
     assert.equal(await page.locator('[data-project]:visible').count(), expectedProjects);
     const first = await page.locator('[data-project]').first().getAttribute('class');
     assert.ok(first?.includes('flagship'), 'The default catalogue should present the flagship first');
-    assert.deepEqual(await projectSlugs(page), projectOrder, 'Catalogue follows the explicit power-engineering priority');
+    assert.deepEqual(await projectSlugs(page), projectOrder, 'Catalogue follows the owner-selected order and preserves remaining records');
   });
 
   const routes = ['', 'projects/', 'experience/', 'research/', 'achievements/', 'education/', 'certificates/', 'about/', 'contact/', '404.html'].map(relative => route(relative));
@@ -247,15 +247,88 @@ try {
     assert.match(content, /electric motor drives the wheels|wheels electrically driven/i);
     assert.match(content, /no direct mechanical connection|no mechanical engine.to.wheel path/i);
     assert.doesNotMatch(await page.locator('meta[name="description"]').getAttribute('content'), /two[\s-]seater/i);
+    const related = await page.locator('section[aria-labelledby="related-heading"] a.record.related-record').evaluateAll(links => links.map(link => new URL(link.href).pathname.match(/\/projects\/([^/]+)\/$/)?.[1]));
+    assert.equal(related.length, 3);
+    assert.ok(!related.includes('range-extended-electric-vehicle'));
+    assert.deepEqual(related, projectOrder.filter(slug => related.includes(slug)), 'Related-project subsets share the owner-selected priority');
   });
 
-  await check('Contact exposes the readable phone and canonical click-to-call link', async () => {
-    await open(page, route('contact/'));
-    const phone = page.locator('main a[href="tel:+923494247649"]');
-    assert.ok(await phone.isVisible());
-    assert.match(await phone.innerText(), /\+92 349 4247649/);
+  await check('Phone, WhatsApp and Gmail remain distinct labelled actions at narrow widths', async () => {
+    const methods = [
+      ['phone', 'Phone', '+92 349 4247649', 'tel:+923494247649'],
+      ['whatsapp', 'WhatsApp', '+92 349 4247649', 'https://wa.me/923494247649'],
+      ['email', 'Email', 'engr.muhammadsharjeel@gmail.com', 'mailto:engr.muhammadsharjeel@gmail.com'],
+    ];
+    for (const width of [320, 390, 768, 1440]) {
+      await page.setViewportSize({ width, height: 900 });
+      for (const relative of ['', 'contact/']) {
+        await open(page, route(relative));
+        for (const container of [relative ? 'main' : '.contact-banner', '.site-footer']) {
+          for (const [method, label, value, href] of methods) {
+            const link = page.locator(`${container} [data-contact-method="${method}"]`);
+            assert.equal(await link.count(), 1, `${container} has one ${method} action`);
+            assert.equal(await link.getAttribute('href'), href);
+            assert.equal((await link.locator('.contact-method-label').innerText()).trim(), label);
+            assert.equal((await link.locator('.contact-method-value').innerText()).trim(), value);
+            assert.ok(await link.locator('svg[aria-hidden="true"][focusable="false"]').isVisible(), `${method} has a decorative local icon`);
+            assert.equal(await link.locator('.contact-method-label').count(), 1, 'Each action owns its label');
+            const geometry = await link.evaluate(element => {
+              const row = element.getBoundingClientRect();
+              return { width: row.width, height: row.height, left: row.left, right: row.right, content: element.scrollWidth, inner: element.clientWidth,
+                grouped: [...element.querySelectorAll('.contact-method-label, .contact-method-value')].every(child => { const box = child.getBoundingClientRect(); return box.left >= row.left - 1 && box.right <= row.right + 1; }) };
+            });
+            assert.ok(geometry.grouped && geometry.content <= geometry.inner + 1 && geometry.left >= -1 && geometry.right <= width + 1, `${method} label/value stay within their own action at ${width}px`);
+            assert.ok(geometry.width >= 44 && geometry.height >= 44, 'Contact actions have adequate touch targets');
+            await link.focus();
+            assert.ok(await link.evaluate(element => element === document.activeElement), 'Every action is keyboard reachable');
+            assert.ok(await link.evaluate(element => getComputedStyle(element).outlineStyle !== 'none'), 'Contact focus is visible');
+          }
+        }
+        if (relative) {
+          for (const [method, label, href] of [['linkedin', 'LinkedIn', 'https://www.linkedin.com/in/engr-muhammad-sharjeel/'], ['github', 'GitHub', 'https://github.com/engr-sharjeel']]) {
+            const link = page.locator(`main [data-contact-method="${method}"]`);
+            assert.equal(await link.getAttribute('href'), href);
+            assert.equal((await link.locator('.contact-method-label').innerText()).trim(), label);
+            assert.ok(await link.locator(`svg[data-contact-icon="${method}"][aria-hidden="true"]`).isVisible());
+          }
+        }
+        await assertPage(page, width);
+      }
+    }
     const schemas = await page.locator('script[type="application/ld+json"]').allTextContents();
     assert.ok(schemas.some(text => text.includes('+923494247649')), 'Person data includes the canonical phone');
+  });
+
+  await check('Navy/teal reference identity is restored across representative page types', async () => {
+    const expected = { '--ink': '#0b1220', '--surface': '#142033', '--surface-soft': '#101b2b', '--surface-state': '#19283b', '--text': '#f4f5f2', '--muted': '#aab6c5', '--accent': '#55cdb5', '--line': '#2a384b', '--line-strong': '#5a6d83' };
+    await page.setViewportSize({ width: 1440, height: 1000 });
+    for (const relative of ['', 'projects/', 'projects/range-extended-electric-vehicle/', 'education/', 'certificates/', 'contact/', '404.html']) {
+      await open(page, route(relative));
+      const appearance = await page.evaluate(keys => {
+        const root = getComputedStyle(document.documentElement);
+        return { tokens: Object.fromEntries(keys.map(key => [key, root.getPropertyValue(key).trim().toLowerCase()])), scheme: root.colorScheme,
+          meta: document.querySelector('meta[name="color-scheme"]')?.content, background: getComputedStyle(document.body).backgroundColor,
+          font: getComputedStyle(document.body).fontFamily };
+      }, Object.keys(expected));
+      assert.deepEqual(appearance.tokens, expected, `Reference palette on ${relative || '/'}`);
+      assert.equal(appearance.scheme, 'dark');
+      assert.equal(appearance.meta, 'dark');
+      assert.equal(appearance.background, 'rgb(11, 18, 32)');
+      assert.match(appearance.font, /Manrope/);
+    }
+    await open(page, route('certificates/'));
+    await page.locator('[data-image-viewer]').first().click();
+    const dialogBackground = await page.locator('.image-viewer').evaluate(element => getComputedStyle(element).backgroundColor);
+    assert.equal(dialogBackground, 'rgb(11, 18, 32)', 'Dialog chrome uses the reference navy palette');
+    await page.keyboard.press('Escape');
+  });
+
+  await check('Transformer uses the requested full display title everywhere it is selected', async () => {
+    await open(page, route());
+    const card = page.locator('.project-card').filter({ has: page.locator(`a[href="${new URL(route('projects/center-tapped-transformer/')).pathname}"]`) });
+    assert.ok(await card.getByRole('heading', { name: 'Single-Phase Center-Tapped Transformer', exact: true }).isVisible());
+    await open(page, route('projects/center-tapped-transformer/'));
+    assert.equal((await page.locator('h1').innerText()).trim(), 'Single-Phase Center-Tapped Transformer');
   });
 
   await check('View all projects opens the catalogue', async () => {

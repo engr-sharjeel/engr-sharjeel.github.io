@@ -60,7 +60,7 @@ async function readViewer() {
 }
 
 try {
-  await check('Reviewed certificate originals retain hashes and intrinsic dimensions', async () => {
+  await check('Approved certificate presentations retain hashes and intrinsic dimensions', async () => {
     const manifest = JSON.parse(await readFile('src/data/public-assets.json', 'utf8'));
     assert.equal(manifest.certificates.length, 12);
     for (const certificate of manifest.certificates) {
@@ -94,6 +94,44 @@ try {
       });
     }
   }
+  await check('New portrait preserves the complete composition in hero and branding at all requested widths', async () => {
+    const portrait = publication.approvedImages.find(image => image.path.includes('/profile/'));
+    assert.ok(portrait, 'The selected portrait has an approved source hash and dimensions');
+    const bytes = await readFile(portrait.path);
+    assert.equal(createHash('sha256').update(bytes).digest('hex'), portrait.sha256);
+    const source = await sharp(bytes).metadata();
+    assert.equal(source.width, portrait.width);
+    assert.equal(source.height, portrait.height);
+    for (const width of [320, 390, 768, 1440]) {
+      await page.setViewportSize({ width, height: 1000 }); await open('');
+      for (const selector of ['.brand-portrait', '.identity-art img']) {
+        const portraitState = await page.locator(selector).evaluate(image => {
+          const style = getComputedStyle(image);
+          const box = image.getBoundingClientRect();
+          const frame = image.closest('.identity-art, .wordmark').getBoundingClientRect();
+          return { fit: style.objectFit, width: box.width, height: box.height, ratio: box.width / box.height,
+            intrinsicRatio: Number(image.getAttribute('width')) / Number(image.getAttribute('height')),
+            naturalWidth: image.naturalWidth, naturalHeight: image.naturalHeight, transform: style.transform,
+            insideFrame: box.left >= frame.left - 1 && box.right <= frame.right + 1 && box.top >= frame.top - 1 && box.bottom <= frame.bottom + 1,
+            candidates: image.srcset.split(',').map(candidate => Number(candidate.trim().match(/\s(\d+)w$/)?.[1])).filter(Boolean) };
+        });
+        assert.ok(portraitState.fit === 'contain' || Math.abs(portraitState.ratio - source.width / source.height) < .01, `${selector} cannot crop the head/collar/tie composition at ${width}px`);
+        assert.ok(portraitState.insideFrame, `${selector} stays visible within its own frame`);
+        assert.equal(portraitState.transform, 'none', 'The image is not enlarged into a destructive crop');
+        assert.equal(portraitState.intrinsicRatio, source.width / source.height, 'Explicit dimensions preserve the source aspect ratio');
+        assert.ok(portraitState.naturalWidth > 0 && portraitState.naturalWidth <= source.width);
+        assert.ok(portraitState.candidates.length > 1 && portraitState.candidates.every(candidate => candidate <= source.width), 'Responsive derivatives stay capped at source resolution');
+        assert.ok(portraitState.width <= source.width && portraitState.height <= source.height, 'Display does not upscale the supplied source');
+      }
+      await assertLayout();
+      await page.screenshot({ path: `${dir}/${width}-portrait-framing.png`, fullPage: true });
+    }
+    await page.setViewportSize({ width: 640, height: 900 }); await open('');
+    await page.addStyleTag({ content: 'html { font-size: 200%; }' }); await assertLayout();
+    assert.ok(await page.locator('.brand-portrait').isVisible());
+    assert.ok(await page.locator('.identity-art img').isVisible());
+    await page.screenshot({ path: `${dir}/enlarged-text-portrait-framing.png`, fullPage: true });
+  });
   const representative = ['', 'projects/', 'projects/range-extended-electric-vehicle/', 'certificates/'];
   for (const width of [640, 641, 800, 801, 940, 941, 1024]) {
     await page.setViewportSize({ width, height: 900 });

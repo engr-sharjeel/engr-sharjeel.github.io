@@ -18,7 +18,7 @@ const methods = [
     <span class="contact-method-symbol"><ContactIcon kind={method.kind} /></span>
     <span class="contact-method-copy">
       <span class="contact-method-label">{method.label}</span>
-      <span class="contact-method-value">{method.value}</span>
+      <span class="contact-method-value">{method.kind === 'email' ? <>{method.value.split('@')[0]}<wbr /><span class="email-domain">@{method.value.split('@')[1]}</span></> : method.value}</span>
       {variant === 'full' && <span class="contact-method-context">{method.context} <span aria-hidden="true">↗</span></span>}
     </span>
   </a>)}
@@ -33,6 +33,7 @@ const methods = [
     .contact-method-copy { display: grid; gap: 3px; min-width: 0; }
     .contact-method-label { color: var(--muted); font: var(--font-label)/1.5 var(--mono); }
     .contact-method-value { color: var(--text); font-size: .875rem; line-height: 1.55; font-weight: 600; overflow-wrap: anywhere; }
+    .email-domain { white-space: nowrap; }
     .contact-method-context { color: var(--muted); font-size: .9375rem; line-height: 1.6; }
     .contact-methods--full { gap: 18px; }
     .contact-methods--full .contact-method { grid-template-columns: 32px minmax(0, 1fr); gap: 18px; padding: var(--panel-space); border-radius: var(--radius); background: var(--surface); }
