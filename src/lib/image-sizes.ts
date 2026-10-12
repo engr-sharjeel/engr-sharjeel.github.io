@@ -33,8 +33,8 @@ export function imageSizes(context: ImageContext, kind = 'photo', aspectRatio?: 
   const ranges = [[640, 40], [800, 48], [1100, 64], [1344, 96]];
   // Document previews have a 390px height cap; portrait images use a narrower slot.
   const framed = (value: string) => context === 'certificate' && aspectRatio
-    ? `min(${value}, ${Math.round(390 * aspectRatio)}px)` : value;
+    ? `min(${value}, ${Math.round(390 * aspectRatio)}px)` : context === 'portrait' ? `min(${value}, 418px)` : value;
   const responsive = ranges.map(([breakpoint, gutter]) => `(max-width: ${breakpoint}px) ${framed(slot(gutter, true, breakpoint))}`);
-  if (context === 'portrait') responsive.push(`(max-width: 1450px) ${slot(1248, false, 1450)}`);
+  if (context === 'portrait') responsive.push(`(max-width: 1450px) ${framed(slot(1248, false, 1450))}`);
   return [...responsive, framed(slot(1248, false, 2000))].join(', ');
 }

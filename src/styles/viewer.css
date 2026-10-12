@@ -1,8 +1,8 @@
 @layer viewer {
   .viewer-open { overflow: hidden; }
-  .image-viewer { color: var(--text); background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--radius-lg); padding: 24px; width: min(1180px, calc(100vw - 32px)); max-height: calc(100dvh - 32px); overflow: hidden; box-shadow: 0 24px 80px #1e2b2738; }
+  .image-viewer { color: var(--text); background: var(--ink); border: 1px solid var(--line-strong); border-radius: var(--radius-lg); padding: 24px; width: min(1180px, calc(100vw - 32px)); max-height: calc(100dvh - 32px); overflow: hidden; box-shadow: 0 24px 80px #0006; }
   .image-viewer[open] { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; gap: 18px; animation: viewer-enter 140ms var(--motion-ease); }
-  .image-viewer::backdrop { background: #1e2b278c; }
+  .image-viewer::backdrop { background: #04080ee8; }
   .viewer-header { display: flex; justify-content: space-between; align-items: start; gap: 24px; }
   .viewer-header > div { min-width: 0; }
   .viewer-header h2 { font-size: clamp(1.1rem, 2vw, 1.4rem); line-height: 1.4; margin-top: 6px; max-width: 65ch; overflow-wrap: anywhere; text-wrap: pretty; }
@@ -11,11 +11,11 @@
   .image-viewer button:hover, .viewer-original:hover, .viewer-verify:hover, .image-viewer button:focus-visible, .viewer-original:focus-visible, .viewer-verify:focus-visible { color: var(--accent); border-color: var(--accent); background: var(--surface-state); }
   .viewer-verify { color: var(--accent); background: var(--surface-state); }
   .image-viewer button:disabled { color: var(--muted); border-color: var(--line-strong); background: var(--surface-soft); cursor: default; }
-  .image-viewer button[aria-pressed='true'] { color: var(--surface); background: var(--accent); border-color: var(--accent); }
+  .image-viewer button[aria-pressed='true'] { color: var(--ink); background: var(--accent); border-color: var(--accent); }
   .viewer-body { min-height: 0; overflow: auto; overscroll-behavior: contain; padding: 5px; margin: -5px; }
-  .viewer-stage { position: relative; background: var(--matte); border: 1px solid var(--line); display: grid; place-items: center; height: min(58dvh, 640px); min-height: 120px; overflow: auto; border-radius: var(--radius-sm); overscroll-behavior: contain; }
+  .viewer-stage { position: relative; background: #f4f5f2; display: grid; place-items: center; height: min(58dvh, 640px); min-height: 120px; overflow: auto; border-radius: var(--radius-sm); overscroll-behavior: contain; }
   .viewer-image { max-width: 100%; max-height: min(58dvh, 640px); object-fit: contain; width: auto; height: auto; }
-  .viewer-loading { display: none; position: absolute; padding: 20px; background: var(--matte); color: var(--muted); text-align: center; max-width: 50ch; font-size: .9375rem; }
+  .viewer-loading { display: none; position: absolute; padding: 20px; background: #f4f5f2; color: #263747; text-align: center; max-width: 50ch; font-size: .9375rem; }
   .is-error .viewer-loading { color: #8c392d; }
   .is-loading .viewer-loading, .is-error .viewer-loading { display: block; }
   .is-loading .viewer-image, .is-error .viewer-image { visibility: hidden; }

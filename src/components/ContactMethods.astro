@@ -1,0 +1,45 @@
+---
+import ContactIcon from './ContactIcon.astro';
+import { site } from '../data/site';
+interface Props { variant?: 'full' | 'compact'; includeProfiles?: boolean; }
+const { variant = 'compact', includeProfiles = false } = Astro.props;
+const methods = [
+  { kind: 'phone' as const, label: 'Phone', value: site.phoneDisplay, href: `tel:${site.phoneCanonical}`, context: 'Opens your calling application' },
+  { kind: 'whatsapp' as const, label: 'WhatsApp', value: site.phoneDisplay, href: site.whatsapp, context: 'Start a conversation on WhatsApp' },
+  { kind: 'email' as const, label: 'Email', value: site.email, href: `mailto:${site.email}`, context: 'Opens your email application' },
+  ...(includeProfiles ? [
+    { kind: 'linkedin' as const, label: 'LinkedIn', value: site.name, href: site.linkedin, context: 'Connect through my professional profile' },
+    { kind: 'github' as const, label: 'GitHub', value: 'engr-sharjeel', href: site.github, context: 'Explore my GitHub profile' },
+  ] : []),
+];
+---
+<div class:list={['contact-methods', `contact-methods--${variant}`]}>
+  {methods.map(method => <a class:list={['contact-method', { 'record contact-record': variant === 'full' }]} href={method.href} data-contact-method={method.kind}>
+    <span class="contact-method-symbol"><ContactIcon kind={method.kind} /></span>
+    <span class="contact-method-copy">
+      <span class="contact-method-label">{method.label}</span>
+      <span class="contact-method-value">{method.value}</span>
+      {variant === 'full' && <span class="contact-method-context">{method.context} <span aria-hidden="true">↗</span></span>}
+    </span>
+  </a>)}
+</div>
+<style>
+  @layer components {
+    .contact-methods { display: grid; gap: 14px; min-width: 0; }
+    .contact-methods--compact { grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); }
+    .contact-method { display: grid; grid-template-columns: 28px minmax(0, 1fr); align-items: center; gap: 13px; min-height: 72px; padding: 12px 15px; border: 1px solid var(--line-strong); border-radius: var(--radius-sm); background: var(--surface-soft); text-decoration: none; color: var(--text); transition: border-color var(--motion-duration) ease, background var(--motion-duration) ease; }
+    .contact-method:hover, .contact-method:focus-visible { color: var(--text); border-color: var(--accent); background: var(--surface-state); }
+    .contact-method-symbol { display: grid; align-items: center; justify-items: start; }
+    .contact-method-copy { display: grid; gap: 3px; min-width: 0; }
+    .contact-method-label { color: var(--muted); font: var(--font-label)/1.5 var(--mono); }
+    .contact-method-value { color: var(--text); font-size: .875rem; line-height: 1.55; font-weight: 600; overflow-wrap: anywhere; }
+    .contact-method-context { color: var(--muted); font-size: .9375rem; line-height: 1.6; }
+    .contact-methods--full { gap: 18px; }
+    .contact-methods--full .contact-method { grid-template-columns: 32px minmax(0, 1fr); gap: 18px; padding: var(--panel-space); border-radius: var(--radius); background: var(--surface); }
+    .contact-methods--full .contact-method-copy { gap: 8px; }
+    .contact-methods--full .contact-method-value { font-size: clamp(1.1rem, 3vw, 1.6rem); letter-spacing: -.02em; }
+    @media (max-width: 640px) {
+      .contact-methods--full .contact-method { grid-template-columns: 26px minmax(0, 1fr); gap: 13px; padding: 22px 18px; }
+    }
+  }
+</style>

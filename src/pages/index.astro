@@ -6,6 +6,7 @@ import SectionHeading from '../components/SectionHeading.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import Flagship from '../components/Flagship.astro';
 import Button from '../components/Button.astro';
+import ContactMethods from '../components/ContactMethods.astro';
 import { featuredProjects, site } from '../data/site';
 import { experience } from '../data/experience';
 import { research } from '../data/research';
@@ -38,5 +39,10 @@ const researchPreview = research[0];
   </div></section>
   <section class="container section research-home"><div><p class="eyebrow">04 / Research & writing</p><h2>Questions behind the work.</h2><p class="section-description">Electric mobility and distribution networks are part of my research interests, alongside a published coauthored paper on engineering education.</p><a class="link-arrow" href={withBase('/research/')}>Explore all research <span aria-hidden="true">↗</span></a></div><a class="research-preview" href={withBase(`/research/#${researchPreview.id}`)}><span class="eyebrow">{researchPreview.status} {researchPreview.year && ` / ${researchPreview.year}`}</span><h3>{researchPreview.title}</h3><p>{researchPreview.summary}</p><span class="link-arrow">Read the research record <span aria-hidden="true">↗</span></span></a></section>
   <section class="container section home-skills" aria-labelledby="home-skills-heading"><SectionHeading eyebrow="05 / Tools & engineering practice" title="Tools, with a practical purpose." description="Used or studied through undergraduate projects and supervised internship learning." id="home-skills-heading" /><div class="skills-groups"><article class="skills-group"><p class="eyebrow">Software & tools</p><h3>From analysis to implementation</h3><ul class="skills-list" data-home-tools>{softwareTools.map((tool, index) => <li><span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>{tool}</li>)}</ul></article><article class="skills-group"><p class="eyebrow">Engineering skills</p><h3>Connecting design and practice</h3><ul class="skills-list" data-home-skills>{engineeringSkills.map((skill, index) => <li><span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>{skill}</li>)}</ul></article></div></section>
-  <section class="container contact-banner"><p class="eyebrow">Have a question or an opportunity?</p><div><h2>Let’s connect<span class="accent">.</span></h2><Button href={withBase('/contact/')}>Get in touch</Button></div><p>I welcome conversations about power systems, embedded control, electric mobility and engineering research.</p></section>
+  <section class="container contact-banner"><p class="eyebrow">Have a question or an opportunity?</p><div><h2>Let’s connect<span class="accent">.</span></h2><Button href={withBase('/contact/')}>Get in touch</Button></div><p>I welcome conversations about power systems, embedded control, electric mobility and engineering research.</p><div class="home-contact-methods"><ContactMethods /></div></section>
 </Layout>
+<style>
+  @layer components {
+    .home-contact-methods { display: block; margin-top: 24px; }
+  }
+</style>

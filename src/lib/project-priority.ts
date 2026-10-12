@@ -1,9 +1,9 @@
-/** Editorial priority for this power-engineering portfolio, not a demand score. */
+/** Owner-selected display order; remaining records retain their existing relative order. */
 export const projectPriority = [
   'range-extended-electric-vehicle',
-  'center-tapped-transformer',
   'micro-hydropower-plant',
   'autonomous-navigation-robot',
+  'center-tapped-transformer',
   'smart-access-monitoring-system',
   'electronic-voting-machine',
   'substation-distribution-design',

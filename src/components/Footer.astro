@@ -1,5 +1,36 @@
 ---
+import ContactIcon from './ContactIcon.astro';
+import ContactMethods from './ContactMethods.astro';
 import { site } from '../data/site';
 import { withBase } from '../lib/urls';
 ---
-<footer class="site-footer"><div class="container"><div class="footer-top"><div><a href={withBase('/')} class="footer-name">{site.name}<span>{site.program}<br />{site.university} · Degree in progress</span></a><div class="footer-contact"><a href={`mailto:${site.email}`}>Email me <span aria-hidden="true">↗</span></a><a href={`tel:${site.phoneCanonical}`}>{site.phoneDisplay}</a></div></div><nav aria-label="Footer navigation"><a href={withBase('/projects/')}>Projects</a><a href={withBase('/experience/')}>Experience</a><a href={withBase('/education/')}>Education</a><a href={withBase('/certificates/')}>Certificates</a><a href={withBase('/research/')}>Research</a><a href={withBase('/achievements/')}>Achievements</a><a href={withBase('/about/')}>About</a><a href={withBase('/contact/')}>Contact</a><a href={site.linkedin}>LinkedIn ↗</a></nav></div><div class="footer-bottom"><span>© {new Date().getFullYear()} {site.name}</span><span>{site.location}</span><span>Built with care & curiosity.</span></div></div></footer>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-identity">
+        <a href={withBase('/')} class="footer-name">{site.name}<span>{site.program}<br />{site.university} · Degree in progress</span></a>
+        <div class="footer-methods"><ContactMethods /></div>
+      </div>
+      <nav aria-label="Footer navigation">
+        <a href={withBase('/projects/')}>Projects</a>
+        <a href={withBase('/experience/')}>Experience</a>
+        <a href={withBase('/education/')}>Education</a>
+        <a href={withBase('/certificates/')}>Certificates</a>
+        <a href={withBase('/research/')}>Research</a>
+        <a href={withBase('/achievements/')}>Achievements</a>
+        <a href={withBase('/about/')}>About</a>
+        <a href={withBase('/contact/')}>Contact</a>
+        <a class="footer-profile" href={site.linkedin}><ContactIcon kind="linkedin" />LinkedIn <span aria-hidden="true">↗</span></a>
+        <a class="footer-profile" href={site.github}><ContactIcon kind="github" />GitHub <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+    <div class="footer-bottom"><span>© {new Date().getFullYear()} {site.name}</span><span>{site.location}</span><span>Built with care & curiosity.</span></div>
+  </div>
+</footer>
+<style>
+  @layer components {
+    .footer-identity { min-width: 0; flex: 1; width: 100%; max-width: 640px; }
+    .footer-methods { margin-top: 24px; }
+    .footer-profile { gap: 8px; }
+  }
+</style>

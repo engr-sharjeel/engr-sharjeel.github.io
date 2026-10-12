@@ -2,12 +2,12 @@
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import { imageSizes, imageWidths, type ImageContext } from '../lib/image-sizes';
-interface Props { image: {src: ImageMetadata; kind: string; alt: string; caption: string; focalPoint?: string}; priority?: boolean; detail?: boolean; actionLabel?: string; gallery?: string; sizes?: string; context?: ImageContext; viewerTitle?: string; imageHref?: string; originalHref?: string; originalFormat?: 'image' | 'pdf'; verificationUrl?: string; }
-const { image, priority = false, detail = false, actionLabel = 'View full resolution', gallery = 'page', sizes, context = detail ? 'gallery' : 'card', viewerTitle, imageHref, originalHref, originalFormat, verificationUrl } = Astro.props;
+interface Props { image: {src: ImageMetadata; kind: string; alt: string; caption: string; focalPoint?: string}; priority?: boolean; detail?: boolean; actionLabel?: string; gallery?: string; sizes?: string; context?: ImageContext; viewerTitle?: string; imageHref?: string; originalHref?: string; originalFormat?: 'image' | 'pdf'; originalLabel?: string; verificationUrl?: string; }
+const { image, priority = false, detail = false, actionLabel = 'View full resolution', gallery = 'page', sizes, context = detail ? 'gallery' : 'card', viewerTitle, imageHref, originalHref, originalFormat, originalLabel, verificationUrl } = Astro.props;
 const contain = detail || image.kind !== 'photo';
 const widths = imageWidths(image.src.width);
 ---
 <figure class:list={['image-frame', { 'image-contain': contain, 'image-detail': detail }]} style={`--image-position: ${image.focalPoint}`}>
   <Image src={image.src} alt={image.alt} widths={widths} sizes={sizes || imageSizes(context, image.kind, image.src.width / image.src.height)} format="webp" loading={priority ? 'eager' : 'lazy'} decoding="async" fetchpriority={priority ? 'high' : 'auto'} />
-  {detail && <figcaption>{image.caption} <a class="image-view-link" href={imageHref || image.src.src} data-image-viewer data-gallery={gallery} data-image-alt={image.alt} data-image-caption={image.caption} data-image-title={viewerTitle || (image.kind === 'certificate' ? 'Certificate' : 'Project image')} data-original-href={originalHref} data-original-format={originalFormat} data-verification-url={verificationUrl} target="_blank" rel="noopener">{actionLabel} <span aria-hidden="true">↗</span><span class="sr-only">: {image.alt}</span></a></figcaption>}
+  {detail && <figcaption>{image.caption} <a class="image-view-link" href={imageHref || image.src.src} data-image-viewer data-gallery={gallery} data-image-alt={image.alt} data-image-caption={image.caption} data-image-title={viewerTitle || (image.kind === 'certificate' ? 'Certificate' : 'Project image')} data-original-href={originalHref} data-original-format={originalFormat} data-original-label={originalLabel} data-verification-url={verificationUrl} target="_blank" rel="noopener">{actionLabel} <span aria-hidden="true">↗</span><span class="sr-only">: {image.alt}</span></a></figcaption>}
 </figure>

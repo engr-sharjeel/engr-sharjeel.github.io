@@ -32,12 +32,11 @@ for (const { provenance, evidenceNotes, ...publicContent } of records) {
   assert.ok(!Object.hasOwn(publicContent, 'featuredOrder'), 'Use the shared priority instead of competing per-project ranks');
 }
 const siteText = await readFile('src/data/site.ts', 'utf8');
-const selection = siteText.split('export const featuredProjects = [')[1]?.split(']')[0];
-assert.ok(selection, 'Featured-project configuration missing');
-const featured = [...selection.matchAll(/'([a-z0-9-]+)'/g)].map(match => match[1]);
+assert.match(siteText, /export const featuredProjects = projectPriority\.slice\(0, 4\)/, 'Homepage selections must derive from the canonical priority');
+const featured = priorities.slice(0, 4);
 assert.equal(featured.length, 4, 'Exactly four homepage selections required');
 assert.equal(new Set(featured).size, 4, 'Homepage selections must be distinct');
-assert.deepEqual(featured, priorities.slice(0, 4), 'Homepage selection must follow the approved REEV, transformer, hydro, robot order');
+assert.deepEqual(featured, ['range-extended-electric-vehicle', 'micro-hydropower-plant', 'autonomous-navigation-robot', 'center-tapped-transformer'], 'Homepage and catalogue follow the owner-selected order');
 assert.ok(featured.includes('range-extended-electric-vehicle'), 'Homepage must contain the flagship');
 featured.forEach(slug => assert.ok(records.some(p => p.slug === slug), `Missing selected project: ${slug}`));
 console.log(`Content verified: ${records.length} projects, ${records.filter(p => p.group === 'showcase').length} showcases, ${records.filter(p => p.group === 'academic').length} academic entries, 4 selections.`);

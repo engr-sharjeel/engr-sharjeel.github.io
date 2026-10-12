@@ -1,5 +1,5 @@
 @layer components {
-  .education-overview { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(230px, .7fr); gap: 32px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: var(--panel-space); box-shadow: var(--shadow); }
+  .education-overview { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(230px, .7fr); gap: 32px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface-soft); padding: var(--panel-space); }
   .degree-heading { display: flex; align-items: start; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
   .degree-heading h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); line-height: 1.2; margin-block: 14px 18px; max-width: 23ch; }
   .degree-copy { min-width: 0; }
@@ -13,10 +13,10 @@
   .academic-snapshot p { font-size: .94rem; line-height: 1.75; }
   .academic-snapshot .eyebrow { font-size: var(--font-label); }
   .focus-area-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
-  .course-focus { padding: var(--panel-space); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); min-width: 0; box-shadow: var(--shadow); }
+  .course-focus { padding: var(--panel-space); background: var(--surface-soft); border: 1px solid var(--line); border-radius: var(--radius); min-width: 0; }
   .course-focus h3 { margin-block: 14px 20px; line-height: 1.3; }
   .course-list { padding: 0; list-style: none; margin: 0; display: flex; flex-wrap: wrap; gap: 9px; }
-  .course-list li { margin: 0; background: var(--ink); border: 1px solid var(--line); padding: 7px 10px; border-radius: var(--radius-sm); font-size: .85rem; line-height: 1.65; }
+  .course-list li { margin: 0; border: 1px solid var(--line); padding: 7px 10px; border-radius: var(--radius-sm); font-size: .85rem; line-height: 1.65; }
   .course-focus > p:not(.eyebrow) { font-size: .94rem; line-height: 1.75; margin-bottom: 22px; }
   .course-project-links { margin-top: 24px; padding-top: 22px; border-top: 1px solid var(--line); }
   .course-project-links .technical-label { font-size: var(--font-label); margin-bottom: 8px; }
@@ -47,13 +47,13 @@
   .credential-group + .credential-group { border-top: 1px solid var(--line); }
   .credential-group { scroll-margin-top: 36px; }
   .credential-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; align-items: stretch; }
-  .credential-card { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); overflow: hidden; scroll-margin-top: 36px; min-width: 0; box-shadow: var(--shadow); transition: border-color var(--motion-duration) var(--motion-ease); }
+  .credential-card { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface-soft); overflow: hidden; scroll-margin-top: 36px; min-width: 0; transition: border-color var(--motion-duration) var(--motion-ease); }
   .credential-card:focus-within { border-color: var(--accent); }
-  .credential-preview { background: var(--matte); border-bottom: 1px solid var(--line); }
+  .credential-preview { background: #f4f5f2; }
   .credential-preview .image-frame { border-radius: 0; padding: 18px; }
   .credential-preview .image-frame img { width: auto; max-width: 100%; height: auto; max-height: 390px; object-fit: contain; margin-inline: auto; }
   .credential-preview .image-frame figcaption { font-size: .81rem; line-height: 1.7; }
-  .credential-preview-label { font: .75rem/1.65 var(--mono); padding: 0 18px 18px; color: var(--muted); }
+  .credential-preview-label { font: .75rem/1.65 var(--mono); padding: 0 18px 18px; color: #3d4c5b; }
   .credential-copy { padding: var(--panel-space); flex: 1; }
   .credential-copy h3 { font-size: clamp(1.2rem, 1.8vw, 1.55rem); line-height: 1.35; margin-block: 12px 20px; overflow-wrap: anywhere; }
   .credential-copy > p:not(.eyebrow) { font-size: .94rem; line-height: 1.8; }
@@ -74,7 +74,7 @@
   .learning-home { display: grid; grid-template-columns: 1fr 1.1fr; gap: 60px; border-top: 1px solid var(--line); }
   .learning-home h2 { margin-block: 16px 22px; }
   .learning-preview-links { display: grid; gap: 18px; }
-  .learning-preview-link { text-decoration: none; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: var(--panel-space); display: flex; align-items: start; justify-content: space-between; gap: 20px; box-shadow: var(--shadow); transition: border-color var(--motion-duration) var(--motion-ease), background var(--motion-duration) var(--motion-ease), transform var(--motion-duration) var(--motion-ease); }
+  .learning-preview-link { text-decoration: none; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface-soft); padding: var(--panel-space); display: flex; align-items: start; justify-content: space-between; gap: 20px; transition: border-color var(--motion-duration) var(--motion-ease), background var(--motion-duration) var(--motion-ease), transform var(--motion-duration) var(--motion-ease); }
   .learning-preview-link > div { min-width: 0; }
   .learning-preview-link h3 { font-size: 1.25rem; line-height: 1.35; margin-block: 10px 12px; }
   .learning-preview-link p { font-size: .94rem; line-height: 1.75; }

@@ -38,6 +38,35 @@ function pdfPageCount(bytes) {
   return (pageObjects.match(/\/Type\s*\/Page\b/g) || []).length;
 }
 
+function checkOrientationDerivative(bytes, record) {
+  const correction = record.orientationCorrection;
+  assert.equal(record.path, 'credentials/iesco-internship-2025/original.pdf', 'Only the approved IESCO rotation derivative is allowed');
+  assert.equal(correction.sourcePageRotationDegrees, 90);
+  assert.equal(correction.publishedPageRotationDegrees, 0);
+  assert.equal(correction.clockwiseDegrees, 270);
+  assert.notEqual(correction.sourceSha256, record.sha256, 'An orientation derivative must retain separate source and publication hashes');
+  const raw = bytes.toString('latin1');
+  const objects = [...raw.matchAll(/\d+\s+\d+\s+obj\b([\s\S]*?)endobj/g)];
+  const page = objects.find(match => /\/Type\s*\/Page\b/.test(match[1]));
+  assert.ok(page, 'Upright PDF requires a page dictionary');
+  assert.match(page[1], /\/Rotate\s+0\b/, 'Upright PDF must have zero page rotation');
+  assert.match(page[1], /\/MediaBox\s*\[\s*0\s+0\s+842\s+595\s*\]/, 'Complete landscape page must retain its source dimensions');
+  const streamHashes = [];
+  for (const match of objects) {
+    const stream = /stream\r?\n/.exec(match[1]);
+    if (!stream) continue;
+    const dictionary = match[1].slice(0, stream.index);
+    const length = Number(dictionary.match(/\/Length\s+(\d+)\b/)?.[1]);
+    assert.ok(length > 0, 'Reviewed PDF streams must have explicit lengths');
+    const headerLength = match[0].indexOf(match[1]);
+    const start = match.index + headerLength + stream.index + stream[0].length;
+    streamHashes.push(hash(bytes.subarray(start, start + length)));
+  }
+  assert.equal(correction.pageContentRawSha256.length, 1);
+  assert.equal(correction.embeddedImageRawSha256.length, 22);
+  for (const digest of [...correction.pageContentRawSha256, ...correction.embeddedImageRawSha256]) assert.ok(streamHashes.includes(digest), 'Orientation-only PDF must preserve each reviewed content/image stream');
+}
+
 for (const [relative, record] of allowedOriginals) {
   assert.ok(!relative.startsWith('/') && !relative.split('/').includes('..'), 'Original path must stay within public output');
   const source = await readFile(path.join('public', relative));
@@ -47,6 +76,7 @@ for (const [relative, record] of allowedOriginals) {
   assert.equal(source.length, record.byteLength, `Original byte length: ${relative}`);
   if (record.format === 'pdf') {
     assert.equal(pdfPageCount(source), record.pageCount, `Original PDF page count: ${relative}`);
+    if (record.orientationCorrection) checkOrientationDerivative(source, record);
   } else {
     const metadata = await sharp(source).metadata();
     assert.equal(metadata.width, record.width, `Original width: ${relative}`);
@@ -74,6 +104,11 @@ for (const record of reviewed.approvedImages) {
   const metadata = await sharp(source).metadata();
   assert.equal(metadata.width, record.width, `Owner image width: ${record.path}`);
   assert.equal(metadata.height, record.height, `Owner image height: ${record.path}`);
+  const extension = path.extname(record.path);
+  const stem = path.basename(record.path, extension);
+  const originals = files.filter(file => path.basename(file).startsWith(`${stem}.`) && file.endsWith(extension));
+  assert.equal(originals.length, 1, `One current owner image original required: ${record.path}`);
+  assert.equal(hash(await readFile(originals[0])), record.sha256, `Delivered owner image differs: ${record.path}`);
 }
 const htmlFiles = files.filter(file => file.endsWith('.html'));
 const projects = await Promise.all((await readdir('src/content/projects')).filter(f => f.endsWith('.json')).map(async f => JSON.parse(await readFile(`src/content/projects/${f}`, 'utf8'))));
@@ -96,7 +131,7 @@ for (const file of htmlFiles) {
   assert.match(html, /<title>[^<]+<\/title>/, `Missing title: ${file}`);
   assert.match(html, /name="description"/, `Missing description: ${file}`);
   assert.doesNotMatch(html, /two[\s-]seater|class="monogram"|MS \/ Electrical/i, `Obsolete owner scope/branding: ${file}`);
-  assert.ok(html.includes('name="color-scheme" content="light"'), `Light color scheme required: ${file}`);
+  assert.ok(html.includes('name="color-scheme" content="dark"'), `Reference dark color scheme required: ${file}`);
   assert.ok(!/Everything\/|LinkedIn projects\/|Profile Picture\/|Power china internship\/|evidenceNotes|provenance|STUDENT_PORTAL|Certificates\.zip/.test(html), `Internal evidence leaked: ${file}`);
   const title = html.match(/<title>([^<]+)<\/title>/)?.[1];
   const description = html.match(/name="description" content="([^"]+)"/)?.[1];

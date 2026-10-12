@@ -1,6 +1,6 @@
-# Approved public assets: Prompt 4
+# Approved public assets: Prompt 5 refinements
 
-The owner explicitly authorises publication of the supplied certificate originals, replacement CV, portrait and internship photographs, including printed signatures, seals, identifiers and other document content. This replaces the earlier certificate-redaction/generated-CV scope; the historical notes below remain evidence of prior decisions. Raw trees, archives, transcript and unrelated originals stay ignored and intact.
+Prompt 4 explicitly authorised publication of the supplied certificate originals, replacement CV, portrait and internship photographs, including printed signatures, seals, identifiers and other document content. Prompt 5 retains that scope, replaces the portrait with the current owner source and authorises an orientation-only IESCO certificate derivative. These decisions supersede the earlier certificate-redaction/generated-CV scope; historical notes below describe prior decisions rather than current publication rules. Raw trees, archives, transcript and unrelated originals stay ignored and intact.
 
 ## Current source-to-public mapping
 
@@ -12,7 +12,7 @@ The actual root source folders are IESCO, Power china internship, Profile Pictur
 | `Certificates/Courses/Coursera 1_page-0001.jpg` | `public/credentials/renewable-energy-fundamentals/original.jpg` | Original image |
 | `Certificates/Courses/Alison_Certificate-6483-50990454_page-0001.jpg` | `public/credentials/nfpa70e-workplace-safety/original.jpg` | Original image |
 | `Certificates/Courses/WhatsApp Image 2025-08-06 at 12.37.28 PM.jpeg` | `public/credentials/electrical-safety-essentials/original.jpeg` | Original image |
-| `Certificates/Internship certificates/Internship Certificate (IESCO).pdf` | `public/credentials/iesco-internship-2025/original.pdf` | PDF, 1 page |
+| `Certificates/Internship certificates/Internship Certificate (IESCO).pdf` | `public/credentials/iesco-internship-2025/original.pdf` | Upright orientation-only PDF derivative, 1 page |
 | `Certificates/Internship certificates/Internship Certificate (Power China).pdf` | `public/credentials/powerchina-sepco1-internship-2024/original.pdf` | PDF, 1 page |
 | `Certificates/IELTS/IELTS Result PK01526504295-03-08-2026-ETRF.pdf` | `public/credentials/ielts-academic-2026/original.pdf` | PDF, 1 page |
 | `Certificates/Appreciation/WhatsApp Image 2026-07-19 at 7.54.18 PM.jpeg` | `public/credentials/air-university-commendation-fall2025/original.jpeg` | Original image |
@@ -21,7 +21,18 @@ The actual root source folders are IESCO, Power china internship, Profile Pictur
 | `Certificates/Organisational/IEEE Certificate_page-0001.jpg` | `public/credentials/ieee-recognition-2025-26/original.jpg` | Original image |
 | `Certificates/Organisational/WhatsApp Image 2026-07-19 at 7.46.13 PM.jpeg` | `public/credentials/ece-farewell-appreciation-2026/original.jpeg` | Original image |
 
-All original copies match source SHA-256 hashes. The eight JPEG/image previews use identical source bytes before responsive delivery. Four original PDFs are each one page; faithful PNG previews retain complete content, colours, orientation and aspect ratio, with access to the complete PDF. The IESCO source is physically sideways; the preview preserves it and the original PDF reader allows rotation while reading. No signatures/identifiers are masked or edited. All ten obsolete masked source PNGs are removed from application assets. The explicit version-2 manifest validates original paths/hashes/formats/page counts, preview hashes/dimensions and approved portrait/photo copies; builds reject unlisted documents and obsolete masked outputs.
+Eleven certificate public originals match source SHA-256 hashes. The eight JPEG/image previews use identical source bytes before responsive delivery. All four certificate PDFs are one page, with complete faithful PNG previews and full-document access. The IESCO public PDF is the explicit orientation-only exception detailed below; its complete preview is newly rendered upright. No signatures, seals, identifiers, text, margins or colours are edited. All ten obsolete masked source PNGs remain absent from application assets. The explicit version-2 manifest validates public paths/hashes/formats/page counts, preview hashes/dimensions and approved portrait/photo copies, recording separate source/public information for IESCO; builds continue to reject unlisted documents and obsolete masked outputs.
+
+## IESCO upright publication derivative
+
+Visual inspection establishes a 90° counterclockwise correction: source PDF page rotation metadata is 90°, and the public derivative changes it to 0°. The page is landscape 842 × 595 points; the new full-page preview is 1684 × 1190px. This is PDF page-rotation correction, not CSS rotation, cropping, raster replacement or document recreation. Card, viewer and PDF presentation therefore agree without a second rotation.
+
+| File | SHA-256 | Bytes |
+| --- | --- | --- |
+| Untouched local supplied PDF | `f4cad91578537542d9bc1e835a613b2847c56bf4acae232f92108e3509063b94` | 68,358 |
+| Published upright PDF | `65035e71638adce66b08ac3c9847f92298e993657ea0d01c54291fdd97e9e22d` | 67,890 |
+
+The source remains intact in the ignored `Certificates/Internship certificates/` folder. PyMuPDF comparison confirms unchanged page content and all 22 raw embedded-image streams, alongside the single preserved page. The optional manifest `orientationCorrection` records source and published hashes plus preservation evidence; the public PDF and upright preview retain independent allowlist hashes/dimensions. The legacy public filename `original.pdf` stays stable for existing links, but the public action is accurately labelled **Open upright PDF**. It is not described as a byte-identical unmodified original. Other certificate documents and the supplied CV remain unchanged.
 
 ## Supplied CV
 
@@ -33,18 +44,23 @@ Source conflicts: the supplied final CV retains historical two-seater wording on
 
 | Source | Application copy | Pixels / use |
 | --- | --- | --- |
-| `Profile Picture/Realistic studio portrait in blazer and tie.png` | `src/assets/profile/muhammad-sharjeel-portrait.png` | 1024 × 1536; hero and small header derivatives |
+| `Profile Picture/Polished studio portrait with side-swept hair.png` | `src/assets/profile/muhammad-sharjeel-portrait.png` | 1024 × 1536; complete 2:3 hero and vertical header derivatives |
 | `IESCO/WhatsApp Image 2026-10-11 at 2.59.36 PM.jpeg` | `src/assets/experience/iesco-grid-station-portrait.jpeg` | 900 × 1600; first IESCO gallery image, contained full portrait |
 | `Power china internship/1967127-image-1557165140.jpg.jpeg` | `src/assets/experience/powerchina-project-dam-context.jpeg` | 800 × 600; project context |
 | `Power china internship/6175ce88e6f10.jpg.jpeg` | `src/assets/experience/powerchina-project-construction-context.jpeg` | 1024 × 768; construction context |
 | `Power china internship/images.jpg.jpeg` | `src/assets/experience/powerchina-project-night-context.jpeg` | 516 × 387; further context |
 
-These five application copies retain original bytes and dimensions; responsive derivatives never upscale them. The face is preserved in the portrait crop, with full internship-image framing available through the viewer. Existing battery-bank/transformer-yard photographs follow the new IESCO photo. POWERCHINA images establish context only, not a specific assignment, photographer, commissioning or personal construction contribution.
+The current portrait source SHA-256 is `b144d7394e8c96e7cd56545c023522d9d8f025c5cbc27012c4510877e9bde259`, and the application copy retains those exact bytes/dimensions. It replaces the earlier Prompt 4 `Realistic studio portrait in blazer and tie.png` mapping. The source remains local and intact; no AI generation, face/clothing/background alteration, extension or upscaling is applied. Both hero and header use `contain` at the source's 2:3 ratio, preserving head, collar, tie knot and visible clothing rather than using a square/circular crop. Header frames are 48 × 72px on phones and 60 × 90px otherwise; the hero panel caps at 420px with a 418px inner image slot. Imported-byte changes produce new Astro derivative URLs instead of reusing the former portrait.
 
-IELTS Academic: test 3 August 2026, issued 4 August 2026, overall 7.5 and printed CEFR C1. Campus Ambassador: Scholars Avenue participation at Air University, Islamabad, 27 July–8 October 2026. Neither adds an engineering internship or professional licence. The Fall 2025 award/report discrepancy and all other deferred engineering facts remain unresolved. Verification URLs are source links, not newly claimed independent verification.
+The four internship-image copies remain unchanged, with full framing available through the viewer and source-capped delivery. Existing battery-bank/transformer-yard photographs follow the owner IESCO photo. POWERCHINA images establish context only, not a specific assignment, photographer, commissioning or personal construction contribution.
+
+IELTS Academic: test 3 August 2026, issued 4 August 2026, overall 7.5/9 and printed CEFR C1; Listening 8.5, Reading 7.5, Writing 6.5 and Speaking 6.5. The actual source remains the unchanged one-page PDF with SHA-256 `dac3883224253cb55aa8ba87864352ca7a314b93a1f951dbc06401e86af0e147`. Its canonical credential now supplies structured result data to the compact Education panel immediately after the degree overview; there is no additional credential or duplicated score record, inferred expiry or independent-verification claim. The Certificates page's order, groups, dates, issuer information, filters and verification destinations are retained.
+
+Campus Ambassador: Scholars Avenue participation at Air University, Islamabad, 27 July–8 October 2026. Neither record adds an engineering internship or professional licence. The Fall 2025 award/report discrepancy and all other deferred engineering facts remain unresolved. Verification URLs are source links, not newly claimed independent verification.
 
 ## Historical asset decisions
 
+The following Phase 1–3 publication restrictions and initial seating/portrait descriptions are historical. The current approved scope and owner corrections above take precedence; they do not undo unrelated project-image sanitization or permit raw source trees/transcript publication.
 
 Phase 2 adds ten **privacy-redacted public credential PNGs** and a newly generated, reviewed **two-page public CV**. The full mappings/redaction decisions are in [PHASE2-SOURCE-AUDIT.md](PHASE2-SOURCE-AUDIT.md), with public review hashes in `src/data/public-assets.json`. Original scans, portal report and source CVs remain private and ignored. The phase-1 decisions below are historical; only the reviewed public derivatives are new application inputs. Twenty-eight local social PNGs contain public names/titles/status rather than source documents.
 

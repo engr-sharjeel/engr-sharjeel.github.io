@@ -2,9 +2,12 @@
 import Layout from '../layouts/Layout.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import Tag from '../components/Tag.astro';
+import { certificates } from '../data/certificates';
 import { education, earlierEducation, courseworkFocusAreas, courseHighlights } from '../data/education';
 import { projectUrl, withBase } from '../lib/urls';
 import '../styles/phase2-pages.css';
+const languageCredential = certificates.find(record => record.slug === 'ielts-academic-2026')!;
+const languageResult = languageCredential.languageResult!;
 ---
 
 <Layout title="Education" description={`Muhammad Sharjeel’s in-progress Electrical (Power) Engineering studies at Air University Islamabad, selected coursework and current reported CGPA of ${education.cgpa}/${education.gpaScale}.`} active="education">
@@ -26,6 +29,10 @@ import '../styles/phase2-pages.css';
         <strong>{education.cgpa}<small>/ {education.gpaScale}</small></strong>
         <p>{education.reportTerm} report snapshot. The reported course results extend through Spring 2026; the degree remains in progress.</p>
       </div>
+    </section>
+    <section class="education-language" aria-labelledby="language-heading">
+      <div><p class="eyebrow">Language qualification</p><h2 id="language-heading">{languageResult.testType}</h2><p>Test date: {languageCredential.dateLabel} · Printed CEFR level {languageResult.cefrLevel}</p><a class="link-arrow" href={withBase(`/certificates/#${languageCredential.slug}`)}>View the language credential <span aria-hidden="true">↗</span></a></div>
+      <div class="language-score"><p class="technical-label">Overall band</p><strong class="language-band">{languageResult.overallBand}<small>/ {languageResult.scale}</small></strong></div>
     </section>
     <section class="section" aria-labelledby="focus-areas-heading">
       <SectionHeading eyebrow="01 / Academic focus" title="Connected areas of study." description="Coursework in power, electronics and computation supports a broad engineering foundation." id="focus-areas-heading" />
@@ -69,3 +76,16 @@ import '../styles/phase2-pages.css';
     </section>
   </div>
 </Layout>
+
+<style>
+  @layer components {
+    .education-language { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: center; padding: 24px 28px; margin-top: 24px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface-soft); }
+    .education-language h2 { font-size: 1.4rem; margin-block: 8px 12px; line-height: 1.3; }
+    .education-language p:not(.eyebrow):not(.technical-label) { font-size: .9375rem; }
+    .education-language .link-arrow { margin-top: 8px; }
+    .language-score { min-width: 105px; padding-left: 24px; border-left: 1px solid var(--line); }
+    .language-band { display: block; font-size: 2.25rem; line-height: 1.4; font-weight: 600; color: var(--text); }
+    .language-band small { color: var(--muted); font-size: .9375rem; font-family: var(--mono); margin-left: 8px; }
+    @media (max-width: 480px) { .education-language { grid-template-columns: minmax(0, 1fr); padding: 22px; gap: 14px; } .language-score { padding: 12px 0 0; border-left: 0; border-top: 1px solid var(--line); } }
+  }
+</style>

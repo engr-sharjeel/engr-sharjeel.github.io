@@ -1,5 +1,6 @@
 import type { ImageMetadata } from 'astro';
 import profilePhoto from '../assets/profile/muhammad-sharjeel-portrait.png';
+import { projectPriority } from '../lib/project-priority';
 
 export const site = {
   name: 'Muhammad Sharjeel',
@@ -11,6 +12,7 @@ export const site = {
   email: 'engr.muhammadsharjeel@gmail.com',
   phoneCanonical: '+923494247649',
   phoneDisplay: '+92 349 4247649',
+  whatsapp: 'https://wa.me/923494247649',
   linkedin: 'https://www.linkedin.com/in/engr-muhammad-sharjeel/',
   github: 'https://github.com/engr-sharjeel',
   resumePath: '/downloads/muhammad-sharjeel-cv.pdf',
@@ -19,13 +21,8 @@ export const site = {
   // The owner-selected original is preserved; Astro generates display derivatives.
   profileImage: profilePhoto as ImageMetadata | undefined,
   profileAlt: 'Portrait of Muhammad Sharjeel in a blazer and tie.',
-  profileFocalPoint: '50% 15%',
+  profileFocalPoint: '50% 50%',
 };
 
-// Exactly four selections; order after the flagship follows this list.
-export const featuredProjects = [
-  'range-extended-electric-vehicle',
-  'center-tapped-transformer',
-  'micro-hydropower-plant',
-  'autonomous-navigation-robot',
-] as const;
+// Home and catalogue share the owner-selected first four; the flagship remains first.
+export const featuredProjects = projectPriority.slice(0, 4);

@@ -36,9 +36,10 @@ export interface CredentialRecord {
   image?: CredentialImage;
   verificationUrl?: string;
   printedName: string;
-  original: { path: string; format: 'image' | 'pdf'; pageCount?: number };
+  original: { path: string; format: 'image' | 'pdf'; pageCount?: number; presentation?: 'upright' };
   previewPages?: CredentialImage[];
   role?: string;
+  languageResult?: { testType: string; overallBand: number; scale: number; cefrLevel: string; components: { listening: number; reading: number; writing: number; speaking: number } };
   experienceId?: string;
   provenance: string[];
   evidenceNotes: string[];
@@ -51,6 +52,7 @@ const preview = (src: ImageMetadata, alt: string, caption: string): CredentialIm
 export const certificates: CredentialRecord[] = [
   {
     slug: 'ielts-academic-2026',
+    languageResult: { testType: 'IELTS Academic', overallBand: 7.5, scale: 9, cefrLevel: 'C1', components: { listening: 8.5, reading: 7.5, writing: 6.5, speaking: 6.5 } },
     title: 'IELTS Academic — overall band 7.5',
     issuer: 'IELTS',
     category: 'Language Qualification',
@@ -200,7 +202,7 @@ export const certificates: CredentialRecord[] = [
   },
   {
     slug: 'iesco-internship-2025',
-    original: { path: '/credentials/iesco-internship-2025/original.pdf', format: 'pdf', pageCount: 1 },
+    original: { path: '/credentials/iesco-internship-2025/original.pdf', format: 'pdf', pageCount: 1, presentation: 'upright' },
     title: 'IESCO Certificate of Internship',
     issuer: 'Islamabad Electric Supply Company (IESCO)',
     category: 'Internship',
@@ -208,11 +210,11 @@ export const certificates: CredentialRecord[] = [
     datePrecision: 'month-range',
     issuedLabel: '16 September 2025',
     context: 'Completion of an eight-week engineering internship with Substation and Transmission Lines (SS&TL) and Protection and Instrumentation (P&I).',
-    image: preview(iescoInternship, 'Original IESCO internship certificate for Muhammad Sharjeel, documenting the 2025 SS&TL and P&I periods.', 'IESCO internship completion certificate. The supplied scan orientation is retained.'),
+    image: preview(iescoInternship, 'Upright IESCO internship certificate for Muhammad Sharjeel, documenting the 2025 SS&TL and P&I periods.', 'IESCO internship completion certificate, presented upright with the complete certificate content preserved.'),
     printedName: 'Muhammad Sharjeel',
     experienceId: 'iesco',
     provenance: ['Certificates/Internship certificates/Internship Certificate (IESCO).pdf', 'Everything/Documents/Scanned PDF/Internship Certificate (IESCO).pdf'],
-    evidenceNotes: ['Visual review confirms 9 July–19 August 2025 in SS&TL and 20 August–2 September 2025 in P&I; the public summary uses the requested month range.', 'Certificate issue date is 16 September 2025; dateLabel represents internship period, not issuance.', 'The unchanged one-page original PDF is published; the faithful preview preserves all content and the supplied orientation.'],
+    evidenceNotes: ['Visual review confirms 9 July–19 August 2025 in SS&TL and 20 August–2 September 2025 in P&I; the public summary uses the requested month range.', 'Certificate issue date is 16 September 2025; dateLabel represents internship period, not issuance.', 'Owner-authorised orientation-only public derivative: page rotation metadata changes from 90 degrees to 0, a 90-degree counterclockwise correction. All page-content and image streams are unchanged; the untouched source remains local.'],
   },
   {
     slug: 'powerchina-sepco1-internship-2024',

@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "reviewed": "2026-10-11",
-  "publicationScope": "Owner-approved original certificates, supplied CV, portrait and internship photographs (Prompt 4).",
+  "reviewed": "2026-10-12",
+  "publicationScope": "Owner-approved certificates, supplied CV, portrait and internship photographs; IESCO has an authorised lossless page-rotation derivative (Prompt 5).",
   "resume": {
     "path": "downloads/muhammad-sharjeel-cv.pdf",
     "sha256": "36817b31517fdc188c7d8a6df4453803ea685c6d52112b1d8311542f7c777a44",
@@ -73,15 +73,49 @@
     {
       "slug": "iesco-internship-2025",
       "filename": "iesco-internship-2025-preview-page-1.png",
-      "sha256": "1a5aa31a24b62db0c056c9d92fa39aed8dd781a1868b27ad9ecce13fde5c3477",
-      "width": 1190,
-      "height": 1684,
+      "sha256": "a682943a9b4583caa204ce2b58621c6d14415fef6ab8f688b680bbdedee0f956",
+      "width": 1684,
+      "height": 1190,
       "original": {
         "path": "credentials/iesco-internship-2025/original.pdf",
-        "sha256": "f4cad91578537542d9bc1e835a613b2847c56bf4acae232f92108e3509063b94",
+        "sha256": "65035e71638adce66b08ac3c9847f92298e993657ea0d01c54291fdd97e9e22d",
         "format": "pdf",
-        "byteLength": 68358,
-        "pageCount": 1
+        "byteLength": 67890,
+        "pageCount": 1,
+        "orientationCorrection": {
+          "sourceSha256": "f4cad91578537542d9bc1e835a613b2847c56bf4acae232f92108e3509063b94",
+          "sourceByteLength": 68358,
+          "sourcePageRotationDegrees": 90,
+          "publishedPageRotationDegrees": 0,
+          "clockwiseDegrees": 270,
+          "pageContentRawSha256": [
+            "88ca7cd4c60e72bbef9e8605fdf3d2980af98b56e9b4285727091fb7ce05146e"
+          ],
+          "embeddedImageRawSha256": [
+            "9119d30ae4b0c1f6e47d7d772cc387165e138021a2c387db0bfa0a58a7e489a1",
+            "cb3f3ea5072254b34cb42f1a808b931767214e7f109541f7736659a1b2fdc2aa",
+            "2a57ac48122d9d36c3061bd039375719794c31869dfce90ea6999239e2c19d66",
+            "85dee90f12f56e460335e569b0928a1efd61d0d5efb3aa55301e4893a256f177",
+            "19b8ee1724e396b4769050f9aaadc28464a79b6078d3169385569a2adeb3be9a",
+            "75ba73c4463359215e7f269a053f65b864c313ff489fe573b6224b09e8d397b9",
+            "320526922e0c8a2ec38a55351e2bb90387e144669cb754a15e42943134dd0027",
+            "5342dd8532861b6dfd72c37399f8528ab16320701dfc6adeece4ea8e4431f7a3",
+            "77c82ad4b41e90d9873e2cc231f43006963dc0c73ffb70c473e7c3e1310e26a9",
+            "be89a1adf5c2de7bcc7910ef6689daedceeeae47bc2e381cad95e99b61f7d301",
+            "b45ca48348820e0334396701a8b8f77d963d9fc69ac7e36279a36bb296d80b6c",
+            "e9f0a628b338fae48e43ef3d9ca3fbb07f5f53e42bcc098ccbd593e753aa1f2b",
+            "3254f181e109de93236525143e90d9c69a24cd87edb3133c169eeb067f04fefe",
+            "28c8f2d55a74de924bbce3f792017b9b68eae9f8095cfdcb5e30b9e80030e1da",
+            "f8949de9f3342424eef8283e27b7d75dd78abdcf07123029f33391a7d84e2048",
+            "3612123de36d2d3040daa391fadea7acd27643c3a82efc8738d9eb652af01a8b",
+            "dfdc5914c1a13a724cd02b17d66fd9719adeccfaddb379f6e512269c09adc860",
+            "2fe009123cc272444474fb3138012d7405ec19bb63695ce054a82794a79d1c88",
+            "9aba593f41f107ff21626cf89d661093c759858482dc43b53e3ba1cebde745c2",
+            "ebc191693f7d54b3ccf65c9e6b3e6838778af026678f511ffcaba065501edd60",
+            "2794ae2adbfdd13bf7c3642708445a4e278386b65d43fab599748db51c535a66",
+            "a0ee3e99f3859a5d3400f5f6cd273ab14738861c98a795295f00430807a9dc30"
+          ]
+        }
       }
     },
     {
@@ -190,10 +224,10 @@
   "approvedImages": [
     {
       "path": "src/assets/profile/muhammad-sharjeel-portrait.png",
-      "sha256": "63cf1abbc96a0c0d9e813d549cc8d6e25ae9ca8fa24da39f21958ada9836a872",
+      "sha256": "b144d7394e8c96e7cd56545c023522d9d8f025c5cbc27012c4510877e9bde259",
       "width": 1024,
       "height": 1536,
-      "byteLength": 2044301
+      "byteLength": 2044380
     },
     {
       "path": "src/assets/experience/iesco-grid-station-portrait.jpeg",

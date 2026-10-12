@@ -1,7 +1,7 @@
 {
   "slug": "center-tapped-transformer",
   "title": "Single-Phase Center-Tapped Transformer",
-  "shortTitle": "Center-Tapped Transformer",
+  "shortTitle": "Single-Phase Center-Tapped Transformer",
   "category": "Power systems",
   "group": "showcase",
   "summary": "An Electric Machines design-and-fabrication project connecting winding calculations with bobbin availability, core fit and practical redesign.",

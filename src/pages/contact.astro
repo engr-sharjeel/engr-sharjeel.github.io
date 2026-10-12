@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import SectionHeading from '../components/SectionHeading.astro';
+import ContactMethods from '../components/ContactMethods.astro';
 import { site } from '../data/site';
 import { withBase } from '../lib/urls';
 ---
@@ -10,32 +11,13 @@ import { withBase } from '../lib/urls';
     <section class="page-intro">
       <p class="eyebrow">Contact</p>
       <h1>Let’s start<br />a conversation.</h1>
-      <p class="intro-copy">For engineering opportunities, academic collaboration or a conversation about the work, reach me by email, phone or LinkedIn.</p>
+      <p class="intro-copy">For engineering opportunities, academic collaboration or a conversation about the work, reach me by email, phone, WhatsApp or LinkedIn.</p>
       <div class="button-row"><a class="button button-secondary" href={withBase(site.resumePath)} download>Download CV <span class="sr-only">(PDF)</span><span aria-hidden="true">↓</span></a></div>
     </section>
     <section class="section two-column" aria-labelledby="contact-heading">
       <SectionHeading eyebrow={site.location} title="Get in touch" id="contact-heading" />
       <div class="contact-links">
-        <a class="record contact-record" href={`tel:${site.phoneCanonical}`}>
-          <span class="eyebrow">Phone</span>
-          <span class="contact-value">{site.phoneDisplay}</span>
-          <span class="muted">Opens your calling application <span aria-hidden="true">↗</span></span>
-        </a>
-        <a class="record contact-record" href={`mailto:${site.email}`}>
-          <span class="eyebrow">Email</span>
-          <span class="contact-value">{site.email.split('@')[0]}<wbr /><span class="contact-domain">@{site.email.split('@')[1]}</span></span>
-          <span class="muted">Opens your email application <span aria-hidden="true">↗</span></span>
-        </a>
-        <a class="record contact-record" href={site.linkedin}>
-          <span class="eyebrow">Professional profile</span>
-          <span class="contact-value">LinkedIn</span>
-          <span class="muted">Connect with {site.name} <span aria-hidden="true">↗</span></span>
-        </a>
-        <a class="record contact-record" href={site.github}>
-          <span class="eyebrow">GitHub profile</span>
-          <span class="contact-value">engr-sharjeel</span>
-          <span class="muted">Explore my GitHub profile <span aria-hidden="true">↗</span></span>
-        </a>
+        <ContactMethods variant="full" includeProfiles />
       </div>
     </section>
   </div>

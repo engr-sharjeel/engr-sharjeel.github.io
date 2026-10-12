@@ -32,7 +32,7 @@
       caption.textContent = link.dataset.imageCaption || '';
       position.textContent = `${index + 1} / ${links.length}`;
       original.href = new URL(link.dataset.originalHref || link.href, window.location.href).href;
-      original.textContent = link.dataset.originalFormat === 'pdf' ? 'Open original PDF ↗' : 'Open image ↗';
+      original.textContent = `${link.dataset.originalLabel || (link.dataset.originalFormat === 'pdf' ? 'Open original PDF' : 'Open image')} ↗`;
       verify.hidden = !link.dataset.verificationUrl;
       if (link.dataset.verificationUrl) verify.href = link.dataset.verificationUrl;
       else verify.removeAttribute('href');
