@@ -1,24 +1,44 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import SectionHeading from '../components/SectionHeading.astro';
+import ProjectEnquiryForm from '../components/ProjectEnquiryForm.astro';
 import ContactMethods from '../components/ContactMethods.astro';
 import { site } from '../data/site';
 import { withBase } from '../lib/urls';
+import '../styles/enquiry.css';
+const nextSteps = [
+  { title: 'Share the brief', description: 'Tell me what you need, what you already have and how you prefer to be contacted.' },
+  { title: 'Discuss the scope', description: 'We can clarify requirements, useful deliverables and whether the work is a suitable fit.' },
+  { title: 'Agree the next steps', description: 'Availability, delivery format, cost and the work itself are agreed before proceeding.' },
+];
 ---
 
-<Layout title="Contact" description="Contact Muhammad Sharjeel for engineering opportunities, academic collaboration and project conversations." active="contact">
+<Layout title="Contact" description="Share an engineering project brief with Muhammad Sharjeel, or get in touch directly by email, phone, WhatsApp or LinkedIn." active="contact">
   <div class="container">
-    <section class="page-intro">
-      <p class="eyebrow">Contact</p>
-      <h1>Let’s start<br />a conversation.</h1>
-      <p class="intro-copy">For engineering opportunities, academic collaboration or a conversation about the work, reach me by email, phone, WhatsApp or LinkedIn.</p>
-      <div class="button-row"><a class="button button-secondary" href={withBase(site.resumePath)} download>Download CV <span class="sr-only">(PDF)</span><span aria-hidden="true">↓</span></a></div>
+    <section class="page-intro contact-intro">
+      <p class="eyebrow">Project enquiries</p>
+      <h1>Tell me about<br />your project.</h1>
+      <p class="intro-copy">Share the need and your contact details. I’ll review the scope and follow up to discuss how I can help. Collaborations and general enquiries are welcome too.</p>
     </section>
-    <section class="section two-column" aria-labelledby="contact-heading">
-      <SectionHeading eyebrow={site.location} title="Get in touch" id="contact-heading" />
-      <div class="contact-links">
-        <ContactMethods variant="full" includeProfiles />
+    <section class="section contact-enquiry-layout" aria-labelledby="contact-enquiry-heading">
+      <div class="enquiry-panel" id="project-enquiry">
+        <div class="enquiry-panel-intro"><p class="eyebrow">Your brief</p><h2 id="contact-enquiry-heading">Let’s shape the work.</h2><p>Start with the essentials. Optional details can help me understand your project, and it’s fine if those are not settled yet.</p></div>
+        <ProjectEnquiryForm id="contact-enquiry" variant="expanded" sourcePath="/contact/" />
       </div>
+      <aside class="direct-contact-panel" aria-labelledby="direct-contact-heading">
+        <p class="eyebrow">Direct contact</p><h2 id="direct-contact-heading">Prefer a conversation?</h2>
+        <p>You can also reach me directly using the options below.</p>
+        <ContactMethods variant="compact" includeProfiles />
+        <p class="direct-contact-location">Based in {site.location}</p>
+      </aside>
+    </section>
+    <section class="section enquiry-next" aria-labelledby="next-heading">
+      <SectionHeading eyebrow="From brief to scope" title="What happens next" id="next-heading" description="An enquiry starts a conversation. It does not confirm a booking or agreement." />
+      <ol class="enquiry-steps" role="list">{nextSteps.map((step, index) => <li><span class="step-number" aria-hidden="true">0{index + 1}</span><h3>{step.title}</h3><p>{step.description}</p></li>)}</ol>
+    </section>
+    <section class="section enquiry-support" aria-labelledby="support-heading">
+      <div><p class="eyebrow">Explore the fit</p><h2 id="support-heading">A little more context.</h2><p>See the support I offer and the academic work behind it.</p></div>
+      <div class="enquiry-support-links"><a class="button button-secondary" href={withBase('/about/#services')}>Explore services <span aria-hidden="true">↗</span></a><a class="link-arrow" href={withBase('/projects/')}>View projects <span aria-hidden="true">↗</span></a><a class="link-arrow" href={withBase(site.resumePath)} download>Download CV <span class="sr-only">(PDF)</span><span aria-hidden="true">↓</span></a></div>
     </section>
   </div>
 </Layout>

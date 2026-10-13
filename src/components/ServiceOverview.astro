@@ -1,0 +1,32 @@
+---
+import { services } from '../data/services';
+import { projectUrl } from '../lib/urls';
+---
+
+<div class="service-overview">
+  <table class="service-table" role="table">
+    <caption>Engineering support, typical deliverables and examples from my work.</caption>
+    <thead role="rowgroup">
+      <tr role="row">
+        <th scope="col" role="columnheader">Service</th>
+        <th scope="col" role="columnheader">Typical support</th>
+        <th scope="col" role="columnheader">Example deliverables</th>
+        <th scope="col" role="columnheader">Relevant work & enquiry</th>
+      </tr>
+    </thead>
+    <tbody role="rowgroup">
+      {services.map((service) => (
+        <tr role="row" data-service-record={service.id} data-service-id={service.id}>
+          <th scope="row" role="rowheader"><span class="service-mobile-label" aria-hidden="true">Service</span><span class="service-title">{service.title}</span></th>
+          <td role="cell"><span class="service-mobile-label" aria-hidden="true">Typical support</span><p>{service.support}</p></td>
+          <td role="cell"><span class="service-mobile-label" aria-hidden="true">Example deliverables</span><ul class="service-deliverables">{service.deliverables.map((deliverable) => <li>{deliverable}</li>)}</ul></td>
+          <td role="cell">
+            <span class="service-mobile-label" aria-hidden="true">Relevant work & enquiry</span>
+            <ul class="service-examples" role="list">{service.examples.map((example) => <li><a href={projectUrl(example.slug)}>{example.label}<span aria-hidden="true"> ↗</span></a></li>)}</ul>
+            <a class="service-enquire link-arrow" href="#project-enquiry" data-service-select={service.id}>Enquire about this service<span class="sr-only">: {service.title}</span><span aria-hidden="true">↓</span></a>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

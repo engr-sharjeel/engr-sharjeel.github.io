@@ -9,8 +9,8 @@ import ImageViewer from '../components/ImageViewer.astro';
 import { site } from '../data/site';
 import pageMeta from '../data/page-meta.json';
 import { withBase } from '../lib/urls';
-interface Props { title?: string; description?: string; active?: string; }
-const { title, description = site.description, active } = Astro.props;
+interface Props { title?: string; description?: string; active?: string; noindex?: boolean; }
+const { title, description = site.description, active, noindex = false } = Astro.props;
 const pageTitle = title ? `${title} — ${site.name}` : `${site.name} — Power, Control & Mobility`;
 const production = Astro.site || new URL('https://engr-sharjeel.github.io/');
 const relativePath = Astro.url.pathname.slice(import.meta.env.BASE_URL.replace(/\/+$/, '').length);
@@ -41,7 +41,7 @@ const jsonLd = JSON.stringify(structured).replace(/</g, '\\u003c').replace(/\u20
     <meta name="description" content={description} />
     <meta name="theme-color" content="#0B1220" />
     <meta name="color-scheme" content="dark" />
-    {notFound && <meta name="robots" content="noindex, follow" />}
+    {(notFound || noindex) && <meta name="robots" content="noindex, follow" />}
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
     <meta property="og:type" content="website" />

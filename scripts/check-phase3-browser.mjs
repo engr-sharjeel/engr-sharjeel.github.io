@@ -83,8 +83,8 @@ try {
     return path.slice(base.pathname.length).replace(/^\/+/, '');
   });
   assert.equal(detailPaths.length, 19);
-  const routes = ['', 'projects/', ...detailPaths, 'experience/', 'research/', 'education/', 'certificates/', 'achievements/', 'about/', 'contact/', '404.html'];
-  assert.equal(routes.length, 29);
+  const routes = ['', 'projects/', ...detailPaths, 'experience/', 'research/', 'education/', 'certificates/', 'achievements/', 'about/', 'contact/', 'contact/thanks/', '404.html'];
+  assert.equal(routes.length, 30);
   for (const width of [320, 1440]) {
     await page.setViewportSize({ width, height: width === 320 ? 844 : 1000 });
     for (const path of routes) {

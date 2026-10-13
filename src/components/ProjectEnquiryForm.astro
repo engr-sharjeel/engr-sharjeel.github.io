@@ -1,0 +1,130 @@
+---
+import { services } from '../data/services';
+import { site } from '../data/site';
+import { withBase } from '../lib/urls';
+import {
+  enquiryDelivery, enquiryReturnUrl, enquiryFields as fields,
+  contactPreferences, enquiryTimeframes, enquiryCurrencies,
+} from '../data/enquiry';
+
+interface Props {
+  id: string;
+  variant?: 'compact' | 'expanded';
+  sourcePath: '/about/' | '/contact/';
+}
+const { id, variant = 'compact', sourcePath } = Astro.props;
+const expanded = variant === 'expanded';
+const fieldId = (name: string) => `${id}-${name}`;
+const errorId = (name: string) => `${fieldId(name)}-error`;
+const hintId = (name: string) => `${fieldId(name)}-hint`;
+const production = Astro.site || new URL('https://engr-sharjeel.github.io/');
+const sourcePage = new URL(withBase(sourcePath), production).href;
+---
+
+<form id={id} class:list={['enquiry-form', `enquiry-form--${variant}`]} data-enquiry-form data-variant={variant} action={enquiryDelivery.endpoint} method="POST" aria-describedby={`${id}-notice`}>
+  <input type="hidden" name="_subject" value={enquiryDelivery.subject} />
+  <input type="hidden" name="_template" value={enquiryDelivery.template} />
+  <input type="hidden" name="_next" value={enquiryReturnUrl(production)} />
+  <input type="hidden" name="source_page" value={sourcePage} />
+  <div class="honeypot" hidden aria-hidden="true">
+    <label for={fieldId('website')}>Leave this field empty</label>
+    <input id={fieldId('website')} type="text" name="_honey" tabindex="-1" autocomplete="off" />
+  </div>
+
+  <div class="form-errors" data-enquiry-errors role="alert" tabindex="-1" hidden>
+    <p class="form-errors-title">Please check the following fields.</p>
+    <ul data-enquiry-error-list></ul>
+  </div>
+
+  <p class="form-hint form-required-note">Fields marked required help me understand your brief and reply.</p>
+  <div class="form-grid">
+    <div class="form-field form-field--wide">
+      <label for={fieldId('service')}>{fields.service.label} <span class="field-requirement">(required)</span></label>
+      <select id={fieldId('service')} name="service" required aria-describedby={errorId('service')}>
+        <option value="" selected>Choose the support you need</option>
+        {services.map(service => <option value={service.id}>{service.title}</option>)}
+        <option value="other">Other / general enquiry</option>
+      </select>
+      <p id={errorId('service')} class="field-error" data-field-error="service" hidden></p>
+    </div>
+    <div class="form-field">
+      <label for={fieldId('name')}>{fields.name.label} <span class="field-requirement">(required)</span></label>
+      <input id={fieldId('name')} name="name" type="text" autocomplete="name" required maxlength={fields.name.maxLength} aria-describedby={errorId('name')} />
+      <p id={errorId('name')} class="field-error" data-field-error="name" hidden></p>
+    </div>
+    <div class="form-field">
+      <label for={fieldId('email')}>{fields.email.label} <span class="field-requirement">(required)</span></label>
+      <input id={fieldId('email')} name="email" type="email" autocomplete="email" inputmode="email" required maxlength={fields.email.maxLength} aria-describedby={`${hintId('email')} ${errorId('email')}`} />
+      <p id={hintId('email')} class="form-hint">Required for a usable reply address, whichever contact method you prefer.</p>
+      <p id={errorId('email')} class="field-error" data-field-error="email" hidden></p>
+    </div>
+    <div class="form-field">
+      <label for={fieldId('preferred_contact')}>{fields.preferred_contact.label}</label>
+      <select id={fieldId('preferred_contact')} name="preferred_contact" aria-describedby={errorId('preferred_contact')}>
+        {contactPreferences.map(method => <option value={method.value} selected={method.value === 'email'}>{method.label}</option>)}
+      </select>
+      <p id={errorId('preferred_contact')} class="field-error" data-field-error="preferred_contact" hidden></p>
+    </div>
+    <div class="form-field">
+      <label for={fieldId('phone')}>{fields.phone.label} <span class="field-requirement" data-phone-requirement>(optional for Email)</span></label>
+      <input id={fieldId('phone')} name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength={fields.phone.maxLength} aria-describedby={`${hintId('phone')} ${errorId('phone')}`} />
+      <p id={hintId('phone')} class="form-hint">Provide a number for a Phone or WhatsApp reply. Include your country code; international formats are welcome.</p>
+      <p id={errorId('phone')} class="field-error" data-field-error="phone" hidden></p>
+    </div>
+
+    {expanded && <>
+      <div class="form-field">
+        <label for={fieldId('project_title')}>{fields.project_title.label} <span class="field-requirement">(optional)</span></label>
+        <input id={fieldId('project_title')} name="project_title" type="text" maxlength={fields.project_title.maxLength} aria-describedby={errorId('project_title')} />
+        <p id={errorId('project_title')} class="field-error" data-field-error="project_title" hidden></p>
+      </div>
+      <div class="form-field">
+        <label for={fieldId('organisation')}>{fields.organisation.label} <span class="field-requirement">(optional)</span></label>
+        <input id={fieldId('organisation')} name="organisation" type="text" autocomplete="organization" maxlength={fields.organisation.maxLength} aria-describedby={errorId('organisation')} />
+        <p id={errorId('organisation')} class="field-error" data-field-error="organisation" hidden></p>
+      </div>
+      <div class="form-field">
+        <label for={fieldId('timeframe')}>{fields.timeframe.label} <span class="field-requirement">(optional)</span></label>
+        <select id={fieldId('timeframe')} name="timeframe">
+          {enquiryTimeframes.map((timeframe, index) => <option value={timeframe} selected={index === 0}>{timeframe}</option>)}
+        </select>
+      </div>
+      <div class="form-field">
+        <label for={fieldId('budget_currency')}>{fields.budget_currency.label} <span class="field-requirement">(optional)</span></label>
+        <select id={fieldId('budget_currency')} name="budget_currency">
+          <option value="" selected>Not sure yet / not applicable</option>
+          {enquiryCurrencies.map(currency => <option value={currency}>{currency}</option>)}
+        </select>
+      </div>
+      <div class="form-field">
+        <label for={fieldId('budget_estimate')}>{fields.budget_estimate.label} <span class="field-requirement">(optional)</span></label>
+        <input id={fieldId('budget_estimate')} name="budget_estimate" type="text" maxlength={fields.budget_estimate.maxLength} aria-describedby={`${hintId('budget_estimate')} ${errorId('budget_estimate')}`} />
+        <p id={hintId('budget_estimate')} class="form-hint">A range, an estimate or “Not sure yet” is fine. Scope and cost are agreed after review.</p>
+        <p id={errorId('budget_estimate')} class="field-error" data-field-error="budget_estimate" hidden></p>
+      </div>
+      <div class="form-field">
+        <label for={fieldId('reference_url')}>{fields.reference_url.label} <span class="field-requirement">(optional)</span></label>
+        <input id={fieldId('reference_url')} name="reference_url" type="url" inputmode="url" maxlength={fields.reference_url.maxLength} aria-describedby={`${hintId('reference_url')} ${errorId('reference_url')}`} />
+        <p id={hintId('reference_url')} class="form-hint">One public reference link beginning with https:// or http://.</p>
+        <p id={errorId('reference_url')} class="field-error" data-field-error="reference_url" hidden></p>
+      </div>
+    </>}
+
+    <div class="form-field form-field--wide">
+      <label for={fieldId('message')}>{fields.message.label} <span class="field-requirement">(required)</span></label>
+      <textarea id={fieldId('message')} name="message" rows={expanded ? 7 : 5} required maxlength={fields.message.maxLength} aria-describedby={`${hintId('message')} ${errorId('message')}`}></textarea>
+      <p id={hintId('message')} class="form-hint">Describe the goal, what you already have and the help you need. For example: “I need a preliminary load calculation and a labelled single-line diagram.” No uploads are needed; please do not include passwords, ID or payment details.</p>
+      <p id={errorId('message')} class="field-error" data-field-error="message" hidden></p>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <button class="button" type="submit" data-enquiry-submit>Send project enquiry <span aria-hidden="true">→</span></button>
+    <p class="form-hint">Sending a brief starts a conversation; it does not confirm a booking.</p>
+  </div>
+  <p id={`${id}-notice`} class="form-notice">Your details will be used to respond to this enquiry. <a href={enquiryDelivery.privacyUrl} target="_blank" rel="noopener">FormSubmit processes the submission</a> and may ask for spam verification. If submission fails, return here to try again or use <a href={`mailto:${site.email}`}>email</a> or <a href={site.whatsapp}>WhatsApp</a>.</p>
+</form>
+
+<script>
+  import '../scripts/project-enquiry';
+</script>

@@ -6,6 +6,6 @@
   "education": {"title": "Education & academic focus", "label": "BS Electrical (Power) Engineering · In progress"},
   "certificates": {"title": "Certificates & recognition", "label": "Engineering learning, internships, language & recognition"},
   "achievements": {"title": "Academic & organisational recognition", "label": "Selected achievements"},
-  "about": {"title": "An engineering foundation", "label": "Muhammad Sharjeel · Air University, Islamabad"},
-  "contact": {"title": "Start a conversation", "label": "Islamabad, Pakistan"}
+  "about": {"title": "Engineering support & project services", "label": "Academic foundation · Practical project support"},
+  "contact": {"title": "Tell me about your project", "label": "Project enquiries · Islamabad, Pakistan"}
 }

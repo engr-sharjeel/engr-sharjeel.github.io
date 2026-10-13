@@ -1,0 +1,19 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ContactMethods from '../../components/ContactMethods.astro';
+import { withBase } from '../../lib/urls';
+import '../../styles/enquiry.css';
+---
+
+<Layout title="Project enquiry" description="Next steps after submitting an engineering project enquiry to Muhammad Sharjeel." active="contact" noindex>
+  <div class="container">
+    <section class="page-intro enquiry-return" aria-labelledby="return-heading">
+      <p class="eyebrow">Project enquiry</p>
+      <h1 id="return-heading">Thank you for sharing<br />your project brief.</h1>
+      <p class="intro-copy">After your submission is confirmed, I’ll review the details and follow up using the contact information you provided.</p>
+      <p class="return-note">Opening this page does not confirm inbox delivery or a booking. If the form did not complete, please try again or contact me directly.</p>
+      <div class="button-row"><a class="button" href={withBase('/projects/')}>Explore projects <span aria-hidden="true">↗</span></a><a class="button button-secondary" href={withBase('/about/#services')}>Back to services <span aria-hidden="true">↗</span></a></div>
+    </section>
+    <section class="section enquiry-return-contact" aria-labelledby="return-contact-heading"><p class="eyebrow">Another way to connect</p><h2 id="return-contact-heading">Reach me directly.</h2><ContactMethods variant="compact" /><a class="link-arrow" href={withBase('/contact/#project-enquiry')}>Return to the enquiry form <span aria-hidden="true">↗</span></a></section>
+  </div>
+</Layout>

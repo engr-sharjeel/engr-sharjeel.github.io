@@ -7,7 +7,7 @@ export default defineConfig({
   site: 'https://engr-sharjeel.github.io',
   base: process.env.PORTFOLIO_BASE || '/',
   output: 'static',
-  integrations: [sitemap({ filter: page => !page.endsWith('/404.html') })],
+  integrations: [sitemap({ filter: page => !page.endsWith('/404.html') && !page.endsWith('/contact/thanks/') })],
   trailingSlash: 'always',
   build: { format: 'directory' },
   devToolbar: { enabled: false },

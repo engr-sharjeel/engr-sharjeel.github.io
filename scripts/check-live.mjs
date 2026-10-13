@@ -15,12 +15,13 @@ for(let index=0;index<pages.length;index+=4) await Promise.all(pages.slice(index
   const title=local.match(/<title>([^<]+)<\/title>/)[1];assert.ok(html.includes(`<title>${title}</title>`),`Live content differs: ${route}`);
   assert.equal((html.match(/<h1(?:\s|>)/g)||[]).length,1);
   const canonical=local.match(/rel="canonical" href="([^"]+)"/)[1];assert.ok(html.includes(`rel="canonical" href="${canonical}"`));
+  if(relative==='contact/thanks/index.html'||relative==='404.html') assert.ok(html.includes('name="robots" content="noindex, follow"'), 'Utility index policy');
   const image=html.match(/property="og:image" content="([^"]+)"/)[1];const imageResponse=await fetch(image,{signal:AbortSignal.timeout(20000)});assert.equal(imageResponse.status,200);assert.match(imageResponse.headers.get('content-type'),/image\/png/);report.shareImages++;
   assert.ok(!/STUDENT_PORTAL|Everything\/|evidenceNotes|provenance/.test(html));
   report.pages.push({route:route||'/',status:response.status,title});
 }));
 const robots=await get('robots.txt');assert.equal(robots.status,200);assert.ok((await robots.text()).includes(`${origin.href}sitemap-index.xml`));
-for(const filename of ['sitemap-index.xml','sitemap-0.xml']){const response=await get(filename);assert.equal(response.status,200);const text=await response.text();assert.ok(!text.includes('404.html'));if(filename==='sitemap-0.xml')assert.equal((text.match(/<loc>/g)||[]).length,pages.length-1);}
+for(const filename of ['sitemap-index.xml','sitemap-0.xml']){const response=await get(filename);assert.equal(response.status,200);const text=await response.text();assert.ok(!text.includes('404.html'));assert.ok(!text.includes('/contact/thanks/'));if(filename==='sitemap-0.xml')assert.equal((text.match(/<loc>/g)||[]).length,pages.length-2);}
 const missing=await get('phase2-route-that-does-not-exist/');assert.equal(missing.status,404);assert.ok((await missing.text()).includes('A different'));
 await writeFile('.tmp/live-report.json',JSON.stringify(report,null,2)+'\n');
 console.log(`Live verified: ${report.pages.length} intended pages, ${report.shareImages} social image references, canonical URLs, sitemap/robots and custom 404.`);

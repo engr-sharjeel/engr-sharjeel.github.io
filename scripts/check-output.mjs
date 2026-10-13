@@ -112,7 +112,8 @@ for (const record of reviewed.approvedImages) {
 }
 const htmlFiles = files.filter(file => file.endsWith('.html'));
 const projects = await Promise.all((await readdir('src/content/projects')).filter(f => f.endsWith('.json')).map(async f => JSON.parse(await readFile(`src/content/projects/${f}`, 'utf8'))));
-const routes = ['index.html','projects/index.html','experience/index.html','research/index.html','achievements/index.html','education/index.html','certificates/index.html','about/index.html','contact/index.html','404.html',...projects.map(p => `projects/${p.slug}/index.html`)];
+const routes = ['index.html','projects/index.html','experience/index.html','research/index.html','achievements/index.html','education/index.html','certificates/index.html','about/index.html','contact/index.html','contact/thanks/index.html','404.html',...projects.map(p => `projects/${p.slug}/index.html`)];
+const noindexRoutes = new Set(['404.html', 'contact/thanks/index.html']);
 for (const route of routes) assert.ok(files.includes(path.join(root, route)), `Missing route: ${route}`);
 assert.equal(htmlFiles.length, routes.length, 'Unexpected generated route inventory');
 const failures = [];
@@ -124,7 +125,8 @@ const sitemap = await readFile(path.join(root, 'sitemap-0.xml'), 'utf8');
 const robots = await readFile(path.join(root, 'robots.txt'), 'utf8');
 assert.ok(robots.includes(`Sitemap: ${production}${base}/sitemap-index.xml`), 'Incorrect robots sitemap URL');
 assert.ok(!sitemap.includes('404.html'), '404 must be excluded from sitemap');
-assert.equal((sitemap.match(/<loc>/g) || []).length, routes.length - 1, 'Sitemap route inventory');
+assert.ok(!sitemap.includes('/contact/thanks/'), 'Submission utility must be excluded from sitemap');
+assert.equal((sitemap.match(/<loc>/g) || []).length, routes.length - noindexRoutes.size, 'Sitemap route inventory');
 for (const file of htmlFiles) {
   const html = await readFile(file, 'utf8');
   assert.equal((html.match(/<h1(?:\s|>)/g) || []).length, 1, `Exactly one h1: ${file}`);
@@ -133,6 +135,7 @@ for (const file of htmlFiles) {
   assert.doesNotMatch(html, /two[\s-]seater|class="monogram"|MS \/ Electrical/i, `Obsolete owner scope/branding: ${file}`);
   assert.ok(html.includes('name="color-scheme" content="dark"'), `Reference dark color scheme required: ${file}`);
   assert.ok(!/Everything\/|LinkedIn projects\/|Profile Picture\/|Power china internship\/|evidenceNotes|provenance|STUDENT_PORTAL|Certificates\.zip/.test(html), `Internal evidence leaked: ${file}`);
+  assert.doesNotMatch(html, /Synthetic browser test|synthetic-enquiry@example\.invalid|TEST ONLY:/, 'Synthetic enquiry fixtures must never enter public pages');
   const title = html.match(/<title>([^<]+)<\/title>/)?.[1];
   const description = html.match(/name="description" content="([^"]+)"/)?.[1];
   assert.ok(!titles.has(title), `Duplicate title: ${file}`); titles.add(title);
@@ -141,7 +144,7 @@ for (const file of htmlFiles) {
   const pagePath = relative === 'index.html' ? '/' : relative.replace(/index\.html$/, '');
   const canonical = `${production}${base}/${pagePath.replace(/^\/+/, '')}`;
   assert.ok(html.includes(`rel="canonical" href="${canonical}"`), `Incorrect canonical: ${file}`);
-  if (relative !== '404.html') assert.ok(sitemap.includes(`<loc>${canonical}</loc>`), `Route absent from sitemap: ${file}`);
+  if (!noindexRoutes.has(relative)) assert.ok(sitemap.includes(`<loc>${canonical}</loc>`), `Route absent from sitemap: ${file}`);
   for (const field of ['og:title', 'og:description', 'og:url', 'og:image', 'og:image:alt']) assert.ok(html.includes(`property="${field}"`), `Missing ${field}: ${file}`);
   assert.ok(html.includes('name="twitter:card" content="summary_large_image"'), 'Missing social card');
   const image = html.match(/property="og:image" content="([^"]+)"/)?.[1];
@@ -149,7 +152,21 @@ for (const file of htmlFiles) {
   await stat(path.join(root, new URL(image).pathname.slice(base.length)));
   const jsonLd = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1] || 'null');
   assert.equal(jsonLd?.['@context'], 'https://schema.org', 'Invalid JSON-LD');
-  if (relative === '404.html') assert.ok(html.includes('content="noindex, follow"'), '404 index policy');
+  if (noindexRoutes.has(relative)) assert.ok(html.includes('content="noindex, follow"'), `Utility index policy: ${relative}`);
+  if (relative === 'about/index.html' || relative === 'contact/index.html') {
+    const forms = [...html.matchAll(/<form\b([^>]*)>([\s\S]*?)<\/form>/g)].filter(match => match[1].includes('data-enquiry-form'));
+    assert.equal(forms.length, 1, `One shared native enquiry form required: ${relative}`);
+    const [, attributes, body] = forms[0];
+    assert.match(attributes, /method="post"/i, 'Enquiries use private POST, never GET');
+    assert.match(attributes, /action="https:\/\/formsubmit\.co\/engr\.muhammadsharjeel@gmail\.com"/, 'Approved delivery endpoint');
+    const replyInput = body.match(/<input\b[^>]*name="email"[^>]*>/)?.[0] || '';
+    assert.match(replyInput, /\btype="email"/, 'Visitor reply input uses native email validation');
+    assert.match(replyInput, /\brequired(?:\s|>|=)/, 'Visitor reply email is required');
+    for (const field of ['service', 'name', 'preferred_contact', 'phone', 'message', '_subject', '_template', '_honey', 'source_page']) assert.ok(body.includes(`name="${field}"`), `Delivered field missing: ${field}`);
+    assert.ok(body.includes(`value="${production}${base}/contact/thanks/"`), 'Return URL must be absolute and base-aware');
+    assert.match(body, /name="_template" value="table"/, 'Descriptive table delivery');
+    assert.doesNotMatch(body, /name="(?:_cc|_autoresponse|_webhook)"|type="(?:file|password)"|name="_captcha"[^>]*value="false"/, 'No extra recipients, autoresponse, sensitive uploads or disabled spam verification');
+  }
   for (const match of html.matchAll(/\b(?:href|src)="([^"#]+)(?:#[^"]*)?"/g)) {
     const url = match[1].split('#')[0].split('?')[0];
     if (/^[a-z][a-z\d+.-]*:|^\/\//i.test(url)) continue;

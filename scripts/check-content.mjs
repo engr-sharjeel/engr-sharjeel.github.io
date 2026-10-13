@@ -1,6 +1,8 @@
 import { readFile, readdir, stat } from 'node:fs/promises';
 import assert from 'node:assert/strict';
 import path from 'node:path';
+import ts from 'typescript';
+import vm from 'node:vm';
 
 const directory = 'src/content/projects';
 const records = await Promise.all((await readdir(directory)).filter(name => name.endsWith('.json')).map(async name => {
@@ -39,4 +41,14 @@ assert.equal(new Set(featured).size, 4, 'Homepage selections must be distinct');
 assert.deepEqual(featured, ['range-extended-electric-vehicle', 'micro-hydropower-plant', 'autonomous-navigation-robot', 'center-tapped-transformer'], 'Homepage and catalogue follow the owner-selected order');
 assert.ok(featured.includes('range-extended-electric-vehicle'), 'Homepage must contain the flagship');
 featured.forEach(slug => assert.ok(records.some(p => p.slug === slug), `Missing selected project: ${slug}`));
-console.log(`Content verified: ${records.length} projects, ${records.filter(p => p.group === 'showcase').length} showcases, ${records.filter(p => p.group === 'academic').length} academic entries, 4 selections.`);
+const serviceModule = { exports: {} };
+vm.runInNewContext(ts.transpile(await readFile('src/data/services.ts', 'utf8'), { module: ts.ModuleKind.CommonJS }), { module: serviceModule, exports: serviceModule.exports });
+const { services } = serviceModule.exports;
+assert.equal(services.length, 6, 'Six evidence-grounded service definitions');
+assert.equal(new Set(services.map(service => service.id)).size, services.length, 'Service IDs must be unique');
+for (const service of services) {
+  assert.match(service.id, /^[a-z][a-z0-9-]+$/);
+  assert.ok(service.title && service.support && service.deliverables.length && service.examples.length, 'Complete service definition required');
+  for (const example of service.examples) assert.ok(records.some(project => project.slug === example.slug), `Unsupported service example: ${example.slug}`);
+}
+console.log(`Content verified: ${records.length} projects, ${records.filter(p => p.group === 'showcase').length} showcases, ${records.filter(p => p.group === 'academic').length} academic entries, 4 selections, ${services.length} supported services.`);

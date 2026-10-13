@@ -115,7 +115,7 @@ try {
     assert.deepEqual(await projectSlugs(page), projectOrder, 'Catalogue follows the owner-selected order and preserves remaining records');
   });
 
-  const routes = ['', 'projects/', 'experience/', 'research/', 'achievements/', 'education/', 'certificates/', 'about/', 'contact/', '404.html'].map(relative => route(relative));
+  const routes = ['', 'projects/', 'experience/', 'research/', 'achievements/', 'education/', 'certificates/', 'about/', 'contact/', 'contact/thanks/', '404.html'].map(relative => route(relative));
   const allRoutes = [...routes, ...detailUrls];
   for (const width of [390, 768, 1440]) {
     await page.setViewportSize({ width, height: width === 1440 ? 1000 : 900 });
