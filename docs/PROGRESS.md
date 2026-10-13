@@ -22,7 +22,20 @@ The current site retains Prompt 5's navy/teal theme, portrait framing, BS identi
 
 ## Release and delivery status
 
-`958dad0` commits the supported services, shared native forms, page design, metadata and output safeguards. Verification/documentation follow-ups and their actual release evidence are recorded after deployment; routine publishing to the existing root site remains authorised.
+Both milestones are pushed:
+
+- `958dad08f6bbeb16f6c0912b707bd5a7a54cd427` — supported services, shared native forms, page design, metadata and publication/output safeguards.
+- `14787deba6163c03541ac623dd28614200163b2b` — focused verification, activation/privacy/editing documentation and matched performance evidence. [Actions run 38334178392](https://github.com/engr-sharjeel/engr-sharjeel.github.io/actions/runs/38334178392) successfully deployed this release. CI checks **55 files with zero errors/warnings/hints** and builds **30 routes / 976 references**. Visitor output is unchanged from the first implementation milestone.
+
+Verified live at [https://engr-sharjeel.github.io/](https://engr-sharjeel.github.io/):
+
+- **30 live routes**, 30 social references, canonical URLs, sitemap/robots and the actual custom 404 pass the all-route live check. The utility is noindex and absent from the 28-page sitemap.
+- Live main regression: **142 passed / zero failed**, **32 axe contexts / zero violations**, no page/console errors. Live enquiry suite: **29 passed / zero failed**, **6 axe contexts / zero violations**, including actual intercepted native POST, error/retry/Back, no-JavaScript and root return/preselection paths. Every provider request is mocked; no activation or real receipt is inferred.
+- Isolated subpath main regression: **142 passed / zero failed**, **32 axe contexts / zero violations**; enquiry **29 passed / zero failed**, **6 axe contexts / zero violations**. Direct page refresh, service anchors/preselection, safe downloads and absolute return paths work under `/portfolio-check/`. Its build/report remain ignored and separate; production stays at `/`.
+- Seven live visual samples cover About/services/form, Contact/preselection and Thanks at 390/1440 plus 320px Contact. Form-first hierarchy, complete contact groups, service focus and native endpoint/absolute return are confirmed with no overflow or browser errors. Provider requests were blocked during visual review; TLS remained verified.
+- Downloaded Pages artifact: **352 public files, 30 HTML pages and 5 explicitly approved PDFs**. The complete output guard passes; every file matches the final local build byte-for-byte. Seven live pages and **44 live assets** also match artifact hashes, including all twelve credential originals, the unchanged supplied CV/portrait, all navy social graphics and the isolated enquiry script. No sources, archives, transcript, test payloads or internal evidence are published.
+
+The final documentation-only handoff records these results without changing visitor files. Its deployment SHA/run and byte-identical artifact comparison are reported at completion after watching the workflow; no unverified inbox claim is added.
 
 **Interface/build/browser checks are complete; recipient activation and real inbox receipt/reply checks remain pending owner confirmation.** There was no existing delivery configuration or confirmed receipt record. Static deployment cannot establish activation, and automated tests must not send a real message. After the completed live release:
 
