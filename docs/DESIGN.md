@@ -1,5 +1,7 @@
 # Design: restored navy/teal engineering portfolio
 
+Prompt 6 extends this system with a captioned service table, mobile labelled service records and shared project-enquiry forms. About's offering follows its background and precedes academic detail. Contact gives the brief the larger column and puts direct methods alongside; mobile stacks the form first. Navy inputs use 1rem text, 50px control heights, readable hints, teal focus outlines and warm error text/borders. Errors are visible beside fields and in a focusable summary; disabled/submitting states retain readable text. The optional return page shares the same rhythm and does not imply an inbox receipt from a direct visit. No additional decorative motion or runtime dependency is introduced. Structure/delivery decisions are recorded in [ENQUIRIES.md](ENQUIRIES.md).
+
 Prompt 5 supersedes Prompt 4's cream theme and transformer-second project order. The real Phase 3 reference is `84ecb18d74ca2a4b89708a8014dc86eae968d35f`, immediately before the first cream commit `fea7fa0ee368ac4eaa4842dc5e82bfa1b75dad9a`. The reference's existing styles and visual assets are restored selectively, preserving current content and functionality rather than resetting/reverting the repository. The same local variable Manrope, measured long-title widths, 15–16px reading copy, readable functional labels, fluid spacing, 4/8/12px radii, button treatment, fine borders and restrained effects remain the visual vocabulary.
 
 | Token | Exact reference value / use |

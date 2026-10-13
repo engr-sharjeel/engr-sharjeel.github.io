@@ -16,7 +16,12 @@ const report = { phase, origin: base.href, date: new Date().toISOString(), chrom
 const route = path => new URL(path.replace(/^\/+/, ''), base).href;
 const label = path => path.replaceAll('/', '-').replace(/-$/, '') || 'home';
 const median = values => [...values].sort((a, b) => a - b)[Math.floor(values.length / 2)];
-const pages = ['', 'projects/', 'projects/range-extended-electric-vehicle/', 'certificates/'];
+const selectedPages = process.argv.find(arg => arg.startsWith('--pages='))?.slice(8);
+const pages = selectedPages ? selectedPages.split(',').map(page => {
+  assert.match(page, /^(?:home|[a-z0-9-]+(?:\/[a-z0-9-]+)*\/?)$/, 'Measure only local page paths');
+  return page === 'home' ? '' : `${page.replace(/\/+$/, '')}/`;
+}) : ['', 'projects/', 'projects/range-extended-electric-vehicle/', 'certificates/'];
+report.pages = pages;
 const assetDimensions = new Map();
 
 try {

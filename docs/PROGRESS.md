@@ -1,4 +1,38 @@
-# Prompt 5 handoff
+# Prompt 6: services and project enquiries
+
+The current site retains Prompt 5's navy/teal theme, portrait framing, BS identity, direct navigation, owner project order, IELTS panel, upright IESCO document, twelve credentials and supplied CV. The working root, clean initial main/upstream and owner GitHub authentication were verified before edits; no source/archive/document bytes, dependencies/lockfile or deployment workflow are changed.
+
+## Implemented scope
+
+- About keeps its biography/background, then adds **Services & project enquiries** at `/about/#services`, a captioned six-service evidence table, local selection actions and the actual compact form at `#project-enquiry`, before its existing academic/skills/recognition content.
+- Contact is a form-first brief page: expanded form, direct-contact side panel, three review/scope/agreement steps and services/projects/CV links. Mobile puts the form first; enlarged text reflows fields/service records/steps naturally. The homepage action goes directly to the brief, with tools/skills still immediately above the invitation.
+- `services.ts` owns IDs/titles/support/deliverables/project examples; `enquiry.ts` owns public provider settings and field definitions. Compact/expanded variants share required core fields, optional phone, conditional phone preferences and useful optional project/timeframe/currency/budget/reference information. Scope remains support based on academic work, without invented clients/rates/credentials or a launched REEV business.
+- Native **POST** to `https://formsubmit.co/engr.muhammadsharjeel@gmail.com`: reply `email`, canonical source page, descriptive subject, table delivery, honeypot, default spam verification and absolute/base-aware return URL. No AJAX success shortcut, upload, CC, autoresponse, public submission list or personal-data logging/storage is added. A concise processing notice links provider privacy information and direct fallback methods.
+- Progressive validation covers trimmed required values, email, reference URLs, international phone formatting and preference-dependent requirements. Errors retain values and focus a linked summary; safe service preselection uses known options only. Valid normal POST locks repeat clicks, while validation/back navigation restore controls. No-JavaScript Email-based enquiries still submit natively.
+- `/contact/thanks/` contains no submitted data and does not claim inbox delivery or a booking merely from opening it. `noindex, follow` and sitemap exclusion preserve **30 HTML routes / 28 indexable sitemap pages**; every existing route remains.
+
+## Fresh local evidence
+
+- Final content/type check: **55 files, zero errors/warnings/hints**; nineteen projects, six showcases/thirteen concise entries, four owner selections and six supported services. Production build/output guard: **30 HTML routes, 976 local references**; original/portrait/CV hashes, lossless IESCO proof, route/metadata/social/JSON-LD/sitemap/robots and publication boundary pass. Native action/method/required reply fields/absolute return and exclusion of test payloads are also guarded.
+- Main regression suite: **138 passed / zero failed**, **31 axe contexts / zero violations**. Responsive suite: **109 passed / zero failed**, **10 axe contexts / zero violations**, including all thirty routes. The main fixture is extended to include the utility route for subsequent/live runs; the first local main run predates that fixture addition.
+- Final focused enquiry suite: **29 passed / zero failed**, **6 axe contexts / zero violations**. Actual native POST payloads are intercepted with synthetic data for compact/expanded/international-phone/no-JavaScript cases. Provider rejection, blocked-network/browser Back, preserved values, repeat locking, valid/unknown service preselection, all row actions and noindex/sitemap behavior pass. No real enquiry or activation email is sent.
+- Credential/education/viewer regression: **18 passed / zero failed**, **6 axe contexts / zero violations**; public original/CV downloads, canonical IELTS, upright IESCO and gallery controls still work. Isolated `/portfolio-check/` production build passes the same **30 routes / 976 references** guard; its enquiry suite also passes **29 checks / 6 axe contexts**, with zero failures/violations and preserved root reports.
+- Manual production review: **18** initial page/size samples plus **5** final targeted samples at 320/390/768/1440, 667×375 and 200% text. No overflow or browser errors; service-table semantics/labels, form-first order, contact grouping, visible focus and errors are readable. Sampled helper/error text contrast is 8.41–10.17:1; normal control boundaries exceed 3:1. A caught fragment-focus issue is fixed, and enlarged-text grids now stack. Reports/screenshots remain ignored.
+- [PERFORMANCE.md](PERFORMANCE.md) records matched before/after mobile delivery: the form script is **1,784 gzip bytes**, loaded only on About/Contact; no unrelated-page script/style/provider request or dependency is added. Median initial CLS is zero. Timings were slower and variable, including byte-identical catalogue output, so no speed improvement or field metric is claimed.
+
+## Release and delivery status
+
+`958dad0` commits the supported services, shared native forms, page design, metadata and output safeguards. Verification/documentation follow-ups and their actual release evidence are recorded after deployment; routine publishing to the existing root site remains authorised.
+
+**Interface/build/browser checks are complete; recipient activation and real inbox receipt/reply checks remain pending owner confirmation.** There was no existing delivery configuration or confirmed receipt record. Static deployment cannot establish activation, and automated tests must not send a real message. After the completed live release:
+
+1. Submit one clearly labelled **TEST** enquiry from the live form.
+2. Open the FormSubmit activation email in **engr.muhammadsharjeel@gmail.com** and confirm it. Check spam/junk if necessary.
+3. Submit another **TEST** enquiry, verify the complete message arrives, and confirm that replying targets the submitted visitor email.
+
+Edit service scope/examples in `src/data/services.ts`, fields/provider settings in `src/data/enquiry.ts`, and public recipient/contact information in `src/data/site.ts`. See [ENQUIRIES.md](ENQUIRIES.md) and README for the documented native provider setup, owner-only activation and Windows preview/test commands. Existing deferred academic/engineering facts and historical CV discrepancies remain unchanged; this task does not resolve them.
+
+## Historical Prompt 5 handoff
 
 Prompt 5 restores the actual navy/teal Phase 3 visual system from **`84ecb18d74ca2a4b89708a8014dc86eae968d35f`** while retaining Prompt 4's approved content, direct navigation, original documents, experience galleries and functional improvements. No repository reset/revert, dependency upgrade, framework change or CV rewrite occurred. The working root was verified as `C:\Users\harri\OneDrive\Desktop\portfolio`; owner authentication/upstream remain unchanged.
 

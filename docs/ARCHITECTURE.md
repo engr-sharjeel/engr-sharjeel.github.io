@@ -1,4 +1,8 @@
-# Architecture: restored theme and owner refinements
+# Architecture: services and static project enquiries
+
+Prompt 6 adds an evidence-grounded About service table and compact form, a form-first structured Contact page and `/contact/thanks/`. The shared typed service collection owns IDs/options/evidence links; a shared Astro form and small page-scoped TypeScript enhancement provide native POST, accessible validation and safe preselection. Both variants deliver through the documented external FormSubmit endpoint, with recipient confirmation and real inbox receipt remaining an owner setup check. The utility return route is noindex and excluded from the sitemap: **30 HTML pages / 28 indexable sitemap routes**, with all nineteen project details and twelve credentials preserved. See [ENQUIRIES.md](ENQUIRIES.md) for page structure, data/field contracts, official provider references, processing notice and activation/test procedure.
+
+The portfolio remains entirely static on GitHub Pages. No server, database, mail credential, client framework, dependency upgrade, public submission list or automatic messages are introduced. Native HTML remains usable without JavaScript; scripts are isolated to About/Contact. Portrait/credential/CV publication guards, owner project order and direct-contact actions remain intact. The existing architecture below continues to apply.
 
 Astro 7.3.8 / strict TypeScript / static multipage output / local Manrope / custom CSS are retained, with unchanged locked dependencies and existing Pages workflow. Prompt 5 restores the real Phase 3 visual reference at `84ecb18d74ca2a4b89708a8014dc86eae968d35f` through selective stylesheet/asset integration; history is not reset and newer content is retained. Production remains the username-repository root; base-aware helpers and the PORTFOLIO_BASE fixture remain supported.
 

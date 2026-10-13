@@ -1,6 +1,6 @@
 # Muhammad Sharjeel: engineering portfolio
 
-Astro 7.3.8, strict TypeScript, custom navy/teal CSS and local Manrope generate this static GitHub Pages site. Prompt 5 restores the Phase 3 visual reference at `84ecb18d74ca2a4b89708a8014dc86eae968d35f` while retaining the newer content, direct navigation and owner-approved documents. There are 29 HTML pages, 19 projects (six showcases/thirteen concise academic records) and 12 distinct credentials. Portrait/name branding replaces the earlier MS monogram.
+Astro 7.3.8, strict TypeScript, custom navy/teal CSS and local Manrope generate this static GitHub Pages site. Prompt 5 restores the Phase 3 visual reference at `84ecb18d74ca2a4b89708a8014dc86eae968d35f` while retaining the newer content, direct navigation and owner-approved documents. There are 30 HTML pages, 19 projects (six showcases/thirteen concise academic records), 12 distinct credentials and six evidence-grounded service offerings. Portrait/name branding replaces the earlier MS monogram. About and Contact share a native project-enquiry form; FormSubmit delivers privately after recipient activation.
 
 ## Run on Windows
 
@@ -24,6 +24,8 @@ Open http://127.0.0.1:4321/ and stop the foreground preview with **Ctrl+C**. Dev
 - `src/data/certificates.ts`: twelve canonical records, unchanged credential order/groups, public document links, faithful previews and verification URLs. Achievements reuses recognition records. The canonical IELTS record also owns structured test/score data used by Education immediately after the degree overview; do not maintain a second score/date copy.
 - `src/data/experience.ts`: IESCO first, with its new portrait-format photograph first; POWERCHINA follows with three supplied project-context photographs. Image order also controls gallery order.
 - `src/data/skills.ts`: six central tools and six central engineering skills, reused on Home/About. PCB design is supported by the supplied CV; SCADA systems is owner-supplied.
+- `src/data/services.ts`: six service IDs/titles, client-oriented support, example deliverables and existing project links, reused by About's table and both enquiry selectors. Keep the offered scope grounded in supported academic work; do not invent prices, client history or licences.
+- `src/data/enquiry.ts`: public delivery endpoint derived from the configured recipient, field labels/limits, contact preferences, timeframes/currencies and the absolute base-aware return path. `ProjectEnquiryForm.astro` shares native HTML; `src/scripts/project-enquiry.ts` adds validation and safe service preselection only on form pages.
 - `src/styles/`: restored reference navy/teal tokens, shared layout, responsive direct navigation, supporting pages and viewer. `src/lib/image-sizes.ts` must follow actual CSS slots/gutters when layout changes. Shared `ContactMethods.astro` groups each icon/label/value/link independently in Contact, Home and Footer; local SVGs add no icon dependency.
 
 ## Replace portrait or CV
@@ -53,9 +55,10 @@ $env:PORTFOLIO_TEST_URL='http://127.0.0.1:4321/'
 npm.cmd run test:browser
 npm.cmd run test:phase2
 npm.cmd run test:phase3
+npm.cmd run test:enquiry
 ```
 
-Do not rebuild `dist` while these production browser checks are running. Tests cover direct navigation, phone/tablet/desktop routes, owner project order/search/reset, unchanged credential categories/search/empty states, uncropped portrait, grouped contact actions, canonical IELTS placement/anchor, upright IESCO presentation, keyboard/no-JavaScript access, viewer focus/Escape/error handling, reduced-motion changes, contrast via axe and publication hashes. Fresh results and deployment evidence belong in `docs/PROGRESS.md`; prior phase counts are historical. Reports/screenshots stay ignored in `.tmp/`.
+Do not rebuild `dist` while these production browser checks are running. Tests cover direct navigation, phone/tablet/desktop routes, owner project order/search/reset, unchanged credential categories/search/empty states, uncropped portrait, grouped contact actions, canonical IELTS placement/anchor, upright IESCO presentation, keyboard/no-JavaScript access, viewer focus/Escape/error handling, reduced-motion changes, contrast via axe and publication hashes. The enquiry suite intercepts every provider request using synthetic data; it never sends a real enquiry or activation email. Fresh results and deployment evidence belong in `docs/PROGRESS.md`; prior phase counts are historical. Reports/screenshots stay ignored in `.tmp/`.
 
 ```powershell
 npm.cmd run measure:performance -- --phase=prompt5-after --screenshots --slots
@@ -78,5 +81,19 @@ Restore the root build before publishing. Production stays https://engr-sharjeel
 Navigation directly exposes Projects, Experience, Education, Certificates, Research, Achievements and About, plus CV/Contact actions; mobile uses a labelled progressive menu with complete no-JavaScript access. The old Background dropdown remains retired. All enhancements remain small and reduced-motion-aware. `generate:social` produces navy/teal share graphics with the name, correct program/university and simple electrical icon; it cannot restore MS branding. Native controls use `color-scheme: dark`.
 
 For a downloaded Pages artifact, set `PORTFOLIO_OUTPUT_DIR` to its extracted site folder and run `node scripts/check-output.mjs`. This runs the same route, metadata and approved-asset boundary checks read-only; normal builds use `dist`. Clear the temporary variable afterwards.
+
+## Enquiry delivery and owner activation
+
+Visitors can use `/about/#services` and its compact form, or the full `/contact/#project-enquiry` brief. A Contact link can preselect a known service, for example `/contact/?service=embedded-systems#project-enquiry`; unknown values are ignored. Never put names, emails, phone numbers or briefs in URLs.
+
+Both forms use normal `POST` to `https://formsubmit.co/engr.muhammadsharjeel@gmail.com`, with named reply email, descriptive subject, table delivery, a honeypot, retained provider spam verification and an absolute return URL. The `/contact/thanks/` utility page is noindex/excluded from the sitemap and contains no submitted data. No uploads, automatic visitor emails or public submission records are created. Visitors can use email/WhatsApp if the provider fails. See [enquiry architecture and official documentation](docs/ENQUIRIES.md).
+
+**Recipient activation and real inbox receipt remain pending owner confirmation.** Deployment alone does not verify delivery. Complete this procedure on the live site:
+
+1. Submit one clearly labelled **TEST** enquiry.
+2. Open the FormSubmit activation email in **engr.muhammadsharjeel@gmail.com** and confirm it; check spam/junk if necessary.
+3. Submit another **TEST** enquiry, verify the complete message arrives, and confirm that replying targets the submitted visitor email.
+
+Do not run real provider submissions from automated tests. The focused suite verifies endpoint/payload/return behavior through mocks without accessing a mailbox or sending messages.
 
 Read [asset curation](docs/ASSET-CURATION.md), [content priority](docs/CONTENT-PRIORITY.md), [architecture](docs/ARCHITECTURE.md), [design](docs/DESIGN.md), [performance](docs/PERFORMANCE.md) and [progress](docs/PROGRESS.md). Raw originals stay intact and ignored; only explicitly approved copies enter the build. Local Manrope retains its SIL Open Font License.

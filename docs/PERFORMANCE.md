@@ -1,4 +1,25 @@
-# Prompt 5 delivery and portrait measurements
+# Prompt 6 enquiry delivery measurements
+
+Paired production previews compare `1c425c2` with visitor code `958dad0`, using the existing script's new optional `--pages=home,about,contact,projects` selection. Default Phase 3 page selection is unchanged. Chrome **154.0.8037.98**, **390 × 844 / DPR 2**, three cold/cache-disabled samples, **4× CPU slowdown**, **150ms latency**, **200,000 bytes/s download**, **93,750 bytes/s upload** and another 1.2 seconds after network idle/fonts are identical. Runs were sequential with QA/build work idle. Reports remain ignored under `.tmp/phase3-prompt6-before/` and `after/`. These are local lab timings, not Lighthouse or field metrics.
+
+| Page | Initial transfer before → after | Median LCP before → after | Median CLS before → after |
+| --- | ---: | ---: | ---: |
+| Home | 86.3 → 85.7 KiB | 2.420 → 3.704s | 0.00148 → 0.00000 |
+| About | 47.1 → 54.2 KiB | 1.528 → 4.524s | 0.00000 → 0.00000 |
+| Contact | 43.7 → 50.4 KiB | 1.436 → 2.512s | 0.00004 → 0.00000 |
+| Catalogue | 96.5 → 95.9 KiB | 1.524 → 3.032s | 0.00025 → 0.00000 |
+
+The added form enhancement is **4,366 raw / 1,784 gzip bytes**, requested only on About/Contact (2,084 transfer bytes including headers). Form/table CSS adds 2,870 transfer bytes on those pages. Their fuller HTML adds approximately 2.5–2.9 KiB compressed. No form script, form stylesheet or provider request loads on Home/Projects; one local 24.5 KiB font, unchanged portraits/images and existing inline enhancements remain. FormSubmit is contacted only on a visitor's native submission; full certificate/CV files remain on demand. No external runtime dependency is installed.
+
+Final median initial CLS is zero; the largest recorded after-sample shift is 0.00001 on About. Request/transfer differences of approximately 0.6 KiB on unchanged image groups reflect optional favicon entries in resource timing, not a new image pipeline or dropped portrait. **Catalogue, REEV, Education and Certificates HTML are byte-identical to the Prompt 5 artifact**, and the measured catalogue CSS/inline script sizes are unchanged. All after timing medians were slower, including that identical catalogue; therefore no speed improvement is claimed or whole timing difference attributed to the forms. The small local samples varied widely (Home 2.552–4.300s, About 2.608–4.924s). Inspection found no new font, provider request, reveal delay, unrelated-page bundle or unnecessary eager document to remove. The intentional form-page transfer increase is kept small; measured variation remains explicit rather than replaced with a score.
+
+Reproduce with `PORTFOLIO_TEST_URL` pointing to a stable production preview:
+
+```powershell
+npm.cmd run measure:performance -- --phase=prompt6-after --pages=home,about,contact,projects
+```
+
+## Historical Prompt 5 delivery and portrait measurements
 
 Fresh paired production-preview measurements compare `b2514ef` (cream baseline at port 4332) with visitor code `6189df2` (restored reference theme and final refinements at port 4334). The existing measurement script and locked dependencies are unchanged. Chrome **154.0.8037.98**, three cold samples per page, cache disabled, **390 × 844 / DPR 2**, **4× CPU slowdown**, **150ms latency**, **200,000 bytes/s download** and **93,750 bytes/s upload** are identical before/after. Timing runs were sequential with browser QA/build work idle. Observation ends after network idle, font readiness and another 1.2 seconds. This is local lab evidence, not Lighthouse or field Core Web Vitals/INP.
 
